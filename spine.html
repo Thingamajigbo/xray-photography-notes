@@ -1,0 +1,1200 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>등뼈·허리뼈 X선 촬영법 요약 노트</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@400;500;700;900&family=Noto+Sans+KR:wght@300;400;500;700&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #f5f1e8;
+    --bg-card: #ffffff;
+    --ink: #1a1a1a;
+    --ink-soft: #3d3d3d;
+    --ink-muted: #6b6b6b;
+    --accent: #8b2635;
+    --accent-dark: #5c1820;
+    --accent-soft: #f4e4e6;
+    --highlight: #d4a574;
+    --highlight-soft: #faf0e0;
+    --rule: #d9d2c1;
+    --code-bg: #2d2a26;
+    --code-ink: #e8e2d5;
+    --success: #3a6b4c;
+    --warn: #a8621a;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: 'Noto Sans KR', sans-serif;
+    background: var(--bg);
+    color: var(--ink);
+    line-height: 1.7;
+    padding: 40px 20px;
+    background-image:
+      radial-gradient(circle at 10% 20%, rgba(139, 38, 53, 0.03) 0%, transparent 40%),
+      radial-gradient(circle at 90% 80%, rgba(212, 165, 116, 0.04) 0%, transparent 40%);
+  }
+
+  .container {
+    max-width: 1100px;
+    margin: 0 auto;
+  }
+
+  /* 헤더 */
+  header.main-header {
+    text-align: center;
+    padding: 60px 20px 50px;
+    border-bottom: 3px double var(--accent);
+    margin-bottom: 50px;
+    position: relative;
+  }
+
+  header.main-header::before {
+    content: "放 射 線 學";
+    position: absolute;
+    top: 12px;
+    left: 50%;
+    transform: translateX(-50%);
+    font-family: 'Noto Serif KR', serif;
+    font-size: 0.75rem;
+    letter-spacing: 0.8em;
+    color: var(--highlight);
+    font-weight: 500;
+  }
+
+  header.main-header .chapter {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.85rem;
+    color: var(--accent);
+    letter-spacing: 0.3em;
+    margin-bottom: 15px;
+    font-weight: 600;
+  }
+
+  header.main-header h1 {
+    font-family: 'Noto Serif KR', serif;
+    font-size: 2.8rem;
+    font-weight: 900;
+    color: var(--ink);
+    margin-bottom: 12px;
+    letter-spacing: -0.02em;
+  }
+
+  header.main-header .subtitle {
+    font-family: 'Noto Serif KR', serif;
+    font-size: 1.05rem;
+    color: var(--ink-muted);
+    font-style: italic;
+    letter-spacing: 0.05em;
+  }
+
+  /* 목차 */
+  nav.toc {
+    background: var(--bg-card);
+    border: 1px solid var(--rule);
+    border-left: 4px solid var(--accent);
+    padding: 28px 35px;
+    margin-bottom: 50px;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.04);
+  }
+
+  nav.toc h2 {
+    font-family: 'Noto Serif KR', serif;
+    font-size: 1.3rem;
+    color: var(--accent);
+    margin-bottom: 18px;
+    padding-bottom: 10px;
+    border-bottom: 1px dashed var(--rule);
+    font-weight: 700;
+  }
+
+  nav.toc ol {
+    list-style: none;
+    columns: 2;
+    column-gap: 40px;
+  }
+
+  nav.toc ol li {
+    padding: 6px 0;
+    font-size: 0.95rem;
+    break-inside: avoid;
+  }
+
+  nav.toc ol li a {
+    color: var(--ink-soft);
+    text-decoration: none;
+    transition: all 0.2s;
+    display: flex;
+    align-items: baseline;
+    gap: 10px;
+  }
+
+  nav.toc ol li a::before {
+    content: counter(item, decimal-leading-zero);
+    counter-increment: item;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.75rem;
+    color: var(--highlight);
+    font-weight: 600;
+    min-width: 24px;
+  }
+
+  nav.toc ol { counter-reset: item; }
+
+  nav.toc ol li a:hover {
+    color: var(--accent);
+    transform: translateX(4px);
+  }
+
+  /* 섹션 구분 (부위별) */
+  .section-divider {
+    margin: 60px 0 40px;
+    text-align: center;
+    position: relative;
+  }
+
+  .section-divider::before {
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: 0;
+    right: 0;
+    height: 1px;
+    background: var(--rule);
+    z-index: 0;
+  }
+
+  .section-divider span {
+    background: var(--bg);
+    padding: 0 30px;
+    position: relative;
+    z-index: 1;
+    font-family: 'Noto Serif KR', serif;
+    font-size: 1.8rem;
+    font-weight: 900;
+    color: var(--accent-dark);
+    letter-spacing: 0.1em;
+  }
+
+  .section-divider span::before,
+  .section-divider span::after {
+    content: "❖";
+    color: var(--highlight);
+    font-size: 0.9rem;
+    margin: 0 15px;
+    vertical-align: middle;
+  }
+
+  /* 각 촬영법 카드 */
+  article.projection-card {
+    background: var(--bg-card);
+    border: 1px solid var(--rule);
+    margin-bottom: 45px;
+    box-shadow: 0 4px 16px rgba(0,0,0,0.05);
+    overflow: hidden;
+    position: relative;
+  }
+
+  article.projection-card::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 6px;
+    height: 100%;
+    background: linear-gradient(180deg, var(--accent) 0%, var(--accent-dark) 100%);
+  }
+
+  .card-header {
+    padding: 30px 40px 25px;
+    border-bottom: 2px solid var(--accent);
+    background: linear-gradient(135deg, var(--bg-card) 0%, #faf7f0 100%);
+    position: relative;
+  }
+
+  .card-header .card-number {
+    position: absolute;
+    top: 20px;
+    right: 30px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.8rem;
+    color: var(--highlight);
+    font-weight: 600;
+    letter-spacing: 0.15em;
+  }
+
+  .card-header h2 {
+    font-family: 'Noto Serif KR', serif;
+    font-size: 1.75rem;
+    font-weight: 900;
+    color: var(--ink);
+    letter-spacing: -0.01em;
+    line-height: 1.3;
+  }
+
+  .card-header .eng-title {
+    display: block;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.95rem;
+    color: var(--accent);
+    font-weight: 600;
+    margin-top: 6px;
+    letter-spacing: 0.02em;
+  }
+
+  .card-body {
+    padding: 15px 40px 35px;
+  }
+
+  /* 6가지 항목 박스 */
+  .field {
+    margin-top: 25px;
+    padding-top: 20px;
+    border-top: 1px dashed var(--rule);
+  }
+
+  .field:first-child {
+    border-top: none;
+    padding-top: 10px;
+  }
+
+  .field-label {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    font-family: 'Noto Serif KR', serif;
+    font-size: 1.05rem;
+    font-weight: 700;
+    color: var(--accent-dark);
+    margin-bottom: 14px;
+    letter-spacing: 0.02em;
+  }
+
+  .field-label .icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 28px;
+    height: 28px;
+    background: var(--accent);
+    color: white;
+    border-radius: 50%;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.75rem;
+    font-weight: 700;
+  }
+
+  .field-content {
+    padding-left: 38px;
+    color: var(--ink-soft);
+    font-size: 0.97rem;
+  }
+
+  .field-content ul {
+    list-style: none;
+    padding: 0;
+  }
+
+  .field-content ul li {
+    position: relative;
+    padding-left: 18px;
+    margin-bottom: 8px;
+    line-height: 1.75;
+  }
+
+  .field-content ul li::before {
+    content: "▸";
+    position: absolute;
+    left: 0;
+    top: 0;
+    color: var(--highlight);
+    font-weight: 700;
+  }
+
+  .field-content ul li ul {
+    margin-top: 6px;
+    margin-left: 10px;
+  }
+
+  .field-content ul li ul li::before {
+    content: "–";
+    color: var(--ink-muted);
+  }
+
+  /* 강조 표시 */
+  .highlight {
+    background: var(--highlight-soft);
+    padding: 2px 8px;
+    border-radius: 3px;
+    font-weight: 600;
+    color: var(--accent-dark);
+    border-bottom: 2px solid var(--highlight);
+  }
+
+  .measure {
+    font-family: 'JetBrains Mono', monospace;
+    background: var(--code-bg);
+    color: var(--code-ink);
+    padding: 2px 8px;
+    border-radius: 3px;
+    font-size: 0.88em;
+    font-weight: 600;
+    letter-spacing: 0.02em;
+  }
+
+  .term-eng {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.88em;
+    color: var(--accent);
+    font-style: italic;
+  }
+
+  /* 특징 박스 */
+  .feature-box {
+    background: var(--accent-soft);
+    border-left: 3px solid var(--accent);
+    padding: 12px 18px;
+    margin: 10px 0;
+    font-size: 0.93rem;
+    border-radius: 0 4px 4px 0;
+  }
+
+  .feature-box .tip-label {
+    font-weight: 700;
+    color: var(--accent-dark);
+    font-size: 0.82rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    display: block;
+    margin-bottom: 4px;
+  }
+
+  /* 촬영상 평가기준 */
+  .eval-list {
+    background: #f9f6ee;
+    border: 1px solid var(--rule);
+    padding: 18px 22px;
+    border-radius: 4px;
+  }
+
+  .eval-list ol {
+    list-style: none;
+    counter-reset: eval;
+    padding: 0;
+  }
+
+  .eval-list ol li {
+    counter-increment: eval;
+    position: relative;
+    padding-left: 32px;
+    margin-bottom: 10px;
+    font-size: 0.93rem;
+    line-height: 1.65;
+  }
+
+  .eval-list ol li::before {
+    content: "✓ " counter(eval, decimal-leading-zero);
+    position: absolute;
+    left: 0;
+    top: 0;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.7rem;
+    font-weight: 700;
+    color: var(--success);
+    letter-spacing: 0.05em;
+  }
+
+  /* 출처 */
+  .source {
+    margin-top: 30px;
+    padding: 14px 20px;
+    background: var(--code-bg);
+    color: var(--code-ink);
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.82rem;
+    letter-spacing: 0.05em;
+    border-radius: 4px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+
+  .source::before {
+    content: "📚";
+    font-size: 1rem;
+  }
+
+  .source strong {
+    color: var(--highlight);
+    font-weight: 600;
+    margin-right: 6px;
+  }
+
+  /* 특별 강조 박스 (Cobb법, Cow's sign, Scotty dog 등) */
+  .special-note {
+    background: linear-gradient(135deg, var(--highlight-soft) 0%, #fff9ed 100%);
+    border: 2px dashed var(--highlight);
+    padding: 20px 25px;
+    margin: 20px 0;
+    border-radius: 6px;
+    position: relative;
+  }
+
+  .special-note .note-title {
+    font-family: 'Noto Serif KR', serif;
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: var(--warn);
+    margin-bottom: 10px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .special-note .note-title::before {
+    content: "★";
+    color: var(--highlight);
+  }
+
+  .special-note ul {
+    list-style: none;
+    padding: 0;
+  }
+
+  .special-note ul li {
+    padding: 4px 0 4px 20px;
+    position: relative;
+    font-size: 0.93rem;
+  }
+
+  .special-note ul li::before {
+    content: "◆";
+    position: absolute;
+    left: 0;
+    color: var(--highlight);
+    font-size: 0.7rem;
+    top: 8px;
+  }
+
+  /* 푸터 */
+  footer {
+    text-align: center;
+    padding: 50px 20px 30px;
+    margin-top: 60px;
+    border-top: 3px double var(--accent);
+    color: var(--ink-muted);
+    font-family: 'Noto Serif KR', serif;
+    font-style: italic;
+    font-size: 0.9rem;
+  }
+
+  footer .sig {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.75rem;
+    letter-spacing: 0.3em;
+    color: var(--highlight);
+    margin-top: 10px;
+  }
+
+  /* 반응형 */
+  @media (max-width: 768px) {
+    body { padding: 20px 12px; }
+    header.main-header h1 { font-size: 2rem; }
+    nav.toc ol { columns: 1; }
+    .card-header, .card-body { padding-left: 25px; padding-right: 25px; }
+    .field-content { padding-left: 8px; }
+    .section-divider span { font-size: 1.3rem; padding: 0 15px; }
+  }
+
+  /* 스크롤 앵커 오프셋 */
+  article.projection-card {
+    scroll-margin-top: 20px;
+  }
+</style>
+</head>
+<body>
+
+<div class="container">
+
+  <header class="main-header">
+    <div class="chapter">CHAPTER 06 · RADIOGRAPHIC POSITIONING</div>
+    <h1>등뼈·허리뼈 X선 촬영법</h1>
+    <div class="subtitle">Thoracic &amp; Lumbar Vertebrae Radiography — 시험 대비 요약 노트</div>
+  </header>
+
+  <!-- 목차 -->
+  <nav class="toc">
+    <h2>목차 · Table of Contents</h2>
+    <ol>
+      <li><a href="#t-ap">흉추 전후방향 촬영 (T-spine AP)</a></li>
+      <li><a href="#t-cobb">척추측만도 계측 — Cobb법</a></li>
+      <li><a href="#t-lat">흉추 측방향 촬영 (T-spine Lateral)</a></li>
+      <li><a href="#t-obl">흉추 사방향 촬영 (T-spine Oblique)</a></li>
+      <li><a href="#l-ap">요추 전후방향 촬영 (L-spine AP)</a></li>
+      <li><a href="#l-lat">요추 측방향 촬영 (L-spine Lateral)</a></li>
+      <li><a href="#l-obl">요추 사방향 촬영 (L-spine Oblique)</a></li>
+    </ol>
+  </nav>
+
+  <!-- ════════════════ 흉추 섹션 ════════════════ -->
+  <div class="section-divider"><span>등뼈 · 흉추 (Thoracic Vertebrae)</span></div>
+
+  <!-- ① 흉추 AP -->
+  <article class="projection-card" id="t-ap">
+    <div class="card-header">
+      <div class="card-number">T-SPINE · 01</div>
+      <h2>흉추 전후방향 촬영
+        <span class="eng-title">Thoracic Vertebrae — AP Projection</span>
+      </h2>
+    </div>
+    <div class="card-body">
+
+      <div class="field">
+        <div class="field-label"><span class="icon">1</span>환자의 자세 (Patient Position)</div>
+        <div class="field-content">
+          <ul>
+            <li>바로 <span class="highlight">눕거나(supine) 또는 선 자세(erect)</span></li>
+            <li><span class="highlight">정중시상면(MSP)</span>을 IR 면의 중심선과 일치시키고, <span class="measure">T7</span>이 영상수용체(IR)의 중앙에 오도록 위치시킨다</li>
+            <li><span class="highlight">무릎을 구부려</span> 등뼈의 생리적 만곡을 완화시킨다</li>
+            <li>양쪽 어깨를 밀착시켜 같은 수평면에 놓이도록 한다</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="field">
+        <div class="field-label"><span class="icon">2</span>촬영방법 (Imaging Parameters)</div>
+        <div class="field-content">
+          <ul>
+            <li>호흡 — <span class="highlight">깊은 심호기 후 멈춘 상태</span></li>
+            <li><span class="term-eng">Heel effect</span>를 고려하여 환자의 자세잡이 수행</li>
+            <li>IR size — <span class="measure">14 × 17 inch</span></li>
+            <li>SID — <span class="measure">100 cm</span></li>
+            <li>Grid — 이동형 또는 고정형 격자 사용</li>
+            <li>차폐 — 생식샘 차폐</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="field">
+        <div class="field-label"><span class="icon">3</span>중심선 (Central Ray)</div>
+        <div class="field-content">
+          <ul>
+            <li><span class="highlight">복장뼈위패임(흉골상절흔, suprasternal notch) 아래 <span class="measure">8–10 cm</span></span></li>
+            <li><strong>또는</strong> <span class="highlight">복장뼈각(흉골각, sternal angle) 아래 <span class="measure">5 cm</span></span> 위치</li>
+            <li>생리적 만곡 환자는 <span class="highlight">위쪽·아래쪽으로 분할 촬영</span>
+              <ul>
+                <li>위쪽 등뼈 : 머리방향으로 <span class="measure">10–15°</span> 각도, T1이 입사 중심점</li>
+                <li>아래쪽 등뼈 : 척추뼈 몸통에 수직으로 입사</li>
+              </ul>
+            </li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="field">
+        <div class="field-label"><span class="icon">4</span>촬영목적 (Purpose)</div>
+        <div class="field-content">
+          <ul>
+            <li>척추뼈몸통 <span class="term-eng">(vertebral body, 추체)</span></li>
+            <li>척추뼈사이공간 <span class="term-eng">(intervertebral space, 추간강)</span></li>
+            <li>척추뼈고리뿌리 <span class="term-eng">(pedicles, 추궁근)</span> 사이의 거리</li>
+            <li>가시돌기 <span class="term-eng">(spinous process, 극돌기)</span></li>
+            <li>가로돌기 <span class="term-eng">(transverse process, 횡돌기)</span></li>
+            <li>갈비뼈 <span class="term-eng">(rib, 늑골)</span></li>
+            <li><span class="highlight">척추측만증 등의 병변 유무 관찰</span></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="field">
+        <div class="field-label"><span class="icon">5</span>촬영법 특징 (Technique Points)</div>
+        <div class="field-content">
+          <ul>
+            <li>조사면 폭을 <span class="measure">10–12 cm</span>로 조절 → 환자 피폭선량 감소 + 대조도 향상</li>
+            <li>범위 — <span class="highlight">C7–L1 까지 모두 포함</span></li>
+            <li>위·아래 등뼈 두께 차이가 큰 환자 → <span class="highlight">쐐기형 보상필터(wedge filter)</span> 또는 <span class="term-eng">heel effect</span> 이용 시 고른 농도범위로 영상 획득</li>
+          </ul>
+          <div class="feature-box">
+            <span class="tip-label">Key Point</span>
+            피폭선량은 <strong>최소화</strong>하는 것이 원칙. 조사야를 10–12 cm로 좁혀 환자 보호와 영상 품질을 동시에 확보한다.
+          </div>
+        </div>
+      </div>
+
+      <div class="field">
+        <div class="field-label"><span class="icon">6</span>촬영상 평가기준 (Evaluation Criteria)</div>
+        <div class="field-content">
+          <div class="eval-list">
+            <ol>
+              <li>C7–L1 까지 모두 포함되어 있는가?</li>
+              <li>고리뿌리(추궁근부, pedicle)상이 명확한가?</li>
+              <li>척추사이 간격이 잘 나타나 있는가?</li>
+              <li>가시돌기(극돌기, spinous process)상이 추체의 중앙에 투영되고 있는가?</li>
+              <li>척추뼈몸통(추체, body)의 앞모서리 및 뒷모서리가 일치되고 있는가?</li>
+              <li>등뼈 전체의 농도가 적절한가?</li>
+              <li>조사야는 여성의 유방음영 안쪽으로 제한되어 있는가?</li>
+              <li>복장빗장관절(흉쇄관절, S–C joint)은 회전 없이 척추와 같은 위치에 대칭되어 있는가?</li>
+              <li>추체는 직선으로 놓여져 있는가?</li>
+            </ol>
+          </div>
+        </div>
+      </div>
+
+      <div class="source"><strong>출처:</strong> 6장 등뼈_허리뼈.pdf, pp. 3–11</div>
+    </div>
+  </article>
+
+  <!-- Cobb법 (보조 설명) -->
+  <article class="projection-card" id="t-cobb">
+    <div class="card-header">
+      <div class="card-number">T-SPINE · 01-α</div>
+      <h2>척추측만도 계측 — Cobb법
+        <span class="eng-title">Scoliosis Measurement — Cobb's Method</span>
+      </h2>
+    </div>
+    <div class="card-body">
+
+      <div class="field">
+        <div class="field-label"><span class="icon">★</span>계측 원리 (Measurement Principle)</div>
+        <div class="field-content">
+          <ul>
+            <li><span class="highlight">일차만곡(primary curve)</span>의 <strong>상단</strong>에 위치하는 가장 기울기가 큰 척추뼈몸통의 <strong>윗면</strong>과, <strong>하단</strong>에서 기울기가 가장 큰 척추뼈몸통의 <strong>아랫면</strong>에 각각 <span class="highlight">접선</span>을 긋는다</li>
+            <li>이 두 접선과 <strong>수직선</strong>이 교차하는 <span class="highlight">보각(supplementary angle)</span>을 1차만곡으로 한다</li>
+            <li>2차만곡(secondary curve)도 같은 원리로 측정</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="field">
+        <div class="field-label"><span class="icon">✦</span>촬영 조건 (Imaging Conditions)</div>
+        <div class="field-content">
+          <ul>
+            <li>SID — <span class="measure">150–200 cm</span> <em>(일반 흉추 AP의 100 cm보다 훨씬 긴 거리)</em></li>
+            <li>호흡 — <span class="highlight">날숨(호기) 후 촬영</span></li>
+          </ul>
+          <div class="special-note">
+            <div class="note-title">Cobb법 핵심 요약</div>
+            <ul>
+              <li><strong>1차만곡 :</strong> 상단 척추 윗면 접선 + 하단 척추 아랫면 접선 → 수직선 교차의 보각</li>
+              <li><strong>예시 :</strong> T4 윗면 ↔ T11 아랫면 접선 → 30° (1차), T12 ↔ L4 → 30° (2차)</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <div class="source"><strong>출처:</strong> 6장 등뼈_허리뼈.pdf, pp. 13–14</div>
+    </div>
+  </article>
+
+  <!-- ② 흉추 Lateral -->
+  <article class="projection-card" id="t-lat">
+    <div class="card-header">
+      <div class="card-number">T-SPINE · 02</div>
+      <h2>흉추 측방향 촬영
+        <span class="eng-title">Thoracic Vertebrae — Lateral Projection</span>
+      </h2>
+    </div>
+    <div class="card-body">
+
+      <div class="field">
+        <div class="field-label"><span class="icon">1</span>환자의 자세 (Patient Position)</div>
+        <div class="field-content">
+          <ul>
+            <li><span class="highlight">옆으로 눕거나(lateral recumbent) 또는 선 자세</span></li>
+            <li>흉곽 아래쪽 밑에 <span class="highlight">방사선 투과성 고정용구</span>를 놓아 자세 지지</li>
+            <li>팔은 몸통의 장축에 직각이 되도록 앞으로 놓는다</li>
+            <li>척추의 장축과 머리의 정중시상면이 <span class="highlight">평행</span>되게 조정</li>
+            <li>양측 무릎을 구부려 무릎 사이에 고정용구를 놓아 <span class="highlight">골반의 회전 방지</span></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="field">
+        <div class="field-label"><span class="icon">2</span>촬영방법 (Imaging Parameters)</div>
+        <div class="field-content">
+          <ul>
+            <li>호흡 — <span class="highlight">호기 후 멈춘 상태 또는 자연호흡(respiration technique)</span> 이용 촬영</li>
+            <li>IR size — <span class="measure">14 × 17 inch</span></li>
+            <li>SID — <span class="measure">100 cm</span></li>
+            <li>Grid — 이동형 또는 고정형 격자 사용</li>
+            <li>차폐 — 생식샘 차폐</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="field">
+        <div class="field-label"><span class="icon">3</span>중심선 (Central Ray)</div>
+        <div class="field-content">
+          <ul>
+            <li><span class="highlight"><span class="measure">T7</span>을 향해 IR면에 대해 수직으로 입사</span></li>
+            <li>전체 척추 장축이 촬영면과 평행하지 않을 경우 → 중심 X선을 머리쪽으로 <span class="measure">5–10°(10–15°)</span> 경사 입사</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="field">
+        <div class="field-label"><span class="icon">4</span>촬영목적 (Purpose)</div>
+        <div class="field-content">
+          <ul>
+            <li>척추뼈몸통 <span class="term-eng">(vertebral body)</span></li>
+            <li>척추뼈사이공간 <span class="term-eng">(intervertebral space)</span></li>
+            <li>척추뼈사이구멍 <span class="term-eng">(intervertebral foramen, 추간공)</span></li>
+            <li>가시돌기 <span class="term-eng">(spinous process)</span></li>
+            <li><span class="highlight">척추뒤굽음증(kyphosis)</span> 등의 병변 관찰</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="field">
+        <div class="field-label"><span class="icon">5</span>촬영법 특징 (Technique Points)</div>
+        <div class="field-content">
+          <ul>
+            <li>조사면 폭 — <span class="measure">10–12 cm</span></li>
+            <li>범위 — <span class="highlight">C7–L1 까지 포함</span></li>
+            <li><span class="highlight">쐐기형 보상필터 또는 heel effect</span> 이용 → 위·아래 등뼈의 고른 농도</li>
+            <li>IR에 도달하는 <span class="highlight">산란선 감소를 위해 환자 등뒤 촬영대에 납판</span>을 놓는다</li>
+            <li>호흡 이용 촬영 시 — <span class="highlight">낮은 관전류(mA), 조사시간 <span class="measure">3–4초</span> 장시간 조사</span></li>
+          </ul>
+          <div class="feature-box">
+            <span class="tip-label">기억 포인트</span>
+            측방향 촬영은 <strong>파워가 장점</strong> — 호흡 이용 기법으로 갈비뼈 음영을 흐려 추체를 선명하게 한다.
+          </div>
+        </div>
+      </div>
+
+      <div class="field">
+        <div class="field-label"><span class="icon">6</span>촬영상 평가기준 (Evaluation Criteria)</div>
+        <div class="field-content">
+          <div class="eval-list">
+            <ol>
+              <li>T-spine의 추체 형태를 모두 식별할 수 있는가?</li>
+              <li>추체의 양모서리가 일치하고 왜곡이 없는가?</li>
+              <li>농도, 특히 폐농도가 너무 높지는 않은가?</li>
+              <li>척추사이(추간)관절을 관찰할 수 있는가?</li>
+              <li>척추사이공간(추간공)의 식별이 가능한가?</li>
+              <li>위쪽등뼈의 식별이 가능한가?</li>
+              <li>제1, 2 허리뼈도 포함되었는가?</li>
+              <li>노광관용도(latitude)가 넓게 나왔는가?</li>
+              <li>갈비뼈(rib)는 뒤쪽에서 겹쳐져서 나타나는가?</li>
+            </ol>
+          </div>
+        </div>
+      </div>
+
+      <div class="source"><strong>출처:</strong> 6장 등뼈_허리뼈.pdf, pp. 15–22</div>
+    </div>
+  </article>
+
+  <!-- ③ 흉추 Oblique -->
+  <article class="projection-card" id="t-obl">
+    <div class="card-header">
+      <div class="card-number">T-SPINE · 03</div>
+      <h2>흉추 사방향 촬영
+        <span class="eng-title">Thoracic Vertebrae — Oblique Projection</span>
+      </h2>
+    </div>
+    <div class="card-body">
+
+      <div class="field">
+        <div class="field-label"><span class="icon">1</span>환자의 자세 (Patient Position)</div>
+        <div class="field-content">
+          <ul>
+            <li><span class="highlight">옆으로 누운 자세 또는 선 자세</span></li>
+            <li>척추의 장축이 IR면 중심선에 일치되도록 하고, <span class="measure">T7</span>이 중앙이 되도록 한다</li>
+            <li><span class="highlight">정측면자세(true lateral)로부터 몸을 <span class="measure">20°</span> 회전</span>
+              → 관상면이 촬영대면에 대하여 <span class="measure">70°</span>가 되게 한다</li>
+            <li>양쪽 엉덩이와 무릎을 구부리고 양팔은 편안한 자세</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="field">
+        <div class="field-label"><span class="icon">2</span>촬영방법 (Imaging Parameters)</div>
+        <div class="field-content">
+          <ul>
+            <li>촬영 종류 — <span class="highlight">AP projection 또는 PA projection</span></li>
+            <li>IR size — <span class="measure">14 × 17 inch</span></li>
+            <li>SID — <span class="measure">100 cm</span></li>
+            <li>Grid — 이동형 또는 고정형 격자 사용</li>
+            <li>차폐 — 생식샘 차폐</li>
+            <li>환자 자세 정확한 회전을 위해 <span class="term-eng">angle block</span> 사용</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="field">
+        <div class="field-label"><span class="icon">3</span>중심선 (Central Ray)</div>
+        <div class="field-content">
+          <ul>
+            <li>IR 중앙점에 <span class="measure">T7</span>이 놓이게 한 후 <span class="highlight">수직 입사</span></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="field">
+        <div class="field-label"><span class="icon">4</span>촬영목적 (Purpose)</div>
+        <div class="field-content">
+          <ul>
+            <li><span class="highlight">등뼈(흉추)의 돌기사이관절 <span class="term-eng">(apophyseal joint)</span></span>을 잘 관찰할 수 있다</li>
+          </ul>
+          <div class="special-note">
+            <div class="note-title">필수 암기 — AP vs PA 사방향의 차이</div>
+            <ul>
+              <li><strong>전후사방향(AP oblique) :</strong> IR면에서 <span class="highlight">먼쪽(upside) 돌기사이관절</span>이 잘 나타남</li>
+              <li><strong>후전사방향(PA oblique) :</strong> IR면에서 <span class="highlight">가까운쪽(downside) 돌기사이관절</span>이 잘 나타남</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <div class="field">
+        <div class="field-label"><span class="icon">5</span>촬영법 특징 (Technique Points)</div>
+        <div class="field-content">
+          <ul>
+            <li>등뼈의 <span class="highlight">돌기사이관절이 선명하게</span> 나타나야 한다</li>
+            <li>등뼈 전체 <span class="measure">12개</span>가 포함되어야 하며 노출관용도가 넓어야 한다</li>
+            <li><span class="highlight">양쪽 사방향 촬영을 기본</span>으로 한다</li>
+            <li>환자의 흉곽은 사방향 자세를 위해 거의 측면이 되어야 한다</li>
+            <li>환자의 몸을 정확하게 회전하기 위해 <span class="term-eng">angle block</span> 사용</li>
+            <li>환자는 뒤쪽 또는 앞쪽으로 회전하여 사방향 자세</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="field">
+        <div class="field-label"><span class="icon">6</span>촬영상 평가기준 (Evaluation Criteria)</div>
+        <div class="field-content">
+          <div class="eval-list">
+            <ol>
+              <li>열두 개의 T-spine이 IR의 중앙선에 나타나는가?</li>
+              <li>돌기사이관절(apophyseal joint)이 잘 나타나고 있는가?</li>
+              <li>노출 관용도(latitude)는 적절한가?</li>
+            </ol>
+          </div>
+        </div>
+      </div>
+
+      <div class="source"><strong>출처:</strong> 6장 등뼈_허리뼈.pdf, pp. 23–29</div>
+    </div>
+  </article>
+
+  <!-- ════════════════ 요추 섹션 ════════════════ -->
+  <div class="section-divider"><span>허리뼈 · 요추 (Lumbar Vertebrae)</span></div>
+
+  <!-- ④ 요추 AP -->
+  <article class="projection-card" id="l-ap">
+    <div class="card-header">
+      <div class="card-number">L-SPINE · 01</div>
+      <h2>요추 전후방향 검사
+        <span class="eng-title">Lumbar Vertebrae — AP (or PA) Projection</span>
+      </h2>
+    </div>
+    <div class="card-body">
+
+      <div class="field">
+        <div class="field-label"><span class="icon">1</span>환자의 자세 (Patient Position)</div>
+        <div class="field-content">
+          <ul>
+            <li><span class="highlight">바로 누운 자세(supine) 또는 선 자세(erect)</span></li>
+            <li><span class="highlight">무릎과 엉덩관절(hip joint)을 구부리고</span> 머리에 베개를 받친다
+              <ul><li>무릎을 구부리는 이유 → <span class="highlight">생리적 만곡을 펴서</span> 중심선이 추체에 수직입사되게 함</li></ul>
+            </li>
+            <li>촬영대의 중심선과 환자의 정중선이 일치되게 한 후, 양 팔은 몸통 옆 또는 가슴 위</li>
+            <li><span class="highlight">골반과 몸통부(torso)가 회전하지 않았는지</span> 확인</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="field">
+        <div class="field-label"><span class="icon">2</span>촬영방법 (Imaging Parameters)</div>
+        <div class="field-content">
+          <ul>
+            <li>중심 X선을 IR면에 <span class="highlight">수직 입사</span></li>
+            <li>호흡 — <span class="highlight">호기 후 멈추고</span> X선 조사</li>
+            <li>SID — <span class="measure">100 cm</span></li>
+            <li>Grid — 이동형 또는 고정형 격자 사용</li>
+            <li>차폐 — 생식샘 차폐</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="field">
+        <div class="field-label"><span class="icon">3</span>중심선 (Central Ray)</div>
+        <div class="field-content">
+          <ul>
+            <li><strong>큰 IR의 경우</strong> — <span class="measure">14 × 17 inch</span> → <span class="highlight">엉덩뼈능선(iliac crest)면 또는 L4–5</span></li>
+            <li><strong>작은 IR의 경우</strong> — <span class="measure">11 × 14 inch</span> → <span class="highlight">L3</span></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="field">
+        <div class="field-label"><span class="icon">4</span>촬영목적 (Purpose)</div>
+        <div class="field-content">
+          <ul>
+            <li>척추뼈몸통 <span class="term-eng">(vertebral body)</span></li>
+            <li>척추뼈사이공간 <span class="term-eng">(intervertebral space)</span></li>
+            <li>척추뼈고리뿌리 <span class="term-eng">(pedicles)</span></li>
+            <li>가시돌기 <span class="term-eng">(spinous process)</span></li>
+            <li>가로돌기 <span class="term-eng">(transverse process)</span></li>
+            <li>엉치엉덩관절 <span class="term-eng">(sacroiliac joint, 천장관절)</span></li>
+            <li>엉치뼈 <span class="term-eng">(sacrum, 천골)</span></li>
+            <li><span class="highlight">척추측만증 등의 병변 유무 관찰</span></li>
+          </ul>
+          <div class="special-note">
+            <div class="note-title">Cow's sign (AP 영상의 소 얼굴 모양)</div>
+            <ul>
+              <li><strong>귀</strong> → 가로돌기 <span class="term-eng">(transverse process)</span></li>
+              <li><strong>눈</strong> → 고리뿌리 <span class="term-eng">(pedicle arch, 추궁근)</span></li>
+              <li><strong>뿔</strong> → 위관절돌기 <span class="term-eng">(superior articular process)</span></li>
+              <li><strong>턱</strong> → 아래관절돌기 <span class="term-eng">(inferior articular process)</span></li>
+              <li><strong>코</strong> → 가시돌기 <span class="term-eng">(spinous process)</span></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <div class="field">
+        <div class="field-label"><span class="icon">5</span>촬영법 특징 (Technique Points)</div>
+        <div class="field-content">
+          <ul>
+            <li><span class="highlight">양쪽 무릎을 구부린다</span> (필수)</li>
+            <li>조사면 — 허리뼈 전체가 나타나도록 <strong>최소범위로 축소</strong></li>
+            <li>단, 복부질환 수반 시 → 배까지 포함되도록 조절</li>
+            <li>가임여성 — 생식선이 조사면 내에 위치하므로 <span class="highlight">피폭선량 경감의 대응 필요</span></li>
+            <li>선자세 촬영은 육체적 부담이 적고 적절한 하중이 걸리지만,
+              <span class="highlight">생리적 만곡에 의해 척추사이관절이 선명하지 않고 움직임에 의한 불선예한 영상</span> 가능성</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="field">
+        <div class="field-label"><span class="icon">6</span>촬영상 평가기준 (Evaluation Criteria)</div>
+        <div class="field-content">
+          <div class="eval-list">
+            <ol>
+              <li>T12까지 포함되고 있는가?</li>
+              <li>척추뼈사이간격이 명확하게 식별 가능한가?</li>
+              <li>척추뼈몸통의 앞모서리와 뒷모서리가 일치되고 왜곡이 없는가?</li>
+              <li>위·아래관절돌기(상·하관절돌기)상을 추구할 수 있는가?</li>
+              <li>위아래관절돌기간부(추궁근부)가 보이는가?</li>
+              <li>엉덩허리근(장요근, psoas muscle), 콩팥 등이 보이는가?</li>
+              <li>장내의 가스가 제거되어 있는가?</li>
+            </ol>
+          </div>
+        </div>
+      </div>
+
+      <div class="source"><strong>출처:</strong> 6장 등뼈_허리뼈.pdf, pp. 30–41</div>
+    </div>
+  </article>
+
+  <!-- ⑤ 요추 Lateral -->
+  <article class="projection-card" id="l-lat">
+    <div class="card-header">
+      <div class="card-number">L-SPINE · 02</div>
+      <h2>요추 측방향 촬영
+        <span class="eng-title">Lumbar Vertebrae — Lateral Projection</span>
+      </h2>
+    </div>
+    <div class="card-body">
+
+      <div class="field">
+        <div class="field-label"><span class="icon">1</span>환자의 자세 (Patient Position)</div>
+        <div class="field-content">
+          <ul>
+            <li><span class="highlight">옆으로 누운 자세(lateral recumbent) 또는 선 자세</span></li>
+            <li>머리에 베개를 받치고 <span class="highlight">무릎과 엉덩이를 구부리고 무릎 사이에 지지체</span>를 고여 바른 측면 자세</li>
+            <li>관상면(coronal plane)을 촬영대 중심선에 맞춘다</li>
+            <li><span class="highlight">허리의 잘록한 부분에 방사선 투과성 지지체</span>를 고여 척추의 장축과 촬영대 면이 평행이 되게 한다 (가시돌기를 손으로 만져 확인 가능)</li>
+            <li>골반과 몸통부가 바른 측면자세가 되도록 한다</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="field">
+        <div class="field-label"><span class="icon">2</span>촬영방법 (Imaging Parameters)</div>
+        <div class="field-content">
+          <ul>
+            <li>호흡 — <span class="highlight">날숨 후 멈춘 상태</span></li>
+            <li>옆으로 누운자세 — 환자의 <span class="highlight">통증이 있는 쪽의 IR 면을 밀착</span>시켜 촬영</li>
+            <li>관전압 — <span class="measure">90–100 kVp</span> 범위</li>
+            <li>SID — <span class="measure">100 cm</span></li>
+            <li>Grid — 이동형 또는 고정형 격자 사용</li>
+            <li>차폐 — 생식샘 차폐</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="field">
+        <div class="field-label"><span class="icon">3</span>중심선 (Central Ray)</div>
+        <div class="field-content">
+          <ul>
+            <li><span class="measure">L3</span>를 향해 입사</li>
+            <li>허리부분에 <span class="highlight">고정용구가 놓여진 경우 → 수직 입사</span></li>
+            <li>고정용구가 <span class="highlight">없는 경우 → 발쪽(caudad)으로 <span class="measure">5–8°</span> 경사</span>
+              <ul><li>(남자 <span class="measure">5°</span> · 여자 <span class="measure">8°</span> — 골반 폭 차이로 인한 경사)</li></ul>
+            </li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="field">
+        <div class="field-label"><span class="icon">4</span>촬영목적 (Purpose)</div>
+        <div class="field-content">
+          <ul>
+            <li>척추뼈몸통 <span class="term-eng">(body)</span></li>
+            <li>척추사이구멍 <span class="term-eng">(intervertebral foramen)</span></li>
+            <li>척추뼈고리뿌리 <span class="term-eng">(pedicle)</span></li>
+            <li>가시돌기 <span class="term-eng">(spinous process)</span></li>
+            <li><span class="highlight">허리뼈분리증(spondylolysis, 척추분리증)</span> 등의 병변 유무 관찰</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="field">
+        <div class="field-label"><span class="icon">5</span>촬영법 특징 (Technique Points)</div>
+        <div class="field-content">
+          <ul>
+            <li>허리뼈 옆면까지 조사야를 완전히 줄인다</li>
+            <li>호흡 — <span class="highlight">날숨 후 멈춘 상태</span></li>
+            <li>통증이 있는 쪽 IR에 밀착</li>
+            <li>관전압 — <span class="measure">90–100 kVp</span></li>
+            <li><span class="term-eng">Anode heel effect</span>를 최대로 이용 → <span class="highlight">골반이 음극(cathode) 방향</span>이 되게 위치, 또는 쐐기형 필터 사용</li>
+            <li>환자 <span class="highlight">등쪽에 납판</span>을 놓아 산란선이 IR에 영향을 주는 것을 줄인다</li>
+          </ul>
+          <div class="feature-box">
+            <span class="tip-label">핵심 암기</span>
+            "고정용구 있으면 <strong>수직</strong>, 없으면 <strong>발쪽 5–8°</strong>" — 중심선 각도는 시험 단골 문제.
+          </div>
+        </div>
+      </div>
+
+      <div class="field">
+        <div class="field-label"><span class="icon">6</span>촬영상 평가기준 (Evaluation Criteria)</div>
+        <div class="field-content">
+          <div class="eval-list">
+            <ol>
+              <li>T12까지 포함되고 있는가?</li>
+              <li>척추뼈몸통 양모서리가 일치하고 왜곡이 없는가?</li>
+              <li>위아래관절돌기(상하관절돌기)를 관찰할 수 있는가?</li>
+              <li>다섯 번째 허리뼈의 척추뼈 몸통은 농도 부족 없이 관찰할 수 있는가?</li>
+              <li>허리뼈와 엉치뼈사이(천추간, L5–S1)의 판별이 가능한가?</li>
+              <li>척추뼈사이 간격을 넓게 관찰할 수 있는가?</li>
+            </ol>
+          </div>
+        </div>
+      </div>
+
+      <div class="source"><strong>출처:</strong> 6장 등뼈_허리뼈.pdf, pp. 42–48</div>
+    </div>
+  </article>
+
+  <!-- ⑥ 요추 Oblique -->
+  <article class="projection-card" id="l-obl">
+    <div class="card-header">
+      <div class="card-number">L-SPINE · 03</div>
+      <h2>요추 사방향 촬영
+        <span class="eng-title">Lumbar Vertebrae — Oblique Projection</span>
+      </h2>
+    </div>
+    <div class="card-body">
+
+      <div class="field">
+        <div class="field-label"><span class="icon">1</span>환자의 자세 (Patient Position)</div>
+        <div class="field-content">
+          <ul>
+            <li><span class="highlight">반듯이 누운 자세(semisupine) 또는 반 엎드린 자세(semiprone)</span></li>
+            <li>척추가 촬영대의 중심에 놓여지도록 한 상태에서 <span class="highlight"><span class="measure">45°</span> 회전</span>시킨다</li>
+            <li>등쪽에 방사선 투과성 스폰지 등을 받쳐 환자의 자세를 고정</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="field">
+        <div class="field-label"><span class="icon">2</span>촬영방법 (Imaging Parameters)</div>
+        <div class="field-content">
+          <ul>
+            <li>SID — <span class="measure">100 cm</span></li>
+            <li>Grid — 이동형 또는 고정형 격자 사용</li>
+            <li>차폐 — 생식샘 차폐</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="field">
+        <div class="field-label"><span class="icon">3</span>중심선 (Central Ray)</div>
+        <div class="field-content">
+          <ul>
+            <li><span class="highlight"><span class="measure">L3</span>를 향하여 IR면에 대해 수직으로 입사</span></li>
+            <li>(각도 없음 — 수직 입사가 원칙)</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="field">
+        <div class="field-label"><span class="icon">4</span>촬영목적 (Purpose)</div>
+        <div class="field-content">
+          <ul>
+            <li>돌기사이관절 <span class="term-eng">(apophyseal joint, 돌기관절)</span></li>
+            <li><span class="highlight">Scotty dog's sign</span> — 스카티 개 모양 관찰</li>
+          </ul>
+          <div class="special-note">
+            <div class="note-title">Scotty dog's sign — 스카티 개 모양 암기</div>
+            <ul>
+              <li><strong>눈 (eye)</strong> → 추궁근 <span class="term-eng">(pedicle)</span></li>
+              <li><strong>코 (nose)</strong> → 횡돌기 <span class="term-eng">(transverse process)</span></li>
+              <li><strong>귀 (ear)</strong> → 상관절돌기 <span class="term-eng">(superior articular process)</span></li>
+              <li><strong>목 (neck)</strong> → 관절간부 <span class="term-eng">(pars interarticularis)</span> ← <em>분리증 호발 부위</em></li>
+              <li><strong>몸통 (body)</strong> → 추궁판 <span class="term-eng">(lamina)</span></li>
+              <li><strong>앞발 (front leg)</strong> → 하관절돌기 <span class="term-eng">(inferior articular process)</span></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <div class="field">
+        <div class="field-label"><span class="icon">5</span>촬영법 특징 (Technique Points)</div>
+        <div class="field-content">
+          <ul>
+            <li>돌기사이관절, 척추뼈고리가 <span class="highlight">선명하게 나타나야 한다</span></li>
+            <li><strong>RPO, LPO (후방사방향) 자세</strong> → <span class="highlight">IR면에서 가까운쪽 돌기사이관절</span>이 잘 나타남</li>
+            <li><strong>RAO, LAO (전방사방향) 자세</strong> → <span class="highlight">IR면에서 먼쪽 돌기사이관절</span>이 잘 나타남</li>
+          </ul>
+          <div class="feature-box">
+            <span class="tip-label">흉추 사방향 vs 요추 사방향 비교</span>
+            <strong>흉추 사방향</strong> : 정측면 기준 <span class="measure">20°</span> 회전 (관상면 <span class="measure">70°</span>)<br>
+            <strong>요추 사방향</strong> : 바로누운 자세 기준 <span class="measure">45°</span> 회전
+          </div>
+        </div>
+      </div>
+
+      <div class="field">
+        <div class="field-label"><span class="icon">6</span>촬영상 평가기준 (Evaluation Criteria)</div>
+        <div class="field-content">
+          <div class="eval-list">
+            <ol>
+              <li>T11–S1 까지 포함되고 있는가?</li>
+              <li>Scotty dog's sign이 다섯 개의 척추뼈에서 모두 나타나는가?</li>
+              <li>추궁근(pedicle)이 척추뼈의 중앙에 나타나는가?</li>
+              <li>척추뼈 주변이 과노출 되어있지는 않은가?</li>
+            </ol>
+          </div>
+        </div>
+      </div>
+
+      <div class="source"><strong>출처:</strong> 6장 등뼈_허리뼈.pdf, pp. 49–56</div>
+    </div>
+  </article>
+
+  <footer>
+    Thoracic &amp; Lumbar Vertebrae — Radiographic Positioning Summary
+    <div class="sig">RADIOGRAPHY · CHAPTER 06 · STUDY NOTES</div>
+  </footer>
+
+</div>
+
+</body>
+</html>

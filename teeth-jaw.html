@@ -1,0 +1,1349 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>치아·턱뼈 X선 촬영법 요약 노트</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@400;500;700;900&family=Noto+Sans+KR:wght@300;400;500;700&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #f5f1e8;
+    --bg-card: #ffffff;
+    --ink: #1a1a1a;
+    --ink-soft: #3d3d3d;
+    --ink-muted: #6b6b6b;
+    --accent: #8b2635;
+    --accent-dark: #5c1820;
+    --accent-soft: #f4e4e6;
+    --highlight: #d4a574;
+    --highlight-soft: #faf0e0;
+    --rule: #d9d2c1;
+    --code-bg: #2d2a26;
+    --code-ink: #e8e2d5;
+    --success: #3a6b4c;
+    --warn: #a8621a;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: 'Noto Sans KR', sans-serif;
+    background: var(--bg);
+    color: var(--ink);
+    line-height: 1.7;
+    padding: 40px 20px;
+    background-image:
+      radial-gradient(circle at 10% 20%, rgba(139, 38, 53, 0.03) 0%, transparent 40%),
+      radial-gradient(circle at 90% 80%, rgba(212, 165, 116, 0.04) 0%, transparent 40%);
+  }
+
+  .container {
+    max-width: 1100px;
+    margin: 0 auto;
+  }
+
+  header.main-header {
+    text-align: center;
+    padding: 60px 20px 50px;
+    border-bottom: 3px double var(--accent);
+    margin-bottom: 50px;
+    position: relative;
+  }
+
+  header.main-header::before {
+    content: "口 腔 顎 顔 面";
+    position: absolute;
+    top: 12px;
+    left: 50%;
+    transform: translateX(-50%);
+    font-family: 'Noto Serif KR', serif;
+    font-size: 0.75rem;
+    letter-spacing: 0.8em;
+    color: var(--highlight);
+    font-weight: 500;
+  }
+
+  header.main-header .chapter {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.85rem;
+    color: var(--accent);
+    letter-spacing: 0.3em;
+    margin-bottom: 15px;
+    font-weight: 600;
+  }
+
+  header.main-header h1 {
+    font-family: 'Noto Serif KR', serif;
+    font-size: 2.8rem;
+    font-weight: 900;
+    color: var(--ink);
+    margin-bottom: 12px;
+    letter-spacing: -0.02em;
+  }
+
+  header.main-header .subtitle {
+    font-family: 'Noto Serif KR', serif;
+    font-size: 1.05rem;
+    color: var(--ink-muted);
+    font-style: italic;
+    letter-spacing: 0.05em;
+  }
+
+  nav.toc {
+    background: var(--bg-card);
+    border: 1px solid var(--rule);
+    border-left: 4px solid var(--accent);
+    padding: 28px 35px;
+    margin-bottom: 50px;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.04);
+  }
+
+  nav.toc h2 {
+    font-family: 'Noto Serif KR', serif;
+    font-size: 1.3rem;
+    color: var(--accent);
+    margin-bottom: 18px;
+    padding-bottom: 10px;
+    border-bottom: 1px dashed var(--rule);
+    font-weight: 700;
+  }
+
+  nav.toc ol {
+    list-style: none;
+    columns: 2;
+    column-gap: 40px;
+  }
+
+  nav.toc ol li {
+    padding: 6px 0;
+    font-size: 0.95rem;
+    break-inside: avoid;
+  }
+
+  nav.toc ol li a {
+    color: var(--ink-soft);
+    text-decoration: none;
+    transition: all 0.2s;
+    display: flex;
+    align-items: baseline;
+    gap: 10px;
+  }
+
+  nav.toc ol li a::before {
+    content: counter(item, decimal-leading-zero);
+    counter-increment: item;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.75rem;
+    color: var(--highlight);
+    font-weight: 600;
+    min-width: 24px;
+  }
+
+  nav.toc ol { counter-reset: item; }
+
+  nav.toc ol li a:hover {
+    color: var(--accent);
+    transform: translateX(4px);
+  }
+
+  .section-divider {
+    margin: 60px 0 40px;
+    text-align: center;
+    position: relative;
+  }
+
+  .section-divider::before {
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: 0;
+    right: 0;
+    height: 1px;
+    background: var(--rule);
+    z-index: 0;
+  }
+
+  .section-divider span {
+    background: var(--bg);
+    padding: 0 30px;
+    position: relative;
+    z-index: 1;
+    font-family: 'Noto Serif KR', serif;
+    font-size: 1.8rem;
+    font-weight: 900;
+    color: var(--accent-dark);
+    letter-spacing: 0.1em;
+  }
+
+  .section-divider span::before,
+  .section-divider span::after {
+    content: "❖";
+    color: var(--highlight);
+    font-size: 0.9rem;
+    margin: 0 15px;
+    vertical-align: middle;
+  }
+
+  article.projection-card {
+    background: var(--bg-card);
+    border: 1px solid var(--rule);
+    margin-bottom: 45px;
+    box-shadow: 0 4px 16px rgba(0,0,0,0.05);
+    overflow: hidden;
+    position: relative;
+  }
+
+  article.projection-card::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 6px;
+    height: 100%;
+    background: linear-gradient(180deg, var(--accent) 0%, var(--accent-dark) 100%);
+  }
+
+  .card-header {
+    padding: 30px 40px 25px;
+    border-bottom: 2px solid var(--accent);
+    background: linear-gradient(135deg, var(--bg-card) 0%, #faf7f0 100%);
+    position: relative;
+  }
+
+  .card-header .card-number {
+    position: absolute;
+    top: 20px;
+    right: 30px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.8rem;
+    color: var(--highlight);
+    font-weight: 600;
+    letter-spacing: 0.15em;
+  }
+
+  .card-header h2 {
+    font-family: 'Noto Serif KR', serif;
+    font-size: 1.75rem;
+    font-weight: 900;
+    color: var(--ink);
+    letter-spacing: -0.01em;
+    line-height: 1.3;
+  }
+
+  .card-header .eng-title {
+    display: block;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.95rem;
+    color: var(--accent);
+    font-weight: 600;
+    margin-top: 6px;
+    letter-spacing: 0.02em;
+  }
+
+  .card-body {
+    padding: 15px 40px 35px;
+  }
+
+  .field {
+    margin-top: 25px;
+    padding-top: 20px;
+    border-top: 1px dashed var(--rule);
+  }
+
+  .field:first-child {
+    border-top: none;
+    padding-top: 10px;
+  }
+
+  .field-label {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    font-family: 'Noto Serif KR', serif;
+    font-size: 1.05rem;
+    font-weight: 700;
+    color: var(--accent-dark);
+    margin-bottom: 14px;
+    letter-spacing: 0.02em;
+  }
+
+  .field-label .icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 28px;
+    height: 28px;
+    background: var(--accent);
+    color: white;
+    border-radius: 50%;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.75rem;
+    font-weight: 700;
+  }
+
+  .field-content {
+    padding-left: 38px;
+    color: var(--ink-soft);
+    font-size: 0.97rem;
+  }
+
+  .field-content ul {
+    list-style: none;
+    padding: 0;
+  }
+
+  .field-content ul li {
+    position: relative;
+    padding-left: 18px;
+    margin-bottom: 8px;
+    line-height: 1.75;
+  }
+
+  .field-content ul li::before {
+    content: "▸";
+    position: absolute;
+    left: 0;
+    top: 0;
+    color: var(--highlight);
+    font-weight: 700;
+  }
+
+  .field-content ul li ul {
+    margin-top: 6px;
+    margin-left: 10px;
+  }
+
+  .field-content ul li ul li::before {
+    content: "–";
+    color: var(--ink-muted);
+  }
+
+  .field-content .not-specified {
+    color: var(--ink-muted);
+    font-style: italic;
+    font-size: 0.9rem;
+    padding: 6px 12px;
+    background: #f0ebe0;
+    border-radius: 3px;
+    display: inline-block;
+  }
+
+  .highlight {
+    background: var(--highlight-soft);
+    padding: 2px 8px;
+    border-radius: 3px;
+    font-weight: 600;
+    color: var(--accent-dark);
+    border-bottom: 2px solid var(--highlight);
+  }
+
+  .measure {
+    font-family: 'JetBrains Mono', monospace;
+    background: var(--code-bg);
+    color: var(--code-ink);
+    padding: 2px 8px;
+    border-radius: 3px;
+    font-size: 0.88em;
+    font-weight: 600;
+    letter-spacing: 0.02em;
+  }
+
+  .term-eng {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.88em;
+    color: var(--accent);
+    font-style: italic;
+  }
+
+  .feature-box {
+    background: var(--accent-soft);
+    border-left: 3px solid var(--accent);
+    padding: 12px 18px;
+    margin: 10px 0;
+    font-size: 0.93rem;
+    border-radius: 0 4px 4px 0;
+  }
+
+  .feature-box .tip-label {
+    font-weight: 700;
+    color: var(--accent-dark);
+    font-size: 0.82rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    display: block;
+    margin-bottom: 4px;
+  }
+
+  /* 장단점 2열 레이아웃 */
+  .pros-cons {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+    margin-top: 8px;
+  }
+
+  .pros-box, .cons-box {
+    padding: 16px 20px;
+    border-radius: 4px;
+    border: 1px solid;
+  }
+
+  .pros-box {
+    background: #f0f6f2;
+    border-color: #c9dfd0;
+    border-left: 4px solid var(--success);
+  }
+
+  .cons-box {
+    background: #fdf2f2;
+    border-color: #e8ccce;
+    border-left: 4px solid var(--accent);
+  }
+
+  .pros-box .pc-label, .cons-box .pc-label {
+    font-family: 'Noto Serif KR', serif;
+    font-weight: 700;
+    font-size: 0.9rem;
+    letter-spacing: 0.08em;
+    margin-bottom: 10px;
+    display: block;
+  }
+
+  .pros-box .pc-label { color: var(--success); }
+  .cons-box .pc-label { color: var(--accent-dark); }
+
+  .pros-box ol, .cons-box ol {
+    list-style: none;
+    counter-reset: pc-item;
+    padding: 0;
+  }
+
+  .pros-box ol li, .cons-box ol li {
+    counter-increment: pc-item;
+    position: relative;
+    padding-left: 26px;
+    margin-bottom: 7px;
+    font-size: 0.92rem;
+    line-height: 1.6;
+  }
+
+  .pros-box ol li::before {
+    content: "(" counter(pc-item) ")";
+    position: absolute;
+    left: 0;
+    top: 0;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.78rem;
+    color: var(--success);
+    font-weight: 700;
+  }
+
+  .cons-box ol li::before {
+    content: "(" counter(pc-item) ")";
+    position: absolute;
+    left: 0;
+    top: 0;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.78rem;
+    color: var(--accent);
+    font-weight: 700;
+  }
+
+  .eval-list {
+    background: #f9f6ee;
+    border: 1px solid var(--rule);
+    padding: 18px 22px;
+    border-radius: 4px;
+  }
+
+  .eval-list ol {
+    list-style: none;
+    counter-reset: eval;
+    padding: 0;
+  }
+
+  .eval-list ol li {
+    counter-increment: eval;
+    position: relative;
+    padding-left: 32px;
+    margin-bottom: 10px;
+    font-size: 0.93rem;
+    line-height: 1.65;
+  }
+
+  .eval-list ol li::before {
+    content: "✓ " counter(eval, decimal-leading-zero);
+    position: absolute;
+    left: 0;
+    top: 0;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.7rem;
+    font-weight: 700;
+    color: var(--success);
+    letter-spacing: 0.05em;
+  }
+
+  .source {
+    margin-top: 30px;
+    padding: 14px 20px;
+    background: var(--code-bg);
+    color: var(--code-ink);
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.82rem;
+    letter-spacing: 0.05em;
+    border-radius: 4px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+
+  .source::before {
+    content: "📚";
+    font-size: 1rem;
+  }
+
+  .source strong {
+    color: var(--highlight);
+    font-weight: 600;
+    margin-right: 6px;
+  }
+
+  .special-note {
+    background: linear-gradient(135deg, var(--highlight-soft) 0%, #fff9ed 100%);
+    border: 2px dashed var(--highlight);
+    padding: 20px 25px;
+    margin: 20px 0;
+    border-radius: 6px;
+    position: relative;
+  }
+
+  .special-note .note-title {
+    font-family: 'Noto Serif KR', serif;
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: var(--warn);
+    margin-bottom: 10px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .special-note .note-title::before {
+    content: "★";
+    color: var(--highlight);
+  }
+
+  .special-note ul {
+    list-style: none;
+    padding: 0;
+  }
+
+  .special-note ul li {
+    padding: 4px 0 4px 20px;
+    position: relative;
+    font-size: 0.93rem;
+  }
+
+  .special-note ul li::before {
+    content: "◆";
+    position: absolute;
+    left: 0;
+    color: var(--highlight);
+    font-size: 0.7rem;
+    top: 8px;
+  }
+
+  /* 비교표 */
+  .comparison-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 15px;
+    font-size: 0.92rem;
+    background: var(--bg-card);
+    border: 1px solid var(--rule);
+  }
+
+  .comparison-table thead th {
+    background: var(--accent-dark);
+    color: white;
+    padding: 12px 14px;
+    text-align: left;
+    font-family: 'Noto Serif KR', serif;
+    font-weight: 700;
+    letter-spacing: 0.03em;
+    font-size: 0.9rem;
+  }
+
+  .comparison-table thead th:first-child {
+    background: var(--accent);
+    width: 22%;
+  }
+
+  .comparison-table tbody td {
+    padding: 11px 14px;
+    border-top: 1px solid var(--rule);
+    vertical-align: top;
+    line-height: 1.55;
+  }
+
+  .comparison-table tbody th {
+    padding: 11px 14px;
+    border-top: 1px solid var(--rule);
+    background: #faf7f0;
+    font-family: 'Noto Serif KR', serif;
+    font-weight: 700;
+    color: var(--accent-dark);
+    text-align: left;
+    font-size: 0.88rem;
+  }
+
+  .comparison-table tbody tr:nth-child(even) td,
+  .comparison-table tbody tr:nth-child(even) th {
+    background-color: #fdfbf5;
+  }
+
+  .comparison-table tbody tr:nth-child(even) th {
+    background-color: #f5f0e4;
+  }
+
+  footer {
+    text-align: center;
+    padding: 50px 20px 30px;
+    margin-top: 60px;
+    border-top: 3px double var(--accent);
+    color: var(--ink-muted);
+    font-family: 'Noto Serif KR', serif;
+    font-style: italic;
+    font-size: 0.9rem;
+  }
+
+  footer .sig {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.75rem;
+    letter-spacing: 0.3em;
+    color: var(--highlight);
+    margin-top: 10px;
+  }
+
+  @media (max-width: 768px) {
+    body { padding: 20px 12px; }
+    header.main-header h1 { font-size: 2rem; }
+    nav.toc ol { columns: 1; }
+    .card-header, .card-body { padding-left: 25px; padding-right: 25px; }
+    .field-content { padding-left: 8px; }
+    .section-divider span { font-size: 1.3rem; padding: 0 15px; }
+    .pros-cons { grid-template-columns: 1fr; }
+    .comparison-table { font-size: 0.82rem; }
+    .comparison-table thead th, .comparison-table tbody td, .comparison-table tbody th {
+      padding: 8px 10px;
+    }
+  }
+
+  article.projection-card { scroll-margin-top: 20px; }
+</style>
+</head>
+<body>
+
+<div class="container">
+
+  <header class="main-header">
+    <div class="chapter">CHAPTER 05 · DENTAL &amp; MAXILLOFACIAL RADIOGRAPHY</div>
+    <h1>치아·턱뼈 X선 촬영법</h1>
+    <div class="subtitle">Dental &amp; Maxillofacial Radiography — 시험 대비 요약 노트</div>
+  </header>
+
+  <!-- 목차 -->
+  <nav class="toc">
+    <h2>목차 · Table of Contents</h2>
+    <ol>
+      <li><a href="#intra-para">치근단촬영 — 평행촬영법</a></li>
+      <li><a href="#intra-bisect">치근단촬영 — 등각촬영법</a></li>
+      <li><a href="#intra-bw">교익촬영 (Bitewing)</a></li>
+      <li><a href="#intra-occ">교합촬영 (Occlusal)</a></li>
+      <li><a href="#intra-loc">위치결정촬영 (Localization)</a></li>
+      <li><a href="#extra-pano">파노라마 촬영 (Panorama)</a></li>
+      <li><a href="#extra-ceph">두개부 규격 X선 촬영 (Cephalometric)</a></li>
+      <li><a href="#comparison">구강 내 vs 구강 외 비교표</a></li>
+    </ol>
+  </nav>
+
+  <!-- ════════════════ 구강 내 촬영 섹션 ════════════════ -->
+  <div class="section-divider"><span>구강 내 X선 검사 · Intraoral Radiography</span></div>
+
+  <!-- ① 평행촬영 -->
+  <article class="projection-card" id="intra-para">
+    <div class="card-header">
+      <div class="card-number">INTRAORAL · 01</div>
+      <h2>치아뿌리끝(치근단) 촬영 — 평행촬영
+        <span class="eng-title">Periapical Radiography — Paralleling Technique</span>
+      </h2>
+    </div>
+    <div class="card-body">
+
+      <div class="field">
+        <div class="field-label"><span class="icon">1</span>환자의 자세 (Patient Position)</div>
+        <div class="field-content">
+          <span class="not-specified">※ 자료에 구체적 자세 명시 없음 — 통상적으로 좌위(sitting position)에서 시행</span>
+        </div>
+      </div>
+
+      <div class="field">
+        <div class="field-label"><span class="icon">2</span>촬영방법 (Imaging Method)</div>
+        <div class="field-content">
+          <ul>
+            <li><span class="highlight">필름을 치아의 장축과 평행하게</span> 놓는다</li>
+            <li>중심 X선은 <span class="highlight">치아와 필름에 직각(수직)</span>으로 조사</li>
+            <li>기하학적 왜곡을 최소화하기 위한 방법</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="field">
+        <div class="field-label"><span class="icon">3</span>중심선 (Central Ray)</div>
+        <div class="field-content">
+          <ul>
+            <li><span class="highlight">치아와 필름에 직각으로 조사</span></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="field">
+        <div class="field-label"><span class="icon">4</span>촬영목적 (Purpose)</div>
+        <div class="field-content">
+          <ul>
+            <li>치아뿌리끝(치근단) 및 주위 조직 관찰</li>
+            <li><span class="highlight">기하학적 왜곡 최소화</span>를 목적으로 한 정밀 영상 획득</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="field">
+        <div class="field-label"><span class="icon">5</span>촬영법 특징 — 장단점 (Advantages &amp; Disadvantages)</div>
+        <div class="field-content">
+          <div class="pros-cons">
+            <div class="pros-box">
+              <span class="pc-label">✓ 장점 (Advantages)</span>
+              <ol>
+                <li>정확한 수직각 및 수평각으로 상(image)이 우수</li>
+                <li>상의 왜곡이 거의 없음</li>
+                <li>위턱(상악) 어금니부에서 <span class="highlight">광대뼈와 치아뿌리끝의 겹침 없이</span> 치아뿌리끝의 상이 뚜렷</li>
+              </ol>
+            </div>
+            <div class="cons-box">
+              <span class="pc-label">✗ 단점 (Disadvantages)</span>
+              <ol>
+                <li>형태학적 변이로 인하여 구강의 모든 부위에서 치아장축과 필름이 <span class="highlight">평행을 이룰 수 없다</span></li>
+                <li>입천장이 낮으면 치아뿌리끝 주위 조직이 관찰되기 어렵다</li>
+                <li><span class="highlight">구토나 점막의 손상</span>이 발생할 수 있다</li>
+              </ol>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="field">
+        <div class="field-label"><span class="icon">6</span>촬영상 (Radiographic Image)</div>
+        <div class="field-content">
+          <ul>
+            <li>치아뿌리끝과 주위 조직이 <span class="highlight">왜곡 없이 선명하게</span> 나타남</li>
+            <li>상악 어금니부에서 광대뼈(zygoma) 음영과 치근단이 분리되어 관찰</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="source"><strong>출처:</strong> 5장 치아_턱뼈.pdf, pp. 3–7</div>
+    </div>
+  </article>
+
+  <!-- ② 등각촬영 -->
+  <article class="projection-card" id="intra-bisect">
+    <div class="card-header">
+      <div class="card-number">INTRAORAL · 02</div>
+      <h2>치아뿌리끝(치근단) 촬영 — 등각촬영
+        <span class="eng-title">Periapical Radiography — Bisecting Technique</span>
+      </h2>
+    </div>
+    <div class="card-body">
+
+      <div class="field">
+        <div class="field-label"><span class="icon">1</span>환자의 자세 (Patient Position)</div>
+        <div class="field-content">
+          <span class="not-specified">※ 자료에 구체적 자세 명시 없음 — 통상적으로 좌위에서 시행</span>
+        </div>
+      </div>
+
+      <div class="field">
+        <div class="field-label"><span class="icon">2</span>촬영방법 (Imaging Method)</div>
+        <div class="field-content">
+          <ul>
+            <li>필름을 가능한 <span class="highlight">치아의 혀면(lingual surface)에 가깝게</span> 위치시킨다</li>
+            <li><span class="highlight">치아 장축과 필름 사이 각도를 이등분하는 가상선</span>에 중심 X선이 <span class="highlight">직각</span>이 되도록 조사</li>
+            <li>중심 X선은 치아뿌리끝을 지나면서 조사됨</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="field">
+        <div class="field-label"><span class="icon">3</span>중심선 (Central Ray)</div>
+        <div class="field-content">
+          <ul>
+            <li><span class="highlight">치아 장축과 필름 사이 각도의 이등분선(bisecting line)에 직각</span>으로 입사</li>
+            <li>치아뿌리끝을 지나도록 조사</li>
+          </ul>
+          <div class="feature-box">
+            <span class="tip-label">기하학적 원리 — 이등변 삼각형의 원리</span>
+            이등분선에 수직으로 X선을 조사하면, 치아(실물)와 필름상 영상이 <strong>합동인 이등변 삼각형</strong>을 이루어 치아의 길이가 실제와 동일하게 기록된다.
+          </div>
+        </div>
+      </div>
+
+      <div class="field">
+        <div class="field-label"><span class="icon">4</span>촬영목적 (Purpose)</div>
+        <div class="field-content">
+          <ul>
+            <li>치아뿌리끝(치근단) 및 주위 조직 관찰</li>
+            <li>평행촬영이 불가능한 해부학적 조건에서의 <span class="highlight">대체 촬영법</span></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="field">
+        <div class="field-label"><span class="icon">5</span>촬영법 특징 — 장단점 (Advantages &amp; Disadvantages)</div>
+        <div class="field-content">
+          <div class="pros-cons">
+            <div class="pros-box">
+              <span class="pc-label">✓ 장점 (Advantages)</span>
+              <ol>
+                <li>필름이 가능한 치아에 근접하므로 <span class="highlight">치아의 길이는 실제 길이와 동일</span></li>
+                <li><span class="highlight">입천장이 낮은 환자에서도 촬영이 가능</span></li>
+              </ol>
+            </div>
+            <div class="cons-box">
+              <span class="pc-label">✗ 단점 (Disadvantages)</span>
+              <ol>
+                <li>치조정연부의 <span class="highlight">볼쪽(협측)과 혀쪽(설측) 관계의 왜곡</span>이 발생</li>
+                <li>환자의 손가락이 구강 내로 들어가기 때문에 심리적인 영향이 발생</li>
+                <li>치아목부위(치경부)에 <span class="highlight">우식증을 발견하기 어려움</span></li>
+                <li>중심 X선이 이등분선에 수직이 되지 않을 경우 <span class="highlight">치아의 길이에 변형</span>이 생김</li>
+                <li>초보자의 경우 상의 왜곡현상이 많이 발생</li>
+              </ol>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="field">
+        <div class="field-label"><span class="icon">6</span>촬영상 (Radiographic Image)</div>
+        <div class="field-content">
+          <ul>
+            <li>치아 길이는 실제와 동일하게 기록됨</li>
+            <li>단, <span class="highlight">치조정연부의 협측·설측 위치 관계가 왜곡</span>되어 나타남</li>
+            <li>중심선 각도 부정확 시 단축(foreshortening) 또는 신장(elongation) 발생 가능</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="source"><strong>출처:</strong> 5장 치아_턱뼈.pdf, pp. 4, 8–10</div>
+    </div>
+  </article>
+
+  <!-- ③ 교익촬영 -->
+  <article class="projection-card" id="intra-bw">
+    <div class="card-header">
+      <div class="card-number">INTRAORAL · 03</div>
+      <h2>교익촬영
+        <span class="eng-title">Bitewing Radiography</span>
+      </h2>
+    </div>
+    <div class="card-body">
+
+      <div class="field">
+        <div class="field-label"><span class="icon">1</span>환자의 자세 (Patient Position)</div>
+        <div class="field-content">
+          <span class="not-specified">※ 자료에 구체적 자세 명시 없음 — 통상적으로 좌위에서 환자가 필름 홀더(bite tab)를 무는 자세</span>
+        </div>
+      </div>
+
+      <div class="field">
+        <div class="field-label"><span class="icon">2</span>촬영방법 (Imaging Method)</div>
+        <div class="field-content">
+          <ul>
+            <li><span class="highlight">위·아래턱(상·하악)의 치아를 동시에 관찰</span>하는 방법</li>
+            <li><span class="highlight">한 장의 필름에 위·아래턱의 치아를 동시에 관찰</span></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="field">
+        <div class="field-label"><span class="icon">3</span>중심선 (Central Ray)</div>
+        <div class="field-content">
+          <span class="not-specified">※ 자료에 명시 없음</span>
+        </div>
+      </div>
+
+      <div class="field">
+        <div class="field-label"><span class="icon">4</span>촬영목적 (Purpose)</div>
+        <div class="field-content">
+          <ul>
+            <li>위·아래턱 치아를 동시에 관찰</li>
+            <li><span class="highlight">치관(crown)</span> 및</li>
+            <li><span class="highlight">치근(치뿌리) 위쪽 1/3</span> 또는 <span class="highlight">치아뿌리 1/2 정도 관찰</span></li>
+          </ul>
+          <div class="feature-box">
+            <span class="tip-label">임상적 활용</span>
+            인접면 치아우식증(interproximal caries) 및 치주질환에 의한 치조골 소실 평가에 유용한 촬영법.
+          </div>
+        </div>
+      </div>
+
+      <div class="field">
+        <div class="field-label"><span class="icon">5</span>촬영법 특징 (Technique Points)</div>
+        <div class="field-content">
+          <ul>
+            <li>하나의 필름으로 상·하악 치아를 동시 관찰 → 효율성</li>
+            <li>치근단 전체는 나타나지 않으므로 치근단 병변 평가에는 부적합</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="field">
+        <div class="field-label"><span class="icon">6</span>촬영상 (Radiographic Image)</div>
+        <div class="field-content">
+          <ul>
+            <li>상·하악 치관과 치근의 상부 1/3 ~ 1/2이 한 필름에 나타남</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="source"><strong>출처:</strong> 5장 치아_턱뼈.pdf, p. 11</div>
+    </div>
+  </article>
+
+  <!-- ④ 교합촬영 -->
+  <article class="projection-card" id="intra-occ">
+    <div class="card-header">
+      <div class="card-number">INTRAORAL · 04</div>
+      <h2>교합촬영
+        <span class="eng-title">Occlusal Radiography</span>
+      </h2>
+    </div>
+    <div class="card-body">
+
+      <div class="field">
+        <div class="field-label"><span class="icon">1</span>환자의 자세 (Patient Position)</div>
+        <div class="field-content">
+          <span class="not-specified">※ 자료에 구체적 자세 명시 없음 — 통상적으로 환자가 교합면으로 필름을 무는 자세</span>
+        </div>
+      </div>
+
+      <div class="field">
+        <div class="field-label"><span class="icon">2</span>촬영방법 (Imaging Method)</div>
+        <div class="field-content">
+          <ul>
+            <li><span class="highlight">비교적 넓은 부위의 구강구조</span>를 관찰할 때 이용</li>
+            <li>필름을 교합면에 놓고 촬영</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="field">
+        <div class="field-label"><span class="icon">3</span>중심선 (Central Ray)</div>
+        <div class="field-content">
+          <span class="not-specified">※ 자료에 명시 없음</span>
+        </div>
+      </div>
+
+      <div class="field">
+        <div class="field-label"><span class="icon">4</span>촬영목적 (Purpose)</div>
+        <div class="field-content">
+          <ul>
+            <li><span class="highlight">골절(fracture)</span></li>
+            <li><span class="highlight">과잉치아 <span class="term-eng">(supernumerary tooth)</span></span></li>
+            <li><span class="highlight">매복치아 <span class="term-eng">(impacted tooth)</span></span></li>
+            <li><span class="highlight">이물질(foreign body)</span></li>
+            <li><span class="highlight">상악동의 이상</span> 관찰</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="field">
+        <div class="field-label"><span class="icon">5</span>촬영법 특징 (Technique Points)</div>
+        <div class="field-content">
+          <ul>
+            <li>치근단·교익 촬영보다 <span class="highlight">넓은 해부학적 범위</span> 포함 가능</li>
+            <li>구강구조의 전반적 평가 및 위치결정 보조에 활용</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="field">
+        <div class="field-label"><span class="icon">6</span>촬영상 (Radiographic Image)</div>
+        <div class="field-content">
+          <ul>
+            <li>한 장에 여러 치아와 주위 골조직의 넓은 영역이 나타남</li>
+            <li>매복치·과잉치·이물질의 존재 및 대략적 위치 확인 가능</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="source"><strong>출처:</strong> 5장 치아_턱뼈.pdf, p. 12</div>
+    </div>
+  </article>
+
+  <!-- ⑤ 위치결정촬영 -->
+  <article class="projection-card" id="intra-loc">
+    <div class="card-header">
+      <div class="card-number">INTRAORAL · 05</div>
+      <h2>위치결정촬영
+        <span class="eng-title">Localization Technique</span>
+      </h2>
+    </div>
+    <div class="card-body">
+
+      <div class="field">
+        <div class="field-label"><span class="icon">1</span>환자의 자세 (Patient Position)</div>
+        <div class="field-content">
+          <span class="not-specified">※ 자료에 구체적 자세 명시 없음</span>
+        </div>
+      </div>
+
+      <div class="field">
+        <div class="field-label"><span class="icon">2</span>촬영방법 (Imaging Method)</div>
+        <div class="field-content">
+          <ul>
+            <li><span class="highlight">평면상으로 나타나는 방사선 사진의 특성</span> 때문에, 환자와 관련된 <span class="highlight">입체적인 정보</span>를 얻기 위해 시행</li>
+            <li>서로 다른 각도에서 촬영한 영상을 비교하여 위치 관계 파악</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="field">
+        <div class="field-label"><span class="icon">3</span>중심선 (Central Ray)</div>
+        <div class="field-content">
+          <span class="not-specified">※ 자료에 명시 없음 — 촬영 각도를 달리하여 입체 정보 획득</span>
+        </div>
+      </div>
+
+      <div class="field">
+        <div class="field-label"><span class="icon">4</span>촬영목적 (Purpose)</div>
+        <div class="field-content">
+          <ul>
+            <li><span class="highlight">악골 내에 존재하는 이물질의 위치 파악</span></li>
+            <li><span class="highlight">매복치아(impacted tooth)의 위치 파악</span></li>
+            <li><span class="highlight">과잉치아(supernumerary tooth)의 위치 파악</span></li>
+            <li><span class="highlight">혀쪽(설측)인지 볼쪽(협측)인지</span>의 관계 규명</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="field">
+        <div class="field-label"><span class="icon">5</span>촬영법 특징 (Technique Points)</div>
+        <div class="field-content">
+          <ul>
+            <li>평면 방사선 사진의 <span class="highlight">2차원적 한계를 극복</span>하기 위한 보조 촬영법</li>
+            <li>임상에서 3차원적 위치 관계 규명이 필요할 때 사용</li>
+          </ul>
+          <div class="special-note">
+            <div class="note-title">위치결정의 임상 적용</div>
+            <ul>
+              <li><strong>이물질 :</strong> 악골 내 금속 파편, 치료 재료 등의 위치 파악</li>
+              <li><strong>매복치아 :</strong> 맹출 방향 및 인접 치아·신경관과의 관계 평가</li>
+              <li><strong>협설측 판별 :</strong> 수술 계획 수립을 위한 필수 정보</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <div class="field">
+        <div class="field-label"><span class="icon">6</span>촬영상 (Radiographic Image)</div>
+        <div class="field-content">
+          <ul>
+            <li>목표 구조물의 <span class="highlight">협측·설측 위치 관계</span>가 명확히 드러나야 함</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="source"><strong>출처:</strong> 5장 치아_턱뼈.pdf, p. 13</div>
+    </div>
+  </article>
+
+  <!-- ════════════════ 구강 외 촬영 섹션 ════════════════ -->
+  <div class="section-divider"><span>구강 외 X선 검사 · Extraoral Radiography</span></div>
+
+  <!-- ⑥ 파노라마 -->
+  <article class="projection-card" id="extra-pano">
+    <div class="card-header">
+      <div class="card-number">EXTRAORAL · 01</div>
+      <h2>파노라마 촬영
+        <span class="eng-title">Panorama Radiography</span>
+      </h2>
+    </div>
+    <div class="card-body">
+
+      <div class="field">
+        <div class="field-label"><span class="icon">1</span>환자의 자세 (Patient Position)</div>
+        <div class="field-content">
+          <span class="not-specified">※ 자료에 구체적 자세 명시 없음 — 통상적으로 선 자세(또는 좌위)에서 파노라마 장비의 chin rest에 턱을 고정</span>
+        </div>
+      </div>
+
+      <div class="field">
+        <div class="field-label"><span class="icon">2</span>촬영방법 (Imaging Method)</div>
+        <div class="field-content">
+          <ul>
+            <li>위·아래턱뼈 및 안면구조물을 <span class="highlight">하나의 연속된 상(panoramic image)</span>으로 보여주는 검사</li>
+            <li>필름 위치 — <span class="highlight">구강 외(extraoral)</span></li>
+            <li>증감지(intensifying screen) — <span class="highlight">사용</span></li>
+            <li>촬영시간 — <span class="measure">13~15 초/회</span></li>
+            <li>확대율 — <span class="measure">약 1.3</span></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="field">
+        <div class="field-label"><span class="icon">3</span>중심선 (Central Ray)</div>
+        <div class="field-content">
+          <span class="not-specified">※ 자료에 명시 없음 — 장비가 환자 주위를 회전하며 연속 촬영</span>
+        </div>
+      </div>
+
+      <div class="field">
+        <div class="field-label"><span class="icon">4</span>촬영목적 (Purpose)</div>
+        <div class="field-content">
+          <ul>
+            <li><span class="highlight">위·아래턱뼈(상·하악골) 및 안면구조물</span>을 하나의 연속된 상으로 관찰</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="field">
+        <div class="field-label"><span class="icon">5</span>촬영법 특징 — 장단점 (Advantages &amp; Disadvantages)</div>
+        <div class="field-content">
+          <div class="pros-cons">
+            <div class="pros-box">
+              <span class="pc-label">✓ 장점 (Advantages)</span>
+              <ol>
+                <li><span class="highlight">광범위한 병소의 평가</span></li>
+                <li>치아가 없는 환자나 <span class="highlight">입을 벌릴 수 없는 환자</span>에게 적용 가능</li>
+                <li>혼합치열기의 치아발육과정이나 발육이상의 평가</li>
+                <li>구강 내 촬영보다 <span class="highlight">방사선 노출이 적고, 촬영방법 간편, 촬영시간 단축, 집단검사 가능</span></li>
+              </ol>
+            </div>
+            <div class="cons-box">
+              <span class="pc-label">✗ 단점 (Disadvantages)</span>
+              <ol>
+                <li>구강 내 촬영보다 <span class="highlight">해상력이 낮고, 상의 확대와 왜곡</span></li>
+                <li>노출시간이 길어 피사체의 움직임으로 인한 <span class="highlight">운동성 불선예도(motion blur)</span> 발생 가능성</li>
+              </ol>
+            </div>
+          </div>
+          <div class="feature-box">
+            <span class="tip-label">암기 포인트 — 피폭선량 비교</span>
+            <strong>파노라마 유효선량 :</strong> <span class="measure">6.7 μSv</span> · <strong>전체치아 구강내 촬영 :</strong> <span class="measure">84 μSv</span><br>
+            → 파노라마가 <strong>약 12배 적은 피폭</strong>으로 집단검사에 유리하다.
+          </div>
+        </div>
+      </div>
+
+      <div class="field">
+        <div class="field-label"><span class="icon">6</span>촬영상 (Radiographic Image)</div>
+        <div class="field-content">
+          <ul>
+            <li>상·하악골과 안면 전체 구조물이 한 장의 영상에 연속된 형태로 표현</li>
+            <li>해상력·선예도는 구강 내 촬영보다 <span class="highlight">낮음</span></li>
+            <li>약 1.3배 확대된 영상</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="source"><strong>출처:</strong> 5장 치아_턱뼈.pdf, pp. 15–18</div>
+    </div>
+  </article>
+
+  <!-- ⑦ 두개부 규격 X선 촬영 -->
+  <article class="projection-card" id="extra-ceph">
+    <div class="card-header">
+      <div class="card-number">EXTRAORAL · 02</div>
+      <h2>두개부 규격 X선 촬영
+        <span class="eng-title">Cephalometric Radiography</span>
+      </h2>
+    </div>
+    <div class="card-body">
+
+      <div class="field">
+        <div class="field-label"><span class="icon">1</span>환자의 자세 (Patient Position)</div>
+        <div class="field-content">
+          <ul>
+            <li>촬영법 분류 — <span class="highlight">PA projection (후전방향)</span> 및 <span class="highlight">Lateral projection (측방향)</span></li>
+            <li>두부 고정기(cephalostat)를 사용하여 두개부를 <span class="highlight">규격화된 위치</span>로 고정</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="field">
+        <div class="field-label"><span class="icon">2</span>촬영방법 (Imaging Method)</div>
+        <div class="field-content">
+          <ul>
+            <li><span class="term-eng">Cephalo</span> 영상이라고 명명</li>
+            <li>두개부의 X선 영상을 <span class="highlight">필름상에서 계측</span>하기 위한 촬영</li>
+            <li><span class="highlight">FOD (Focus–Object Distance) — <span class="measure">60 inch = 150 cm</span></span></li>
+          </ul>
+          <div class="feature-box">
+            <span class="tip-label">핵심 암기 — 시험 빈출</span>
+            Cephalo 촬영의 <strong>초점-피사체간 거리(FOD)</strong>는 <span class="measure">60 inch</span> = <span class="measure">150 cm</span>.<br>
+            → 긴 FOD로 <strong>확대를 최소화</strong>하여 정확한 계측을 가능하게 함.
+          </div>
+        </div>
+      </div>
+
+      <div class="field">
+        <div class="field-label"><span class="icon">3</span>중심선 (Central Ray)</div>
+        <div class="field-content">
+          <ul>
+            <li><strong>PA projection :</strong> 후두부 → 안면부 방향</li>
+            <li><strong>Lateral projection :</strong> 측두부 → 반대측 측두부 방향</li>
+            <li class="not-specified" style="display:list-item;">※ 자료에 구체적 각도 수치 명시 없음</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="field">
+        <div class="field-label"><span class="icon">4</span>촬영목적 (Purpose)</div>
+        <div class="field-content">
+          <ul>
+            <li>두개부의 X선 영상을 <span class="highlight">필름상에서 계측</span>하기 위함</li>
+            <li><span class="highlight">턱의 발육성장과정을 쉽게 비교평가</span></li>
+            <li><span class="highlight">인류학적 계측(anthropometric measurement)</span>에도 응용</li>
+            <li>치과교정 치료계획 수립 및 경과 관찰의 핵심 영상</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="field">
+        <div class="field-label"><span class="icon">5</span>촬영법 특징 (Technique Points)</div>
+        <div class="field-content">
+          <ul>
+            <li>촬영 종류 —
+              <ul>
+                <li><span class="highlight">PA projection (후전방향)</span> : 안면 대칭성, 횡적 성장 평가</li>
+                <li><span class="highlight">Lateral projection (측방향)</span> : 전후방 관계, 수직적 성장 평가</li>
+              </ul>
+            </li>
+            <li>규격화된 촬영 조건 → <span class="highlight">반복 촬영 시 동일 조건 재현</span>으로 시계열 비교 가능</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="field">
+        <div class="field-label"><span class="icon">6</span>촬영상 (Radiographic Image)</div>
+        <div class="field-content">
+          <ul>
+            <li>두개골·안면골의 해부학적 랜드마크가 <span class="highlight">계측 가능한 수준으로 선명</span>하게 나타남</li>
+            <li>긴 FOD로 인해 <span class="highlight">확대·왜곡이 최소화</span>된 영상</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="source"><strong>출처:</strong> 5장 치아_턱뼈.pdf, pp. 19–20</div>
+    </div>
+  </article>
+
+  <!-- 비교표 -->
+  <article class="projection-card" id="comparison">
+    <div class="card-header">
+      <div class="card-number">COMPARISON</div>
+      <h2>구강 내 촬영 vs 구강 외 촬영 비교
+        <span class="eng-title">Intraoral vs Extraoral Radiography — Comparison Table</span>
+      </h2>
+    </div>
+    <div class="card-body">
+
+      <div class="field">
+        <div class="field-label"><span class="icon">★</span>항목별 비교표 (파노라마 촬영 vs 전체치아 구강내방사선 촬영)</div>
+        <div class="field-content">
+          <table class="comparison-table">
+            <thead>
+              <tr>
+                <th>비교 항목</th>
+                <th>파노라마 촬영 (구강 외)</th>
+                <th>전체치아 구강내방사선 촬영 (구강 내)</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <th>촬영부위</th>
+                <td>위·아래턱뼈(상·하악골) 및 얼굴 구조</td>
+                <td>2~3개 치아와 주위조직</td>
+              </tr>
+              <tr>
+                <th>필름의 위치</th>
+                <td>구강 외</td>
+                <td>구강 내</td>
+              </tr>
+              <tr>
+                <th>증감지</th>
+                <td>사용</td>
+                <td>사용 안함</td>
+              </tr>
+              <tr>
+                <th>촬영시간(초/회)</th>
+                <td><span class="measure">13~15</span></td>
+                <td><span class="measure">0.05~0.5</span></td>
+              </tr>
+              <tr>
+                <th>확대율</th>
+                <td><span class="measure">약 1.3</span></td>
+                <td><span class="measure">약 1.05</span></td>
+              </tr>
+              <tr>
+                <th>환자의 불편감</th>
+                <td>편함</td>
+                <td>불편 (통증 및 메스꺼움)</td>
+              </tr>
+              <tr>
+                <th>X선 영상</th>
+                <td>선예도와 해상도가 낮음</td>
+                <td>선명</td>
+              </tr>
+              <tr>
+                <th>특징</th>
+                <td>광범위한 병소의 평가<br>입 열림이 불가능할 때 촬영 가능</td>
+                <td>실제와 비슷한 상이 얻어짐<br>미세한 구조도 관찰 가능</td>
+              </tr>
+              <tr>
+                <th>피폭선량</th>
+                <td>피부선량은 비교적 적다</td>
+                <td>위턱·아래턱 구강내 촬영 시 파노라마 촬영보다 피부선량이 많다</td>
+              </tr>
+              <tr>
+                <th>유효선량</th>
+                <td><span class="measure">6.7 μSv</span></td>
+                <td><span class="measure">84 μSv</span></td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="special-note" style="margin-top: 20px;">
+            <div class="note-title">시험 빈출 암기 포인트</div>
+            <ul>
+              <li><strong>촬영시간 비교 :</strong> 파노라마 <span class="measure">13~15초</span> ↔ 구강내 <span class="measure">0.05~0.5초</span> (약 <strong>30~300배 차이</strong>)</li>
+              <li><strong>확대율 비교 :</strong> 파노라마 <span class="measure">1.3</span> ↔ 구강내 <span class="measure">1.05</span></li>
+              <li><strong>유효선량 비교 :</strong> 파노라마 <span class="measure">6.7 μSv</span> ↔ 구강내 전체 <span class="measure">84 μSv</span> (파노라마가 약 <strong>12배 적음</strong>)</li>
+              <li><strong>증감지 사용 여부 :</strong> 구강 외(파노라마)는 <strong>사용</strong>, 구강 내는 <strong>사용 안함</strong></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <div class="source"><strong>출처:</strong> 5장 치아_턱뼈.pdf, p. 18</div>
+    </div>
+  </article>
+
+  <footer>
+    Dental &amp; Maxillofacial Radiography — Positioning Summary
+    <div class="sig">RADIOGRAPHY · CHAPTER 05 · STUDY NOTES</div>
+  </footer>
+
+</div>
+
+</body>
+</html>

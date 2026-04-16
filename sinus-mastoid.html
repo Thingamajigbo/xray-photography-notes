@@ -1,0 +1,1196 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>코곁굴 · 유양돌기 엑스선 촬영법 시험 대비 노트</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,400;0,600;0,700;0,900;1,400&family=IBM+Plex+Sans+KR:wght@300;400;500;600;700&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #f4f1ea;
+    --paper: #fbf9f3;
+    --ink: #1a1814;
+    --ink-soft: #4a4640;
+    --ink-muted: #7a746a;
+    --rule: #d8d2c4;
+    --rule-soft: #e8e2d4;
+    --accent: #8b2f1d;
+    --accent-soft: #c44a2d;
+    --highlight: #e8d56f;
+    --highlight-soft: #f5ebb8;
+    --blue: #2d4a6b;
+    --green: #3d5a3a;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--bg);
+    color: var(--ink);
+    font-family: 'IBM Plex Sans KR', sans-serif;
+    font-weight: 400;
+    line-height: 1.7;
+    font-size: 15.5px;
+    -webkit-font-smoothing: antialiased;
+    background-image:
+      radial-gradient(circle at 20% 10%, rgba(139, 47, 29, 0.03) 0%, transparent 50%),
+      radial-gradient(circle at 80% 90%, rgba(45, 74, 107, 0.03) 0%, transparent 50%);
+  }
+
+  .container {
+    max-width: 960px;
+    margin: 0 auto;
+    padding: 60px 40px 120px;
+  }
+
+  /* ===== 헤더 ===== */
+  header {
+    border-bottom: 3px double var(--ink);
+    padding-bottom: 32px;
+    margin-bottom: 48px;
+    position: relative;
+  }
+
+  .kicker {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 16px;
+    font-weight: 700;
+  }
+
+  h1 {
+    font-family: 'Fraunces', serif;
+    font-weight: 900;
+    font-size: clamp(34px, 5vw, 52px);
+    line-height: 1.05;
+    letter-spacing: -0.02em;
+    margin-bottom: 12px;
+  }
+
+  h1 .accent {
+    font-style: italic;
+    font-weight: 400;
+    color: var(--accent);
+  }
+
+  .subtitle {
+    font-family: 'Fraunces', serif;
+    font-style: italic;
+    font-size: 17px;
+    color: var(--ink-soft);
+    margin-bottom: 20px;
+  }
+
+  .meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 24px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    color: var(--ink-muted);
+    letter-spacing: 0.05em;
+  }
+
+  .meta span::before {
+    content: '◆ ';
+    color: var(--accent);
+  }
+
+  /* ===== 목차 ===== */
+  .toc {
+    background: var(--paper);
+    border: 1px solid var(--rule);
+    padding: 28px 32px;
+    margin-bottom: 56px;
+    border-radius: 2px;
+  }
+
+  .toc-title {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 16px;
+    font-weight: 700;
+  }
+
+  .toc-list {
+    list-style: none;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 6px 24px;
+  }
+
+  .toc-list li {
+    font-size: 13.5px;
+    padding: 4px 0;
+    border-bottom: 1px dotted var(--rule);
+  }
+
+  .toc-list a {
+    color: var(--ink);
+    text-decoration: none;
+    display: flex;
+    justify-content: space-between;
+    transition: color 0.2s;
+  }
+
+  .toc-list a:hover { color: var(--accent); }
+
+  .toc-list .num {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    color: var(--ink-muted);
+    padding-right: 12px;
+  }
+
+  /* ===== 섹션 헤더 ===== */
+  .section-divider {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    margin: 72px 0 40px;
+  }
+
+  .section-divider::before,
+  .section-divider::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: var(--ink);
+  }
+
+  .section-divider h2 {
+    font-family: 'Fraunces', serif;
+    font-weight: 600;
+    font-size: 22px;
+    letter-spacing: 0.02em;
+    white-space: nowrap;
+  }
+
+  /* ===== 촬영법 카드 ===== */
+  .technique {
+    background: var(--paper);
+    border: 1px solid var(--rule);
+    margin-bottom: 32px;
+    border-radius: 2px;
+    overflow: hidden;
+    box-shadow: 0 1px 0 rgba(0, 0, 0, 0.03);
+  }
+
+  .technique-header {
+    padding: 28px 36px 20px;
+    border-bottom: 1px solid var(--rule);
+    background: linear-gradient(to bottom, var(--paper), transparent);
+    position: relative;
+  }
+
+  .technique-number {
+    position: absolute;
+    top: 20px;
+    right: 28px;
+    font-family: 'Fraunces', serif;
+    font-size: 56px;
+    font-weight: 900;
+    font-style: italic;
+    color: var(--rule);
+    line-height: 1;
+  }
+
+  .technique-ko {
+    font-family: 'Fraunces', serif;
+    font-size: 26px;
+    font-weight: 700;
+    letter-spacing: -0.01em;
+    line-height: 1.2;
+    margin-bottom: 6px;
+    padding-right: 80px;
+  }
+
+  .technique-en {
+    font-family: 'Fraunces', serif;
+    font-style: italic;
+    font-size: 14px;
+    color: var(--ink-muted);
+    font-weight: 400;
+    padding-right: 80px;
+  }
+
+  .technique-tag {
+    display: inline-block;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    background: var(--ink);
+    color: var(--paper);
+    padding: 4px 10px;
+    margin-top: 12px;
+    border-radius: 2px;
+  }
+
+  .technique-tag.waters { background: var(--accent); }
+  .technique-tag.caldwell { background: var(--blue); }
+  .technique-tag.schuller { background: var(--green); }
+
+  /* ===== 본문 그리드 ===== */
+  .technique-body {
+    padding: 28px 36px 32px;
+  }
+
+  .field {
+    display: grid;
+    grid-template-columns: 140px 1fr;
+    gap: 20px;
+    padding: 16px 0;
+    border-bottom: 1px dotted var(--rule);
+  }
+
+  .field:last-of-type { border-bottom: none; }
+
+  .field-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10.5px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    font-weight: 700;
+    color: var(--accent);
+    padding-top: 2px;
+  }
+
+  .field-label-ko {
+    display: block;
+    font-family: 'IBM Plex Sans KR', sans-serif;
+    font-size: 13px;
+    letter-spacing: 0;
+    text-transform: none;
+    font-weight: 600;
+    color: var(--ink);
+    margin-top: 2px;
+  }
+
+  .field-content {
+    font-size: 14.5px;
+    color: var(--ink-soft);
+  }
+
+  .field-content ul {
+    list-style: none;
+    padding: 0;
+  }
+
+  .field-content li {
+    position: relative;
+    padding-left: 18px;
+    margin-bottom: 8px;
+  }
+
+  .field-content li::before {
+    content: '—';
+    position: absolute;
+    left: 0;
+    color: var(--ink-muted);
+  }
+
+  .field-content li:last-child { margin-bottom: 0; }
+
+  /* ===== 강조 ===== */
+  .highlight {
+    background: linear-gradient(180deg, transparent 60%, var(--highlight-soft) 60%);
+    padding: 0 2px;
+    font-weight: 600;
+    color: var(--ink);
+  }
+
+  .num-highlight {
+    font-family: 'JetBrains Mono', monospace;
+    background: var(--ink);
+    color: var(--paper);
+    padding: 2px 8px;
+    border-radius: 2px;
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: 0.02em;
+    white-space: nowrap;
+  }
+
+  .num-highlight.red { background: var(--accent); }
+  .num-highlight.blue { background: var(--blue); }
+
+  .term {
+    color: var(--ink);
+    font-weight: 600;
+  }
+
+  /* ===== 출처 ===== */
+  .source {
+    background: #2a2620;
+    color: #d8d2c4;
+    padding: 12px 36px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.08em;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .source::before {
+    content: '📚';
+    font-size: 14px;
+  }
+
+  /* ===== 핵심 요약 ===== */
+  .summary-box {
+    background: var(--ink);
+    color: var(--paper);
+    padding: 40px 44px;
+    margin-top: 72px;
+    border-radius: 2px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .summary-box::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 4px;
+    background: linear-gradient(90deg, var(--accent) 0%, var(--highlight) 50%, var(--accent) 100%);
+  }
+
+  .summary-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.25em;
+    color: var(--highlight);
+    margin-bottom: 8px;
+    font-weight: 700;
+  }
+
+  .summary-title {
+    font-family: 'Fraunces', serif;
+    font-size: 28px;
+    font-weight: 700;
+    margin-bottom: 28px;
+    letter-spacing: -0.01em;
+  }
+
+  .summary-title .italic {
+    font-style: italic;
+    font-weight: 400;
+    color: var(--highlight);
+  }
+
+  .summary-section {
+    margin-bottom: 32px;
+  }
+
+  .summary-section h3 {
+    font-family: 'Fraunces', serif;
+    font-size: 17px;
+    font-weight: 600;
+    color: var(--highlight);
+    margin-bottom: 14px;
+    padding-bottom: 8px;
+    border-bottom: 1px solid #4a4640;
+  }
+
+  .summary-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 13.5px;
+  }
+
+  .summary-table th,
+  .summary-table td {
+    padding: 10px 14px;
+    text-align: left;
+    border-bottom: 1px dotted #4a4640;
+  }
+
+  .summary-table th {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--highlight);
+    font-weight: 700;
+  }
+
+  .summary-table td:first-child {
+    font-weight: 600;
+    color: var(--paper);
+    width: 38%;
+  }
+
+  .summary-table td:last-child {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 12.5px;
+    color: #d8d2c4;
+  }
+
+  .summary-table tr:last-child td { border-bottom: none; }
+
+  /* ===== 푸터 ===== */
+  footer {
+    text-align: center;
+    margin-top: 80px;
+    padding-top: 32px;
+    border-top: 1px solid var(--rule);
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    color: var(--ink-muted);
+    letter-spacing: 0.1em;
+  }
+
+  /* ===== 반응형 ===== */
+  @media (max-width: 720px) {
+    .container { padding: 40px 20px 80px; }
+    .toc-list { grid-template-columns: 1fr; }
+    .field { grid-template-columns: 1fr; gap: 8px; }
+    .technique-body { padding: 24px 24px 28px; }
+    .technique-header { padding: 24px 24px 18px; }
+    .technique-number { font-size: 40px; top: 18px; right: 20px; }
+    .technique-ko { font-size: 21px; padding-right: 50px; }
+    .source { padding: 12px 24px; }
+    .summary-box { padding: 32px 24px; }
+  }
+
+  /* ===== 인쇄 ===== */
+  @media print {
+    body { background: white; }
+    .technique { page-break-inside: avoid; break-inside: avoid; }
+    .summary-box { page-break-before: always; }
+  }
+</style>
+</head>
+<body>
+<div class="container">
+
+  <!-- ========== 헤더 ========== -->
+  <header>
+    <div class="kicker">Radiography Exam Notes · 방사선 촬영학</div>
+    <h1>코곁굴 · 유양돌기<br><span class="accent">엑스선 촬영법</span></h1>
+    <p class="subtitle">Paranasal Sinuses &amp; Mastoid Process — 3학년 전공 시험 대비 요약 노트</p>
+    <div class="meta">
+      <span>총 10개 촬영법</span>
+      <span>출처 강의자료 기반</span>
+      <span>2026.04</span>
+    </div>
+  </header>
+
+  <!-- ========== 목차 ========== -->
+  <nav class="toc">
+    <div class="toc-title">목 차 · Contents</div>
+    <ul class="toc-list">
+      <li><a href="#t1"><span><span class="num">01</span>부비강 측방향</span><span>Lateral</span></a></li>
+      <li><a href="#t2"><span><span class="num">02</span>부비강 두정비극</span><span>Waters</span></a></li>
+      <li><a href="#t3"><span><span class="num">03</span>부비강 후전 축방향</span><span>Caldwell</span></a></li>
+      <li><a href="#t4"><span><span class="num">04</span>부비강 하악두정</span><span>Schuller</span></a></li>
+      <li><a href="#t5"><span><span class="num">05</span>유양돌기 축측사 (Law)</span><span>Law</span></a></li>
+      <li><a href="#t6"><span><span class="num">06</span>유양돌기 축측사 (Stenvers)</span><span>Stenvers</span></a></li>
+      <li><a href="#t7"><span><span class="num">07</span>유양돌기 축측사 (Arcelin)</span><span>Arcelin</span></a></li>
+      <li><a href="#t8"><span><span class="num">08</span>유양돌기 축측사 (Mayer)</span><span>Mayer</span></a></li>
+      <li><a href="#t9"><span><span class="num">09</span>유양돌기 축측사 (변형Hickey)</span><span>m. Hickey</span></a></li>
+      <li><a href="#t10"><span><span class="num">10</span>유양돌기 축측 (Schuller)</span><span>Schuller</span></a></li>
+    </ul>
+  </nav>
+
+  <!-- ========== PART 1: 코곁굴 ========== -->
+  <div class="section-divider">
+    <h2>PART I · 코곁굴 (Paranasal Sinus)</h2>
+  </div>
+
+  <!-- ----- 01 ----- -->
+  <article class="technique" id="t1">
+    <div class="technique-header">
+      <div class="technique-number">01</div>
+      <h3 class="technique-ko">부비강 측방향 촬영</h3>
+      <p class="technique-en">Paranasal Sinuses Lateral Projection</p>
+    </div>
+    <div class="technique-body">
+      <div class="field">
+        <div class="field-label">Position<span class="field-label-ko">환자의 자세</span></div>
+        <div class="field-content">
+          <ul>
+            <li>엎드린 자세(복와위), 머리를 정측면 자세로 위치</li>
+            <li><span class="highlight">Air fluid level 관찰 시 선자세로 5분 대기 후 촬영</span>하는 것이 바람직</li>
+          </ul>
+        </div>
+      </div>
+      <div class="field">
+        <div class="field-label">Method<span class="field-label-ko">촬영방법</span></div>
+        <div class="field-content">
+          <ul>
+            <li>정중시상면을 IR면에 <span class="term">평행</span></li>
+            <li>눈확사이선(동공간선)이 <span class="term">수직</span></li>
+            <li>눈확아래귀구멍선(IOML)이 IR면 횡축에 <span class="term">평행</span></li>
+            <li>가쪽눈구석에서 뒤로 약 <span class="num-highlight">2cm</span> 지점을 IR면 중앙에 위치</li>
+          </ul>
+        </div>
+      </div>
+      <div class="field">
+        <div class="field-label">Central Ray<span class="field-label-ko">중심선</span></div>
+        <div class="field-content">
+          검사 반대쪽 가쪽눈구석에서 뒤로 약 2cm 지점을 향해 <span class="num-highlight red">수직 입사</span>
+        </div>
+      </div>
+      <div class="field">
+        <div class="field-label">Purpose<span class="field-label-ko">촬영목적</span></div>
+        <div class="field-content">
+          이마굴(전두동), 위턱굴(상악동), 벌집굴(사골동), 나비굴(접형골동)의 측면상 관찰
+        </div>
+      </div>
+      <div class="field">
+        <div class="field-label">Feature<span class="field-label-ko">촬영법 특징</span></div>
+        <div class="field-content">
+          <ul>
+            <li>코곁굴 4개 모두를 하나의 측면상으로 관찰 가능</li>
+            <li>Air fluid level 목적일 때는 선자세 촬영 권장</li>
+          </ul>
+        </div>
+      </div>
+      <div class="field">
+        <div class="field-label">Image<span class="field-label-ko">촬영상</span></div>
+        <div class="field-content">
+          <ul>
+            <li>4개의 코곁굴이 바른 측면상으로 나타나야 함</li>
+            <li><span class="highlight">특히 나비굴(접형골동)이 선명하게 촬영되어야 함</span></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="source">출처: 11_코곁굴_유양돌기.pdf · 2–7 페이지</div>
+  </article>
+
+  <!-- ----- 02 ----- -->
+  <article class="technique" id="t2">
+    <div class="technique-header">
+      <div class="technique-number">02</div>
+      <h3 class="technique-ko">부비강 두정비극방향 촬영</h3>
+      <p class="technique-en">Paranasal Sinuses Parietocanthial Projection</p>
+      <span class="technique-tag waters">Waters 법</span>
+    </div>
+    <div class="technique-body">
+      <div class="field">
+        <div class="field-label">Position<span class="field-label-ko">환자의 자세</span></div>
+        <div class="field-content">
+          <ul>
+            <li>앉은자세 또는 선자세</li>
+            <li>머리를 뒤로 젖혀 정중시상면이 수직, 턱으로 지지</li>
+          </ul>
+        </div>
+      </div>
+      <div class="field">
+        <div class="field-label">Method<span class="field-label-ko">촬영방법</span></div>
+        <div class="field-content">
+          <ul>
+            <li>정중시상면을 IR면 중심선과 일치</li>
+            <li>코끝점(비극점)이 중앙에 오도록 위치</li>
+            <li><span class="highlight">눈확귀구멍선(OML)이 IR면에 <span class="num-highlight">37°</span></span></li>
+          </ul>
+        </div>
+      </div>
+      <div class="field">
+        <div class="field-label">Central Ray<span class="field-label-ko">중심선</span></div>
+        <div class="field-content">
+          코끝점(비극점)을 향해 IR면에 <span class="num-highlight red">수직 입사</span>
+        </div>
+      </div>
+      <div class="field">
+        <div class="field-label">Purpose<span class="field-label-ko">촬영목적</span></div>
+        <div class="field-content">
+          위턱굴(상악동) 바닥 및 위턱굴 내 액체 등 병변 유무 관찰
+        </div>
+      </div>
+      <div class="field">
+        <div class="field-label">Feature<span class="field-label-ko">촬영법 특징</span></div>
+        <div class="field-content">
+          <ul>
+            <li><span class="highlight">Open mouth Waters법</span>: 입을 벌린 공간을 통해 나비굴(접형골동)도 관찰 가능</li>
+            <li>일반 Waters법에서는 나비굴이 나타나지 않음</li>
+          </ul>
+        </div>
+      </div>
+      <div class="field">
+        <div class="field-label">Image<span class="field-label-ko">촬영상</span></div>
+        <div class="field-content">
+          <ul>
+            <li>이마굴 또는 코중격이 얼굴뼈 중앙에 위치</li>
+            <li>위턱굴의 윤곽이 선명하게 나타나야 함</li>
+            <li>나비굴은 나타나지 않음</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="source">출처: 11_코곁굴_유양돌기.pdf · 8–12 페이지</div>
+  </article>
+
+  <!-- ----- 03 ----- -->
+  <article class="technique" id="t3">
+    <div class="technique-header">
+      <div class="technique-number">03</div>
+      <h3 class="technique-ko">부비강 후전 축방향 촬영</h3>
+      <p class="technique-en">Paranasal Sinuses PA Axial Projection</p>
+      <span class="technique-tag caldwell">Caldwell 법</span>
+    </div>
+    <div class="technique-body">
+      <div class="field">
+        <div class="field-label">Position<span class="field-label-ko">환자의 자세</span></div>
+        <div class="field-content">
+          <ul>
+            <li>앉은자세 또는 선자세 (염증 관찰 시 반드시 좌위 또는 입위)</li>
+            <li>이마와 코를 촬영대에 대고 머리 고정</li>
+          </ul>
+        </div>
+      </div>
+      <div class="field">
+        <div class="field-label">Method<span class="field-label-ko">촬영방법</span></div>
+        <div class="field-content">
+          <ul>
+            <li>정중시상면을 IR면 중심선과 일치</li>
+            <li>코뿌리점(비근점)이 중앙에 오도록 위치</li>
+            <li>정중시상면과 OML이 IR면에 수직</li>
+          </ul>
+        </div>
+      </div>
+      <div class="field">
+        <div class="field-label">Central Ray<span class="field-label-ko">중심선</span></div>
+        <div class="field-content">
+          <ul>
+            <li>코뿌리점을 향해, OML 기준 수직일 때 <span class="num-highlight red">발쪽 15°</span></li>
+            <li>GML 기준 수직일 때 <span class="num-highlight red">발쪽 23°</span></li>
+          </ul>
+        </div>
+      </div>
+      <div class="field">
+        <div class="field-label">Purpose<span class="field-label-ko">촬영목적</span></div>
+        <div class="field-content">
+          이마굴(전두동) 및 앞벌집굴(전사골동) 병변 유무 관찰
+        </div>
+      </div>
+      <div class="field">
+        <div class="field-label">Feature<span class="field-label-ko">촬영법 특징</span></div>
+        <div class="field-content">
+          염증 관찰 시 반드시 앉은 자세 또는 선 자세로 촬영
+        </div>
+      </div>
+      <div class="field">
+        <div class="field-label">Image<span class="field-label-ko">촬영상</span></div>
+        <div class="field-content">
+          <ul>
+            <li>이마굴과 앞벌집굴이 잘 나타나야 함</li>
+            <li><span class="highlight">눈확음영의 아래 1/3 부근에 바위능선(petrous ridge)이 위치</span></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="source">출처: 11_코곁굴_유양돌기.pdf · 13–17 페이지</div>
+  </article>
+
+  <!-- ----- 04 ----- -->
+  <article class="technique" id="t4">
+    <div class="technique-header">
+      <div class="technique-number">04</div>
+      <h3 class="technique-ko">부비강 하악두정방향 촬영</h3>
+      <p class="technique-en">Paranasal Sinuses Submentovertical Projection (SMV)</p>
+      <span class="technique-tag schuller">Schuller 법</span>
+    </div>
+    <div class="technique-body">
+      <div class="field">
+        <div class="field-label">Position<span class="field-label-ko">환자의 자세</span></div>
+        <div class="field-content">
+          <ul>
+            <li>앉은자세 또는 바로누운자세(앙와위)</li>
+            <li>머리를 뒤로 젖혀 정수리가 IR에 닿도록</li>
+          </ul>
+        </div>
+      </div>
+      <div class="field">
+        <div class="field-label">Method<span class="field-label-ko">촬영방법</span></div>
+        <div class="field-content">
+          <ul>
+            <li>눈확아래귀구멍선(IOML)을 IR면에 <span class="term">평행</span></li>
+            <li>정중시상면이 <span class="term">수직</span></li>
+          </ul>
+        </div>
+      </div>
+      <div class="field">
+        <div class="field-label">Central Ray<span class="field-label-ko">중심선</span></div>
+        <div class="field-content">
+          IOML에 대해 <span class="num-highlight red">수직</span>으로, 양쪽 턱뼈각(하악각) 사이 정중면으로 <span class="num-highlight">수평 입사</span>
+        </div>
+      </div>
+      <div class="field">
+        <div class="field-label">Purpose<span class="field-label-ko">촬영목적</span></div>
+        <div class="field-content">
+          나비굴(접형골동), 벌집굴(사골동), 위턱굴(상악동) 병변 유무 관찰
+        </div>
+      </div>
+      <div class="field">
+        <div class="field-label">Feature<span class="field-label-ko">촬영법 특징</span></div>
+        <div class="field-content">
+          코곁굴 중 특히 <span class="highlight">나비굴 관찰에 가장 유리한 축방향 촬영</span>
+        </div>
+      </div>
+      <div class="field">
+        <div class="field-label">Image<span class="field-label-ko">촬영상</span></div>
+        <div class="field-content">
+          <ul>
+            <li>머리뼈가 좌우대칭으로 촬영</li>
+            <li>나비굴이 선명하게 나타나야 함</li>
+            <li>턱 바로 아래에 뒤벌집굴(후사골동), 위턱굴, 코중격 출현</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="source">출처: 11_코곁굴_유양돌기.pdf · 18–22 페이지</div>
+  </article>
+
+  <!-- ========== PART 2: 유양돌기 ========== -->
+  <div class="section-divider">
+    <h2>PART II · 꼭지돌기 / 바위부 (Mastoid / Petrous)</h2>
+  </div>
+
+  <!-- ----- 05 Law ----- -->
+  <article class="technique" id="t5">
+    <div class="technique-header">
+      <div class="technique-number">05</div>
+      <h3 class="technique-ko">유양돌기 축측사방향 촬영</h3>
+      <p class="technique-en">Mastoid Process Axiolateral Oblique Projection</p>
+      <span class="technique-tag">Law 법</span>
+    </div>
+    <div class="technique-body">
+      <div class="field">
+        <div class="field-label">Position<span class="field-label-ko">환자의 자세</span></div>
+        <div class="field-content">
+          <ul>
+            <li>엎드린자세, 검사측이 아래로 가도록</li>
+            <li><span class="highlight">테이프로 귀바퀴를 앞쪽으로 접어 붙여</span> 꼭지돌기와 겹치지 않도록</li>
+          </ul>
+        </div>
+      </div>
+      <div class="field">
+        <div class="field-label">Method<span class="field-label-ko">촬영방법</span></div>
+        <div class="field-content">
+          <ul>
+            <li>바깥귀길 바로 뒤 귀바퀴-머리 접합부를 IR면 중앙에 일치</li>
+            <li>바른 측면자세에서 <span class="highlight">정중시상면을 앞쪽 IR면 방향으로 <span class="num-highlight">15°</span> 회전</span></li>
+            <li>눈확사이선은 수직, IOML은 IR 윗면 횡축에 평행</li>
+          </ul>
+        </div>
+      </div>
+      <div class="field">
+        <div class="field-label">Central Ray<span class="field-label-ko">중심선</span></div>
+        <div class="field-content">
+          <ul>
+            <li>검사쪽 꼭지돌기를 향해 <span class="num-highlight red">발쪽 15° 기울여 입사</span></li>
+            <li>입사점: 검사 반대쪽 바깥귀길에서 <span class="num-highlight">뒤로 5cm, 위로 5cm</span></li>
+          </ul>
+        </div>
+      </div>
+      <div class="field">
+        <div class="field-label">Purpose<span class="field-label-ko">촬영목적</span></div>
+        <div class="field-content">
+          염증 및 종양에 의한 바깥귀길, 고실개, 꼭지벌집, 턱관절 병변 유무 관찰
+        </div>
+      </div>
+      <div class="field">
+        <div class="field-label">Feature<span class="field-label-ko">촬영법 특징</span></div>
+        <div class="field-content">
+          <ul>
+            <li><span class="term">3가지 변형 기법</span> 존재 (목적·관찰부위·입사부위 동일, 머리 자세에 따라 중심선만 차이)</li>
+            <li><span class="highlight">단일각도법</span>: 머리 앞 15° + 중심선 발쪽 15°</li>
+            <li><span class="highlight">이중각도법</span>: 머리 정측면 + 중심선 발쪽 15° &amp; 앞쪽 15°</li>
+            <li><span class="highlight">머리회전 촬영법</span>: 머리 앞 15° + 발쪽 15° 상태에서 수직 입사</li>
+            <li>비교 위해 양쪽 모두 촬영</li>
+          </ul>
+        </div>
+      </div>
+      <div class="field">
+        <div class="field-label">Image<span class="field-label-ko">촬영상</span></div>
+        <div class="field-content">
+          검사쪽과 검사 반대쪽 꼭지벌집의 머리부분이 <span class="highlight">중복되지 않아야 함</span>
+        </div>
+      </div>
+    </div>
+    <div class="source">출처: 11_코곁굴_유양돌기.pdf · 24–29 페이지</div>
+  </article>
+
+  <!-- ----- 06 Stenvers ----- -->
+  <article class="technique" id="t6">
+    <div class="technique-header">
+      <div class="technique-number">06</div>
+      <h3 class="technique-ko">유양돌기 축측사방향 촬영</h3>
+      <p class="technique-en">Mastoid Process Axiolateral Oblique Projection</p>
+      <span class="technique-tag">Stenvers 법</span>
+    </div>
+    <div class="technique-body">
+      <div class="field">
+        <div class="field-label">Position<span class="field-label-ko">환자의 자세</span></div>
+        <div class="field-content">
+          <ul>
+            <li>엎드린자세 또는 앉은자세</li>
+            <li>이마, 코, 광대뼈를 IR면에 붙임</li>
+          </ul>
+        </div>
+      </div>
+      <div class="field">
+        <div class="field-label">Method<span class="field-label-ko">촬영방법</span></div>
+        <div class="field-content">
+          <ul>
+            <li><span class="highlight">머리의 정중시상면을 <span class="term">검사쪽으로</span> <span class="num-highlight">45°</span> 회전</span></li>
+            <li>검사쪽 바깥귀길에서 앞으로 <span class="num-highlight">2.5cm</span> 지점이 중앙</li>
+            <li>IOML은 IR면에 수직</li>
+          </ul>
+        </div>
+      </div>
+      <div class="field">
+        <div class="field-label">Central Ray<span class="field-label-ko">중심선</span></div>
+        <div class="field-content">
+          IR면 중앙점을 향해 <span class="num-highlight red">머리쪽 12° 기울여 입사</span>
+        </div>
+      </div>
+      <div class="field">
+        <div class="field-label">Purpose<span class="field-label-ko">촬영목적</span></div>
+        <div class="field-content">
+          꼭지돌기의 벌집, 속귀길(내이도)의 염증 또는 종양 등의 유무 관찰
+        </div>
+      </div>
+      <div class="field">
+        <div class="field-label">Feature<span class="field-label-ko">촬영법 특징</span></div>
+        <div class="field-content">
+          <ul>
+            <li><span class="highlight">바위모뿔(pyramid) 및 미로 관찰에 특화</span></li>
+            <li>비교 위해 양쪽 모두 촬영 필수</li>
+          </ul>
+        </div>
+      </div>
+      <div class="field">
+        <div class="field-label">Image<span class="field-label-ko">촬영상</span></div>
+        <div class="field-content">
+          <ul>
+            <li>바위모뿔 및 미로가 반측면상으로 일그러짐 없이 나타나야 함</li>
+            <li>바위모뿔 위·아래 모서리, 바위모뿔끝, 꼭지벌집, 미로, 속귀길(내이도)이 선명히 촬영</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="source">출처: 11_코곁굴_유양돌기.pdf · 30–34 페이지</div>
+  </article>
+
+  <!-- ----- 07 Arcelin ----- -->
+  <article class="technique" id="t7">
+    <div class="technique-header">
+      <div class="technique-number">07</div>
+      <h3 class="technique-ko">유양돌기 축측사방향 촬영</h3>
+      <p class="technique-en">Mastoid Process Axiolateral Oblique Projection</p>
+      <span class="technique-tag">Arcelin 법 (Reverse Stenvers)</span>
+    </div>
+    <div class="technique-body">
+      <div class="field">
+        <div class="field-label">Position<span class="field-label-ko">환자의 자세</span></div>
+        <div class="field-content">
+          <ul>
+            <li><span class="highlight">바로누운자세(앙와위) 또는 앉은자세</span></li>
+            <li>엎드린자세로 촬영할 수 없는 환자에 적용</li>
+          </ul>
+        </div>
+      </div>
+      <div class="field">
+        <div class="field-label">Method<span class="field-label-ko">촬영방법</span></div>
+        <div class="field-content">
+          <ul>
+            <li><span class="highlight">머리의 정중시상면을 <span class="term">검사 반대쪽</span>으로 <span class="num-highlight">45°</span> 회전</span></li>
+            <li>검사쪽 바깥귀길에서 앞으로 2.5cm 지점이 중앙</li>
+            <li>IOML은 IR면에 수직</li>
+          </ul>
+        </div>
+      </div>
+      <div class="field">
+        <div class="field-label">Central Ray<span class="field-label-ko">중심선</span></div>
+        <div class="field-content">
+          검사쪽 바깥귀길에서 <span class="num-highlight">앞으로 2.5cm, 위로 2cm</span> 지점을 향해 <span class="num-highlight red">발쪽 10° 기울여 입사</span>
+        </div>
+      </div>
+      <div class="field">
+        <div class="field-label">Purpose<span class="field-label-ko">촬영목적</span></div>
+        <div class="field-content">
+          꼭지돌기의 벌집, 속귀길(내이도)의 염증 또는 종양 등의 유무 관찰 (Stenvers법과 동일)
+        </div>
+      </div>
+      <div class="field">
+        <div class="field-label">Feature<span class="field-label-ko">촬영법 특징</span></div>
+        <div class="field-content">
+          <ul>
+            <li><span class="highlight">Reverse Stenvers법</span> — 엎드릴 수 없는 환자를 위한 변형 기법</li>
+            <li>양쪽 모두 촬영</li>
+          </ul>
+        </div>
+      </div>
+      <div class="field">
+        <div class="field-label">Image<span class="field-label-ko">촬영상</span></div>
+        <div class="field-content">
+          Stenvers법과 동일하게 바위모뿔, 속귀길 등 관찰 가능
+        </div>
+      </div>
+    </div>
+    <div class="source">출처: 11_코곁굴_유양돌기.pdf · 35–39 페이지</div>
+  </article>
+
+  <!-- ----- 08 Mayer ----- -->
+  <article class="technique" id="t8">
+    <div class="technique-header">
+      <div class="technique-number">08</div>
+      <h3 class="technique-ko">유양돌기 축측사방향 촬영</h3>
+      <p class="technique-en">Mastoid Process Axiolateral Oblique Projection</p>
+      <span class="technique-tag">Mayer 법</span>
+    </div>
+    <div class="technique-body">
+      <div class="field">
+        <div class="field-label">Position<span class="field-label-ko">환자의 자세</span></div>
+        <div class="field-content">
+          <ul>
+            <li>바로누운자세(앙와위) 또는 앉은자세</li>
+            <li>테이프로 귀바퀴를 앞으로 접어 붙임</li>
+          </ul>
+        </div>
+      </div>
+      <div class="field">
+        <div class="field-label">Method<span class="field-label-ko">촬영방법</span></div>
+        <div class="field-content">
+          <ul>
+            <li><span class="highlight">머리를 <span class="term">검사쪽</span>으로 <span class="num-highlight">45°</span> 회전</span></li>
+            <li>바깥귀길이 IR면 중앙에 오도록 위치</li>
+            <li>IOML이 IR면 횡축과 평행 및 수직</li>
+          </ul>
+        </div>
+      </div>
+      <div class="field">
+        <div class="field-label">Central Ray<span class="field-label-ko">중심선</span></div>
+        <div class="field-content">
+          <ul>
+            <li>검사쪽 바깥귀길을 향해 <span class="num-highlight red">발쪽 45° 기울여 입사</span></li>
+            <li>들어올려진 쪽 눈썹 위 약 <span class="num-highlight">7.5cm</span> 지점에 입사 → 검사측 바깥귀길 앞 2.5cm 지점 통과 → IR 중앙 입사</li>
+          </ul>
+        </div>
+      </div>
+      <div class="field">
+        <div class="field-label">Purpose<span class="field-label-ko">촬영목적</span></div>
+        <div class="field-content">
+          염증 및 종양 등에 의한 바깥귀길, 고실개, 꼭지벌집, 턱관절(악관절) 등 병변 유무 관찰
+        </div>
+      </div>
+      <div class="field">
+        <div class="field-label">Feature<span class="field-label-ko">촬영법 특징</span></div>
+        <div class="field-content">
+          <ul>
+            <li><span class="highlight">발쪽 기울기가 <span class="num-highlight">45°</span>로 가장 큰 축측사방향 기법</span></li>
+            <li>양쪽 모두 촬영</li>
+          </ul>
+        </div>
+      </div>
+      <div class="field">
+        <div class="field-label">Image<span class="field-label-ko">촬영상</span></div>
+        <div class="field-content">
+          <ul>
+            <li>조사면 안에 꼭지벌집의 관심영역 위치</li>
+            <li>바위부는 꼭지벌집 아래에 나타나야 함</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="source">출처: 11_코곁굴_유양돌기.pdf · 40–44 페이지</div>
+  </article>
+
+  <!-- ----- 09 변형 Hickey ----- -->
+  <article class="technique" id="t9">
+    <div class="technique-header">
+      <div class="technique-number">09</div>
+      <h3 class="technique-ko">유양돌기 축측사방향 촬영</h3>
+      <p class="technique-en">Mastoid Process Axiolateral Oblique Projection</p>
+      <span class="technique-tag">변형 Hickey 법</span>
+    </div>
+    <div class="technique-body">
+      <div class="field">
+        <div class="field-label">Position<span class="field-label-ko">환자의 자세</span></div>
+        <div class="field-content">
+          <ul>
+            <li>바로누운자세(앙와위) 또는 앉은자세</li>
+            <li>바깥귀길 바로 뒤에 중심점 표시</li>
+            <li>테이프로 귀바퀴를 앞으로 접어 붙임</li>
+          </ul>
+        </div>
+      </div>
+      <div class="field">
+        <div class="field-label">Method<span class="field-label-ko">촬영방법</span></div>
+        <div class="field-content">
+          <ul>
+            <li><span class="highlight">머리의 정중시상면을 <span class="term">검사 반대쪽</span>으로 회전하여 IR면에 대해 <span class="num-highlight">55°</span></span></li>
+            <li>IR면 중앙에 표시지점이 오도록 위치</li>
+            <li>IOML은 수직</li>
+          </ul>
+        </div>
+      </div>
+      <div class="field">
+        <div class="field-label">Central Ray<span class="field-label-ko">중심선</span></div>
+        <div class="field-content">
+          검사쪽 바깥귀길 바로 뒤 표시지점을 향해 <span class="num-highlight red">발쪽 15° 입사</span>
+        </div>
+      </div>
+      <div class="field">
+        <div class="field-label">Purpose<span class="field-label-ko">촬영목적</span></div>
+        <div class="field-content">
+          바위능선, 꼭지돌기의 벌집, 고실부위, 속귀길(내이도), 바위모뿔의 병변 관찰
+        </div>
+      </div>
+      <div class="field">
+        <div class="field-label">Feature<span class="field-label-ko">촬영법 특징</span></div>
+        <div class="field-content">
+          <ul>
+            <li><span class="highlight">머리 회전각이 <span class="num-highlight">55°</span>로 다른 사방향 기법보다 큼</span></li>
+            <li>양쪽 모두 촬영</li>
+          </ul>
+        </div>
+      </div>
+      <div class="field">
+        <div class="field-label">Image<span class="field-label-ko">촬영상</span></div>
+        <div class="field-content">
+          <ul>
+            <li><span class="highlight">꼭지돌기가 뒤통수뼈 음영의 아래에 나타나야 함</span></li>
+            <li>꼭지벌집이 선명하고 귀바퀴와 겹치지 않아야 함</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="source">출처: 11_코곁굴_유양돌기.pdf · 45–49 페이지</div>
+  </article>
+
+  <!-- ----- 10 Schuller(유양돌기) ----- -->
+  <article class="technique" id="t10">
+    <div class="technique-header">
+      <div class="technique-number">10</div>
+      <h3 class="technique-ko">유양돌기 축측방향 촬영</h3>
+      <p class="technique-en">Mastoid Process Axiolateral Projection</p>
+      <span class="technique-tag schuller">Schuller · Henschen · Lysholm 법</span>
+    </div>
+    <div class="technique-body">
+      <div class="field">
+        <div class="field-label">Position<span class="field-label-ko">환자의 자세</span></div>
+        <div class="field-content">
+          <ul>
+            <li>엎드린자세, 검사쪽이 바닥으로 가도록</li>
+            <li>꼭지벌집 관찰 시 테이프로 귀바퀴 앞으로 접어 붙임</li>
+          </ul>
+        </div>
+      </div>
+      <div class="field">
+        <div class="field-label">Method<span class="field-label-ko">촬영방법</span></div>
+        <div class="field-content">
+          <ul>
+            <li>바깥귀길 바로 뒤 귀바퀴-머리 겹침부를 IR면 중앙에 일치</li>
+            <li>정중시상면은 IR면에 평행</li>
+            <li>눈확사이선은 수직, IOML은 IR면 횡축에 평행</li>
+          </ul>
+        </div>
+      </div>
+      <div class="field">
+        <div class="field-label">Central Ray<span class="field-label-ko">중심선</span></div>
+        <div class="field-content">
+          <ul>
+            <li>검사쪽 바깥귀길을 향해 <span class="num-highlight red">발쪽 25° 기울여 입사 (Schuller법)</span></li>
+            <li>동일 자세에서 <span class="highlight">Henschen법 <span class="num-highlight">15°</span>, Lysholm법 <span class="num-highlight">35°</span></span>로 입사</li>
+          </ul>
+        </div>
+      </div>
+      <div class="field">
+        <div class="field-label">Purpose<span class="field-label-ko">촬영목적</span></div>
+        <div class="field-content">
+          염증 및 종양 등에 의한 바깥귀길, 고실개, 꼭지벌집, 턱관절(악관절) 등 병변 유무 관찰
+        </div>
+      </div>
+      <div class="field">
+        <div class="field-label">Feature<span class="field-label-ko">촬영법 특징</span></div>
+        <div class="field-content">
+          <ul>
+            <li>3가지 변형이 <span class="highlight">같은 자세에서 중심선 각도만 다름</span> — 꼭 외울 것</li>
+            <li>⚠️ Schuller법은 <span class="term">부비강 하악두정방향(SMV)</span>에서도 같은 이름으로 등장 — 혼동 주의</li>
+          </ul>
+        </div>
+      </div>
+      <div class="field">
+        <div class="field-label">Image<span class="field-label-ko">촬영상</span></div>
+        <div class="field-content">
+          <ul>
+            <li>검사쪽 꼭지돌기 측면상이 검사 반대쪽과 <span class="highlight">중복되지 않아야 함</span></li>
+            <li>양쪽 모두 촬영</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="source">출처: 11_코곁굴_유양돌기.pdf · 50–54 페이지</div>
+  </article>
+
+  <!-- ========== 핵심 요약 ========== -->
+  <div class="summary-box">
+    <div class="summary-label">EXAM ESSENTIALS · 시험 직전 암기표</div>
+    <h2 class="summary-title">핵심 <span class="italic">각도</span> 정리</h2>
+
+    <div class="summary-section">
+      <h3>코곁굴 4대 촬영법 중심선</h3>
+      <table class="summary-table">
+        <thead>
+          <tr>
+            <th>촬영법</th>
+            <th>중심선 / 각도</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td>측방향 (Lateral)</td><td>수직 입사</td></tr>
+          <tr><td>Waters법 (Parietocanthial)</td><td>OML 37° + 수직 입사</td></tr>
+          <tr><td>Caldwell법 (PA Axial)</td><td>발쪽 15° (OML) / 23° (GML)</td></tr>
+          <tr><td>Schuller SMV법 (하악두정)</td><td>IOML 수직 + 수평 입사</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="summary-section">
+      <h3>유양돌기 촬영법 각도표</h3>
+      <table class="summary-table">
+        <thead>
+          <tr>
+            <th>촬영법</th>
+            <th>머리 회전 + 중심선</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td>Law법</td><td>앞쪽 15° + 발쪽 15°</td></tr>
+          <tr><td>Stenvers법</td><td>검사쪽 45° + 머리쪽 12°</td></tr>
+          <tr><td>Arcelin법 (Reverse Stenvers)</td><td>검사 반대쪽 45° + 발쪽 10°</td></tr>
+          <tr><td>Mayer법</td><td>검사쪽 45° + 발쪽 45°</td></tr>
+          <tr><td>변형 Hickey법</td><td>검사 반대쪽 55° + 발쪽 15°</td></tr>
+          <tr><td>Schuller법 (축측)</td><td>발쪽 25°</td></tr>
+          <tr><td>Henschen법</td><td>발쪽 15°</td></tr>
+          <tr><td>Lysholm법</td><td>발쪽 35°</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <footer>
+    © 2026 · 방사선사 국가고시 · 전공 시험 대비 요약 노트
+  </footer>
+
+</div>
+</body>
+</html>

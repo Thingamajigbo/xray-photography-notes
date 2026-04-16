@@ -1,0 +1,1022 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>6장 척추·골반 (경추) — 엑스선 촬영법 요약 노트</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@400;500;600;700;900&family=IBM+Plex+Sans+KR:wght@400;500;600;700&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #f4efe6;
+    --paper: #fbf7ef;
+    --ink: #1a1a1a;
+    --ink-soft: #3d3d3d;
+    --accent: #8b1a1a;
+    --accent-2: #d4a017;
+    --rule: #c8bfae;
+    --highlight: #fff3a8;
+    --tag-bg: #1a1a1a;
+    --tag-fg: #fbf7ef;
+    --shadow: 0 1px 0 rgba(0,0,0,0.04), 0 8px 24px rgba(0,0,0,0.06);
+  }
+
+  * { box-sizing: border-box; }
+
+  html, body {
+    margin: 0; padding: 0;
+    background: var(--bg);
+    color: var(--ink);
+    font-family: 'IBM Plex Sans KR', sans-serif;
+    line-height: 1.65;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  body::before {
+    content: "";
+    position: fixed; inset: 0;
+    background-image: radial-gradient(rgba(0,0,0,0.03) 1px, transparent 1px);
+    background-size: 3px 3px;
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  .wrap {
+    max-width: 980px;
+    margin: 0 auto;
+    padding: 48px 32px 120px;
+    position: relative;
+    z-index: 1;
+  }
+
+  /* ─── HEADER ─── */
+  header.masthead {
+    border-top: 4px double var(--ink);
+    border-bottom: 4px double var(--ink);
+    padding: 28px 0 24px;
+    margin-bottom: 48px;
+    text-align: center;
+  }
+  .masthead .kicker {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.35em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 14px;
+  }
+  .masthead h1 {
+    font-family: 'Noto Serif KR', serif;
+    font-weight: 900;
+    font-size: clamp(28px, 4.2vw, 44px);
+    margin: 0 0 10px;
+    letter-spacing: -0.01em;
+  }
+  .masthead .subtitle {
+    font-family: 'Noto Serif KR', serif;
+    font-style: italic;
+    font-size: 15px;
+    color: var(--ink-soft);
+  }
+  .masthead .meta {
+    display: flex;
+    justify-content: center;
+    gap: 24px;
+    margin-top: 18px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.15em;
+    color: var(--ink-soft);
+    text-transform: uppercase;
+  }
+
+  /* ─── TOC ─── */
+  nav.toc {
+    background: var(--paper);
+    border: 1px solid var(--rule);
+    padding: 24px 28px;
+    margin-bottom: 56px;
+    box-shadow: var(--shadow);
+  }
+  nav.toc h2 {
+    font-family: 'Noto Serif KR', serif;
+    font-size: 13px;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    margin: 0 0 16px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid var(--rule);
+    color: var(--accent);
+  }
+  nav.toc ol {
+    list-style: none;
+    counter-reset: toc;
+    padding: 0; margin: 0;
+    columns: 2;
+    column-gap: 32px;
+  }
+  nav.toc li {
+    counter-increment: toc;
+    padding: 6px 0;
+    break-inside: avoid;
+    font-size: 14px;
+  }
+  nav.toc li::before {
+    content: counter(toc, decimal-leading-zero);
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    color: var(--accent);
+    margin-right: 10px;
+    font-weight: 600;
+  }
+  nav.toc a {
+    color: var(--ink);
+    text-decoration: none;
+    border-bottom: 1px dotted var(--rule);
+    transition: color 0.2s, border 0.2s;
+  }
+  nav.toc a:hover {
+    color: var(--accent);
+    border-bottom-color: var(--accent);
+  }
+
+  /* ─── INTRO CARD ─── */
+  .intro-card {
+    background: var(--paper);
+    border-left: 4px solid var(--accent);
+    padding: 22px 28px;
+    margin-bottom: 56px;
+    box-shadow: var(--shadow);
+  }
+  .intro-card h3 {
+    font-family: 'Noto Serif KR', serif;
+    font-size: 18px;
+    margin: 0 0 10px;
+  }
+  .intro-card p {
+    margin: 6px 0;
+    font-size: 14.5px;
+    color: var(--ink-soft);
+  }
+  .intro-card .anatomy-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+    gap: 8px 18px;
+    margin-top: 14px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 12px;
+  }
+  .intro-card .anatomy-grid span strong {
+    color: var(--accent);
+  }
+
+  /* ─── TECHNIQUE CARD ─── */
+  article.technique {
+    background: var(--paper);
+    border: 1px solid var(--rule);
+    margin-bottom: 44px;
+    box-shadow: var(--shadow);
+    position: relative;
+    overflow: hidden;
+  }
+  article.technique::before {
+    content: "";
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 3px;
+    background: linear-gradient(90deg, var(--accent) 0%, var(--accent) 30%, var(--accent-2) 30%, var(--accent-2) 100%);
+  }
+
+  .tech-head {
+    padding: 26px 32px 20px;
+    border-bottom: 1px solid var(--rule);
+    background: linear-gradient(180deg, rgba(139,26,26,0.04) 0%, transparent 100%);
+  }
+  .tech-head .num {
+    display: inline-block;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    background: var(--tag-bg);
+    color: var(--tag-fg);
+    padding: 3px 10px;
+    letter-spacing: 0.15em;
+    margin-bottom: 12px;
+  }
+  .tech-head h2 {
+    font-family: 'Noto Serif KR', serif;
+    font-weight: 700;
+    font-size: 26px;
+    margin: 0 0 6px;
+    line-height: 1.3;
+  }
+  .tech-head .en {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 13px;
+    color: var(--accent);
+    letter-spacing: 0.02em;
+  }
+
+  .tech-body {
+    padding: 10px 32px 24px;
+  }
+
+  .field {
+    display: grid;
+    grid-template-columns: 140px 1fr;
+    gap: 24px;
+    padding: 18px 0;
+    border-bottom: 1px dashed var(--rule);
+  }
+  .field:last-child { border-bottom: none; }
+  .field .label {
+    font-family: 'Noto Serif KR', serif;
+    font-weight: 600;
+    font-size: 14px;
+    color: var(--accent);
+    position: relative;
+    padding-left: 14px;
+  }
+  .field .label::before {
+    content: "▸";
+    position: absolute;
+    left: 0;
+    color: var(--accent-2);
+  }
+  .field .content {
+    font-size: 14.5px;
+    color: var(--ink);
+  }
+  .field .content ul {
+    margin: 0; padding-left: 18px;
+  }
+  .field .content ul li {
+    margin-bottom: 6px;
+  }
+  .field .content ul li:last-child { margin-bottom: 0; }
+
+  .field .content .num-list {
+    list-style: none;
+    counter-reset: step;
+    padding-left: 0;
+  }
+  .field .content .num-list li {
+    counter-increment: step;
+    position: relative;
+    padding-left: 28px;
+    margin-bottom: 8px;
+  }
+  .field .content .num-list li::before {
+    content: "(" counter(step) ")";
+    position: absolute; left: 0;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 12px;
+    color: var(--accent);
+    font-weight: 600;
+  }
+
+  /* 핵심 수치 하이라이트 */
+  .hl {
+    background: var(--highlight);
+    padding: 1px 5px;
+    font-weight: 600;
+    border-radius: 2px;
+  }
+  .term {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 12.5px;
+    color: var(--accent);
+    font-weight: 600;
+  }
+  .en-term {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 12px;
+    color: var(--ink-soft);
+    font-style: italic;
+  }
+
+  /* ─── PARAM GRID (중심선·SID·IR 등) ─── */
+  .param-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+    gap: 12px;
+    margin-top: 6px;
+  }
+  .param {
+    background: rgba(139,26,26,0.04);
+    border-left: 2px solid var(--accent);
+    padding: 8px 12px;
+    font-size: 13px;
+  }
+  .param .k {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--accent);
+    display: block;
+    margin-bottom: 2px;
+  }
+  .param .v { font-weight: 500; }
+
+  /* ─── EVAL CHECKLIST ─── */
+  .checklist {
+    list-style: none;
+    padding: 0; margin: 0;
+  }
+  .checklist li {
+    padding: 5px 0 5px 26px;
+    position: relative;
+    font-size: 14px;
+  }
+  .checklist li::before {
+    content: "□";
+    position: absolute; left: 0;
+    font-size: 16px;
+    color: var(--accent);
+    font-weight: 600;
+  }
+
+  /* ─── WARNING BOX ─── */
+  .warn {
+    background: #fff9e6;
+    border: 1px solid #d4a017;
+    border-left: 4px solid #d4a017;
+    padding: 10px 14px;
+    margin: 10px 0 0;
+    font-size: 13.5px;
+  }
+  .warn strong {
+    color: #8b5e00;
+    font-family: 'Noto Serif KR', serif;
+  }
+
+  /* ─── SOURCE FOOTER ─── */
+  .source {
+    padding: 14px 32px;
+    background: #ebe4d5;
+    border-top: 1px dashed var(--rule);
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11.5px;
+    color: var(--ink-soft);
+    letter-spacing: 0.02em;
+  }
+  .source strong { color: var(--accent); }
+
+  /* ─── FOOTER ─── */
+  footer.end {
+    text-align: center;
+    margin-top: 80px;
+    padding-top: 30px;
+    border-top: 2px solid var(--ink);
+    font-family: 'Noto Serif KR', serif;
+    font-style: italic;
+    font-size: 13px;
+    color: var(--ink-soft);
+  }
+  footer.end .ornament {
+    font-size: 20px;
+    color: var(--accent);
+    margin-bottom: 10px;
+    letter-spacing: 0.5em;
+  }
+
+  /* ─── RESPONSIVE ─── */
+  @media (max-width: 700px) {
+    .wrap { padding: 24px 18px 80px; }
+    nav.toc ol { columns: 1; }
+    .field { grid-template-columns: 1fr; gap: 8px; }
+    .field .label { padding-left: 0; }
+    .tech-head, .tech-body { padding-left: 20px; padding-right: 20px; }
+    .source { padding-left: 20px; padding-right: 20px; }
+  }
+
+  /* 앵커 오프셋 */
+  article.technique { scroll-margin-top: 20px; }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<!-- ══════════ HEADER ══════════ -->
+<header class="masthead">
+  <div class="kicker">Radiologic Technology · Study Note</div>
+  <h1>제 6장 척추·골반 — 경추 촬영법</h1>
+  <div class="subtitle">Radiographic Techniques of the Cervical Spine</div>
+  <div class="meta">
+    <span>Total 12 Techniques</span>
+    <span>·</span>
+    <span>Exam-Oriented Summary</span>
+  </div>
+</header>
+
+<!-- ══════════ INTRO ══════════ -->
+<section class="intro-card">
+  <h3>📖 기초 해부학 요약</h3>
+  <p>척추는 총 <span class="hl">목뼈 7개 · 등뼈 12개 · 허리뼈 5개 · 엉치뼈 5개 · 꼬리뼈 3~6개</span>로 구성되며, 경추와 요추는 <span class="term">lordosis(앞굽이)</span>, 흉추와 천미부는 <span class="term">kyphosis(뒷굽이)</span>를 이룬다. 옆굽이는 <span class="term">scoliosis(측만)</span>.</p>
+  <div class="anatomy-grid">
+    <span><strong>C1</strong> 고리뼈 Atlas</span>
+    <span><strong>C2</strong> 중쇠뼈 Axis</span>
+    <span><strong>C7</strong> 융추 Vertebra prominens</span>
+    <span><strong>4방향</strong> AP · Lat · Obl ×2</span>
+  </div>
+</section>
+
+<!-- ══════════ TOC ══════════ -->
+<nav class="toc">
+  <h2>목차 · Table of Contents</h2>
+  <ol>
+    <li><a href="#t01">경추 전후방향 (AP)</a></li>
+    <li><a href="#t02">환추·축추 전후방향 (Open Mouth)</a></li>
+    <li><a href="#t03">경추 측방향 (Lateral)</a></li>
+    <li><a href="#t04">경추 사방향 (Oblique)</a></li>
+    <li><a href="#t05">측면 전굴·후굴위 (Hyperflexion·Hyperextension)</a></li>
+    <li><a href="#t06">전후방향 저작촬영 (Ottonello 법)</a></li>
+    <li><a href="#t07">Swimmer's 측방향 검사</a></li>
+  </ol>
+</nav>
+
+<!-- ══════════ 01. AP ══════════ -->
+<article class="technique" id="t01">
+  <div class="tech-head">
+    <span class="num">TECHNIQUE · 01</span>
+    <h2>경추 전후방향 촬영</h2>
+    <div class="en">Cervical Vertebrae · AP Projection</div>
+  </div>
+  <div class="tech-body">
+
+    <div class="field">
+      <div class="label">촬영목적</div>
+      <div class="content">
+        <ol class="num-list">
+          <li>외상성 질환에 의한 골절</li>
+          <li>목뼈손상</li>
+          <li>탈구(dislocation)</li>
+          <li>변성질환</li>
+          <li>염증성 질환</li>
+          <li>종양 등의 병변 유무 관찰</li>
+        </ol>
+      </div>
+    </div>
+
+    <div class="field">
+      <div class="label">환자의 자세</div>
+      <div class="content">
+        <ul>
+          <li>눕거나(<span class="en-term">spine position</span>) 선 자세(<span class="en-term">erect position</span>)</li>
+          <li>촬영대의 중앙선에 몸의 <span class="term">정중선(median line)</span>을 일치</li>
+          <li>턱을 들어 <span class="term">씹는면(교합면, occlusal plane)</span>과 <span class="term">꼭지돌기끝(유양돌기첨, mastoid tip)</span>을 연결한 선이 <strong>IR 면에 수직</strong>되게 머리를 조정</li>
+          <li>머리나 몸의 회전이 없어야 함</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="field">
+      <div class="label">촬영방법</div>
+      <div class="content">
+        <ul>
+          <li>제3~7번 목뼈의 추체와 제1~2번 등뼈 추체 관찰 목적</li>
+          <li>추궁근(pediculate), 추간원판강(intervertebral disk space), 극돌기(spinous process), 가로돌기 관찰</li>
+          <li>촬영 시 <strong>호흡을 멈추게</strong> 한다</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="field">
+      <div class="label">중심선</div>
+      <div class="content">
+        <div class="param-grid">
+          <div class="param"><span class="k">Angle</span><span class="v"><span class="hl">머리쪽 15~20°</span></span></div>
+          <div class="param"><span class="k">Entry</span><span class="v">제4목뼈 (방패연골, <span class="en-term">thyroid cartilage</span>)</span></div>
+          <div class="param"><span class="k">SID</span><span class="v">100 cm</span></div>
+          <div class="param"><span class="k">Grid</span><span class="v">이동형 / 고정형</span></div>
+          <div class="param"><span class="k">차폐</span><span class="v">생식샘 차폐</span></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="field">
+      <div class="label">촬영법 특징</div>
+      <div class="content">
+        <ul>
+          <li>목뼈는 IR면 <strong>중앙</strong>에 촬영</li>
+          <li>추체는 좌우대칭, 극돌기는 정중선상에 촬영</li>
+          <li><span class="hl">제3목뼈 ~ 제2등뼈</span>까지 포함</li>
+          <li>아래턱과 뒤통수뼈 음영은 <strong>C1·C2와 중복</strong>되어야 함</li>
+          <li>추간원판강이 열려 관찰 가능해야 함</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="field">
+      <div class="label">촬영상 (평가기준)</div>
+      <div class="content">
+        <ul class="checklist">
+          <li>제3목뼈에서 제2등뼈까지 포함되어 있는가?</li>
+          <li>가시돌기가 추체의 중앙에 나타나 있는가?</li>
+          <li>척추뼈사이의 간격이 동일한가?</li>
+          <li>좌우 대칭인가?</li>
+          <li>아래턱뼈·뒤통수뼈의 음영이 고리뼈·중쇠뼈와 겹쳐 있는가?</li>
+        </ul>
+      </div>
+    </div>
+
+  </div>
+  <div class="source">📚 출처: <strong>6장_척추_골반_경추</strong>, 13~18 페이지</div>
+</article>
+
+<!-- ══════════ 02. OPEN MOUTH ══════════ -->
+<article class="technique" id="t02">
+  <div class="tech-head">
+    <span class="num">TECHNIQUE · 02</span>
+    <h2>환추와 축추 전후방향 촬영 (개구위)</h2>
+    <div class="en">Atlas &amp; Axis · AP Open Mouth Projection (Den's View)</div>
+  </div>
+  <div class="tech-body">
+
+    <div class="field">
+      <div class="label">촬영목적</div>
+      <div class="content">
+        <ol class="num-list">
+          <li>외상에 의한 <strong>중쇠치아돌기(축추치돌기) 골절</strong></li>
+          <li>류마티스에 의한 <strong>고리중쇠관절(환축관절) 이상</strong></li>
+        </ol>
+      </div>
+    </div>
+
+    <div class="field">
+      <div class="label">환자의 자세</div>
+      <div class="content">
+        <ul>
+          <li>눕거나 선 자세</li>
+          <li>촬영대의 중앙선에 몸의 <span class="term">정중면</span> 일치</li>
+          <li><span class="hl">위치열의 앞니 아래가장자리와 꼭지돌기끝을 연결한 선</span>이 <strong>IR에 수직</strong>되도록 함</li>
+          <li>머리·몸이 중앙선에 일치 (회전 없음)</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="field">
+      <div class="label">촬영방법</div>
+      <div class="content">
+        <ul>
+          <li>치아돌기(odontoid process)와 중쇠뼈(axis) 추체 관찰</li>
+          <li>고리뼈(atlas)의 <span class="term">가쪽덩이(외측괴, lateral mass)</span> 관찰</li>
+          <li>고리뼈와 중쇠뼈 사이의 <span class="term">돌기관절(apophyseal joint)</span> 관찰</li>
+          <li>X선이 조사되는 동안 가볍게 <strong>"아—" 소리를 낸다</strong> (입을 벌리게 함)</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="field">
+      <div class="label">중심선</div>
+      <div class="content">
+        <div class="param-grid">
+          <div class="param"><span class="k">Angle</span><span class="v"><span class="hl">IR 면에 수직</span></span></div>
+          <div class="param"><span class="k">Entry</span><span class="v">벌려진 입의 중앙</span></div>
+          <div class="param"><span class="k">IR size</span><span class="v">8×10 인치 (세로)</span></div>
+          <div class="param"><span class="k">SID</span><span class="v">100 cm</span></div>
+          <div class="param"><span class="k">Grid</span><span class="v">이동형 / 고정형</span></div>
+          <div class="param"><span class="k">차폐</span><span class="v">생식샘 차폐</span></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="field">
+      <div class="label">촬영상 (평가기준)</div>
+      <div class="content">
+        <ul class="checklist">
+          <li>고리뼈와 중쇠뼈가 열려진 입을 통해 뚜렷이 나타나는가?</li>
+          <li>위치열의 아래가장자리와 <span class="term">머리뼈바닥(두개저, cranial base)</span>이 겹쳐지는가?</li>
+          <li>뼈와 연조직 모두가 적절한 조건으로 나타나는가?</li>
+          <li>치아돌기·중쇠뼈·고리뼈 및 이들 사이의 관절면이 잘 나타나는가?</li>
+        </ul>
+      </div>
+    </div>
+
+  </div>
+  <div class="source">📚 출처: <strong>6장_척추_골반_경추</strong>, 19~23 페이지</div>
+</article>
+
+<!-- ══════════ 03. LATERAL ══════════ -->
+<article class="technique" id="t03">
+  <div class="tech-head">
+    <span class="num">TECHNIQUE · 03</span>
+    <h2>경추 측방향 촬영</h2>
+    <div class="en">Cervical Vertebrae · Lateral Projection</div>
+  </div>
+  <div class="tech-body">
+
+    <div class="field">
+      <div class="label">촬영목적</div>
+      <div class="content">
+        <ol class="num-list">
+          <li>외상성 질환에 의한 골절</li>
+          <li>탈구</li>
+          <li>염증이나 종양 등의 병변 유무 관찰</li>
+        </ol>
+      </div>
+    </div>
+
+    <div class="field">
+      <div class="label">환자의 자세</div>
+      <div class="content">
+        <ul>
+          <li><strong>선자세 또는 앉은 자세</strong></li>
+          <li>검사쪽 어깨를 IR에 밀착</li>
+          <li>수직격자장치/촬영대 중앙선에 <span class="term">관상면(coronal plane)</span> 중심을 일치</li>
+          <li><span class="hl">바깥귀길(EAM) 위쪽 약 5 cm</span> 위치에 IR의 끝을 맞춤</li>
+          <li>양쪽 어깨는 가능한 한 많이 늘어뜨림</li>
+          <li>턱을 약간 들어 <strong>턱뼈가지와 목뼈가 겹치는 것을 방지</strong></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="field">
+      <div class="label">촬영방법</div>
+      <div class="content">
+        <ul>
+          <li>추체, 추간관절강, <span class="term">관절기둥(articular pillars)</span>, 극돌기, <span class="term">돌기사이관절(apophyseal joint)</span> 관찰</li>
+          <li>호흡은 <strong>날숨(호기) 후 멈추고</strong> 촬영</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="field">
+      <div class="label">중심선</div>
+      <div class="content">
+        <div class="param-grid">
+          <div class="param"><span class="k">Angle</span><span class="v"><span class="hl">IR 면에 수평 입사</span></span></div>
+          <div class="param"><span class="k">Entry</span><span class="v">넷째 목뼈 (C4)</span></div>
+          <div class="param"><span class="k">IR size</span><span class="v">10×12 인치 (세로)</span></div>
+          <div class="param"><span class="k">SID</span><span class="v"><span class="hl">180 cm</span></span></div>
+          <div class="param"><span class="k">Grid</span><span class="v">이동형 / 고정형</span></div>
+          <div class="param"><span class="k">차폐</span><span class="v">생식샘 차폐</span></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="field">
+      <div class="label">촬영법 특징</div>
+      <div class="content">
+        <ul>
+          <li><strong>C1~C7 전체</strong>를 관찰 가능해야 함</li>
+          <li>턱뼈가지가 <strong>C1·C2와 겹치지 않도록</strong> 턱을 살짝 올림</li>
+          <li>어깨를 내려 <strong>C7 극돌기</strong>가 촬영되도록 함</li>
+          <li>영상에 양쪽 턱뼈가지가 똑같이 겹쳐져야 함</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="field">
+      <div class="label">촬영상 (평가기준)</div>
+      <div class="content">
+        <ul class="checklist">
+          <li>제1목뼈에서 제7목뼈까지 포함되어 있는가?</li>
+          <li>목뼈간격이 일정하고 선명한가?</li>
+          <li>치아돌기의 윤곽을 추구할 수 있는가?</li>
+          <li>고리뼈의 <span class="term">앞궁(전궁)</span>이 명확히 나와 있는가?</li>
+          <li>목의 연부조직을 식별할 수 있는가?</li>
+          <li>턱뼈가지와 C1·C2가 겹치지 않았는가?</li>
+          <li>양쪽 턱뼈가지가 똑같이 겹쳤는가?</li>
+        </ul>
+      </div>
+    </div>
+
+  </div>
+  <div class="source">📚 출처: <strong>6장_척추_골반_경추</strong>, 24~29 페이지</div>
+</article>
+
+<!-- ══════════ 04. OBLIQUE ══════════ -->
+<article class="technique" id="t04">
+  <div class="tech-head">
+    <span class="num">TECHNIQUE · 04</span>
+    <h2>경추 사방향 촬영</h2>
+    <div class="en">Cervical Vertebrae · Oblique Projection (RPO/LPO · RAO/LAO)</div>
+  </div>
+  <div class="tech-body">
+
+    <div class="field">
+      <div class="label">촬영목적</div>
+      <div class="content">
+        <ol class="num-list">
+          <li>외상에 의한 골절</li>
+          <li>탈구</li>
+        </ol>
+        <div class="warn">
+          <strong>관찰 부위 구분:</strong><br>
+          · <strong>후전 사방향(PA oblique)</strong>: IR에서 <span class="hl">가까운 쪽</span>의 추궁근(pedicle)과 <span class="term">추간공(intervertebral foramen)</span> 관찰<br>
+          · <strong>전후 사방향(AP oblique)</strong>: IR에서 <span class="hl">먼 쪽</span>의 추궁근과 추간공 관찰
+        </div>
+      </div>
+    </div>
+
+    <div class="field">
+      <div class="label">환자의 자세</div>
+      <div class="content">
+        <ul>
+          <li>선자세 또는 앉은 자세</li>
+          <li>양팔은 자연스럽게 몸의 옆면에 붙임</li>
+          <li>몸과 머리를 <span class="hl">45°</span> 회전</li>
+          <li>턱을 약간 내밀어 <strong>턱뼈가지와 추간공이 겹쳐지지 않도록</strong> 함</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="field">
+      <div class="label">촬영방법</div>
+      <div class="content">
+        <ul>
+          <li>양측 사방향 촬영이 <strong>기본</strong></li>
+          <li><strong>비만체형 환자</strong>: IR면에 <span class="hl">55~60°</span> 가까이 경사지게 촬영 → 추간공이 잘 배열</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="field">
+      <div class="label">중심선</div>
+      <div class="content">
+        <div class="param-grid">
+          <div class="param"><span class="k">PA oblique</span><span class="v">C4 향해 <span class="hl">발쪽 15~20°</span></span></div>
+          <div class="param"><span class="k">AP oblique</span><span class="v">C4 향해 <span class="hl">머리쪽 15~20°</span></span></div>
+          <div class="param"><span class="k">IR size</span><span class="v">8×10 또는 10×12 (세로)</span></div>
+          <div class="param"><span class="k">SID</span><span class="v">100 cm</span></div>
+          <div class="param"><span class="k">Grid</span><span class="v">이동형 / 고정형</span></div>
+          <div class="param"><span class="k">차폐</span><span class="v">생식샘 차폐</span></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="field">
+      <div class="label">촬영상 (평가기준)</div>
+      <div class="content">
+        <ul class="checklist">
+          <li>C1~C7의 추간공과 추간원판강이 <strong>분리된 상태</strong>로 관찰되는가?</li>
+          <li>턱뼈가지와 C1·C2가 겹쳐지지 않았는가?</li>
+          <li>두개저부와 첫째 목뼈가 겹쳐지지 않았는가?</li>
+          <li>목뼈의 추궁근도 볼 수 있는가?</li>
+          <li>촬영조건은 뼈와 연부조직을 잘 볼 수 있을 정도로 적정한가?</li>
+        </ul>
+      </div>
+    </div>
+
+  </div>
+  <div class="source">📚 출처: <strong>6장_척추_골반_경추</strong>, 30~37 페이지</div>
+</article>
+
+<!-- ══════════ 05. HYPERFLEXION/EXTENSION ══════════ -->
+<article class="technique" id="t05">
+  <div class="tech-head">
+    <span class="num">TECHNIQUE · 05</span>
+    <h2>측면 전굴·후굴위 촬영</h2>
+    <div class="en">Lateral · Hyperflexion &amp; Hyperextension Projection</div>
+  </div>
+  <div class="tech-body">
+
+    <div class="field">
+      <div class="label">촬영목적</div>
+      <div class="content">
+        <ol class="num-list">
+          <li>경추의 <strong>신체적(기능적) 기능</strong> 평가</li>
+          <li>추간강의 <strong>압축이나 벌어짐, 탈구 등 운동에 의한 이상</strong> 유무 관찰</li>
+        </ol>
+      </div>
+    </div>
+
+    <div class="field">
+      <div class="label">환자의 자세</div>
+      <div class="content">
+        <ul>
+          <li>측면자세로 앉거나 선 자세</li>
+          <li>수직격자장치 앞에 검사쪽 어깨를 밀착시켜 세움</li>
+          <li><span class="term">정중이마면(관상면, coronal plane)</span>이 IR면의 중심과 일치</li>
+          <li>넷째 목뼈가 중앙이 되도록 조정</li>
+        </ul>
+        <div class="warn" style="margin-top:12px;">
+          <strong>▸ 전굴위 촬영:</strong> 환자가 견딜 수 있는 한 <strong>턱이 가슴에 밀착될 때까지</strong> 머리를 앞으로 숙임<br>
+          <strong>▸ 후굴위 촬영:</strong> 환자의 <strong>턱을 높이 내밀고</strong> 머리는 가능한 한 뒤쪽으로 젖힘
+        </div>
+      </div>
+    </div>
+
+    <div class="field">
+      <div class="label">중심선</div>
+      <div class="content">
+        <div class="param-grid">
+          <div class="param"><span class="k">Angle</span><span class="v">IR 중앙점에 <span class="hl">수평 입사</span></span></div>
+          <div class="param"><span class="k">Entry</span><span class="v">넷째 목뼈 부위</span></div>
+          <div class="param"><span class="k">IR size</span><span class="v">10×12 또는 8×10 (세로)</span></div>
+          <div class="param"><span class="k">SID</span><span class="v"><span class="hl">180 cm</span></span></div>
+          <div class="param"><span class="k">Grid</span><span class="v">이동형 / 고정형</span></div>
+          <div class="param"><span class="k">차폐</span><span class="v">생식샘 차폐</span></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="field">
+      <div class="label">촬영법 특징</div>
+      <div class="content">
+        <ul>
+          <li>호흡은 <strong>깊은 날숨(심호기)</strong> 상태에서 멈추고 X선 조사</li>
+          <li>C7 극돌기가 촬영되도록 함</li>
+          <li>젖힘자세(후굴위)에서는 환자가 움직일 수 있으므로 <strong>단시간 촬영</strong>이 바람직</li>
+          <li>환자의 상태에 충분히 주의하면서 구부림</li>
+        </ul>
+        <div class="warn">
+          <strong>⚠ 금기:</strong> 목뼈의 <strong>골절이나 외상이 있는 환자는 이 촬영법을 실시해서는 안된다.</strong>
+        </div>
+      </div>
+    </div>
+
+    <div class="field">
+      <div class="label">촬영상 (평가기준)</div>
+      <div class="content">
+        <ul class="checklist">
+          <li>C1~C7까지 영상에 모두 나타나는가?</li>
+          <li>양쪽 턱뼈가지가 똑같이 겹쳐졌는가?</li>
+          <li>촬영조건이 뼈와 연부조직을 잘 볼 수 있을 정도로 적정한가?</li>
+        </ul>
+        <div class="warn" style="margin-top:10px; background:#eef7ee; border-color:#4a7c2e;">
+          <strong style="color:#2d5016;">영상 판독 핵심:</strong><br>
+          · <strong>전굴위</strong>: 가시돌기(극돌기)가 <span class="hl">분리되어</span> 잘 보인다<br>
+          · <strong>후굴위</strong>: 가시돌기가 <span class="hl">서로 밀착되어</span> 보인다
+        </div>
+      </div>
+    </div>
+
+  </div>
+  <div class="source">📚 출처: <strong>6장_척추_골반_경추</strong>, 38~42 페이지</div>
+</article>
+
+<!-- ══════════ 06. OTTONELLO ══════════ -->
+<article class="technique" id="t06">
+  <div class="tech-head">
+    <span class="num">TECHNIQUE · 06</span>
+    <h2>전후방향 저작촬영 (Ottonello 법)</h2>
+    <div class="en">AP "Chewing" / "Wagging Jaw" Projection · Ottonello Method</div>
+  </div>
+  <div class="tech-body">
+
+    <div class="field">
+      <div class="label">촬영목적</div>
+      <div class="content">
+        X선을 조사하는 동안 <strong>일정한 저작운동(씹는 동작)</strong>을 하면서 촬영한 후, <span class="hl">흐려진 아래턱뼈 음영을 통해 전체 목뼈의 전후방향 촬영상</span>을 관찰
+      </div>
+    </div>
+
+    <div class="field">
+      <div class="label">환자의 자세</div>
+      <div class="content">
+        <ul>
+          <li>눕거나 선 자세</li>
+          <li>촬영대 중앙선에 몸의 정중선 일치</li>
+          <li>양 어깨를 촬영대에 밀착시켜 같은 수평면에 놓이게 조정</li>
+          <li>턱을 들어 <strong>씹는면(교합면)과 꼭지돌기끝 연결선이 IR 면에 수직</strong>되게 머리 조정</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="field">
+      <div class="label">촬영방법</div>
+      <div class="content">
+        <ul>
+          <li><strong>머리를 고정</strong>하고 아래턱뼈가 자연스럽게 움직일 수 있도록 연습</li>
+          <li>X선 조사 중 <strong>저작운동(씹기)</strong>을 하게 함</li>
+          <li>촬영조건: <span class="hl">낮은 관전류(mA) + 장시간 조사(sec)</span>로 설정</li>
+          <li>mAs, kVp, 거리 등은 동일하게 유지</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="field">
+      <div class="label">중심선</div>
+      <div class="content">
+        <div class="param-grid">
+          <div class="param"><span class="k">Angle</span><span class="v"><span class="hl">수직 입사</span> (AP와 차이)</span></div>
+          <div class="param"><span class="k">Entry</span><span class="v">제4목뼈 (방패연골)</span></div>
+          <div class="param"><span class="k">IR size</span><span class="v">8×10 인치 (세로)</span></div>
+          <div class="param"><span class="k">SID</span><span class="v">100 cm</span></div>
+          <div class="param"><span class="k">Grid</span><span class="v">이동형 / 고정형</span></div>
+          <div class="param"><span class="k">차폐</span><span class="v">생식샘 차폐</span></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="field">
+      <div class="label">촬영법 특징</div>
+      <div class="content">
+        <ul>
+          <li>7개의 목뼈 전체가 전후방향으로 촬영되어야 함</li>
+          <li>흐려진 아래턱뼈 음영을 통해 <strong>C1·C2가 정면상으로 관찰</strong> 가능</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="field">
+      <div class="label">촬영상 (평가기준)</div>
+      <div class="content">
+        <ul class="checklist">
+          <li>7개의 목뼈 전체를 관찰할 수 있는가?</li>
+          <li>겹쳐진 아래턱뼈의 음영을 통해 C1·C2를 볼 수 있는가?</li>
+          <li>머리뼈나 목뼈가 움직이지 않았는가?</li>
+        </ul>
+      </div>
+    </div>
+
+  </div>
+  <div class="source">📚 출처: <strong>6장_척추_골반_경추</strong>, 43~47 페이지</div>
+</article>
+
+<!-- ══════════ 07. SWIMMER'S ══════════ -->
+<article class="technique" id="t07">
+  <div class="tech-head">
+    <span class="num">TECHNIQUE · 07</span>
+    <h2>Swimmer's 측방향 검사 (외상 시리즈)</h2>
+    <div class="en">Swimmer's Lateral Projection · Cervicothoracic Region</div>
+  </div>
+  <div class="tech-body">
+
+    <div class="field">
+      <div class="label">촬영목적</div>
+      <div class="content">
+        <strong>어깨 음영 사이로</strong> 아래쪽 목뼈(<span class="hl">C6~C7</span>)와 위쪽 등뼈(<span class="hl">T1~T2</span>)의 골절, 탈구, 염증 등의 병변 유무 관찰
+        <div class="warn" style="margin-top:10px;">
+          <strong>경추 외상환자 검사 시리즈:</strong> 측방향(수평검사) · 전후방향 · 사방향 · Swimmer's 측방향
+        </div>
+      </div>
+    </div>
+
+    <div class="field">
+      <div class="label">환자의 자세</div>
+      <div class="content">
+        <ul>
+          <li>선자세, 앉은 자세, 또는 옆으로 누운 자세</li>
+          <li>선자세인 경우 수직격자장치 앞에 검사쪽 어깨를 밀착시켜 측면자세로 세움</li>
+          <li>관상면(coronal plane)이 IR면 중심과 일치 → <strong>두번째 등뼈(T2)가 중앙</strong>이 되도록 조정</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="field">
+      <div class="label">촬영방법</div>
+      <div class="content">
+        <ul>
+          <li>IR면에 밀착된 쪽 팔을 <strong>위로 들어올림</strong> → 어깨를 앞이나 뒤로 약간 돌림</li>
+          <li>반대쪽 어깨는 검사쪽 어깨의 <strong>반대방향</strong>으로 돌려 어깨와 팔을 아래로 늘어뜨림</li>
+          <li>→ 양쪽 어깨가 서로 겹치지 않도록 분리</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="field">
+      <div class="label">중심선</div>
+      <div class="content">
+        <div class="param-grid">
+          <div class="param"><span class="k">Angle</span><span class="v"><span class="hl">IR에 수직 입사</span></span></div>
+          <div class="param"><span class="k">Entry</span><span class="v">두번째 등뼈 (T2)</span></div>
+          <div class="param"><span class="k">보정각</span><span class="v">어깨 분리 X → <span class="hl">발쪽 5°</span></span></div>
+          <div class="param"><span class="k">IR size</span><span class="v">8×10 인치 (세로)</span></div>
+          <div class="param"><span class="k">SID</span><span class="v">100 cm</span></div>
+          <div class="param"><span class="k">Grid / 차폐</span><span class="v">이동형·고정형 / 생식샘 차폐</span></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="field">
+      <div class="label">촬영법 특징</div>
+      <div class="content">
+        <ul>
+          <li>등뼈와 목뼈가 측방향 촬영상으로 나타나야 하며 <strong>척추 자체가 회전되어서는 안됨</strong></li>
+          <li>촬영 범위: <span class="hl">C5~T5 까지 (또는 C4~T3)</span></li>
+          <li>양쪽 어깨가 서로 겹쳐지지 않도록 함</li>
+          <li>조사조건: <strong>어깨를 투과할 정도</strong>로 적정해야 함</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="field">
+      <div class="label">촬영상 (평가기준)</div>
+      <div class="content">
+        <ul class="checklist">
+          <li>척추 자체가 회전되어서는 안된다</li>
+          <li><span class="term">위팔뼈머리(상완골두, humeral head)</span>는 양 어깨에서 분리되어야 한다</li>
+          <li>양 어깨가 서로 겹쳐지지 말아야 한다</li>
+          <li>촬영조건은 어깨를 투과할 정도로 적정해야 한다</li>
+        </ul>
+      </div>
+    </div>
+
+  </div>
+  <div class="source">📚 출처: <strong>6장_척추_골반_경추</strong>, 48~53 페이지</div>
+</article>
+
+<!-- ══════════ FOOTER ══════════ -->
+<footer class="end">
+  <div class="ornament">◆ ◆ ◆</div>
+  <div>— End of Chapter 6 : Cervical Spine —</div>
+  <div style="margin-top:8px; font-family:'JetBrains Mono',monospace; font-style:normal; font-size:11px; letter-spacing:0.2em;">
+    STUDY NOTE FOR RADIOGRAPHIC TECHNOLOGY · EXAM PREP
+  </div>
+</footer>
+
+</div>
+</body>
+</html>
