@@ -1,0 +1,1721 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>2026 전산화단층촬영학 중간수시고사 풀이 노트</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,400;0,600;0,700;0,900;1,400&family=IBM+Plex+Sans+KR:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #f7f5f0;
+  --bg-card: #ffffff;
+  --ink: #1a1a1a;
+  --ink-soft: #4a4a4a;
+  --ink-muted: #8a8a8a;
+  --line: #e5e1d8;
+  --line-soft: #efebe2;
+  --accent: #c8311c;
+  --accent-soft: #f9e8e4;
+  --correct: #2d6a4f;
+  --correct-soft: #e6f0ea;
+  --wrong: #b04040;
+  --warn-bg: #fdf6e3;
+  --warn-border: #e0c78a;
+  --info-bg: #eef3f7;
+  --info-border: #b8c9d6;
+  --tip-bg: #f2ecf5;
+  --tip-border: #c9b5d1;
+  --code-bg: #f0ece3;
+  --shadow: 0 1px 2px rgba(0,0,0,.04), 0 4px 12px rgba(0,0,0,.04);
+}
+
+* { box-sizing: border-box; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  margin: 0;
+  font-family: 'IBM Plex Sans KR', -apple-system, BlinkMacSystemFont, sans-serif;
+  font-weight: 400;
+  background: var(--bg);
+  color: var(--ink);
+  line-height: 1.7;
+  font-size: 15px;
+  letter-spacing: -0.01em;
+}
+
+.container {
+  max-width: 880px;
+  margin: 0 auto;
+  padding: 60px 32px 120px;
+}
+
+/* === Header === */
+header {
+  border-bottom: 2px solid var(--ink);
+  padding-bottom: 32px;
+  margin-bottom: 48px;
+}
+
+.eyebrow {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin-bottom: 12px;
+  font-weight: 600;
+}
+
+h1 {
+  font-family: 'Fraunces', serif;
+  font-weight: 700;
+  font-size: 42px;
+  line-height: 1.15;
+  margin: 0 0 16px;
+  letter-spacing: -0.02em;
+}
+
+h1 em {
+  font-style: italic;
+  font-weight: 400;
+  color: var(--ink-soft);
+}
+
+.meta {
+  display: flex;
+  gap: 24px;
+  flex-wrap: wrap;
+  font-size: 13px;
+  color: var(--ink-muted);
+  font-family: 'JetBrains Mono', monospace;
+  margin-top: 20px;
+}
+
+.meta span strong {
+  color: var(--ink);
+  font-weight: 600;
+}
+
+/* === TOC === */
+.toc {
+  background: var(--bg-card);
+  border: 1px solid var(--line);
+  border-radius: 4px;
+  padding: 24px 28px;
+  margin-bottom: 56px;
+  box-shadow: var(--shadow);
+}
+
+.toc-title {
+  font-family: 'Fraunces', serif;
+  font-size: 15px;
+  font-weight: 600;
+  margin: 0 0 16px;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+  color: var(--ink-soft);
+}
+
+.toc-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+  gap: 6px 16px;
+}
+
+.toc-grid a {
+  display: flex;
+  gap: 10px;
+  text-decoration: none;
+  color: var(--ink-soft);
+  font-size: 13px;
+  padding: 4px 0;
+  border-bottom: 1px dotted transparent;
+  transition: all 0.15s;
+}
+
+.toc-grid a:hover {
+  color: var(--accent);
+  border-bottom-color: var(--accent);
+}
+
+.toc-grid a .num {
+  font-family: 'JetBrains Mono', monospace;
+  font-weight: 600;
+  color: var(--ink-muted);
+  min-width: 24px;
+}
+
+/* === Section Header === */
+.section-divider {
+  margin: 64px 0 32px;
+  display: flex;
+  align-items: baseline;
+  gap: 16px;
+}
+
+.section-divider::before {
+  content: '';
+  height: 1px;
+  background: var(--ink);
+  flex: 0 0 40px;
+}
+
+.section-divider h2 {
+  font-family: 'Fraunces', serif;
+  font-size: 22px;
+  font-weight: 600;
+  margin: 0;
+  font-style: italic;
+  letter-spacing: -0.01em;
+}
+
+.section-divider::after {
+  content: '';
+  height: 1px;
+  background: var(--line);
+  flex: 1;
+}
+
+/* === Question Card === */
+.q {
+  background: var(--bg-card);
+  border: 1px solid var(--line);
+  border-radius: 6px;
+  padding: 32px 36px;
+  margin-bottom: 24px;
+  box-shadow: var(--shadow);
+  scroll-margin-top: 20px;
+}
+
+.q-head {
+  display: flex;
+  align-items: baseline;
+  gap: 16px;
+  padding-bottom: 16px;
+  margin-bottom: 20px;
+  border-bottom: 1px solid var(--line-soft);
+}
+
+.q-num {
+  font-family: 'Fraunces', serif;
+  font-weight: 900;
+  font-size: 32px;
+  line-height: 1;
+  color: var(--accent);
+  letter-spacing: -0.02em;
+}
+
+.q-num::before { content: 'Q'; font-size: 18px; vertical-align: super; margin-right: 2px; font-weight: 600; }
+
+.q-title {
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--ink);
+  flex: 1;
+}
+
+.q-tag {
+  display: inline-block;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  padding: 3px 8px;
+  background: var(--ink);
+  color: var(--bg);
+  border-radius: 2px;
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+.q-stem {
+  color: var(--ink-soft);
+  font-size: 14.5px;
+  margin-bottom: 20px;
+  padding-left: 0;
+}
+
+/* === Answer Block === */
+.answer {
+  background: var(--correct-soft);
+  border-left: 3px solid var(--correct);
+  padding: 12px 18px;
+  margin: 16px 0 20px;
+  border-radius: 0 4px 4px 0;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-weight: 600;
+}
+
+.answer::before {
+  content: '✓';
+  color: var(--correct);
+  font-weight: 700;
+  font-size: 16px;
+}
+
+.answer .label {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px;
+  letter-spacing: 0.1em;
+  color: var(--correct);
+  text-transform: uppercase;
+  margin-right: 4px;
+}
+
+/* === Subsection === */
+.sub {
+  margin: 20px 0;
+}
+
+.sub-title {
+  font-family: 'Fraunces', serif;
+  font-size: 14px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--ink-soft);
+  margin: 0 0 10px;
+  padding-bottom: 4px;
+  border-bottom: 1px dashed var(--line);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.sub-title .icon {
+  font-size: 12px;
+}
+
+.sub p {
+  margin: 8px 0;
+  font-size: 14.5px;
+}
+
+.sub ul {
+  margin: 8px 0;
+  padding-left: 0;
+  list-style: none;
+}
+
+.sub ul li {
+  padding: 4px 0 4px 24px;
+  position: relative;
+  font-size: 14px;
+}
+
+.sub ul li::before {
+  content: '—';
+  position: absolute;
+  left: 0;
+  color: var(--ink-muted);
+}
+
+/* === Options analysis === */
+.opts {
+  background: var(--bg);
+  border-radius: 4px;
+  padding: 16px 20px;
+  border: 1px solid var(--line-soft);
+}
+
+.opts ul { padding-left: 0; }
+.opts li {
+  padding: 6px 0 6px 32px;
+  position: relative;
+  font-size: 13.5px;
+  line-height: 1.6;
+}
+.opts li::before {
+  content: '✗';
+  position: absolute;
+  left: 6px;
+  color: var(--wrong);
+  font-weight: 700;
+}
+.opts li.ok::before {
+  content: '◦';
+  color: var(--ink-muted);
+}
+
+.opt-num {
+  font-family: 'JetBrains Mono', monospace;
+  font-weight: 600;
+  color: var(--ink);
+  margin-right: 4px;
+}
+
+/* === Callouts === */
+.trap {
+  background: var(--warn-bg);
+  border: 1px solid var(--warn-border);
+  border-left: 3px solid #c89a2a;
+  padding: 12px 18px;
+  border-radius: 0 4px 4px 0;
+  font-size: 14px;
+}
+
+.trap .head {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: #8a6a15;
+  font-weight: 600;
+  margin-bottom: 6px;
+}
+
+.mnemonic {
+  background: var(--tip-bg);
+  border: 1px solid var(--tip-border);
+  border-left: 3px solid #8a5fa3;
+  padding: 12px 18px;
+  border-radius: 0 4px 4px 0;
+  font-family: 'Fraunces', serif;
+  font-style: italic;
+  font-size: 15px;
+  color: #4a2e5e;
+}
+
+.mnemonic .head {
+  font-family: 'JetBrains Mono', monospace;
+  font-style: normal;
+  font-size: 11px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: #6b3f85;
+  font-weight: 600;
+  margin-bottom: 6px;
+  display: block;
+}
+
+.extra {
+  background: var(--info-bg);
+  border: 1px solid var(--info-border);
+  border-left: 3px solid #4a7a9c;
+  padding: 12px 18px;
+  border-radius: 0 4px 4px 0;
+  font-size: 14px;
+}
+
+.extra .head {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: #355d78;
+  font-weight: 600;
+  margin-bottom: 6px;
+}
+
+details.extra summary {
+  cursor: pointer;
+  list-style: none;
+  font-weight: 600;
+  color: #355d78;
+}
+
+details.extra summary::-webkit-details-marker { display: none; }
+
+details.extra summary::before {
+  content: '▸ ';
+  color: #4a7a9c;
+  transition: transform 0.15s;
+  display: inline-block;
+}
+
+details.extra[open] summary::before {
+  content: '▾ ';
+}
+
+details.extra .ans {
+  margin-top: 8px;
+  padding-top: 8px;
+  border-top: 1px dashed var(--info-border);
+  font-weight: 500;
+  color: var(--ink);
+}
+
+code {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 12.5px;
+  background: var(--code-bg);
+  padding: 1px 6px;
+  border-radius: 3px;
+  color: var(--ink);
+  font-weight: 500;
+}
+
+.source {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px;
+  color: var(--ink-muted);
+  font-weight: 500;
+}
+
+/* === Formula === */
+.formula {
+  background: var(--code-bg);
+  padding: 12px 16px;
+  border-radius: 4px;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 13px;
+  margin: 10px 0;
+  line-height: 1.8;
+}
+
+.formula .step {
+  color: var(--accent);
+  font-weight: 700;
+}
+
+/* === Footer === */
+footer {
+  margin-top: 80px;
+  padding-top: 32px;
+  border-top: 1px solid var(--line);
+  text-align: center;
+  color: var(--ink-muted);
+  font-size: 13px;
+  font-family: 'JetBrains Mono', monospace;
+}
+
+footer em {
+  font-family: 'Fraunces', serif;
+  font-style: italic;
+  color: var(--ink-soft);
+}
+
+/* Back to top */
+.back-top {
+  position: fixed;
+  bottom: 24px;
+  right: 24px;
+  background: var(--ink);
+  color: var(--bg);
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
+  font-size: 14px;
+  font-weight: 700;
+  box-shadow: 0 4px 12px rgba(0,0,0,.15);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.2s;
+}
+
+.back-top.show {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.back-top:hover {
+  background: var(--accent);
+}
+
+@media (max-width: 640px) {
+  .container { padding: 40px 20px 100px; }
+  h1 { font-size: 32px; }
+  .q { padding: 24px 22px; }
+  .q-head { flex-direction: column; gap: 8px; align-items: flex-start; }
+  .q-num { font-size: 28px; }
+  .meta { gap: 12px; font-size: 11px; }
+}
+
+@media print {
+  body { background: white; font-size: 11pt; }
+  .container { max-width: 100%; padding: 0; }
+  .q { box-shadow: none; border: 1px solid #ccc; break-inside: avoid; }
+  .toc, .back-top { display: none; }
+  .section-divider { break-before: page; }
+}
+</style>
+</head>
+<body>
+<div class="container">
+
+<header>
+  <div class="eyebrow">Radiography · 방사선학과 수시고사</div>
+  <h1>전산화단층촬영학<br><em>2026년 중간수시고사 풀이 노트</em></h1>
+  <div class="meta">
+    <span><strong>과목</strong> · CT (Computed Tomography)</span>
+    <span><strong>문항</strong> · 30문제</span>
+    <span><strong>출처</strong> · 강의자료 p.3–52</span>
+  </div>
+</header>
+
+<!-- TOC -->
+<nav class="toc">
+  <div class="toc-title">문항 색인</div>
+  <div class="toc-grid">
+    <a href="#q1"><span class="num">01</span>3세대 CT 특징</a>
+    <a href="#q2"><span class="num">02</span>WW/WL 변화</a>
+    <a href="#q3"><span class="num">03</span>전처리 후 데이터</a>
+    <a href="#q4"><span class="num">04</span>Auto bolus tracking</a>
+    <a href="#q5"><span class="num">05</span>HU 최저값 조직</a>
+    <a href="#q6"><span class="num">06</span>부분체적 감소</a>
+    <a href="#q7"><span class="num">07</span>CT X선관 조건</a>
+    <a href="#q8"><span class="num">08</span>고전압 슬립링</a>
+    <a href="#q9"><span class="num">09</span>Smoothing 적용</a>
+    <a href="#q10"><span class="num">10</span>공간분해능 인자</a>
+    <a href="#q11"><span class="num">11</span>Z축 해상력</a>
+    <a href="#q12"><span class="num">12</span>노이즈 원인</a>
+    <a href="#q13"><span class="num">13</span>HU 정의</a>
+    <a href="#q14"><span class="num">14</span>WW/WL 계산</a>
+    <a href="#q15"><span class="num">15</span>Convolution 단계</a>
+    <a href="#q16"><span class="num">16</span>Bowtie filter</a>
+    <a href="#q17"><span class="num">17</span>노이즈 감소</a>
+    <a href="#q18"><span class="num">18</span>공간분해능 향상</a>
+    <a href="#q19"><span class="num">19</span>Pitch 증가</a>
+    <a href="#q20"><span class="num">20</span>지방 HU값</a>
+    <a href="#q21"><span class="num">21</span>Metal artifact</a>
+    <a href="#q22"><span class="num">22</span>적응배열 검출기</a>
+    <a href="#q23"><span class="num">23</span>MDCT 특징</a>
+    <a href="#q24"><span class="num">24</span>Standard algorithm</a>
+    <a href="#q25"><span class="num">25</span>뇌 윈도우 조건</a>
+    <a href="#q26"><span class="num">26</span>정렬 불량 → Ring</a>
+    <a href="#q27"><span class="num">27</span>고관전압 특징</a>
+    <a href="#q28"><span class="num">28</span>Lung window</a>
+    <a href="#q29"><span class="num">29</span>HU 결정 인자</a>
+    <a href="#q30"><span class="num">30</span>피폭선량 증가</a>
+  </div>
+</nav>
+
+<!-- ========== SECTION 1: Q1–Q5 ========== -->
+<div class="section-divider"><h2>Part I · 세대별 구조 & 기본 개념</h2></div>
+
+<!-- Q1 -->
+<article class="q" id="q1">
+  <div class="q-head">
+    <span class="q-num">1</span>
+    <span class="q-title">3세대 CT 장치의 구조적·기하학적 특징</span>
+    <span class="q-tag">정의</span>
+  </div>
+  <div class="q-stem">3세대 CT 장치에서 나타나는 고유한 현상은?</div>
+
+  <div class="answer"><span class="label">정답</span>③ 원형 인공물 (Ring artifact)</div>
+
+  <div class="sub">
+    <div class="sub-title"><span class="icon">◆</span>핵심 근거</div>
+    <p>3세대 장치는 X선관과 검출기가 모두 회전하는 <code>회전/회전 (Rotation/Rotation)</code> 방식을 사용한다 <span class="source">[p.4]</span>. 검출소자의 결함이나 교정(Calibration) 오류 시 영상 전체에 동심원 모양의 <code>Ring artifact</code>가 발생하는 것이 가장 큰 특징이다 <span class="source">[p.4]</span>.</p>
+  </div>
+
+  <div class="sub">
+    <div class="sub-title"><span class="icon">◆</span>보기별 분석</div>
+    <div class="opts"><ul>
+      <li><span class="opt-num">①</span><strong>전자총 (Electron gun)</strong> — 5세대 CT (EBCT)의 특징 <span class="source">[p.5]</span></li>
+      <li><span class="opt-num">②</span><strong>단일 연필형 선속 (Parallel beam)</strong> — 1세대 CT의 특징 <span class="source">[p.4]</span></li>
+      <li><span class="opt-num">④</span><strong>고정형 검출기 (Stationary detector)</strong> — 4세대 장치의 특징 <span class="source">[p.5]</span></li>
+      <li><span class="opt-num">⑤</span><strong>고정식 검출기</strong> — 위와 동일, 4세대 특징 <span class="source">[p.5]</span></li>
+    </ul></div>
+  </div>
+
+  <div class="trap">
+    <div class="head">★ Trap Check</div>
+    세대별 X선관-검출기 운동 조합(회전/직선, 회전/회전, 회전/고정)을 구분할 것. 4세대는 검출기가 환자를 360° 둘러싸고 <strong>고정(Stationary)</strong>되어 있다는 점과 혼동 금지.
+  </div>
+
+  <div class="mnemonic">
+    <span class="head">한줄 요약</span>
+    "3세대는 <strong>링(Ring)</strong> 위에서 튜브랑 검출기가 같이 돈다!"
+  </div>
+
+  <details class="extra">
+    <summary>파생 예상문제 — 4세대 CT 운동 방식</summary>
+    <div class="ans">X선관 회전 · 검출기 고정 (Rotation/Stationary) <span class="source">[p.5]</span></div>
+  </details>
+</article>
+
+<!-- Q2 -->
+<article class="q" id="q2">
+  <div class="q-head">
+    <span class="q-num">2</span>
+    <span class="q-title">Window Width / Window Level 변화에 따른 영상 효과</span>
+    <span class="q-tag">비교</span>
+  </div>
+  <div class="q-stem">WW/WL 설정 변화와 영상 효과에 대한 설명으로 옳은 것은?</div>
+
+  <div class="answer"><span class="label">정답</span>④ Window width가 증가하면 대조도가 감소한다</div>
+
+  <div class="sub">
+    <div class="sub-title"><span class="icon">◆</span>핵심 근거</div>
+    <p><code>WW</code>를 넓게 설정하면 표현되는 <code>Gray scale</code> 단계는 많아지지만, 인접 조직 간의 <code>Contrast</code>는 저하된다 <span class="source">[p.16]</span>. 반대로 폭을 좁히면 대조도는 증가하여 비슷한 조직 간 식별능이 좋아진다.</p>
+  </div>
+
+  <div class="sub">
+    <div class="sub-title"><span class="icon">◆</span>보기별 분석</div>
+    <div class="opts"><ul>
+      <li><span class="opt-num">①</span><strong>WL 감소</strong> 시 영상은 밝게 나타남 <span class="source">[p.17]</span> (설명과 반대)</li>
+      <li><span class="opt-num">②</span><strong>WL 증가</strong> 시 영상은 어둡게 나타남 <span class="source">[p.17]</span></li>
+      <li><span class="opt-num">③</span><strong>WW 감소</strong> 시 대조도·식별능은 <strong>증가</strong> <span class="source">[p.16]</span></li>
+      <li><span class="opt-num">⑤</span>노이즈는 mAs·kVp 등 획득 인자가 좌우 <span class="source">[p.21]</span></li>
+    </ul></div>
+  </div>
+
+  <div class="trap">
+    <div class="head">★ Trap Check</div>
+    <strong>Width(폭) = 대조도(Contrast)</strong>, <strong>Level(높이) = 밝기(Brightness)</strong> 공식을 반드시 기억.
+  </div>
+
+  <div class="mnemonic">
+    <span class="head">한줄 요약</span>
+    "<strong>좁대</strong>(폭이 좁으면 대조도 증가), <strong>레밝</strong>(레벨은 밝기 조절)"
+  </div>
+
+  <details class="extra">
+    <summary>파생 예상문제 — 골 조직 관찰 시 적절한 WL</summary>
+    <div class="ans">Window Level을 높게 설정 (약 200~300 HU) <span class="source">[p.17, 18]</span></div>
+  </details>
+</article>
+
+<!-- Q3 -->
+<article class="q" id="q3">
+  <div class="q-head">
+    <span class="q-num">3</span>
+    <span class="q-title">전처리(Pre-processing) 과정을 마친 데이터의 명칭</span>
+    <span class="q-tag">정의</span>
+  </div>
+  <div class="q-stem">측정데이터가 전처리 과정을 거친 후의 데이터 명칭은?</div>
+
+  <div class="answer"><span class="label">정답</span>① 원 데이터 (Raw data)</div>
+
+  <div class="sub">
+    <div class="sub-title"><span class="icon">◆</span>핵심 근거</div>
+    <p><code>Measurement data</code>가 <code>Pre-processing</code>을 통하여 <code>Raw data</code>로 변환된다 <span class="source">[p.42]</span>. 이 데이터는 <code>Scan data</code>라고도 불리며 보조 기억장치에 저장되어 영상 재구성에 사용된다.</p>
+  </div>
+
+  <div class="sub">
+    <div class="sub-title"><span class="icon">◆</span>보기별 분석</div>
+    <div class="opts"><ul>
+      <li><span class="opt-num">②</span><strong>Image data</strong> — 역투영까지 마친 최종 공간 영역 데이터 <span class="source">[p.13]</span></li>
+      <li><span class="opt-num">③</span><strong>Projection data</strong> — 한 방향에서의 모든 레이 합(Ray sum) <span class="source">[p.39]</span></li>
+      <li><span class="opt-num">④</span><strong>Measurement data</strong> — DAS 출력 직후의 전처리 이전 데이터 <span class="source">[p.40]</span></li>
+      <li><span class="opt-num">⑤</span><strong>Filtered raw data</strong> — Convolution 처리 후의 데이터 <span class="source">[p.44]</span></li>
+    </ul></div>
+  </div>
+
+  <div class="trap">
+    <div class="head">★ Trap Check</div>
+    데이터 처리 순서: <code>Measurement</code> → 전처리 → <code>Raw</code> → Convolution → <code>Filtered Raw</code> → 역투영 → <code>Image</code> <span class="source">[p.44]</span>
+  </div>
+
+  <div class="mnemonic">
+    <span class="head">한줄 요약</span>
+    "데이터는 <strong>측 · 전 · 원</strong>!" (측정 → 전처리 → 원데이터)
+  </div>
+
+  <details class="extra">
+    <summary>파생 예상문제 — Raw data와 관련된 영상의 명칭</summary>
+    <div class="ans">사이노그램 (Sinogram) <span class="source">[p.39, 42]</span></div>
+  </details>
+</article>
+
+<!-- Q4 -->
+<article class="q" id="q4">
+  <div class="q-head">
+    <span class="q-num">4</span>
+    <span class="q-title">자동 볼러스 추적 (Auto bolus tracking)의 임상적 특징</span>
+    <span class="q-tag">인자 분석</span>
+  </div>
+  <div class="q-stem">Auto bolus tracking 기법에 대한 설명으로 옳은 것은?</div>
+
+  <div class="answer"><span class="label">정답</span>③ 동맥조영의 효과를 극대화하기 위한 검사법이다</div>
+
+  <div class="sub">
+    <div class="sub-title"><span class="icon">◆</span>핵심 근거</div>
+    <p><code>Auto bolus tracking</code>은 시간-농도 곡선을 이용하여 조영제의 <code>Peak time</code>을 찾아 최적의 스캔 시작 시점을 결정한다 <span class="source">[p.26]</span>. 동맥기(Arterial phase) 영상을 가장 선명하게 얻기 위한 필수 소프트웨어이다.</p>
+  </div>
+
+  <div class="sub">
+    <div class="sub-title"><span class="icon">◆</span>보기별 분석</div>
+    <div class="opts"><ul>
+      <li><span class="opt-num">①</span>ROI는 대동맥에 설정되지만 "오름대동맥"으로 단정하는 것은 정의가 아님</li>
+      <li><span class="opt-num">②</span>시간-HU 변화를 측정, 주입량(Volume) 측정이 아님 <span class="source">[p.26]</span></li>
+      <li><span class="opt-num">④</span>혈관외유출 예방은 검사 전 확인 사항</li>
+      <li><span class="opt-num">⑤</span>설정된 <code>Threshold</code> 도달 시 메인 스캔 시작 <span class="source">[p.26]</span></li>
+    </ul></div>
+  </div>
+
+  <div class="trap">
+    <div class="head">★ Trap Check</div>
+    단순히 조영제 유입을 보는 것이 아니라, <strong>최적의 스캔 시점(Timing)</strong>을 잡는 것이 목적.
+  </div>
+
+  <div class="mnemonic">
+    <span class="head">한줄 요약</span>
+    "볼러스 트래킹은 <strong>타이밍(Timing)</strong>이다!"
+  </div>
+</article>
+
+<!-- Q5 -->
+<article class="q" id="q5">
+  <div class="q-head">
+    <span class="q-num">5</span>
+    <span class="q-title">CT Number (HU) 수치가 가장 낮은 조직</span>
+    <span class="q-tag">비교</span>
+  </div>
+  <div class="q-stem">다음 중 CT Number가 가장 낮은 조직은?</div>
+
+  <div class="answer"><span class="label">정답</span>③ 지방 (Fat, −100 ± 10 HU)</div>
+
+  <div class="sub">
+    <div class="sub-title"><span class="icon">◆</span>핵심 근거</div>
+    <p>물(0 HU)을 기준으로 밀도가 낮은 <code>Fat</code>은 <code>−100 HU</code> 전후의 음수값을 가진다 <span class="source">[p.10]</span>. 제시된 다른 조직들은 모두 물보다 밀도가 높아 양수(+) 값을 갖는다.</p>
+  </div>
+
+  <div class="sub">
+    <div class="sub-title"><span class="icon">◆</span>보기별 분석</div>
+    <div class="opts"><ul class="all-num">
+      <li class="ok"><span class="opt-num">①</span>물: <strong>0 HU</strong> (기준점)</li>
+      <li class="ok"><span class="opt-num">②</span>근육: <strong>45 ± 5 HU</strong></li>
+      <li class="ok"><span class="opt-num">④</span>이자(췌장): <strong>40 ± 10 HU</strong></li>
+      <li class="ok"><span class="opt-num">⑤</span>뇌척수액(CSF): <strong>약 15 HU</strong> (물에 가까운 양수)</li>
+    </ul></div>
+  </div>
+
+  <div class="trap">
+    <div class="head">★ Trap Check</div>
+    공기(−1,000)가 보기에 없으므로 제시된 것 중 가장 낮은 <strong>지방(−100)</strong> 선택.
+  </div>
+
+  <div class="mnemonic">
+    <span class="head">한줄 요약 · HU 사다리</span>
+    "<strong>공−1000 · 지−100 · 물0 · 간50 · 뼈+1000</strong>"
+  </div>
+</article>
+
+<!-- ========== SECTION 2: Q6–Q10 ========== -->
+<div class="section-divider"><h2>Part II · 하드웨어 & 인공물 관리</h2></div>
+
+<!-- Q6 -->
+<article class="q" id="q6">
+  <div class="q-head">
+    <span class="q-num">6</span>
+    <span class="q-title">부분체적 현상(Partial Volume Effect) 감소 방법</span>
+    <span class="q-tag">인자 분석</span>
+  </div>
+  <div class="q-stem">부분체적 현상을 가장 효과적으로 감소시키는 방법은?</div>
+
+  <div class="answer"><span class="label">정답</span>② 단면두께 감소</div>
+
+  <div class="sub">
+    <div class="sub-title"><span class="icon">◆</span>핵심 근거</div>
+    <p><code>Slice thickness</code>가 얇을수록 한 픽셀 내에 여러 조직의 감약계수가 평균화되는 오류가 줄어들어 부분체적현상이 감소한다 <span class="source">[p.19]</span>.</p>
+  </div>
+
+  <div class="sub">
+    <div class="sub-title"><span class="icon">◆</span>보기별 분석</div>
+    <div class="opts"><ul>
+      <li><span class="opt-num">①</span>검출기 교체 — 하드웨어 문제로, 파라미터 조절이 우선</li>
+      <li><span class="opt-num">③</span>저 관전압 — 선속경화(Beam hardening)와 관련 <span class="source">[p.21]</span></li>
+      <li><span class="opt-num">④</span>높은 관전류 — 양자 노이즈 감소에 기여 <span class="source">[p.21]</span></li>
+      <li><span class="opt-num">⑤</span>움직임 교정 — 모션 아티팩트 방지법 <span class="source">[p.25]</span></li>
+    </ul></div>
+  </div>
+
+  <div class="trap">
+    <div class="head">★ Trap Check</div>
+    두께를 얇게 하면 해상력은 좋아지지만 <strong>노이즈는 증가</strong>한다는 트레이드 오프 관계 주의 <span class="source">[p.19]</span>.
+  </div>
+
+  <div class="mnemonic">
+    <span class="head">한줄 요약</span>
+    "<strong>얇아야 안 섞인다</strong> — 슬라이스가 얇을수록 부분체적 현상 감소"
+  </div>
+
+  <details class="extra">
+    <summary>파생 예상문제 — 슬라이스 두께를 얇게 했을 때 틀린 변화는?</summary>
+    <div class="ans">대조도 분해능이 향상된다 (X, 노이즈 증가로 대조도 분해능은 감소) <span class="source">[p.19]</span></div>
+  </details>
+</article>
+
+<!-- Q7 -->
+<article class="q" id="q7">
+  <div class="q-head">
+    <span class="q-num">7</span>
+    <span class="q-title">CT 전용 X선관(Tube)의 필수 물리적 조건</span>
+    <span class="q-tag">정의</span>
+  </div>
+  <div class="q-stem">CT용 X선관이 갖추어야 할 조건으로 옳은 것은?</div>
+
+  <div class="answer"><span class="label">정답</span>③ 열축적 용량이 커야 한다</div>
+
+  <div class="sub">
+    <div class="sub-title"><span class="icon">◆</span>핵심 근거</div>
+    <p>CT는 연속적인 고출력 조사가 필요하므로 양극의 <code>열축적 용량(2~5 MHU)</code>이 커야 하며, 발생한 열을 빨리 식히는 <code>Cooling rate</code>도 높아야 한다 <span class="source">[p.31]</span>.</p>
+  </div>
+
+  <div class="sub">
+    <div class="sub-title"><span class="icon">◆</span>보기별 분석</div>
+    <div class="opts"><ul>
+      <li><span class="opt-num">①</span>초점은 작을수록 공간해상력 향상 <span class="source">[p.30]</span></li>
+      <li><span class="opt-num">②</span>안정적 전자 방출을 위해 <strong>높은 진공도</strong> 유지</li>
+      <li><span class="opt-num">④</span>X선관은 X선 <strong>발생</strong> 장치, 흡수는 피사체·검출기의 역할</li>
+      <li><span class="opt-num">⑤</span>대조도 분해능을 위해 <strong>높은 관전류</strong>를 견뎌야 함 <span class="source">[p.30]</span></li>
+    </ul></div>
+  </div>
+
+  <div class="mnemonic">
+    <span class="head">한줄 요약</span>
+    "CT 튜브는 <strong>열을 잘 버티고(용량) 잘 식혀야(냉각)</strong> 한다"
+  </div>
+</article>
+
+<!-- Q8 -->
+<article class="q" id="q8">
+  <div class="q-head">
+    <span class="q-num">8</span>
+    <span class="q-title">고전압 슬립링(High voltage slip ring) 방식의 특징</span>
+    <span class="q-tag">비교</span>
+  </div>
+  <div class="q-stem">나선형 CT의 고전압 슬립링 방식이 갖는 특징은?</div>
+
+  <div class="answer"><span class="label">정답</span>③ 높은 출력 제공</div>
+
+  <div class="sub">
+    <div class="sub-title"><span class="icon">◆</span>핵심 근거</div>
+    <p>외부 변압기에서 승압된 고전압을 직접 전달하므로 전력 손실이 적고 <code>높은 출력의 연속적인 제공</code>이 가능하다 <span class="source">[p.29]</span>.</p>
+  </div>
+
+  <div class="sub">
+    <div class="sub-title"><span class="icon">◆</span>보기별 분석</div>
+    <div class="opts"><ul>
+      <li><span class="opt-num">①</span>신뢰성 있는 작동 — 저압(Low voltage) 방식의 장점 <span class="source">[p.30]</span></li>
+      <li><span class="opt-num">②</span>고압 변압기가 갠트리 외부에 있어 회전부 무게는 <strong>가벼움</strong> <span class="source">[p.29]</span></li>
+      <li><span class="opt-num">④</span>고압을 다루므로 절연이 매우 중요 <span class="source">[p.29]</span></li>
+      <li><span class="opt-num">⑤</span>아킹 및 전기적 노이즈 발생 가능성 <strong>더 높음</strong></li>
+    </ul></div>
+  </div>
+
+  <div class="trap">
+    <div class="head">★ Trap Check</div>
+    <strong>고압(외부 변압기 = 가벼움, 고출력)</strong> vs <strong>저압(내부 변압기 = 무거움, 안정적)</strong>
+  </div>
+
+  <div class="mnemonic">
+    <span class="head">한줄 요약</span>
+    "고압(High)은 <strong>파워(출력)</strong>가 좋고, <strong>가볍다</strong>(외부 변압기)"
+  </div>
+</article>
+
+<!-- Q9 -->
+<article class="q" id="q9">
+  <div class="q-head">
+    <span class="q-num">9</span>
+    <span class="q-title">Soft/Smoothing 알고리즘 적용 부위</span>
+    <span class="q-tag">비교</span>
+  </div>
+  <div class="q-stem">Soft/Smoothing algorithm을 적용하기에 가장 적절한 검사 부위는?</div>
+
+  <div class="answer"><span class="label">정답</span>⑤ 복부 (Abdomen)</div>
+
+  <div class="sub">
+    <div class="sub-title"><span class="icon">◆</span>핵심 근거</div>
+    <p><code>Smoothing algorithm</code>은 노이즈를 줄여 연부조직 간의 미세한 <code>대조도 분해능</code>을 높여야 하는 복부 검사에 최적화 <span class="source">[p.18, 41]</span>.</p>
+  </div>
+
+  <div class="sub">
+    <div class="sub-title"><span class="icon">◆</span>보기별 분석</div>
+    <div class="opts"><ul>
+      <li><span class="opt-num">①</span>폐 — Sharp 알고리즘 사용 <span class="source">[p.18]</span></li>
+      <li><span class="opt-num">②</span>척추 — Bone 알고리즘 사용 <span class="source">[p.18]</span></li>
+      <li><span class="opt-num">③</span>골반 — Sharp 알고리즘 유리</li>
+      <li><span class="opt-num">④</span>관자뼈 — Ultra sharp 알고리즘 <span class="source">[p.18]</span></li>
+    </ul></div>
+  </div>
+
+  <div class="mnemonic">
+    <span class="head">한줄 요약 · 매칭</span>
+    "<strong>복말스</strong>(복부=Smooth) · <strong>폐뼈샵</strong>(폐·뼈=Sharp)"
+  </div>
+</article>
+
+<!-- Q10 -->
+<article class="q" id="q10">
+  <div class="q-head">
+    <span class="q-num">10</span>
+    <span class="q-title">검출기 요건 중 공간분해능과 직결되는 인자</span>
+    <span class="q-tag">인자 분석</span>
+  </div>
+  <div class="q-stem">공간분해능 향상과 직접 연관되는 검출기 인자는?</div>
+
+  <div class="answer"><span class="label">정답</span>⑤ 검출소자의 수</div>
+
+  <div class="sub">
+    <div class="sub-title"><span class="icon">◆</span>핵심 근거</div>
+    <p><code>검출소자의 수</code>가 많을수록 동일 범위 내에서 더 많은 데이터를 채집(Sampling)할 수 있어 작은 물체를 구별하는 <code>공간분해능</code>이 높아진다 <span class="source">[p.32]</span>.</p>
+  </div>
+
+  <div class="sub">
+    <div class="sub-title"><span class="icon">◆</span>보기별 분석</div>
+    <div class="opts"><ul>
+      <li><span class="opt-num">①</span>흡수효율 — 선량 효율·피폭 관련</li>
+      <li><span class="opt-num">②</span>동적범위 — 다양한 신호 크기 처리 능력</li>
+      <li><span class="opt-num">③</span>회복시간 — 잔광 관련, 스캔 속도에 영향</li>
+      <li><span class="opt-num">④</span>신호의 직선성 — 입력-출력 비례 관계</li>
+    </ul></div>
+  </div>
+
+  <div class="mnemonic">
+    <span class="head">한줄 요약</span>
+    "<strong>많이 박혀야(소자 수) 자세히(해상도) 보인다</strong>"
+  </div>
+</article>
+
+<!-- ========== SECTION 3: Q11–Q15 ========== -->
+<div class="section-divider"><h2>Part III · 영상 질 & 재구성</h2></div>
+
+<!-- Q11 -->
+<article class="q" id="q11">
+  <div class="q-head">
+    <span class="q-num">11</span>
+    <span class="q-title">Z-축(종단면) 해상력 결정 인자</span>
+    <span class="q-tag">인자 분석</span>
+  </div>
+  <div class="q-stem">CT 영상에서 Z-축 해상력을 결정하는 가장 중요한 인자는?</div>
+
+  <div class="answer"><span class="label">정답</span>⑤ 슬라이스 두께 (Slice Thickness)</div>
+
+  <div class="sub">
+    <div class="sub-title"><span class="icon">◆</span>핵심 근거</div>
+    <p>슬라이스 두께는 <code>Z-축 방향의 데이터 단위</code>를 결정하며, 얇을수록 공간분해능이 향상되고 <code>Z-axis resolution</code>이 정밀해지며 부분체적현상이 감소한다 <span class="source">[p.19, 26]</span>.</p>
+  </div>
+
+  <div class="sub">
+    <div class="sub-title"><span class="icon">◆</span>보기별 분석</div>
+    <div class="opts"><ul>
+      <li><span class="opt-num">①</span>FOV — XY 평면의 픽셀 크기 결정 <span class="source">[p.23]</span></li>
+      <li><span class="opt-num">②</span>관전압(kVp) — 대조도·노이즈에 주로 영향 <span class="source">[p.21]</span></li>
+      <li><span class="opt-num">③</span>검출기 크기 — 영향은 있으나 직접 제어 파라미터는 두께 <span class="source">[p.19]</span></li>
+      <li><span class="opt-num">④</span>WW/WL — 디스플레이 조건일 뿐 해상력과 무관 <span class="source">[p.15]</span></li>
+    </ul></div>
+  </div>
+
+  <div class="trap">
+    <div class="head">★ Trap Check</div>
+    해상력 문제라고 무조건 Matrix/Pixel로 가지 말 것. <strong>Z-축</strong>이라는 단어가 나오면 무조건 <strong>두께(Thickness)</strong>.
+  </div>
+
+  <div class="mnemonic">
+    <span class="head">한줄 요약</span>
+    "<strong>Z축은 깊이(두께)</strong>가 결정한다!"
+  </div>
+
+  <details class="extra">
+    <summary>파생 예상문제 — Pitch 증가 시 Z축 해상능 변화</summary>
+    <div class="ans">저하된다 (데이터 획득 간격이 넓어짐) <span class="source">[p.26]</span></div>
+  </details>
+</article>
+
+<!-- Q12 -->
+<article class="q" id="q12">
+  <div class="q-head">
+    <span class="q-num">12</span>
+    <span class="q-title">영상 A, B의 노이즈 차이 원인</span>
+    <span class="q-tag">비교</span>
+  </div>
+  <div class="q-stem">노이즈가 서로 다른 두 영상의 화질 차이를 만드는 주된 인자는?</div>
+
+  <div class="answer"><span class="label">정답</span>③ 관전압과 관전류 차이 (kVp & mAs 차이)</div>
+
+  <div class="sub">
+    <div class="sub-title"><span class="icon">◆</span>핵심 근거</div>
+    <p><code>mAs</code>가 증가하면 조사되는 <code>광자 수</code>가 늘어나 <code>양자 노이즈</code>가 감소한다 <span class="source">[p.21, 22]</span>.</p>
+  </div>
+
+  <div class="sub">
+    <div class="sub-title"><span class="icon">◆</span>보기별 분석</div>
+    <div class="opts"><ul>
+      <li><span class="opt-num">①</span>알고리즘 — 선예도·부드러움 조절, 양자 노이즈와는 무관 <span class="source">[p.42]</span></li>
+      <li><span class="opt-num">②</span>WW/WL — 밝기·대조도만 바뀜, 노이즈 입자 제거 불가</li>
+      <li><span class="opt-num">④</span>절편두께 — 두꺼워지면 노이즈↓ 가능하지만 1차 인자는 선량</li>
+      <li><span class="opt-num">⑤</span>조영제 — 감약 차이에만 작용, 노이즈와 무관</li>
+    </ul></div>
+  </div>
+
+  <div class="mnemonic">
+    <span class="head">한줄 요약</span>
+    "<strong>많이 쏴야(mAs) 깨끗하다(노이즈 감소)</strong>"
+  </div>
+</article>
+
+<!-- Q13 -->
+<article class="q" id="q13">
+  <div class="q-head">
+    <span class="q-num">13</span>
+    <span class="q-title">CT Number (HU)의 정의</span>
+    <span class="q-tag">정의</span>
+  </div>
+  <div class="q-stem">CT Number에 대한 설명으로 옳은 것은?</div>
+
+  <div class="answer"><span class="label">정답</span>⑤ CT number는 입사되는 에너지에 따라 다르게 나타난다</div>
+
+  <div class="sub">
+    <div class="sub-title"><span class="icon">◆</span>핵심 근거</div>
+    <p>CT Number는 물질의 <code>선감약계수(μ)</code>를 바탕으로 계산되며, μ 값은 X선의 <code>에너지 레벨(kVp)</code>에 따라 변한다. 따라서 동일 조직이라도 에너지에 따라 HU 값이 달라진다 <span class="source">[p.10]</span>.</p>
+  </div>
+
+  <div class="sub">
+    <div class="sub-title"><span class="icon">◆</span>보기별 분석</div>
+    <div class="opts"><ul>
+      <li><span class="opt-num">①</span>기준 물질은 <strong>물(0 HU)과 공기(−1,000 HU)</strong></li>
+      <li><span class="opt-num">②</span>CT Number는 선감약계수에 <strong>정비례</strong></li>
+      <li><span class="opt-num">③</span>공기의 CT Number는 <strong>−1,000</strong></li>
+      <li><span class="opt-num">④</span>모니터 크기와 무관한 <strong>물리적 측정값</strong></li>
+    </ul></div>
+  </div>
+
+  <div class="trap">
+    <div class="head">★ Trap Check</div>
+    <strong>에너지 의존성</strong>: kVp가 바뀌면 HU도 바뀐다는 점이 국가고시 빈출 포인트.
+  </div>
+</article>
+
+<!-- Q14 -->
+<article class="q" id="q14">
+  <div class="q-head">
+    <span class="q-num">14</span>
+    <span class="q-title">WW 100, WL 0 조건의 HU 표시 범위</span>
+    <span class="q-tag">계산</span>
+  </div>
+  <div class="q-stem">WW 100, WL 0일 때 모니터에 표시되는 CT Number 범위는?</div>
+
+  <div class="answer"><span class="label">정답</span>③ −50 ~ +50</div>
+
+  <div class="sub">
+    <div class="sub-title"><span class="icon">◆</span>핵심 근거 · 단계별 풀이</div>
+    <div class="formula">
+      <div><span class="step">STEP 1 (공식)</span> &nbsp; Lower = WL − (WW ÷ 2) &nbsp;|&nbsp; Upper = WL + (WW ÷ 2)</div>
+      <div><span class="step">STEP 2 (대입)</span> &nbsp; 0 − (100 ÷ 2) = <strong>−50</strong> &nbsp;|&nbsp; 0 + (100 ÷ 2) = <strong>+50</strong></div>
+      <div><span class="step">STEP 3 (결과)</span> &nbsp; 표시 범위 = <strong>−50 ~ +50 HU</strong></div>
+    </div>
+    <p class="source">[p.15, 16]</p>
+  </div>
+
+  <div class="sub">
+    <div class="sub-title"><span class="icon">◆</span>보기별 분석</div>
+    <div class="opts"><ul>
+      <li><span class="opt-num">①</span>범위가 200이 됨</li>
+      <li><span class="opt-num">②</span>레벨이 −50이 됨</li>
+      <li><span class="opt-num">④</span>레벨이 +50이 됨</li>
+      <li><span class="opt-num">⑤</span>레벨이 +100이 됨</li>
+    </ul></div>
+  </div>
+</article>
+
+<!-- Q15 -->
+<article class="q" id="q15">
+  <div class="q-head">
+    <span class="q-num">15</span>
+    <span class="q-title">알고리즘(커널/필터) 적용 단계</span>
+    <span class="q-tag">순서</span>
+  </div>
+  <div class="q-stem">CT 영상 재구성 중 알고리즘을 선택해 적용하는 단계는?</div>
+
+  <div class="answer"><span class="label">정답</span>④ 컨볼루션(Convolution) 단계</div>
+
+  <div class="sub">
+    <div class="sub-title"><span class="icon">◆</span>핵심 근거</div>
+    <p><code>Convolution</code>은 재구성되는 영상의 질을 결정하는 처리이며, 검사 목적에 따라 <code>Standard, Bone, Soft</code> 등의 알고리즘으로 데이터를 필터링한다 <span class="source">[p.6, 42]</span>.</p>
+  </div>
+
+  <div class="sub">
+    <div class="sub-title"><span class="icon">◆</span>보기별 분석</div>
+    <div class="opts"><ul>
+      <li><span class="opt-num">①</span>전처리 — 투과값을 원 데이터로 교정하는 초기 단계 <span class="source">[p.7, 42]</span></li>
+      <li><span class="opt-num">②</span>재구성 — 전체 과정(역투영 포함)을 포괄 <span class="source">[p.7]</span></li>
+      <li><span class="opt-num">③</span>후처리 — 영상 완성 후 3D·MPR 생성 <span class="source">[p.44]</span></li>
+      <li><span class="opt-num">⑤</span>3차원 영상화 — 후처리의 일종 <span class="source">[p.47]</span></li>
+    </ul></div>
+  </div>
+
+  <div class="trap">
+    <div class="head">★ Trap Check</div>
+    <strong>알고리즘 = 컨볼루션 커널 = 수학적 필터</strong> 모두 같은 의미로 혼용됨.
+  </div>
+
+  <div class="mnemonic">
+    <span class="head">한줄 요약</span>
+    "<strong>데이터의 여과(Filtering)는 컨볼루션</strong>에서!"
+  </div>
+</article>
+
+<!-- ========== SECTION 4: Q16–Q20 ========== -->
+<div class="section-divider"><h2>Part IV · 부속 장치 & 영상 인자</h2></div>
+
+<!-- Q16 -->
+<article class="q" id="q16">
+  <div class="q-head">
+    <span class="q-num">16</span>
+    <span class="q-title">선속경화 보정용 부속 장치</span>
+    <span class="q-tag">정의</span>
+  </div>
+  <div class="q-stem">다색 X선의 선속경화를 보정하기 위한 장치는?</div>
+
+  <div class="answer"><span class="label">정답</span>③ 나비형 필터 (Bowtie filter)</div>
+
+  <div class="sub">
+    <div class="sub-title"><span class="icon">◆</span>핵심 근거</div>
+    <p>CT는 다색 선속을 사용하므로 저에너지 광자가 먼저 흡수되는 <code>Beam hardening</code>이 발생한다 <span class="source">[p.9]</span>. 이를 방지하고 선속을 균일하게 만드는 <code>Beam shaping</code>을 위해 <code>Bowtie filter</code>를 사용 <span class="source">[p.31]</span>.</p>
+  </div>
+
+  <div class="sub">
+    <div class="sub-title"><span class="icon">◆</span>보기별 분석</div>
+    <div class="opts"><ul>
+      <li><span class="opt-num">①</span>슬립링 — 연속 회전을 위한 전력 전달 장치 <span class="source">[p.28]</span></li>
+      <li><span class="opt-num">②</span>콜리메이터 — 슬라이스 두께 조절·산란선 제거 <span class="source">[p.31]</span></li>
+      <li><span class="opt-num">④</span>광전자증배관(PMT) — 섬광체 빛을 전기신호로 증폭 <span class="source">[p.33]</span></li>
+      <li><span class="opt-num">⑤</span>전압배분장치(PDU) — 시스템 전원 분배 <span class="source">[p.30]</span></li>
+    </ul></div>
+  </div>
+
+  <div class="trap">
+    <div class="head">★ Trap Check</div>
+    필터의 이중 역할: <strong>환자 피폭 감소</strong> + <strong>선속경화 방지(Beam shaping)</strong>. 나비모양인 이유는 인체의 중심부가 두껍고 주변부가 얇기 때문.
+  </div>
+
+  <div class="mnemonic">
+    <span class="head">한줄 요약</span>
+    "<strong>나비(Bowtie)</strong>가 날아다니며 <strong>딱딱한 선속(Beam hardening)</strong>을 부드럽게 만든다"
+  </div>
+
+  <details class="extra">
+    <summary>파생 예상문제 — 필터 사용 시 SNR 변화</summary>
+    <div class="ans">증가한다 (불필요한 저에너지 제거로 투과력 상승) <span class="source">[p.31]</span></div>
+  </details>
+</article>
+
+<!-- Q17 -->
+<article class="q" id="q17">
+  <div class="q-head">
+    <span class="q-num">17</span>
+    <span class="q-title">노이즈(Noise)가 감소하는 경우</span>
+    <span class="q-tag">관계 분석</span>
+  </div>
+  <div class="q-stem">CT 매개변수 조절 중 노이즈가 감소하는 경우는?</div>
+
+  <div class="answer"><span class="label">정답</span>② 관전류를 증가시킨다</div>
+
+  <div class="sub">
+    <div class="sub-title"><span class="icon">◆</span>핵심 근거</div>
+    <p><code>mAs</code>는 X선 광자 수에 비례하며, 증가 시 검출기 도달 광자 수가 많아져 <code>양자 노이즈</code>가 줄어든다 <span class="source">[p.21, 22]</span>.</p>
+  </div>
+
+  <div class="sub">
+    <div class="sub-title"><span class="icon">◆</span>보기별 분석</div>
+    <div class="opts"><ul>
+      <li><span class="opt-num">①</span>관전압 감소 — 투과 광자 수 감소, 노이즈 <strong>증가</strong> <span class="source">[p.21]</span></li>
+      <li><span class="opt-num">③</span>산란선 증가 — 대조도 저하·노이즈 유발 <span class="source">[p.31]</span></li>
+      <li><span class="opt-num">④</span>절편두께 감소 — 픽셀당 광자 수 감소, 노이즈 <strong>증가</strong> <span class="source">[p.19]</span></li>
+      <li><span class="opt-num">⑤</span>매트릭스 증가 — 픽셀 크기↓ → 노이즈 <strong>증가</strong> <span class="source">[p.12]</span></li>
+    </ul></div>
+  </div>
+
+  <div class="mnemonic">
+    <span class="head">한줄 요약</span>
+    "<strong>노이즈는 배고픔이다</strong>. 광자(밥)를 많이 줄수록(mAs↑) 노이즈는 사라진다"
+  </div>
+</article>
+
+<!-- Q18 -->
+<article class="q" id="q18">
+  <div class="q-head">
+    <span class="q-num">18</span>
+    <span class="q-title">공간분해능(Spatial resolution) 향상 방법</span>
+    <span class="q-tag">비교</span>
+  </div>
+  <div class="q-stem">CT 공간분해능을 향상시키는 방법으로 옳은 것은?</div>
+
+  <div class="answer"><span class="label">정답</span>③ 단면두께를 얇게 한다</div>
+
+  <div class="sub">
+    <div class="sub-title"><span class="icon">◆</span>핵심 근거</div>
+    <p><code>Slice thickness</code>를 얇게 설정할수록 Z-축 데이터가 세밀해져 공간분해능이 향상되고 부분체적현상이 감소한다 <span class="source">[p.19]</span>.</p>
+  </div>
+
+  <div class="sub">
+    <div class="sub-title"><span class="icon">◆</span>보기별 분석</div>
+    <div class="opts"><ul>
+      <li><span class="opt-num">①</span>관전압 증가 — 대조도·노이즈에 영향, 공간분해능과 직접 관련 ↓</li>
+      <li><span class="opt-num">②</span>관전류 증가 — 대조도 분해능에 기여, 공간분해능과 무관</li>
+      <li><span class="opt-num">④</span>연부조직 알고리즘 — Smoothing 필터, 해상력 일부 희생</li>
+      <li><span class="opt-num">⑤</span>SFOV·DFOV 확대 — 픽셀 크기 증가, 해상력 <strong>감소</strong> <span class="source">[p.23]</span></li>
+    </ul></div>
+  </div>
+
+  <div class="trap">
+    <div class="head">★ Trap Check</div>
+    <strong>공간분해능 vs 대조도분해능</strong>: 공간분해능은 <strong>크기(두께·픽셀)</strong>가, 대조도분해능은 <strong>노이즈(mAs)</strong>가 결정.
+  </div>
+
+  <div class="mnemonic">
+    <span class="head">한줄 요약</span>
+    "<strong>얇고(두께) 작을수록(픽셀) 선명하다</strong>(공간분해능)"
+  </div>
+</article>
+
+<!-- Q19 -->
+<article class="q" id="q19">
+  <div class="q-head">
+    <span class="q-num">19</span>
+    <span class="q-title">Pitch 증가 시 나타나는 현상</span>
+    <span class="q-tag">관계 분석</span>
+  </div>
+  <div class="q-stem">Pitch를 증가시킬 때 발생하는 현상으로 옳은 것은?</div>
+
+  <div class="answer"><span class="label">정답</span>③ 검사시간 단축</div>
+
+  <div class="sub">
+    <div class="sub-title"><span class="icon">◆</span>핵심 근거</div>
+    <p><code>Pitch</code>는 X선관 1회전당 테이블 이동 거리 <span class="source">[p.23]</span>. 피치가 증가하면 테이블이 더 빨리 움직여 동일 범위 스캔 시간이 짧아진다 <span class="source">[p.26]</span>.</p>
+  </div>
+
+  <div class="sub">
+    <div class="sub-title"><span class="icon">◆</span>보기별 분석</div>
+    <div class="opts"><ul>
+      <li><span class="opt-num">①</span>데이터가 성기게 획득 → 해상력 <strong>감소</strong></li>
+      <li><span class="opt-num">②</span>빠르게 지나가며 촬영 → 총 피폭 <strong>감소</strong></li>
+      <li><span class="opt-num">④</span>단면 감성 윤곽(SSP) 넓어져 <strong>나빠짐</strong></li>
+      <li><span class="opt-num">⑤</span>검사 시간 단축으로 움직임 아티팩트 오히려 <strong>감소</strong></li>
+    </ul></div>
+  </div>
+
+  <div class="trap">
+    <div class="head">★ Trap Check</div>
+    <strong>Pitch와 피폭·화질은 반비례</strong>: 빨리 찍으면(High Pitch) 피폭은 줄지만 화질도 떨어진다.
+  </div>
+
+  <div class="mnemonic">
+    <span class="head">한줄 요약</span>
+    "<strong>피치를 올리면 속도가 붙고 선량은 빠진다</strong>"
+  </div>
+</article>
+
+<!-- Q20 -->
+<article class="q" id="q20">
+  <div class="q-head">
+    <span class="q-num">20</span>
+    <span class="q-title">복부 영상 피하지방의 CT Number</span>
+    <span class="q-tag">정의</span>
+  </div>
+  <div class="q-stem">복부 CT 영상에서 피하지방 부위의 일반적인 CT Number는?</div>
+
+  <div class="answer"><span class="label">정답</span>④ −100 ± 10</div>
+
+  <div class="sub">
+    <div class="sub-title"><span class="icon">◆</span>핵심 근거</div>
+    <p>물(0 HU)보다 밀도가 낮은 <code>Fat</code>은 선감약계수가 작아 음수값을 가지며, 전형적 수치는 <code>−100 HU</code> 부근 <span class="source">[p.10]</span>.</p>
+  </div>
+
+  <div class="sub">
+    <div class="sub-title"><span class="icon">◆</span>HU 값 매칭</div>
+    <div class="opts"><ul>
+      <li><span class="opt-num">①</span>&gt; 250 — 피질골(Bone)</li>
+      <li><span class="opt-num">②</span>40 ± 10 — 간·근육·혈액 등 연부조직</li>
+      <li><span class="opt-num">③</span>0 — 물(Water) 기준</li>
+      <li><span class="opt-num">⑤</span>−1,000 — 공기(Air)</li>
+    </ul></div>
+  </div>
+
+  <div class="mnemonic">
+    <span class="head">한줄 요약 · HU 사다리</span>
+    "<strong>공마천</strong>(공기 −1,000) · <strong>지방마백</strong>(지방 −100) · <strong>물제공</strong>(물 0)"
+  </div>
+</article>
+
+<!-- ========== SECTION 5: Q21–Q25 ========== -->
+<div class="section-divider"><h2>Part V · 인공물 & 임상 응용</h2></div>
+
+<!-- Q21 -->
+<article class="q" id="q21">
+  <div class="q-head">
+    <span class="q-num">21</span>
+    <span class="q-title">치아 부위 방사형 선상 인공물</span>
+    <span class="q-tag">정의</span>
+  </div>
+  <div class="q-stem">영상 내 치아 부위에서 발생하는 방사형 선상 인공물의 원인은?</div>
+
+  <div class="answer"><span class="label">정답</span>④ 금속 인공물 (Metal artifact)</div>
+
+  <div class="sub">
+    <div class="sub-title"><span class="icon">◆</span>핵심 근거</div>
+    <p>치아 임플란트·수술용 클립 등 감약계수가 매우 큰 금속이 포함되면 데이터 결손·산란으로 별 모양(Star-shape)이나 방사형 선상 인공물이 발생한다 <span class="source">[p.3]</span>.</p>
+  </div>
+
+  <div class="sub">
+    <div class="sub-title"><span class="icon">◆</span>보기별 분석</div>
+    <div class="opts"><ul>
+      <li><span class="opt-num">①</span>움직임 인공물 — 겹침 현상 <span class="source">[p.25]</span></li>
+      <li><span class="opt-num">②</span>조영제 인공물 — 고농도 조영제 시 선속경화 유발 <span class="source">[p.13]</span></li>
+      <li><span class="opt-num">③</span>선속경화 인공물 — 컵·띠 모양 <span class="source">[p.9]</span></li>
+      <li><span class="opt-num">⑤</span>검출기 결함 — 3세대의 원형(Ring) 형태 <span class="source">[p.4]</span></li>
+    </ul></div>
+  </div>
+
+  <div class="trap">
+    <div class="head">★ Trap Check</div>
+    <strong>치아·수술 부위</strong>에 밝은 물질 + 주변에 검고 하얀 선들 → 1순위 <strong>Metal artifact</strong>.
+  </div>
+
+  <div class="mnemonic">
+    <span class="head">한줄 요약</span>
+    "<strong>금속은 별처럼 빛난다</strong> — 금속(Metal) → 방사형(Star-shape) 인공물"
+  </div>
+</article>
+
+<!-- Q22 -->
+<article class="q" id="q22">
+  <div class="q-head">
+    <span class="q-num">22</span>
+    <span class="q-title">중앙 0.5mm / 주변 1.5mm 검출기</span>
+    <span class="q-tag">정의</span>
+  </div>
+  <div class="q-stem">소자 두께가 다르게 배열된 검출기의 종류는?</div>
+
+  <div class="answer"><span class="label">정답</span>적응배열 검출기 (Adaptive Array Detector, AAD)</div>
+
+  <div class="sub">
+    <div class="sub-title"><span class="icon">◆</span>핵심 근거</div>
+    <p><code>Adaptive array detector</code>는 Z-축 방향으로 검출소자의 크기를 다르게 배치해 다양한 슬라이스 두께 조합을 효율적으로 생성한다 <span class="source">[p.34]</span>.</p>
+  </div>
+
+  <div class="sub">
+    <div class="sub-title"><span class="icon">◆</span>보기별 분석</div>
+    <div class="opts"><ul>
+      <li><span class="opt-num">①</span>균일 검출기 — 모든 소자 동일 크기</li>
+      <li><span class="opt-num">④</span>매트릭스 검출기 — 소자 크기 일정한 고정배열의 다른 명칭 <span class="source">[p.34]</span></li>
+      <li><span class="opt-num">⑤</span>고정배열(Fixed-array) — 모든 소자 동일 두께 <span class="source">[p.34]</span></li>
+    </ul></div>
+  </div>
+
+  <div class="trap">
+    <div class="head">★ Trap Check</div>
+    <strong>중앙 얇음 + 주변 두꺼움</strong> = 무조건 <strong>적응배열(Adaptive)</strong>. 소스 [p.34] 그림 확인 필수.
+  </div>
+
+  <div class="mnemonic">
+    <span class="head">한줄 요약</span>
+    "<strong>두께가 다르면 적응(Adaptive)</strong>해야 한다"
+  </div>
+</article>
+
+<!-- Q23 -->
+<article class="q" id="q23">
+  <div class="q-head">
+    <span class="q-num">23</span>
+    <span class="q-title">MDCT의 고유한 특징</span>
+    <span class="q-tag">비교</span>
+  </div>
+  <div class="q-stem">SDCT와 비교했을 때 MDCT에서 나타나는 특징은?</div>
+
+  <div class="answer"><span class="label">정답</span>⑤ 원추선속 인공물 (Cone beam artifact)의 발생</div>
+
+  <div class="sub">
+    <div class="sub-title"><span class="icon">◆</span>핵심 근거</div>
+    <p>MDCT는 넓은 부채꼴 모양인 <code>Cone beam</code>을 사용하여 여러 검출기 열을 한꺼번에 조사하므로 주변부 데이터 왜곡인 <code>Cone beam artifact</code>가 발생한다 <span class="source">[p.26]</span>.</p>
+  </div>
+
+  <div class="sub">
+    <div class="sub-title"><span class="icon">◆</span>보기별 분석</div>
+    <div class="opts"><ul>
+      <li><span class="opt-num">①</span>Z축 분해능 — MDCT는 얇은 두께 획득 가능, 향상됨 <span class="source">[p.25]</span></li>
+      <li><span class="opt-num">②</span>X선관 효율 — 짧은 시간에 넓은 범위 → 효율 높음</li>
+      <li><span class="opt-num">③</span>움직임 인공물 — 스캔 속도↑ → 오히려 감소</li>
+      <li><span class="opt-num">④</span>나선형 인공물 — MDCT 대표 '단점'은 ⑤번</li>
+    </ul></div>
+  </div>
+
+  <div class="mnemonic">
+    <span class="head">한줄 요약</span>
+    "<strong>MDCT는 넓게 쏘니까(Cone) 왜곡(Artifact)도 넓게</strong> 생긴다"
+  </div>
+</article>
+
+<!-- Q24 -->
+<article class="q" id="q24">
+  <div class="q-head">
+    <span class="q-num">24</span>
+    <span class="q-title">연부조직 관찰용 표준 알고리즘</span>
+    <span class="q-tag">정의</span>
+  </div>
+  <div class="q-stem">뇌 등 일반 연부조직 관찰에 보편적으로 사용하는 알고리즘은?</div>
+
+  <div class="answer"><span class="label">정답</span>③ 표준 알고리즘 (Standard algorithm)</div>
+
+  <div class="sub">
+    <div class="sub-title"><span class="icon">◆</span>핵심 근거</div>
+    <p><code>Standard algorithm</code>은 영상의 노이즈와 선예도 사이 균형을 맞춘 알고리즘으로, 일반적인 연부조직 검사에 표준 사용 <span class="source">[p.7, 42]</span>.</p>
+  </div>
+
+  <div class="sub">
+    <div class="sub-title"><span class="icon">◆</span>보기별 분석</div>
+    <div class="opts"><ul>
+      <li><span class="opt-num">①</span>High — 뼈·폐 등 고해상력 부위 <span class="source">[p.43]</span></li>
+      <li><span class="opt-num">②</span>Bone — 뼈의 미세구조 표현 <span class="source">[p.7]</span></li>
+      <li><span class="opt-num">⑤</span>Soft tissue — 복부 등 노이즈 극도로 줄여야 하는 부위 <span class="source">[p.42]</span></li>
+    </ul></div>
+  </div>
+
+  <div class="mnemonic">
+    <span class="head">한줄 요약</span>
+    "<strong>보통일 땐 표준(Standard)</strong>으로 찍자"
+  </div>
+</article>
+
+<!-- Q25 -->
+<article class="q" id="q25">
+  <div class="q-head">
+    <span class="q-num">25</span>
+    <span class="q-title">뇌 실질 관찰용 최적 윈도우</span>
+    <span class="q-tag">비교</span>
+  </div>
+  <div class="q-stem">뇌 실질 조직을 정밀 관찰하기 위한 최적 WW/WL은?</div>
+
+  <div class="answer"><span class="label">정답</span>① WW 100 / WL 10</div>
+
+  <div class="sub">
+    <div class="sub-title"><span class="icon">◆</span>핵심 근거</div>
+    <p>뇌 실질은 회백질-백질 간 대조도 차이가 매우 작으므로, 윈도우 폭을 좁게(<code>W 80~100</code>) 설정하고 중심 레벨을 낮게(<code>L 0~30</code>) 잡아야 구분 가능 <span class="source">[p.18]</span>.</p>
+  </div>
+
+  <div class="sub">
+    <div class="sub-title"><span class="icon">◆</span>보기별 분석 (부위별 프리셋)</div>
+    <div class="opts"><ul>
+      <li><span class="opt-num">②</span>500 / 60 — 흉부(종격동)·연부조직용</li>
+      <li><span class="opt-num">③</span>1,000 / 30 — 뼈·연부조직 동시 관찰용</li>
+      <li><span class="opt-num">④</span>1,500 / 500 — 뼈(Bone) 설정</li>
+      <li><span class="opt-num">⑤</span>1,500 / −500 — 폐(Lung) 설정</li>
+    </ul></div>
+  </div>
+
+  <div class="trap">
+    <div class="head">★ Trap Check</div>
+    뇌 영상은 <strong>Narrow Window(좁은 폭)</strong>가 생명. 미세한 뇌출혈·경색을 찾으려면 대조도를 극대화해야 함.
+  </div>
+
+  <div class="mnemonic">
+    <span class="head">한줄 요약</span>
+    "<strong>뇌는 예민해서 좁게(WW 100)</strong> 봐야 한다"
+  </div>
+</article>
+
+<!-- ========== SECTION 6: Q26–Q30 ========== -->
+<div class="section-divider"><h2>Part VI · 인공물 심화 & 방사선 안전</h2></div>
+
+<!-- Q26 -->
+<article class="q" id="q26">
+  <div class="q-head">
+    <span class="q-num">26</span>
+    <span class="q-title">초점-검출기 정렬 불량 시 인공물</span>
+    <span class="q-tag">정의</span>
+  </div>
+  <div class="q-stem">X선관 초점과 검출기 배열이 수직 정렬되지 않을 때 발생하는 인공물은?</div>
+
+  <div class="answer"><span class="label">정답</span>② 원형 인공물 (Ring artifact)</div>
+
+  <div class="sub">
+    <div class="sub-title"><span class="icon">◆</span>핵심 근거</div>
+    <p>3세대 CT처럼 X선관과 검출기가 함께 회전하는 구조에서는 <code>기하학적 정렬 불량</code>이나 <code>검출기 교정 오류</code> 시 동심원 모양의 <code>Ring artifact</code>가 발생 <span class="source">[p.4]</span>.</p>
+  </div>
+
+  <div class="sub">
+    <div class="sub-title"><span class="icon">◆</span>보기별 분석</div>
+    <div class="opts"><ul>
+      <li><span class="opt-num">①</span>나선형 인공물 — 보간법 과정의 오류 <span class="source">[p.26]</span></li>
+      <li><span class="opt-num">③</span>움직임 인공물 — 환자 움직임으로 겹침·흐림 <span class="source">[p.25]</span></li>
+      <li><span class="opt-num">④</span>원추선속 인공물 — MDCT의 주변부 왜곡 <span class="source">[p.26]</span></li>
+      <li><span class="opt-num">⑤</span>고대조도 인공물 — 금속 등 극심한 감약 물질 주변 <span class="source">[p.3]</span></li>
+    </ul></div>
+  </div>
+
+  <div class="trap">
+    <div class="head">★ Trap Check</div>
+    <strong>초점-검출기 수직 관계 = 정렬(Alignment)</strong>. 정렬이 틀어지면 3세대에서는 무조건 <strong>Ring</strong>.
+  </div>
+
+  <div class="mnemonic">
+    <span class="head">한줄 요약</span>
+    "<strong>정렬이 틀어지면 바퀴(Ring)가 휜다</strong>"
+  </div>
+
+  <details class="extra">
+    <summary>파생 예상문제 — 3세대 CT에서 검출소자 감도 결함 시 인공물</summary>
+    <div class="ans">원형 인공물 (Ring artifact) <span class="source">[p.4]</span></div>
+  </details>
+</article>
+
+<!-- Q27 -->
+<article class="q" id="q27">
+  <div class="q-head">
+    <span class="q-num">27</span>
+    <span class="q-title">고관전압(High kVp) 사용 시 특징</span>
+    <span class="q-tag">비교</span>
+  </div>
+  <div class="q-stem">CT 검사 시 고관전압을 사용하는 목적/특징으로 옳은 것은?</div>
+
+  <div class="answer"><span class="label">정답</span>② 선속경화현상으로 인한 인공물 감소</div>
+
+  <div class="sub">
+    <div class="sub-title"><span class="icon">◆</span>핵심 근거</div>
+    <p><code>고관전압</code> 기법 적용 시 X선속 투과력이 증가하여, 저에너지 광자 흡수로 평균 에너지가 상승하는 <code>Beam hardening</code> 현상이 완화된다 <span class="source">[p.3, 21]</span>.</p>
+  </div>
+
+  <div class="sub">
+    <div class="sub-title"><span class="icon">◆</span>보기별 분석</div>
+    <div class="opts"><ul>
+      <li><span class="opt-num">①</span>연부조직 대조도 — kVp↑ 시 감약 차이 감소, 대조도 <strong>↓</strong></li>
+      <li><span class="opt-num">③</span>해상능 증가 — 감약 차이 큰 조직 분별력 오히려 <strong>감소 가능</strong></li>
+      <li><span class="opt-num">④</span>검출기 출력 — 투과량↑ → 출력 신호 <strong>높아짐</strong></li>
+      <li><span class="opt-num">⑤</span>도달 선량 — 투과력 상승 → 검출기 도달 선량 <strong>증가</strong></li>
+    </ul></div>
+  </div>
+
+  <div class="trap">
+    <div class="head">★ Trap Check · kVp 공식</div>
+    <strong>kVp 증가</strong> = 투과력 ↑ / 대조도 ↓ / 노이즈 ↓ / 선속경화 ↓
+  </div>
+
+  <div class="mnemonic">
+    <span class="head">한줄 요약</span>
+    "<strong>세게 쏘면(High kVp) 딱딱해진 선속(Beam hardening)도 뚫고</strong> 지나간다"
+  </div>
+</article>
+
+<!-- Q28 -->
+<article class="q" id="q28">
+  <div class="q-head">
+    <span class="q-num">28</span>
+    <span class="q-title">폐-종격동 두 영상의 윈도우 차이</span>
+    <span class="q-tag">비교</span>
+  </div>
+  <div class="q-stem">폐(A)와 종격동(B) 영상의 윈도우 설정 차이에 대한 설명으로 옳은 것은?</div>
+
+  <div class="answer"><span class="label">정답</span>② A는 폐 실질(parenchyma)을 보기 위한 window setting이다</div>
+
+  <div class="sub">
+    <div class="sub-title"><span class="icon">◆</span>핵심 근거</div>
+    <p>영상 A는 폐포의 미세 구조 관찰을 위해 윈도우 폭을 매우 넓게(<code>WW 1,000~1,500</code>) 설정한 <code>Lung window</code> 영상 <span class="source">[p.7, 18]</span>.</p>
+  </div>
+
+  <div class="sub">
+    <div class="sub-title"><span class="icon">◆</span>보기별 분석</div>
+    <div class="opts"><ul>
+      <li><span class="opt-num">①</span>창폭(WW) — A(Lung)가 B(Mediastinum)보다 훨씬 <strong>넓음</strong></li>
+      <li><span class="opt-num">③</span>창높이(WL) — A는 약 <strong>−700 HU</strong>로 낮고, B는 <strong>0~100 HU</strong></li>
+      <li><span class="opt-num">④</span>고해상력 알고리즘 — A는 <strong>Sharp/High resolution</strong> 사용</li>
+      <li><span class="opt-num">⑤</span>위상 차이·굴절 — 윈도우 설정은 굴절과 무관, 감약계수 차이 전시 기법</li>
+    </ul></div>
+  </div>
+
+  <div class="trap">
+    <div class="head">★ Trap Check · Lung Window</div>
+    공기가 많으므로 레벨은 <strong>낮게(−700)</strong>, 미세 구조를 다 보아야 하므로 폭은 <strong>넓게(1,000 이상)</strong>!
+  </div>
+
+  <div class="mnemonic">
+    <span class="head">한줄 요약</span>
+    "<strong>폐(A)는 넓고(+WW) 낮게(−WL), 종격동(B)은 좁고(−WW) 높게(+WL)</strong>"
+  </div>
+</article>
+
+<!-- Q29 -->
+<article class="q" id="q29">
+  <div class="q-head">
+    <span class="q-num">29</span>
+    <span class="q-title">HU 값 결정에 가장 결정적인 인자</span>
+    <span class="q-tag">인자 분석</span>
+  </div>
+  <div class="q-stem">CT Number 값에 가장 결정적인 영향을 미치는 물리적 인자는?</div>
+
+  <div class="answer"><span class="label">정답</span>③ 방사선속의 에너지 (kVp)</div>
+
+  <div class="sub">
+    <div class="sub-title"><span class="icon">◆</span>핵심 근거</div>
+    <p>CT Number는 물질의 선감약계수(μ)에 비례하는데, μ는 입사되는 <code>X선 에너지 레벨(kVp)</code>에 따라 민감하게 변화한다 <span class="source">[p.10]</span>.</p>
+  </div>
+
+  <div class="sub">
+    <div class="sub-title"><span class="icon">◆</span>보기별 분석</div>
+    <div class="opts"><ul>
+      <li><span class="opt-num">①</span>스캔 방식 — 나선형/고식적 여부는 HU 정의와 무관 <span class="source">[p.11]</span></li>
+      <li><span class="opt-num">②</span>검출기 수 — 해상도에 영향, HU 결정 인자 아님 <span class="source">[p.32]</span></li>
+      <li><span class="opt-num">④</span>스캔 단면의 수 — 검사 범위 결정일 뿐</li>
+      <li><span class="opt-num">⑤</span>공급 방식 — 고압/저압 슬립링은 전력 전달 효율 차이 <span class="source">[p.29]</span></li>
+    </ul></div>
+  </div>
+
+  <div class="trap">
+    <div class="head">★ Trap Check</div>
+    <strong>HU 값의 에너지 의존성</strong>은 국가고시 단골 기출. 에너지 바뀜 → μ 바뀜 → HU 바뀜.
+  </div>
+</article>
+
+<!-- Q30 -->
+<article class="q" id="q30">
+  <div class="q-head">
+    <span class="q-num">30</span>
+    <span class="q-title">환자 방사선 피폭선량 증가 요인</span>
+    <span class="q-tag">관계 분석</span>
+  </div>
+  <div class="q-stem">환자의 방사선 피폭선량을 직접적으로 증가시키는 요인은?</div>
+
+  <div class="answer"><span class="label">정답</span>③ 높은 관전류 (High mAs)</div>
+
+  <div class="sub">
+    <div class="sub-title"><span class="icon">◆</span>핵심 근거</div>
+    <p><code>mAs</code>는 발생 X선 광자 수에 직접 비례하며, 조사 광자 수가 많을수록 환자 <code>피폭선량</code>도 정비례하여 증가 <span class="source">[p.21, 22]</span>.</p>
+  </div>
+
+  <div class="sub">
+    <div class="sub-title"><span class="icon">◆</span>보기별 분석</div>
+    <div class="opts"><ul>
+      <li><span class="opt-num">①</span>높은 피치 — 테이블 빠른 이동으로 노출 시간↓, 피폭 <strong>감소</strong> <span class="source">[p.26]</span></li>
+      <li><span class="opt-num">②</span>낮은 관전압 — 투과량↓, 피폭 <strong>감소</strong> <span class="source">[p.21]</span></li>
+      <li><span class="opt-num">④</span>짧은 검사시간 — 노출 시간 단축으로 피폭 <strong>감소</strong> <span class="source">[p.25]</span></li>
+      <li><span class="opt-num">⑤</span>AEC — 체형 맞춤 선량 조절, 과다 피폭 <strong>감소</strong></li>
+    </ul></div>
+  </div>
+
+  <div class="trap">
+    <div class="head">★ Trap Check</div>
+    <strong>Pitch와 피폭은 반비례</strong>: 피치 2배 → 피폭 절반 <span class="source">[p.26]</span>.
+  </div>
+
+  <div class="mnemonic">
+    <span class="head">한줄 요약</span>
+    "<strong>mAs는 환자가 맞는 매의 개수다</strong> — 많을수록 아프고 피폭도 많다"
+  </div>
+
+  <details class="extra">
+    <summary>파생 예상문제 — 동일 화질 유지하며 피폭 줄이는 법</summary>
+    <div class="ans">관전류(mAs) 감소 또는 Pitch 증가 <span class="source">[p.21, 26]</span></div>
+  </details>
+</article>
+
+<footer>
+  <em>전산화단층촬영학 중간수시고사 풀이 노트</em> · 2026년 · 30문항 완결<br>
+  ※ 출처: 강의자료 p.3–52 / 본 자료는 수시고사 및 국가고시 대비용 학습 정리본입니다
+</footer>
+
+</div>
+
+<a href="#" class="back-top" id="backTop" aria-label="맨 위로">↑</a>
+
+<script>
+  const btn = document.getElementById('backTop');
+  window.addEventListener('scroll', () => {
+    if (window.scrollY > 400) btn.classList.add('show');
+    else btn.classList.remove('show');
+  });
+</script>
+
+</body>
+</html>
