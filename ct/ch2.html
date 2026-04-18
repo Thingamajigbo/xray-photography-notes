@@ -1,0 +1,1560 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CT 영상 파라메터 - 시험 대비 노트</title>
+<style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    
+    body {
+        font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Malgun Gothic', sans-serif;
+        background: #f5f3ee;
+        color: #2c2c2c;
+        line-height: 1.7;
+        padding: 0;
+    }
+    
+    .container {
+        max-width: 960px;
+        margin: 0 auto;
+        background: #ffffff;
+        padding: 60px 50px;
+        min-height: 100vh;
+        box-shadow: 0 0 40px rgba(0,0,0,0.05);
+    }
+    
+    /* ===== 헤더 ===== */
+    header {
+        text-align: center;
+        padding-bottom: 40px;
+        margin-bottom: 50px;
+        border-bottom: 3px double #2c2c2c;
+    }
+    
+    header .chapter-num {
+        display: inline-block;
+        font-family: 'Georgia', serif;
+        font-size: 14px;
+        letter-spacing: 4px;
+        color: #b85c38;
+        margin-bottom: 15px;
+        text-transform: uppercase;
+    }
+    
+    header h1 {
+        font-size: 34px;
+        font-weight: 800;
+        color: #1a1a1a;
+        margin-bottom: 10px;
+        letter-spacing: -0.5px;
+    }
+    
+    header .subtitle {
+        font-size: 15px;
+        color: #666;
+        font-style: italic;
+    }
+    
+    /* ===== 목차 (TOC) ===== */
+    .toc {
+        background: #2c2c2c;
+        color: #f5f3ee;
+        padding: 35px 40px;
+        margin-bottom: 60px;
+        border-radius: 2px;
+    }
+    
+    .toc h2 {
+        font-size: 13px;
+        letter-spacing: 3px;
+        margin-bottom: 25px;
+        color: #e0a96d;
+        text-transform: uppercase;
+        border-bottom: 1px solid #555;
+        padding-bottom: 12px;
+    }
+    
+    .toc ol {
+        list-style: none;
+        counter-reset: toc-counter;
+    }
+    
+    .toc li {
+        counter-increment: toc-counter;
+        padding: 8px 0;
+        border-bottom: 1px dashed #444;
+        display: flex;
+        align-items: baseline;
+    }
+    
+    .toc li:last-child { border-bottom: none; }
+    
+    .toc li::before {
+        content: counter(toc-counter, decimal-leading-zero);
+        font-family: 'Georgia', serif;
+        color: #e0a96d;
+        font-weight: bold;
+        margin-right: 15px;
+        min-width: 30px;
+    }
+    
+    .toc a {
+        color: #f5f3ee;
+        text-decoration: none;
+        font-size: 15px;
+        flex: 1;
+        transition: color 0.2s;
+    }
+    
+    .toc a:hover { color: #e0a96d; }
+    
+    .toc .eng {
+        font-size: 12px;
+        color: #999;
+        font-style: italic;
+        margin-left: 10px;
+    }
+    
+    /* ===== 챕터 ===== */
+    .chapter {
+        margin-bottom: 70px;
+        scroll-margin-top: 20px;
+    }
+    
+    .chapter-header {
+        margin-bottom: 30px;
+        padding-bottom: 15px;
+        border-bottom: 2px solid #2c2c2c;
+        position: relative;
+    }
+    
+    .chapter-header .num {
+        font-family: 'Georgia', serif;
+        font-size: 60px;
+        font-weight: 800;
+        color: #e8dfd0;
+        position: absolute;
+        top: -20px;
+        right: 0;
+        line-height: 1;
+        z-index: 0;
+    }
+    
+    .chapter-header h2 {
+        font-size: 26px;
+        color: #1a1a1a;
+        font-weight: 800;
+        position: relative;
+        z-index: 1;
+    }
+    
+    .chapter-header .eng-title {
+        font-size: 14px;
+        color: #b85c38;
+        font-style: italic;
+        margin-top: 4px;
+        font-weight: 500;
+    }
+    
+    /* ===== 섹션 ===== */
+    .section {
+        margin-bottom: 35px;
+    }
+    
+    .section h3 {
+        font-size: 18px;
+        color: #2c2c2c;
+        margin-bottom: 15px;
+        padding-left: 15px;
+        border-left: 4px solid #b85c38;
+        font-weight: 700;
+    }
+    
+    .section h3 .eng {
+        font-size: 13px;
+        color: #888;
+        font-style: italic;
+        font-weight: 400;
+        margin-left: 8px;
+    }
+    
+    .section h4 {
+        font-size: 15px;
+        color: #2c2c2c;
+        margin: 18px 0 10px 0;
+        font-weight: 700;
+    }
+    
+    .section p {
+        margin-bottom: 12px;
+        color: #3a3a3a;
+        font-size: 15px;
+    }
+    
+    .section ul, .section ol {
+        margin-left: 22px;
+        margin-bottom: 15px;
+    }
+    
+    .section li {
+        margin-bottom: 8px;
+        color: #3a3a3a;
+        font-size: 15px;
+    }
+    
+    /* ===== 개념 정의 카드 (Concept) ===== */
+    .concept-card {
+        background: #faf8f3;
+        border: 1px solid #d4c9b0;
+        border-left: 5px solid #b85c38;
+        padding: 20px 25px;
+        margin: 20px 0;
+        border-radius: 2px;
+    }
+    
+    .concept-card .label {
+        display: inline-block;
+        background: #b85c38;
+        color: white;
+        font-size: 11px;
+        padding: 3px 10px;
+        letter-spacing: 1px;
+        margin-bottom: 10px;
+        font-weight: 600;
+    }
+    
+    .concept-card .term {
+        font-size: 17px;
+        font-weight: 700;
+        color: #1a1a1a;
+        margin-bottom: 6px;
+    }
+    
+    .concept-card .term .eng {
+        font-size: 13px;
+        color: #888;
+        font-style: italic;
+        font-weight: 400;
+    }
+    
+    .concept-card .definition {
+        font-size: 14.5px;
+        color: #3a3a3a;
+        line-height: 1.7;
+    }
+    
+    /* ===== 핵심 수치 강조 (Key Values) ===== */
+    .key-value {
+        display: inline-block;
+        background: #fff3d9;
+        color: #7a4a10;
+        padding: 2px 8px;
+        font-weight: 700;
+        border-radius: 3px;
+        border-bottom: 2px solid #e0a96d;
+        font-family: 'Georgia', serif;
+    }
+    
+    .highlight {
+        background: linear-gradient(to bottom, transparent 60%, #fff3d9 60%);
+        font-weight: 700;
+        color: #1a1a1a;
+        padding: 0 2px;
+    }
+    
+    /* ===== 비교표 (Comparison) ===== */
+    .comparison-box {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 15px;
+        margin: 20px 0;
+    }
+    
+    .comparison-box .col {
+        background: #faf8f3;
+        border: 1px solid #d4c9b0;
+        padding: 20px;
+        border-radius: 2px;
+    }
+    
+    .comparison-box .col.left { border-top: 4px solid #2c5f2d; }
+    .comparison-box .col.right { border-top: 4px solid #97311e; }
+    
+    .comparison-box .col-title {
+        font-weight: 700;
+        font-size: 15px;
+        margin-bottom: 12px;
+        padding-bottom: 8px;
+        border-bottom: 1px dashed #aaa;
+    }
+    
+    .comparison-box .col.left .col-title { color: #2c5f2d; }
+    .comparison-box .col.right .col-title { color: #97311e; }
+    
+    .comparison-box ul {
+        margin-left: 18px;
+        font-size: 14px;
+    }
+    
+    .comparison-box li {
+        margin-bottom: 6px;
+    }
+    
+    /* 일반 테이블 */
+    table {
+        width: 100%;
+        border-collapse: collapse;
+        margin: 20px 0;
+        font-size: 14px;
+    }
+    
+    table th {
+        background: #2c2c2c;
+        color: #f5f3ee;
+        padding: 12px;
+        text-align: left;
+        font-weight: 600;
+        font-size: 13px;
+        letter-spacing: 0.5px;
+    }
+    
+    table td {
+        padding: 10px 12px;
+        border-bottom: 1px solid #e0d9c8;
+        background: #fff;
+    }
+    
+    table tr:nth-child(even) td {
+        background: #faf8f3;
+    }
+    
+    /* ===== 공식 박스 (Formula) ===== */
+    .formula-box {
+        background: linear-gradient(135deg, #1a1a1a 0%, #2c2c2c 100%);
+        color: #f5f3ee;
+        padding: 25px 30px;
+        margin: 25px 0;
+        border-radius: 3px;
+        box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+        position: relative;
+    }
+    
+    .formula-box::before {
+        content: "ƒ";
+        position: absolute;
+        top: 10px;
+        right: 18px;
+        font-family: 'Georgia', serif;
+        font-size: 36px;
+        color: #e0a96d;
+        font-style: italic;
+        opacity: 0.6;
+    }
+    
+    .formula-box .formula-label {
+        font-size: 11px;
+        letter-spacing: 3px;
+        color: #e0a96d;
+        text-transform: uppercase;
+        margin-bottom: 12px;
+        font-weight: 600;
+    }
+    
+    .formula-box .formula {
+        font-family: 'Georgia', 'Times New Roman', serif;
+        font-size: 20px;
+        text-align: center;
+        padding: 15px;
+        margin: 15px 0;
+        background: rgba(255,255,255,0.05);
+        border-radius: 2px;
+        font-style: italic;
+    }
+    
+    .formula-box .legend {
+        font-size: 13px;
+        color: #ccc;
+        margin-top: 12px;
+        border-top: 1px dashed #555;
+        padding-top: 12px;
+    }
+    
+    .formula-box .legend strong { color: #e0a96d; }
+    
+    /* ===== 기출 포인트 박스 ===== */
+    .exam-focus {
+        background: #0a0a0a;
+        color: #f5f3ee;
+        padding: 25px 30px;
+        margin: 25px 0;
+        border-radius: 3px;
+        border: 2px solid #e0a96d;
+        position: relative;
+    }
+    
+    .exam-focus .star-label {
+        display: inline-block;
+        background: #e0a96d;
+        color: #0a0a0a;
+        padding: 4px 12px;
+        font-size: 11px;
+        font-weight: 800;
+        letter-spacing: 2px;
+        margin-bottom: 15px;
+    }
+    
+    .exam-focus ol {
+        list-style: none;
+        counter-reset: exam-counter;
+        margin-left: 0;
+    }
+    
+    .exam-focus li {
+        counter-increment: exam-counter;
+        padding: 8px 0 8px 40px;
+        position: relative;
+        border-bottom: 1px dashed #333;
+        font-size: 14.5px;
+        color: #f5f3ee;
+    }
+    
+    .exam-focus li:last-child { border-bottom: none; }
+    
+    .exam-focus li::before {
+        content: counter(exam-counter);
+        position: absolute;
+        left: 0;
+        top: 8px;
+        background: #e0a96d;
+        color: #0a0a0a;
+        width: 24px;
+        height: 24px;
+        border-radius: 50%;
+        text-align: center;
+        line-height: 24px;
+        font-weight: 700;
+        font-size: 13px;
+        font-family: 'Georgia', serif;
+    }
+    
+    .exam-focus .keyword {
+        color: #e0a96d;
+        font-weight: 700;
+    }
+    
+    .exam-focus .red-key {
+        color: #ff8c7a;
+        font-weight: 700;
+    }
+    
+    /* ===== 출처 ===== */
+    .source {
+        text-align: right;
+        font-size: 12px;
+        color: #999;
+        font-style: italic;
+        margin-top: 12px;
+        padding-top: 6px;
+        border-top: 1px dotted #ccc;
+    }
+    
+    /* ===== 예상문제 박스 ===== */
+    .practice-section {
+        margin-top: 80px;
+        padding-top: 40px;
+        border-top: 3px double #2c2c2c;
+    }
+    
+    .practice-section > h2 {
+        font-size: 28px;
+        text-align: center;
+        margin-bottom: 10px;
+        color: #1a1a1a;
+    }
+    
+    .practice-section > .sub {
+        text-align: center;
+        color: #888;
+        font-style: italic;
+        margin-bottom: 40px;
+        font-size: 14px;
+    }
+    
+    .problem {
+        background: #f9f7f1;
+        border: 1px solid #d4c9b0;
+        border-radius: 3px;
+        padding: 25px 30px;
+        margin-bottom: 25px;
+        font-family: 'Courier New', 'Consolas', 'D2Coding', monospace;
+    }
+    
+    .problem .q-num {
+        display: inline-block;
+        background: #2c2c2c;
+        color: #e0a96d;
+        padding: 4px 12px;
+        font-size: 12px;
+        font-weight: 700;
+        letter-spacing: 2px;
+        margin-bottom: 12px;
+        font-family: 'Georgia', serif;
+    }
+    
+    .problem .question {
+        font-size: 15px;
+        color: #1a1a1a;
+        line-height: 1.8;
+        margin-bottom: 15px;
+        font-weight: 600;
+    }
+    
+    .problem .options {
+        margin: 12px 0 18px 0;
+        padding-left: 10px;
+        font-size: 14px;
+        color: #333;
+        line-height: 2;
+    }
+    
+    .problem .solution {
+        background: #fff;
+        border-left: 3px solid #b85c38;
+        padding: 15px 18px;
+        margin: 15px 0;
+        font-size: 13.5px;
+        color: #333;
+        line-height: 1.8;
+    }
+    
+    .problem .solution .sol-label {
+        font-weight: 700;
+        color: #b85c38;
+        display: block;
+        margin-bottom: 6px;
+        letter-spacing: 1px;
+    }
+    
+    .problem .solution .step {
+        display: block;
+        padding: 3px 0 3px 15px;
+        border-left: 2px dotted #ccc;
+        margin-left: 5px;
+    }
+    
+    .problem .answer {
+        display: inline-block;
+        background: #2c5f2d;
+        color: #fff;
+        padding: 6px 16px;
+        font-weight: 700;
+        border-radius: 2px;
+        letter-spacing: 1px;
+        font-family: 'Georgia', serif;
+    }
+    
+    /* ===== 유틸리티 ===== */
+    .note-tip {
+        background: #e8f4ec;
+        border-left: 4px solid #2c5f2d;
+        padding: 12px 18px;
+        margin: 15px 0;
+        font-size: 14px;
+        color: #1a3d1c;
+        border-radius: 2px;
+    }
+    
+    .note-tip strong { color: #2c5f2d; }
+    
+    .arrow { color: #b85c38; font-weight: 700; }
+    
+    .sub-list {
+        background: #faf8f3;
+        padding: 15px 25px;
+        border-radius: 2px;
+        margin: 12px 0;
+    }
+    
+    /* ===== 푸터 ===== */
+    footer {
+        margin-top: 80px;
+        padding-top: 30px;
+        border-top: 2px solid #2c2c2c;
+        text-align: center;
+        color: #888;
+        font-size: 13px;
+        font-style: italic;
+    }
+    
+    /* 반응형 */
+    @media (max-width: 768px) {
+        .container { padding: 30px 20px; }
+        .comparison-box { grid-template-columns: 1fr; }
+        header h1 { font-size: 26px; }
+        .chapter-header .num { font-size: 40px; }
+        .chapter-header h2 { font-size: 20px; }
+    }
+    
+    /* 인쇄용 */
+    @media print {
+        body { background: #fff; }
+        .container { box-shadow: none; padding: 20px; }
+        .chapter { page-break-inside: avoid; }
+        .problem { page-break-inside: avoid; }
+    }
+</style>
+</head>
+<body>
+
+<div class="container">
+
+<!-- ===== 헤더 ===== -->
+<header>
+    <div class="chapter-num">CHAPTER · 02</div>
+    <h1>영상 파라메터</h1>
+    <div class="subtitle">CT Imaging Parameters — 시험 대비 완벽 정리 노트</div>
+</header>
+
+<!-- ===== 목차 (TOC) ===== -->
+<nav class="toc">
+    <h2>◆ Contents / 목차</h2>
+    <ol>
+        <li><a href="#ch1">슬라이스 두께와 선속 콜리메이션<span class="eng">Slice Thickness & Beam Collimation</span></a></li>
+        <li><a href="#ch2">관전압<span class="eng">Tube Voltage (kVp)</span></a></li>
+        <li><a href="#ch3">관전류 · mAs · 회전시간<span class="eng">Tube Current · mAs · Rotation Time</span></a></li>
+        <li><a href="#ch4">Field of View (FOV)<span class="eng">Scan FOV & Display FOV</span></a></li>
+        <li><a href="#ch5">재구성 알고리즘<span class="eng">Reconstruction Algorithm</span></a></li>
+        <li><a href="#ch6">초점 크기와 해상능<span class="eng">Focal Spot Size & Resolution</span></a></li>
+        <li><a href="#ch7">Helical Pitch와 Preferred Pitch<span class="eng">Helical Pitch</span></a></li>
+        <li><a href="#ch8">고식적 CT vs 나선형 CT · MDCT<span class="eng">Conventional vs Helical · MDCT</span></a></li>
+        <li><a href="#ch9">Bolus Tracking Technique<span class="eng">Auto Bolus Tracking</span></a></li>
+        <li><a href="#ch10">Z-축 기하학적 선량효율<span class="eng">Z-axis Geometric Dose Efficiency</span></a></li>
+        <li><a href="#practice">★ 예상문제 10選 (Practice Problems)</a></li>
+    </ol>
+</nav>
+
+<!-- ==================== CHAPTER 01 ==================== -->
+<section class="chapter" id="ch1">
+    <div class="chapter-header">
+        <div class="num">01</div>
+        <h2>슬라이스 두께와 선속 콜리메이션</h2>
+        <div class="eng-title">Slice Thickness & Beam Collimation</div>
+    </div>
+    
+    <!-- 1-1 슬라이스 두께 -->
+    <div class="section">
+        <h3>1) 슬라이스 두께 <span class="eng">Slice Thickness</span></h3>
+        
+        <div class="concept-card">
+            <span class="label">CONCEPT</span>
+            <div class="term">슬라이스 두께 <span class="eng">(Slice Thickness)</span></div>
+            <div class="definition">
+                재구성된 영상의 두께로, <span class="highlight">병변 감지의 민감도</span>에 큰 영향을 미치는 인자. 
+                영상의 <strong>노이즈</strong>와 <strong>해상력</strong>에 직접 영향을 준다.
+            </div>
+        </div>
+
+        <h4>◈ 슬라이스 두께가 얇을수록 나타나는 변화 (7가지)</h4>
+        
+        <div class="comparison-box">
+            <div class="col left">
+                <div class="col-title">▲ 향상 / 증가</div>
+                <ul>
+                    <li>(1) 공간분해능 <strong>향상</strong></li>
+                    <li>(2) 작은 병변 감지능 <strong>향상</strong></li>
+                    <li>(5) 노이즈 <strong>증가</strong></li>
+                    <li>(6) 스캔시간 <strong>증가</strong></li>
+                    <li>(7) 슬라이스 수 <strong>증가</strong></li>
+                </ul>
+            </div>
+            <div class="col right">
+                <div class="col-title">▼ 감소</div>
+                <ul>
+                    <li>(3) 부분체적현상(Partial Volume Effect) <strong>감소</strong></li>
+                    <li>(4) 대조도 분해능 <strong>감소</strong></li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="exam-focus">
+            <span class="star-label">★ EXAM FOCUS</span>
+            <ol>
+                <li>슬라이스 두께 ↓ <span class="keyword">→ 공간분해능 ↑, 부분체적현상 ↓</span> (가장 중요한 출제 포인트)</li>
+                <li>슬라이스 두께 ↓ <span class="red-key">→ 노이즈 ↑, 대조도 분해능 ↓</span> (반대 방향)</li>
+                <li>얇은 슬라이스에서 인공음영(artifact)을 줄이려면 <span class="keyword">고관전압 + 좁은 선속</span>을 선택한다.</li>
+            </ol>
+        </div>
+
+        <div class="source">📚 출처: 2장_영상_파라메터_복사본.pdf, p.3~8</div>
+    </div>
+
+    <!-- 1-2 선속 콜리메이션 -->
+    <div class="section">
+        <h3>2) 선속 콜리메이션 <span class="eng">Beam Collimation</span></h3>
+        
+        <div class="concept-card">
+            <span class="label">CONCEPT</span>
+            <div class="term">선속 콜리메이션 <span class="eng">(Beam Collimation)</span></div>
+            <div class="definition">
+                <strong>MDCT</strong>에서 검출소자의 크기와 그 구성을 포함하는 개념.
+                <span class="highlight">Small collimation</span>과 <span class="highlight">Large collimation</span>의 2가지로 구분한다.
+            </div>
+        </div>
+
+        <h4>◈ 16 MDCT의 Small/Large Collimation 예시</h4>
+        <div class="comparison-box">
+            <div class="col left">
+                <div class="col-title">Small Beam Collimation</div>
+                <ul>
+                    <li>검출기 구성: <span class="key-value">16 × 0.6 mm</span></li>
+                    <li>개별 검출소자 크기: <span class="key-value">0.6 mm</span></li>
+                    <li>→ 얇은 슬라이스, 고해상도</li>
+                </ul>
+            </div>
+            <div class="col right">
+                <div class="col-title">Large Beam Collimation</div>
+                <ul>
+                    <li>검출기 구성: <span class="key-value">16 × 1.2 mm</span></li>
+                    <li>개별 검출소자 크기: <span class="key-value">1.2 mm</span></li>
+                    <li>→ 두꺼운 슬라이스, 넓은 커버리지</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="note-tip">
+            <strong>💡 용어 정리:</strong> 
+            Umbra(본영) = 완전 차폐된 영역 내부의 정상 X선 영역 /
+            Penumbra(반음영) = 콜리메이터 가장자리에서 발생하는 반영(半影) 영역 → MDCT에서 선량효율 저하의 원인.
+        </div>
+        <div class="source">📚 출처: 2장_영상_파라메터_복사본.pdf, p.9~10</div>
+    </div>
+
+    <!-- 1-3 단면감성윤곽 -->
+    <div class="section">
+        <h3>3) 단면감성윤곽 (유효 슬라이스 두께) <span class="eng">Section Sensitivity Profile, SSP</span></h3>
+
+        <div class="concept-card">
+            <span class="label">CONCEPT</span>
+            <div class="term">Section Sensitivity Profile <span class="eng">(SSP, 단면감성윤곽)</span></div>
+            <div class="definition">
+                실제 구현된 슬라이스의 감도 분포 곡선. <span class="highlight">유효 슬라이스 두께(Effective slice thickness)</span>를 나타낸다.
+                이상적인 사각형 프로파일보다 <strong>나선형 스캔에서 완만한 종형 곡선</strong>으로 나타난다.
+            </div>
+        </div>
+
+        <h4>◈ SSP에 영향을 미치는 요소 (4가지)</h4>
+        <ol>
+            <li>선형보간법 (Linear interpolation)</li>
+            <li>Helical Pitch</li>
+            <li>슬라이스 두께 (Slice thickness)</li>
+            <li>영상 재구성 간격 (Reconstruction interval)</li>
+        </ol>
+
+        <div class="exam-focus">
+            <span class="star-label">★ EXAM FOCUS</span>
+            <ol>
+                <li>SSP에 영향을 주는 4요소 <span class="keyword">"선보(간) · Pitch · 두께 · 재구성간격"</span> 암기!</li>
+                <li>고식적 스캔은 <span class="keyword">사각형에 가까운 프로파일</span>, 나선형 스캔은 <span class="red-key">종 모양(bell-shape)</span>으로 변형된다.</li>
+            </ol>
+        </div>
+        <div class="source">📚 출처: 2장_영상_파라메터_복사본.pdf, p.11</div>
+    </div>
+
+    <!-- 1-4 Focal spot tracking -->
+    <div class="section">
+        <h3>4) Focal Spot Tracking <span class="eng">초점 추적</span></h3>
+
+        <div class="concept-card">
+            <span class="label">CONCEPT</span>
+            <div class="term">Focal Spot Tracking <span class="eng">(Dynamic Collimation, 동적 콜리메이션)</span></div>
+            <div class="definition">
+                나선형 스캔에서 X선관의 <strong>회전속도 증가</strong> 시 원심력으로 초점이 미세하게 이동 → 아티팩트 발생.
+                이를 방지하기 위해 <span class="highlight">양극의 초점 위치를 이동시켜 선속의 위치를 지속적으로 교정</span>하는 기술.
+            </div>
+        </div>
+        <div class="source">📚 출처: 2장_영상_파라메터_복사본.pdf, p.12</div>
+    </div>
+</section>
+
+<!-- ==================== CHAPTER 02 ==================== -->
+<section class="chapter" id="ch2">
+    <div class="chapter-header">
+        <div class="num">02</div>
+        <h2>관전압</h2>
+        <div class="eng-title">Tube Voltage (kVp)</div>
+    </div>
+
+    <div class="section">
+        <div class="concept-card">
+            <span class="label">CONCEPT</span>
+            <div class="term">관전압 <span class="eng">(Tube Voltage, kVp)</span></div>
+            <div class="definition">
+                X선속의 <strong>에너지 레벨</strong>을 반영하여 영상의 질에 작용하는 인자.
+                CT장치에서는 <span class="highlight">80~140 kV 범위에서 3~4개</span>의 관전압을 선택 가능하다.
+            </div>
+        </div>
+
+        <h4>◈ 관전압 설정 가이드 (부위별)</h4>
+        <table>
+            <thead>
+                <tr><th>검사 목적 / 부위</th><th>권장 kVp</th><th>이유</th></tr>
+            </thead>
+            <tbody>
+                <tr><td>일반 CT (대부분의 검사)</td><td><span class="key-value">120 kV</span></td><td>표준값</td></tr>
+                <tr><td>Posterior Fossa (후두와)</td><td><span class="key-value">140 kV</span></td><td>골 인공음영(beam hardening) 감소</td></tr>
+                <tr><td>High Resolution Lung CT (HRCT)</td><td><span class="key-value">140 kV</span></td><td>폐실질 해상도 ↑</td></tr>
+                <tr><td>비만 환자 스캔</td><td><span class="key-value">140 kV</span></td><td>투과력 확보</td></tr>
+                <tr><td>Bone Mineral Densitometry CT</td><td><span class="key-value">80 or 100 kV</span></td><td>골밀도 대조도 ↑</td></tr>
+                <tr><td>소아 환자 CT</td><td><span class="key-value">80 or 100 kV</span></td><td>피폭선량 감소</td></tr>
+            </tbody>
+        </table>
+    </div>
+
+    <div class="section">
+        <h4>◈ kVp 증가에 따른 변화 (3가지)</h4>
+        <ol>
+            <li><strong>양자노이즈 감소</strong> (Quantum noise ↓)</li>
+            <li><strong>방사선의 감약 차이가 적어짐</strong> (대조도 ↓)</li>
+            <li><strong>검출기 출력 증가</strong></li>
+        </ol>
+
+        <div class="note-tip">
+            <strong>💡 관전압과 선량 관계:</strong> 
+            80 kV ≈ 30%, 100 kV ≈ 53%, 120 kV ≈ 100%(기준), 140 kV ≈ 150%
+            <br>→ kVp가 20 증가할 때마다 선량이 대략 <strong>1.5배씩 증가</strong>하는 경향.
+        </div>
+
+        <div class="exam-focus">
+            <span class="star-label">★ EXAM FOCUS</span>
+            <ol>
+                <li>kVp ↑ <span class="keyword">→ 양자노이즈 ↓, 투과력 ↑, 피폭선량 ↑, 대조도(CNR) ↓</span></li>
+                <li>후두와 인공음영 감소법: <span class="red-key">고관전압(140 kV) + 좁은 선속</span></li>
+                <li>소아·골밀도 검사에서는 <span class="keyword">저관전압(80~100 kV)</span> 사용 → 피폭↓, CNR↑</li>
+                <li>동일 선량 부여 시 <span class="red-key">관전압이 낮을수록 CNR이 향상</span>된다 (요오드 조영제 효과 ↑).</li>
+            </ol>
+        </div>
+        <div class="source">📚 출처: 2장_영상_파라메터_복사본.pdf, p.13~16</div>
+    </div>
+</section>
+
+<!-- ==================== CHAPTER 03 ==================== -->
+<section class="chapter" id="ch3">
+    <div class="chapter-header">
+        <div class="num">03</div>
+        <h2>관전류 · mAs · 회전시간</h2>
+        <div class="eng-title">Tube Current · mAs · Rotation Time</div>
+    </div>
+
+    <div class="section">
+        <div class="concept-card">
+            <span class="label">CONCEPT</span>
+            <div class="term">mAs <span class="eng">(milliampere-second)</span></div>
+            <div class="definition">
+                관전류(mA) × 조사시간(s). <strong>X선 광자의 수</strong>에 직접 비례하는 값.
+                mAs × kV의 곱인 <span class="highlight">Heat Unit(HU)</span>은 X선관 양극에 부과된 <strong>에너지의 양</strong>을 반영한다.
+            </div>
+        </div>
+
+        <div class="formula-box">
+            <div class="formula-label">◆ Formula 01 — Heat Unit</div>
+            <div class="formula">HU = mAs × kVp</div>
+            <div class="legend">
+                <strong>HU</strong> = Heat Unit (X선관 양극 부하 에너지) &nbsp;|&nbsp;
+                <strong>mAs</strong> = 관전류(mA) × 시간(s) &nbsp;|&nbsp;
+                <strong>kVp</strong> = 피크 관전압
+            </div>
+        </div>
+
+        <h4>◈ mAs 증가에 따른 변화 (3가지)</h4>
+        <ol>
+            <li><strong>양자노이즈 감소</strong></li>
+            <li><strong>대조도 분해능 증가</strong></li>
+            <li><strong>방사선 피폭 증가</strong> (선형 비례)</li>
+        </ol>
+    </div>
+
+    <div class="section">
+        <h3>회전시간 <span class="eng">Rotation Time</span></h3>
+        <div class="concept-card">
+            <span class="label">CONCEPT</span>
+            <div class="term">Rotation Time <span class="eng">(회전시간)</span></div>
+            <div class="definition">
+                X선관이 <strong>360° 1회전</strong>하는 데 걸리는 시간.
+                고식적 CT에서 긴 회전시간을 선택하면 mAs 증가 → 대조도 분해능 향상.
+                단, 스캔 중 환자 움직임으로 인해 영상 질 저하 가능성.
+            </div>
+        </div>
+
+        <div class="exam-focus">
+            <span class="star-label">★ EXAM FOCUS</span>
+            <ol>
+                <li>mAs ↑ <span class="keyword">→ 노이즈 ↓, 대조도 ↑, 피폭 ↑</span> (세트로 암기)</li>
+                <li>Heat Unit = <span class="red-key">mAs × kVp</span> → X선관 양극 부하 지표</li>
+                <li>긴 회전시간의 단점: <span class="keyword">환자 움직임에 의한 motion artifact</span></li>
+                <li>mAs만 2배 증가 시 <span class="keyword">선량은 2배, 노이즈는 √2(약 1.41)배 감소</span></li>
+            </ol>
+        </div>
+        <div class="source">📚 출처: 2장_영상_파라메터_복사본.pdf, p.17~19</div>
+    </div>
+</section>
+
+<!-- ==================== CHAPTER 04 ==================== -->
+<section class="chapter" id="ch4">
+    <div class="chapter-header">
+        <div class="num">04</div>
+        <h2>Field of View (FOV)</h2>
+        <div class="eng-title">Scan FOV & Display FOV</div>
+    </div>
+
+    <div class="section">
+        <div class="comparison-box">
+            <div class="col left">
+                <div class="col-title">Scan FOV (SFOV)</div>
+                <ul>
+                    <li><strong>조사야 범위</strong>를 의미</li>
+                    <li>스캔 중 <span class="highlight">데이터 획득에 사용되는 범위</span></li>
+                    <li>Effective detector의 수를 결정</li>
+                    <li>예시: <span class="key-value">25 cm × 25 cm</span></li>
+                    <li>너무 작게 → 정보 손실 발생</li>
+                    <li>너무 크게 → 산란선 증가로 영상 질 저하</li>
+                </ul>
+            </div>
+            <div class="col right">
+                <div class="col-title">Display FOV (DFOV)</div>
+                <ul>
+                    <li><strong>재구성 범위</strong>를 의미</li>
+                    <li>CRT 상에 나타나는 <span class="highlight">완성 영상의 묘사 범위</span></li>
+                    <li>모니터 표시 영상의 크기·해상도 조절</li>
+                    <li>예시: <span class="key-value">14 cm × 14 cm</span></li>
+                    <li>항상 <strong>SFOV ≥ DFOV</strong> 관계 유지</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="formula-box">
+            <div class="formula-label">◆ Formula 02 — Pixel Size</div>
+            <div class="formula">Pixel Size = DFOV / Matrix Size</div>
+            <div class="legend">
+                <strong>DFOV</strong> = 재구성 영역 (mm) &nbsp;|&nbsp;
+                <strong>Matrix Size</strong> = 재구성 행렬 (예: 512 × 512)<br>
+                ※ <strong>DFOV ↓ → 픽셀 크기 ↓ → 공간분해능 ↑</strong>
+            </div>
+        </div>
+
+        <div class="note-tip">
+            <strong>💡 DFOV와 해상도 관계:</strong> 
+            DFOV 증가 → 영상 크기는 모니터에 맞춰 <strong>축소</strong>되고, 픽셀당 포함 범위가 넓어져 <strong>해상력 감소</strong>.
+            반대로 DFOV 감소 → 확대 효과 + 해상력 향상(픽셀 크기 작아짐).
+        </div>
+
+        <div class="exam-focus">
+            <span class="star-label">★ EXAM FOCUS</span>
+            <ol>
+                <li>SFOV는 <span class="keyword">effective detector 수</span>를 결정한다.</li>
+                <li>SFOV는 항상 <span class="red-key">DFOV보다 크거나 같다</span> (SFOV ≥ DFOV).</li>
+                <li>DFOV ↓ <span class="keyword">→ 픽셀 크기 ↓ → 공간분해능 ↑</span></li>
+                <li>SFOV가 피사체보다 작으면 <span class="red-key">정보 손실</span>, 너무 크면 <span class="red-key">산란선 증가</span>.</li>
+            </ol>
+        </div>
+        <div class="source">📚 출처: 2장_영상_파라메터_복사본.pdf, p.20~24</div>
+    </div>
+</section>
+
+<!-- ==================== CHAPTER 05 ==================== -->
+<section class="chapter" id="ch5">
+    <div class="chapter-header">
+        <div class="num">05</div>
+        <h2>재구성 알고리즘</h2>
+        <div class="eng-title">Reconstruction Algorithm (Kernel / Filter)</div>
+    </div>
+
+    <div class="section">
+        <div class="concept-card">
+            <span class="label">CONCEPT</span>
+            <div class="term">재구성 알고리즘 <span class="eng">(Reconstruction Algorithm, Kernel)</span></div>
+            <div class="definition">
+                <strong>스캔 데이터(Raw data)</strong>를 <strong>영상화 데이터(Image data)</strong>로 변화시키는 데 사용되는
+                <span class="highlight">필터링(Filter) 또는 알고리즘</span>.
+            </div>
+        </div>
+
+        <div class="comparison-box">
+            <div class="col left">
+                <div class="col-title">Smoothing Kernel (연부조직용)</div>
+                <ul>
+                    <li>저주파 강조, 고주파 억제</li>
+                    <li>노이즈 <strong>감소</strong></li>
+                    <li>대조도 분해능 <strong>향상</strong></li>
+                    <li>공간분해능 <strong>감소</strong></li>
+                    <li>적용: 복부·뇌 연부조직, CT angio</li>
+                </ul>
+            </div>
+            <div class="col right">
+                <div class="col-title">Sharp Kernel (Bone/Edge용)</div>
+                <ul>
+                    <li>고주파 강조 (Edge enhancement)</li>
+                    <li>노이즈 <strong>증가</strong></li>
+                    <li>공간분해능 <strong>향상</strong></li>
+                    <li>대조도 분해능 <strong>감소</strong></li>
+                    <li>적용: 골, 폐 HRCT, 내이</li>
+                </ul>
+            </div>
+        </div>
+        <div class="source">📚 출처: 2장_영상_파라메터_복사본.pdf, p.25~26</div>
+    </div>
+</section>
+
+<!-- ==================== CHAPTER 06 ==================== -->
+<section class="chapter" id="ch6">
+    <div class="chapter-header">
+        <div class="num">06</div>
+        <h2>초점 크기와 해상능</h2>
+        <div class="eng-title">Focal Spot Size & Spatial Resolution</div>
+    </div>
+
+    <div class="section">
+        <div class="concept-card">
+            <span class="label">CONCEPT</span>
+            <div class="term">해상능 <span class="eng">(Resolution, 分解能)</span></div>
+            <div class="definition">
+                인접해 있는 <strong>작은 두 물체를 식별</strong>할 수 있는 능력.
+                <span class="highlight">Small 초점</span>과 <span class="highlight">Large 초점</span> 두 개를 조정하여 해상능 모드를 선택한다.
+            </div>
+        </div>
+
+        <h4>◈ 해상능 모드 3단계 비교</h4>
+        <table>
+            <thead>
+                <tr><th>모드</th><th>초점 크기</th><th>해상능 (lp/cm)</th><th>특징</th></tr>
+            </thead>
+            <tbody>
+                <tr><td>(a) Standard</td><td>Large focal spot</td><td><span class="key-value">11 lp/cm</span></td><td>일반 스캔</td></tr>
+                <tr><td>(b) High</td><td>Small focal spot</td><td><span class="key-value">14 lp/cm</span></td><td>고해상도</td></tr>
+                <tr><td>(c) Ultrahigh</td><td>Small focal spot + 추가 collimator</td><td><span class="key-value">20 lp/cm</span></td><td>최고 해상도 (예: 내이)</td></tr>
+            </tbody>
+        </table>
+
+        <div class="exam-focus">
+            <span class="star-label">★ EXAM FOCUS</span>
+            <ol>
+                <li>초점이 작을수록 <span class="keyword">공간분해능 ↑</span>, 하지만 <span class="red-key">관전류 한계 ↓</span></li>
+                <li>Ultrahigh 모드는 <span class="keyword">검출기 전방에 추가 collimator</span>를 배치하여 <span class="red-key">20 lp/cm</span> 달성</li>
+                <li>숫자 암기: <span class="keyword">11 → 14 → 20 lp/cm</span></li>
+            </ol>
+        </div>
+        <div class="source">📚 출처: 2장_영상_파라메터_복사본.pdf, p.27~28</div>
+    </div>
+</section>
+
+<!-- ==================== CHAPTER 07 ==================== -->
+<section class="chapter" id="ch7">
+    <div class="chapter-header">
+        <div class="num">07</div>
+        <h2>Helical Pitch와 Preferred Pitch</h2>
+        <div class="eng-title">Helical Pitch</div>
+    </div>
+
+    <div class="section">
+        <div class="concept-card">
+            <span class="label">CONCEPT</span>
+            <div class="term">Helical Pitch <span class="eng">(나선형 피치)</span></div>
+            <div class="definition">
+                X선관이 <strong>1회전</strong> 하는 동안 <strong>테이블이 진행하는 거리</strong>를 
+                <span class="highlight">선속 콜리메이션</span>으로 나눈 값.
+            </div>
+        </div>
+
+        <div class="formula-box">
+            <div class="formula-label">◆ Formula 03 — Slice Pitch (SDCT용)</div>
+            <div class="formula">Slice Pitch = (1회전당 테이블 이동거리 mm) / (슬라이스 두께 mm)</div>
+            <div class="legend">
+                <strong>분자</strong> = X선관 1회전 동안 테이블이 이동한 거리 (mm)<br>
+                <strong>분모</strong> = 슬라이스 두께 (mm) &nbsp;|&nbsp; Single Slice CT에서 주로 사용
+            </div>
+        </div>
+
+        <div class="formula-box">
+            <div class="formula-label">◆ Formula 04 — Beam Pitch (MDCT용)</div>
+            <div class="formula">Beam Pitch = (1회전당 테이블 이동거리 mm) / (빔 콜리메이션 or Z-coverage mm)</div>
+            <div class="legend">
+                <strong>분자</strong> = X선관 1회전 동안 테이블이 이동한 거리 (mm)<br>
+                <strong>분모</strong> = 빔 콜리메이션 전체 너비(= 검출기 수 × 개별 두께), Z축 총 커버리지
+            </div>
+        </div>
+
+        <h4>◈ Pitch 값에 따른 X선 궤적 (개념도)</h4>
+        <table>
+            <thead>
+                <tr><th>Pitch 값</th><th>궤적 특성</th><th>의미</th></tr>
+            </thead>
+            <tbody>
+                <tr><td><span class="key-value">Pitch 1.0</span></td><td>궤적이 조밀하게 겹침</td><td>데이터 과잉, 피폭 ↑, 영상 질 ↑</td></tr>
+                <tr><td><span class="key-value">Pitch 1.5</span></td><td>궤적이 적당히 간격</td><td>표준값</td></tr>
+                <tr><td><span class="key-value">Pitch 2.0</span></td><td>궤적이 느슨하게 분리</td><td>스캔 시간 ↓, Z축 해상능 ↓</td></tr>
+            </tbody>
+        </table>
+
+        <h4>◈ Pitch 증가에 따른 영향 — SDCT vs MDCT</h4>
+        <div class="comparison-box">
+            <div class="col left">
+                <div class="col-title">Single Slice CT (SDCT)</div>
+                <ul>
+                    <li>스캔범위 <strong>증가</strong></li>
+                    <li>검사시간 <strong>단축</strong></li>
+                    <li>X선관 부하 <strong>감소</strong></li>
+                    <li>환자 피폭 <strong>감소</strong></li>
+                    <li>슬라이스 폭 <strong>증가</strong></li>
+                    <li>Spiral artifact <strong>증가</strong></li>
+                    <li>Z축 해상능 <strong>저하</strong></li>
+                </ul>
+            </div>
+            <div class="col right">
+                <div class="col-title">Multi Slice CT (MDCT)</div>
+                <ul>
+                    <li>슬라이스 폭 <strong>거의 일정</strong></li>
+                    <li>환자 피폭 <strong>거의 일정</strong></li>
+                    <li>Z축 해상능 <strong>저하</strong></li>
+                    <li>(핵심 차이점: SDCT처럼 슬라이스 폭·피폭이 변하지 않음)</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="exam-focus">
+            <span class="star-label">★ EXAM FOCUS</span>
+            <ol>
+                <li>Pitch 공식: <span class="keyword">Pitch = 1회전당 테이블 이동거리 / 슬라이스 두께(or 빔 콜리메이션)</span></li>
+                <li>SDCT에서 Pitch ↑ → <span class="keyword">스캔범위 ↑, 시간 ↓, 피폭 ↓, Z축 해상능 ↓</span></li>
+                <li>MDCT에서 Pitch ↑ → <span class="red-key">슬라이스 폭·피폭은 거의 일정</span>, Z축 해상능만 저하</li>
+                <li>계산 예제: 두께 5 mm, 테이블 이동 30 mm → Pitch = <span class="red-key">30/5 = 6</span></li>
+            </ol>
+        </div>
+        <div class="source">📚 출처: 2장_영상_파라메터_복사본.pdf, p.29~31, p.42~43</div>
+    </div>
+</section>
+
+<!-- ==================== CHAPTER 08 ==================== -->
+<section class="chapter" id="ch8">
+    <div class="chapter-header">
+        <div class="num">08</div>
+        <h2>고식적 CT vs 나선형 CT · MDCT</h2>
+        <div class="eng-title">Conventional vs Helical vs MDCT</div>
+    </div>
+
+    <div class="section">
+        <h3>1) 고식적 CT <span class="eng">Standard Conventional Scan</span></h3>
+        
+        <div class="concept-card">
+            <span class="label">CONCEPT</span>
+            <div class="term">고식적 CT <span class="eng">(Conventional CT, Slice-by-slice Scan)</span></div>
+            <div class="definition">
+                한 슬라이스씩 <strong>정지 상태</strong>에서 스캔한 후 테이블을 이동하는 방식.
+                <span class="highlight">2D 슬라이스 데이터</span>를 획득하며, 각 슬라이스 사이에 <strong>ISD(Inter-Scan Delay)</strong>가 발생한다.
+            </div>
+        </div>
+
+        <h4>◈ 고식적 CT의 특징 (4가지)</h4>
+        <ol>
+            <li><strong>고압 케이블</strong>을 통해 갠트리 내의 X선관에 고압을 전달</li>
+            <li>검출기의 회전에 제한 → <span class="key-value">400° 이상 회전 불가능</span></li>
+            <li>CW 회전 후 케이블을 풀기 위해 반드시 다음 스캔은 CCW(반대방향) 회전</li>
+            <li>회전자의 급격한 저지 및 반대방향 전환을 위한 <strong>Delay Time</strong> 필요 → 스캔 시간 단축 한계</li>
+        </ol>
+    </div>
+
+    <div class="section">
+        <h3>2) 나선형 CT <span class="eng">Helical / Spiral CT</span></h3>
+
+        <div class="concept-card">
+            <span class="label">CONCEPT</span>
+            <div class="term">나선형 CT <span class="eng">(Helical / Spiral CT)</span></div>
+            <div class="definition">
+                피사체에 조사된 X선 궤적이 <strong>나사못의 홈처럼 시작점과 끝점이 다른 나선 형태</strong>를 그려서 
+                "Spiral" 또는 "Helical" CT라고 한다. <span class="highlight">3D 볼륨 데이터</span> 획득.
+            </div>
+        </div>
+
+        <h4>◈ 나선형 CT의 동작 원리 (4가지)</h4>
+        <ol>
+            <li><strong>Slip ring</strong>과 <strong>Brush</strong>를 통해 동력 및 데이터를 전달</li>
+            <li>X선관이 <strong>나선형으로 연속 회전</strong></li>
+            <li>X선 조사 중 환자 테이블도 <strong>일정한 속도로 연속 이동</strong></li>
+            <li><strong>보간삽입법(Interpolation)</strong>을 이용하여 영상 재구성</li>
+        </ol>
+
+        <div class="comparison-box">
+            <div class="col left">
+                <div class="col-title">✓ 나선형 CT 장점 (7가지)</div>
+                <ul>
+                    <li>빠른 영상 획득</li>
+                    <li>조영제 효과 극대화</li>
+                    <li>환자 피폭선량 감소</li>
+                    <li>3D 영상 질 향상</li>
+                    <li>호흡·움직임 artifact 감소</li>
+                    <li>넓은 검사범위도 총 시간 단축</li>
+                    <li>Z축 분해능 ↑ → MPR(sagittal, coronal) 영상 질 ↑</li>
+                </ul>
+            </div>
+            <div class="col right">
+                <div class="col-title">✗ 나선형 CT 단점 (3가지)</div>
+                <ul>
+                    <li>연속 스캔으로 <strong>X선관 부하 가중</strong></li>
+                    <li>Tube의 효율적 냉각·열 방출 필요</li>
+                    <li>Slip ring과 Brush 사이 <strong>Arching(아크 방전) 발생</strong> 제거 필요</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <div class="section">
+        <h3>3) Single Detector CT vs MDCT</h3>
+
+        <div class="comparison-box">
+            <div class="col left">
+                <div class="col-title">SDCT (Single Detector CT)</div>
+                <ul>
+                    <li>Tube 1회전당 <strong>1개 슬라이스</strong> 획득</li>
+                    <li>검출기 1열</li>
+                </ul>
+            </div>
+            <div class="col right">
+                <div class="col-title">MDCT (Multi Detector CT)</div>
+                <ul>
+                    <li>Tube 1회전당 <strong>여러 개의 슬라이스</strong> 획득</li>
+                    <li>검출기 다열 배열</li>
+                    <li>Detector collimator 배열에 따라 슬라이스 수 결정</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="exam-focus">
+            <span class="star-label">★ EXAM FOCUS</span>
+            <ol>
+                <li>고식적 CT는 <span class="keyword">ISD 발생, 400° 회전 한계, CW↔CCW 교대 회전</span></li>
+                <li>나선형 CT는 <span class="keyword">Slip ring + Brush</span>로 연속 회전 가능 → ISD 없음</li>
+                <li>나선형 CT의 재구성에는 <span class="red-key">보간삽입법(Interpolation)</span>이 반드시 사용된다.</li>
+                <li>MDCT는 1회전당 다중 슬라이스를 획득하여 <span class="keyword">Z축 커버리지 대폭 향상</span></li>
+                <li>호흡 조절 영향: 깊은 흡기/보통 흡기 차이로 <span class="red-key">병변 누락(missed lesion)</span> 발생 가능</li>
+            </ol>
+        </div>
+        <div class="source">📚 출처: 2장_영상_파라메터_복사본.pdf, p.32~41</div>
+    </div>
+</section>
+
+<!-- ==================== CHAPTER 09 ==================== -->
+<section class="chapter" id="ch9">
+    <div class="chapter-header">
+        <div class="num">09</div>
+        <h2>Bolus Tracking Technique</h2>
+        <div class="eng-title">Auto Bolus Tracking</div>
+    </div>
+
+    <div class="section">
+        <div class="concept-card">
+            <span class="label">CONCEPT</span>
+            <div class="term">Auto Bolus Tracking <span class="eng">(자동 조영 추적 기법)</span></div>
+            <div class="definition">
+                <strong>시간-농도 곡선(Time-Density Curve)</strong>을 이용하여 시간 변화에 따른 
+                <span class="highlight">관찰 부위의 조영제 피크 시간</span>을 자동으로 찾아 스캔을 개시하는 소프트웨어 기법.
+            </div>
+        </div>
+
+        <h4>◈ 구동 원리 요약</h4>
+        <ol>
+            <li>관심 혈관/장기에 <strong>Target ROI</strong> 설정 (1개 또는 2개)</li>
+            <li>저선량 Monitoring scan 반복 실시</li>
+            <li>ROI 내 HU 값이 <strong>Trigger threshold</strong>에 도달하면 자동으로 main scan 개시</li>
+            <li>조영제 효과가 최대일 때 영상을 획득 → <strong>조영제 사용량·스캔 지연 최적화</strong></li>
+        </ol>
+
+        <div class="exam-focus">
+            <span class="star-label">★ EXAM FOCUS</span>
+            <ol>
+                <li>Bolus tracking은 <span class="keyword">시간-농도곡선(Time-Density Curve) 기반</span></li>
+                <li>목적: <span class="red-key">조영 피크 시간 자동 포착</span> → 조영제 효과 극대화</li>
+                <li>Target ROI는 <span class="keyword">1개 또는 2개</span>를 설정할 수 있다 (예: 대동맥 + 간문맥).</li>
+            </ol>
+        </div>
+        <div class="source">📚 출처: 2장_영상_파라메터_복사본.pdf, p.44~45</div>
+    </div>
+</section>
+
+<!-- ==================== CHAPTER 10 ==================== -->
+<section class="chapter" id="ch10">
+    <div class="chapter-header">
+        <div class="num">10</div>
+        <h2>Z-축 기하학적 선량효율</h2>
+        <div class="eng-title">Z-axis Geometric Dose Efficiency</div>
+    </div>
+
+    <div class="section">
+        <div class="concept-card">
+            <span class="label">CONCEPT</span>
+            <div class="term">Z-축 기하학적 선량효율 <span class="eng">(Z-axis Geometric Dose Efficiency)</span></div>
+            <div class="definition">
+                CT장치의 <strong>Z-축 방향 선량 이용률</strong>. 
+                MDCT 장치는 <span class="highlight">Overbeaming</span>으로 인해 <strong>반음영(penumbra)이 증가</strong>하고, 
+                결과적으로 <span class="red-key" style="color:#97311e;font-weight:700;">SDCT보다 Z축 방향 선량효율이 낮다</span>.
+            </div>
+        </div>
+
+        <div class="comparison-box">
+            <div class="col left">
+                <div class="col-title">Non-MDCT (SDCT)</div>
+                <ul>
+                    <li>X선속이 <strong>검출기 내에 조사</strong></li>
+                    <li>반음영 손실 ↓</li>
+                    <li>선량효율 <strong>높음</strong></li>
+                </ul>
+            </div>
+            <div class="col right">
+                <div class="col-title">MDCT</div>
+                <ul>
+                    <li>반음영을 포함한 X선속이 <strong>유효 검출기 바깥으로 조사</strong></li>
+                    <li>Umbra(본영)만 유효 detector 사용, Penumbra는 차폐/손실</li>
+                    <li>선량효율 <strong>낮음</strong> (Overbeaming 효과)</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="note-tip">
+            <strong>💡 Overbeaming이란?</strong>
+            MDCT에서 여러 개의 검출기 열 중 양 끝단의 반음영(penumbra) 영역이 유효 detector를 벗어나 
+            영상 형성에 기여하지 못하는 현상. 이로 인해 <strong>환자는 피폭되지만 영상에는 반영 안 됨</strong> → 선량효율 저하.
+        </div>
+
+        <div class="exam-focus">
+            <span class="star-label">★ EXAM FOCUS</span>
+            <ol>
+                <li>MDCT는 <span class="red-key">Overbeaming</span>으로 인해 <span class="keyword">반음영 증가</span> → Z축 선량효율 저하</li>
+                <li>SDCT > MDCT (Z축 선량효율 기준)</li>
+                <li>Umbra(본영)만 유효 검출기에 도달, <span class="red-key">Penumbra(반음영)는 손실</span></li>
+            </ol>
+        </div>
+        <div class="source">📚 출처: 2장_영상_파라메터_복사본.pdf, p.46</div>
+    </div>
+</section>
+
+
+<!-- ==================== 예상문제 ==================== -->
+<section class="practice-section" id="practice">
+    <h2>★ 예상문제 10選</h2>
+    <div class="sub">Practice Problems — 시험 직전 반드시 풀어볼 것</div>
+
+    <!-- Q1 -->
+    <div class="problem">
+        <div class="q-num">QUESTION 01</div>
+        <div class="question">
+            CT에서 슬라이스 두께를 얇게 설정했을 때 나타나는 변화로 옳지 않은 것은?
+        </div>
+        <div class="options">
+            ① 공간분해능이 향상된다<br>
+            ② 부분체적현상이 감소한다<br>
+            ③ 대조도 분해능이 향상된다<br>
+            ④ 영상 노이즈가 증가한다<br>
+            ⑤ 슬라이스 수가 증가한다
+        </div>
+        <div class="solution">
+            <span class="sol-label">▶ 풀이</span>
+            슬라이스 두께가 얇을수록 공간분해능 ↑, 병변 감지능 ↑, 부분체적현상 ↓, 
+            <strong>대조도 분해능 ↓</strong>, 노이즈 ↑, 스캔시간 ↑, 슬라이스 수 ↑.<br>
+            → 대조도 분해능은 <strong>감소</strong>한다.
+        </div>
+        <div class="answer">정답: ③</div>
+    </div>
+
+    <!-- Q2 -->
+    <div class="problem">
+        <div class="q-num">QUESTION 02</div>
+        <div class="question">
+            후두와(Posterior fossa) 부위의 인공음영(beam hardening artifact)을 감소시키기 위한 가장 적절한 방법은?
+        </div>
+        <div class="options">
+            ① 고관전압 + 좁은 선속<br>
+            ② 고관전압 + 넓은 선속<br>
+            ③ 저관전압 + 좁은 선속<br>
+            ④ 저관전압 + 넓은 선속
+        </div>
+        <div class="solution">
+            <span class="sol-label">▶ 풀이</span>
+            후두와의 골 인공음영은 저에너지 광자 흡수에 의한 것이므로 
+            <strong>고관전압(140 kV)</strong>으로 투과력을 높이고, 
+            <strong>좁은 선속(narrow collimation)</strong>으로 산란선을 억제해야 한다.
+        </div>
+        <div class="answer">정답: ①</div>
+    </div>
+
+    <!-- Q3 -->
+    <div class="problem">
+        <div class="q-num">QUESTION 03</div>
+        <div class="question">
+            관전압(kVp) 증가에 따른 변화로 옳은 것을 모두 고르시오.<br>
+            ㄱ. 양자노이즈 감소   ㄴ. 대조도 분해능 증가<br>
+            ㄷ. 검출기 출력 증가   ㄹ. 환자 피폭선량 감소
+        </div>
+        <div class="options">
+            ① ㄱ, ㄴ  ② ㄱ, ㄷ  ③ ㄴ, ㄹ  ④ ㄷ, ㄹ  ⑤ ㄱ, ㄴ, ㄷ
+        </div>
+        <div class="solution">
+            <span class="sol-label">▶ 풀이</span>
+            kVp ↑ → 양자노이즈 ↓(ㄱ○), 투과력 ↑ → 감약 차이 작아짐 → <strong>대조도 ↓</strong>(ㄴ×), 
+            검출기 출력 ↑(ㄷ○), <strong>피폭선량 ↑</strong>(ㄹ×).
+        </div>
+        <div class="answer">정답: ②</div>
+    </div>
+
+    <!-- Q4 -->
+    <div class="problem">
+        <div class="q-num">QUESTION 04</div>
+        <div class="question">
+            Single Slice CT에서 슬라이스 두께가 5 mm이고, X선관 1회전 동안 환자 테이블이 30 mm 이동하는 경우 Slice Pitch 값은?
+        </div>
+        <div class="options">
+            ① 4  ② 5  ③ 6  ④ 10  ⑤ 20
+        </div>
+        <div class="solution">
+            <span class="sol-label">▶ STEP별 풀이</span>
+            <span class="step">STEP 1. 공식 작성 → Slice Pitch = 테이블 이동거리 / 슬라이스 두께</span>
+            <span class="step">STEP 2. 값 대입 → Pitch = 30 mm / 5 mm</span>
+            <span class="step">STEP 3. 계산 → <strong>Pitch = 6</strong></span>
+        </div>
+        <div class="answer">정답: ③</div>
+    </div>
+
+    <!-- Q5 -->
+    <div class="problem">
+        <div class="q-num">QUESTION 05</div>
+        <div class="question">
+            Section Sensitivity Profile(SSP, 단면감성윤곽)에 영향을 미치는 요소가 아닌 것은?
+        </div>
+        <div class="options">
+            ① 선형보간법  ② Helical Pitch  ③ 슬라이스 두께<br>
+            ④ 영상 재구성 간격  ⑤ 관전압(kVp)
+        </div>
+        <div class="solution">
+            <span class="sol-label">▶ 풀이</span>
+            SSP 영향 4요소: 선형보간법 · Helical Pitch · 슬라이스 두께 · 영상 재구성 간격.<br>
+            <strong>관전압(kVp)</strong>은 에너지·노이즈·대조도에 영향을 주지만 SSP 프로파일 자체의 형태에는 관여하지 않는다.
+        </div>
+        <div class="answer">정답: ⑤</div>
+    </div>
+
+    <!-- Q6 -->
+    <div class="problem">
+        <div class="q-num">QUESTION 06</div>
+        <div class="question">
+            FOV에 대한 설명으로 옳은 것은?
+        </div>
+        <div class="options">
+            ① Scan FOV는 항상 Display FOV보다 작거나 같다<br>
+            ② Display FOV가 증가하면 픽셀 크기는 감소한다<br>
+            ③ Scan FOV는 effective detector의 수를 결정한다<br>
+            ④ Scan FOV를 너무 작게 설정하면 산란선이 증가한다<br>
+            ⑤ Display FOV가 감소하면 공간분해능도 감소한다
+        </div>
+        <div class="options" style="margin-top:-8px;"></div>
+        <div class="solution">
+            <span class="sol-label">▶ 풀이</span>
+            ① SFOV ≥ DFOV (×)<br>
+            ② DFOV ↑ → 픽셀 크기 <strong>↑</strong> (×)<br>
+            ③ ○ — SFOV는 유효 검출기 수를 결정<br>
+            ④ SFOV 너무 크게 설정 시 산란선 ↑ (×)<br>
+            ⑤ DFOV ↓ → 픽셀 크기 ↓ → <strong>공간분해능 ↑</strong> (×)
+        </div>
+        <div class="answer">정답: ③</div>
+    </div>
+
+    <!-- Q7 -->
+    <div class="problem">
+        <div class="q-num">QUESTION 07</div>
+        <div class="question">
+            Multi Detector CT(MDCT)에서 Pitch를 증가시킬 때 나타나는 변화로 옳은 것은?
+        </div>
+        <div class="options">
+            ① 슬라이스 폭이 크게 증가한다<br>
+            ② 환자 피폭선량이 크게 감소한다<br>
+            ③ 슬라이스 폭과 환자 피폭은 거의 일정하나 Z축 해상능은 저하된다<br>
+            ④ X선관 부하가 크게 증가한다<br>
+            ⑤ Spiral artifact가 감소한다
+        </div>
+        <div class="solution">
+            <span class="sol-label">▶ 풀이</span>
+            SDCT에서 Pitch ↑ → 슬라이스 폭 ↑, 피폭 ↓, Z축 해상능 ↓, spiral artifact ↑.<br>
+            <strong>MDCT에서 Pitch ↑ → 슬라이스 폭·피폭은 거의 일정</strong>, Z축 해상능만 저하된다. (핵심 차이점)
+        </div>
+        <div class="answer">정답: ③</div>
+    </div>
+
+    <!-- Q8 -->
+    <div class="problem">
+        <div class="q-num">QUESTION 08</div>
+        <div class="question">
+            나선형 CT(Helical CT)의 장점으로 옳지 않은 것은?
+        </div>
+        <div class="options">
+            ① 빠른 영상 획득이 가능하다<br>
+            ② 조영제 효과를 극대화할 수 있다<br>
+            ③ 호흡·움직임에 의한 artifact가 적다<br>
+            ④ X선관의 부하가 감소한다<br>
+            ⑤ MPR(sagittal, coronal) 영상의 질이 향상된다
+        </div>
+        <div class="solution">
+            <span class="sol-label">▶ 풀이</span>
+            나선형 CT의 단점: <strong>연속 스캔으로 X선관 부하 가중</strong>, 효율적 냉각 필요, Slip ring arching 문제.<br>
+            → ④는 단점이지 장점이 아니다.
+        </div>
+        <div class="answer">정답: ④</div>
+    </div>
+
+    <!-- Q9 -->
+    <div class="problem">
+        <div class="q-num">QUESTION 09</div>
+        <div class="question">
+            16 MDCT에서 Beam collimation이 16 × 1.2 mm로 설정되어 있고, X선관 1회전 동안 테이블이 28.8 mm 이동한다면 Beam Pitch 값은?
+        </div>
+        <div class="options">
+            ① 0.75  ② 1.0  ③ 1.5  ④ 2.0  ⑤ 2.4
+        </div>
+        <div class="solution">
+            <span class="sol-label">▶ STEP별 풀이</span>
+            <span class="step">STEP 1. 총 빔 콜리메이션 = 16 × 1.2 mm = 19.2 mm</span>
+            <span class="step">STEP 2. Beam Pitch = 테이블 이동거리 / 총 빔 콜리메이션</span>
+            <span class="step">STEP 3. Beam Pitch = 28.8 / 19.2 = <strong>1.5</strong></span>
+        </div>
+        <div class="answer">정답: ③</div>
+    </div>
+
+    <!-- Q10 -->
+    <div class="problem">
+        <div class="q-num">QUESTION 10</div>
+        <div class="question">
+            MDCT에서 Z축 방향 선량효율이 SDCT보다 낮은 주된 원인은?
+        </div>
+        <div class="options">
+            ① Slip ring에서의 arching 발생<br>
+            ② 검출기의 회전 제한<br>
+            ③ Overbeaming에 의한 반음영(penumbra) 증가<br>
+            ④ 보간삽입법의 오차<br>
+            ⑤ 초점 크기의 변동
+        </div>
+        <div class="solution">
+            <span class="sol-label">▶ 풀이</span>
+            MDCT는 여러 검출기 열을 사용하기 때문에 X선속의 양 끝단 <strong>반음영(penumbra)</strong>이 
+            유효 검출기 바깥으로 조사되는 <strong>Overbeaming</strong> 현상이 발생한다.<br>
+            → 이로 인해 환자는 피폭되지만 영상에 기여하지 못해 <strong>Z축 선량효율이 SDCT보다 낮아진다</strong>.
+        </div>
+        <div class="answer">정답: ③</div>
+    </div>
+</section>
+
+<!-- ===== 푸터 ===== -->
+<footer>
+    <p>— CT 영상 파라메터 (2장) 완벽 정리 노트 —</p>
+    <p style="margin-top:8px;">시험 직전 ★ 기출 포인트 박스와 공식 박스를 먼저 훑어볼 것</p>
+    <p style="margin-top:8px;">📚 출처: 2장_영상_파라메터_복사본.pdf (전 46페이지)</p>
+</footer>
+
+</div>
+
+</body>
+</html>

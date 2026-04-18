@@ -1,0 +1,1449 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>3장 MDCT의 하드웨어 - 시험 대비 노트</title>
+<style>
+  :root {
+    --bg: #f7f5f0;
+    --paper: #ffffff;
+    --ink: #1a1a1a;
+    --ink-soft: #4a4a4a;
+    --accent: #b84242;
+    --accent-dark: #8a2e2e;
+    --accent-soft: #f4e4e4;
+    --blue: #2c5282;
+    --blue-soft: #e8f0f7;
+    --gold: #b8860b;
+    --gold-soft: #faf3e0;
+    --green: #2f6b3a;
+    --green-soft: #e8f3ea;
+    --gray: #6c6c6c;
+    --gray-soft: #ececec;
+    --border: #d4cfc4;
+    --code-bg: #1f1f1f;
+    --code-ink: #f0e6d2;
+  }
+  * { box-sizing: border-box; }
+  body {
+    font-family: 'Noto Serif KR', 'Nanum Myeongjo', 'Times New Roman', serif;
+    background: var(--bg);
+    color: var(--ink);
+    line-height: 1.75;
+    margin: 0;
+    padding: 0;
+  }
+  .container {
+    max-width: 960px;
+    margin: 0 auto;
+    padding: 48px 40px 80px;
+    background: var(--paper);
+    box-shadow: 0 2px 20px rgba(0,0,0,0.05);
+    min-height: 100vh;
+  }
+
+  /* HEADER */
+  .doc-header {
+    border-bottom: 3px double var(--ink);
+    padding-bottom: 24px;
+    margin-bottom: 36px;
+    text-align: center;
+  }
+  .doc-header .subject {
+    font-size: 13px;
+    letter-spacing: 0.3em;
+    color: var(--accent);
+    font-weight: 600;
+    margin-bottom: 8px;
+  }
+  .doc-header h1 {
+    font-size: 32px;
+    margin: 6px 0 10px;
+    letter-spacing: -0.02em;
+    font-weight: 800;
+  }
+  .doc-header .en-title {
+    font-size: 15px;
+    font-style: italic;
+    color: var(--gray);
+    font-family: Georgia, serif;
+    margin-bottom: 12px;
+  }
+  .doc-header .meta {
+    font-size: 12px;
+    color: var(--gray);
+    letter-spacing: 0.1em;
+  }
+
+  /* TOC */
+  .toc {
+    background: var(--gold-soft);
+    border: 1px solid var(--border);
+    border-left: 6px solid var(--gold);
+    padding: 22px 28px;
+    margin-bottom: 48px;
+    border-radius: 2px;
+  }
+  .toc h2 {
+    margin: 0 0 14px;
+    font-size: 18px;
+    color: var(--gold);
+    letter-spacing: 0.08em;
+    border-bottom: 1px dashed var(--border);
+    padding-bottom: 8px;
+  }
+  .toc ol {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    columns: 2;
+    column-gap: 32px;
+  }
+  .toc li {
+    padding: 4px 0;
+    font-size: 14px;
+    break-inside: avoid;
+  }
+  .toc a {
+    color: var(--ink);
+    text-decoration: none;
+    border-bottom: 1px dotted transparent;
+    transition: all 0.2s;
+  }
+  .toc a:hover {
+    color: var(--accent);
+    border-bottom-color: var(--accent);
+  }
+  .toc .num {
+    font-family: Georgia, serif;
+    font-weight: bold;
+    color: var(--accent);
+    margin-right: 8px;
+  }
+
+  /* CHAPTER */
+  .chapter {
+    margin-bottom: 56px;
+    scroll-margin-top: 20px;
+  }
+  .chapter-title {
+    font-size: 26px;
+    margin: 0 0 4px;
+    padding-bottom: 10px;
+    border-bottom: 2px solid var(--ink);
+    letter-spacing: -0.01em;
+  }
+  .chapter-title .num {
+    display: inline-block;
+    background: var(--ink);
+    color: var(--paper);
+    font-family: Georgia, serif;
+    padding: 2px 10px;
+    font-size: 18px;
+    margin-right: 12px;
+    vertical-align: middle;
+    font-weight: 900;
+  }
+  .chapter-title .en {
+    font-size: 15px;
+    font-family: Georgia, serif;
+    font-style: italic;
+    color: var(--gray);
+    font-weight: 400;
+    margin-left: 10px;
+  }
+
+  .section-title {
+    font-size: 19px;
+    margin: 28px 0 12px;
+    color: var(--accent-dark);
+    padding-left: 12px;
+    border-left: 4px solid var(--accent);
+    font-weight: 700;
+  }
+  .section-title .en {
+    font-family: Georgia, serif;
+    font-style: italic;
+    font-size: 14px;
+    color: var(--gray);
+    font-weight: 400;
+    margin-left: 6px;
+  }
+
+  p { margin: 10px 0; }
+
+  /* CONCEPT CARD */
+  .concept {
+    background: var(--paper);
+    border: 1px solid var(--border);
+    border-top: 4px solid var(--blue);
+    padding: 18px 22px;
+    margin: 16px 0;
+    border-radius: 2px;
+    box-shadow: 1px 1px 0 var(--border);
+  }
+  .concept-label {
+    font-size: 11px;
+    letter-spacing: 0.2em;
+    color: var(--blue);
+    font-weight: 700;
+    margin-bottom: 6px;
+  }
+  .concept-term {
+    font-size: 17px;
+    font-weight: 700;
+    margin-bottom: 8px;
+    color: var(--ink);
+  }
+  .concept-term .en {
+    font-family: Georgia, serif;
+    font-style: italic;
+    color: var(--gray);
+    font-weight: 400;
+    font-size: 14px;
+  }
+  .concept-body {
+    font-size: 15px;
+    color: var(--ink-soft);
+  }
+
+  /* KEY VALUE HIGHLIGHT */
+  .kv {
+    display: inline-block;
+    background: var(--gold-soft);
+    border-bottom: 2px solid var(--gold);
+    padding: 1px 7px;
+    font-weight: 700;
+    color: var(--accent-dark);
+    font-family: 'Courier New', monospace;
+    font-size: 0.95em;
+    border-radius: 2px;
+  }
+
+  /* COMPARISON TABLE */
+  .compare {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0;
+    margin: 18px 0;
+    border: 2px solid var(--ink);
+  }
+  .compare > div {
+    padding: 16px 18px;
+  }
+  .compare .head {
+    background: var(--ink);
+    color: var(--paper);
+    text-align: center;
+    font-weight: 700;
+    letter-spacing: 0.05em;
+    padding: 10px;
+    font-size: 15px;
+  }
+  .compare .cell-left {
+    background: var(--blue-soft);
+    border-right: 1px solid var(--border);
+  }
+  .compare .cell-right {
+    background: var(--accent-soft);
+  }
+  .compare ul { margin: 0; padding-left: 18px; font-size: 14px; }
+  .compare li { margin: 4px 0; }
+
+  /* TABLE */
+  table.std {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 16px 0;
+    font-size: 14px;
+  }
+  table.std th, table.std td {
+    border: 1px solid var(--border);
+    padding: 10px 12px;
+    text-align: left;
+    vertical-align: top;
+  }
+  table.std th {
+    background: var(--ink);
+    color: var(--paper);
+    font-weight: 600;
+    letter-spacing: 0.04em;
+  }
+  table.std tr:nth-child(even) td { background: #fafafa; }
+
+  /* FORMULA BOX */
+  .formula {
+    background: var(--code-bg);
+    color: var(--code-ink);
+    padding: 20px 26px;
+    margin: 18px 0;
+    border-radius: 3px;
+    font-family: 'Courier New', 'Consolas', monospace;
+    border-left: 5px solid var(--gold);
+  }
+  .formula .label {
+    font-size: 11px;
+    letter-spacing: 0.25em;
+    color: var(--gold);
+    font-weight: 700;
+    margin-bottom: 10px;
+  }
+  .formula .eq {
+    font-size: 18px;
+    text-align: center;
+    padding: 10px 0;
+    font-weight: bold;
+    color: #fff;
+  }
+  .formula .legend {
+    font-size: 12px;
+    color: #c0b89c;
+    border-top: 1px dashed #555;
+    padding-top: 10px;
+    margin-top: 12px;
+    line-height: 1.7;
+    font-family: 'Noto Serif KR', serif;
+  }
+
+  /* EXAM FOCUS */
+  .exam-focus {
+    background: var(--ink);
+    color: var(--paper);
+    padding: 20px 26px;
+    margin: 22px 0;
+    border-radius: 3px;
+    border-left: 5px solid var(--accent);
+  }
+  .exam-focus .title {
+    font-size: 13px;
+    letter-spacing: 0.25em;
+    color: var(--accent);
+    font-weight: 800;
+    margin-bottom: 12px;
+    border-bottom: 1px dashed #555;
+    padding-bottom: 8px;
+  }
+  .exam-focus ol {
+    margin: 0;
+    padding-left: 22px;
+    font-size: 14px;
+    line-height: 1.9;
+  }
+  .exam-focus li { margin: 6px 0; }
+  .exam-focus .hl {
+    background: var(--accent);
+    color: #fff;
+    padding: 1px 6px;
+    font-weight: 700;
+    border-radius: 2px;
+  }
+  .exam-focus .hl-gold {
+    color: var(--gold);
+    font-weight: 700;
+    border-bottom: 1px solid var(--gold);
+  }
+
+  /* NOTE BOX */
+  .note {
+    background: var(--green-soft);
+    border-left: 4px solid var(--green);
+    padding: 12px 18px;
+    margin: 14px 0;
+    font-size: 14px;
+    color: var(--ink-soft);
+    border-radius: 0 2px 2px 0;
+  }
+  .note .label {
+    font-weight: 700;
+    color: var(--green);
+    margin-right: 6px;
+  }
+
+  /* LIST */
+  ul.tight, ol.tight {
+    margin: 8px 0;
+    padding-left: 22px;
+  }
+  ul.tight li, ol.tight li {
+    margin: 5px 0;
+    font-size: 15px;
+  }
+
+  /* SOURCE */
+  .source {
+    font-size: 11px;
+    color: var(--gray);
+    text-align: right;
+    margin: 4px 0 20px;
+    font-style: italic;
+    border-top: 1px dotted var(--border);
+    padding-top: 6px;
+  }
+  .source::before {
+    content: "📚 ";
+  }
+
+  /* PRACTICE PROBLEMS */
+  .practice {
+    background: #fcfaf5;
+    border: 2px solid var(--ink);
+    padding: 24px 28px;
+    margin-top: 40px;
+    font-family: 'Courier New', 'Consolas', monospace;
+  }
+  .practice h2 {
+    margin: 0 0 8px;
+    font-size: 22px;
+    font-family: 'Noto Serif KR', serif;
+    border-bottom: 2px solid var(--ink);
+    padding-bottom: 10px;
+  }
+  .practice h2 .en {
+    font-family: Georgia, serif;
+    font-style: italic;
+    font-size: 14px;
+    color: var(--gray);
+    font-weight: 400;
+  }
+  .q-block {
+    margin: 24px 0;
+    border-bottom: 1px dashed var(--border);
+    padding-bottom: 20px;
+  }
+  .q-block:last-child { border-bottom: none; }
+  .q-num {
+    display: inline-block;
+    background: var(--ink);
+    color: var(--paper);
+    padding: 2px 10px;
+    font-weight: 700;
+    margin-right: 10px;
+    font-family: Georgia, serif;
+  }
+  .q-question {
+    font-size: 15px;
+    font-weight: 700;
+    margin-bottom: 10px;
+    color: var(--ink);
+  }
+  .q-choices {
+    font-size: 14px;
+    margin: 10px 0 10px 20px;
+    color: var(--ink-soft);
+  }
+  .q-choices div { margin: 3px 0; }
+  .q-solution {
+    background: var(--gray-soft);
+    padding: 12px 16px;
+    margin: 10px 0;
+    font-size: 13px;
+    border-left: 3px solid var(--blue);
+    font-family: 'Noto Serif KR', serif;
+    color: var(--ink-soft);
+    line-height: 1.7;
+  }
+  .q-solution .label {
+    font-weight: 700;
+    color: var(--blue);
+    margin-right: 6px;
+  }
+  .q-answer {
+    background: var(--accent);
+    color: #fff;
+    padding: 8px 14px;
+    font-weight: 700;
+    font-size: 13px;
+    display: inline-block;
+    font-family: 'Noto Serif KR', serif;
+    letter-spacing: 0.05em;
+    margin-top: 6px;
+  }
+  .step {
+    background: #2a2a2a;
+    color: var(--code-ink);
+    padding: 10px 14px;
+    margin: 8px 0;
+    font-size: 12px;
+    border-left: 3px solid var(--gold);
+  }
+  .step .sl { color: var(--gold); font-weight: 700; margin-right: 6px; }
+
+  /* STRONG INLINE */
+  strong.red { color: var(--accent); }
+  strong.blue { color: var(--blue); }
+
+  /* DIAGRAM WRAP */
+  .diagram {
+    background: var(--blue-soft);
+    border: 1px solid var(--border);
+    padding: 14px 18px;
+    margin: 14px 0;
+    font-size: 13px;
+    font-family: 'Courier New', monospace;
+    color: var(--ink-soft);
+    border-radius: 2px;
+    white-space: pre-wrap;
+    line-height: 1.5;
+  }
+
+  /* print-friendly */
+  @media print {
+    body { background: #fff; }
+    .container { box-shadow: none; padding: 10px; }
+    .toc a { color: #000 !important; }
+  }
+
+  @media (max-width: 700px) {
+    .container { padding: 24px 16px; }
+    .toc ol { columns: 1; }
+    .compare { grid-template-columns: 1fr; }
+    .compare .cell-left { border-right: none; border-bottom: 1px solid var(--border); }
+    .doc-header h1 { font-size: 24px; }
+  }
+</style>
+</head>
+<body>
+
+<div class="container">
+
+<!-- HEADER -->
+<header class="doc-header">
+  <div class="subject">RADIOLOGIC TECHNOLOGY · CHAPTER 3</div>
+  <h1>3장 MDCT의 하드웨어</h1>
+  <div class="en-title">Hardware of Multi-Detector Computed Tomography</div>
+  <div class="meta">시험 대비 재구성 노트 · 전공 3학년 수준</div>
+</header>
+
+<!-- TOC -->
+<nav class="toc">
+  <h2>📖 TABLE OF CONTENTS</h2>
+  <ol>
+    <li><span class="num">01.</span><a href="#c01">CT 장치의 전체 구성</a></li>
+    <li><span class="num">02.</span><a href="#c02">고전압 발생장치 (Generator)</a></li>
+    <li><span class="num">03.</span><a href="#c03">Slip Ring & Brush 기술</a></li>
+    <li><span class="num">04.</span><a href="#c04">고압용 Slip Ring 방식</a></li>
+    <li><span class="num">05.</span><a href="#c05">저압용 Slip Ring 방식</a></li>
+    <li><span class="num">06.</span><a href="#c06">전압분배장치 (PDU)</a></li>
+    <li><span class="num">07.</span><a href="#c07">갠트리 및 환자테이블</a></li>
+    <li><span class="num">08.</span><a href="#c08">CT X선관 (CT Tube)</a></li>
+    <li><span class="num">09.</span><a href="#c09">필터 (Filter)</a></li>
+    <li><span class="num">10.</span><a href="#c10">콜리메이터 (Collimator)</a></li>
+    <li><span class="num">11.</span><a href="#c11">검출기 (Detector)</a></li>
+    <li><span class="num">12.</span><a href="#c12">검출기의 종류</a></li>
+    <li><span class="num">13.</span><a href="#c13">Multi-slice Detector</a></li>
+    <li><span class="num">14.</span><a href="#c14">Dual Energy CT</a></li>
+    <li><span class="num">15.</span><a href="#c15">DAS (Data Acquisition System)</a></li>
+    <li><span class="num">16.</span><a href="#c16">영상처리·표시·저장·전송</a></li>
+    <li><span class="num">17.</span><a href="#c17">기타 보조장치</a></li>
+    <li><span class="num">18.</span><a href="#practice">★ 예상문제 10선</a></li>
+  </ol>
+</nav>
+
+<!-- ============ 01 ============ -->
+<section class="chapter" id="c01">
+  <h2 class="chapter-title"><span class="num">01</span>CT 장치의 전체 구성<span class="en">Configuration of CT System</span></h2>
+
+  <p>CT 장치는 크게 <strong>4대 하위 시스템</strong>으로 나뉜다. 각 시스템이 담당하는 역할을 명확히 구분하는 것이 핵심이다.</p>
+
+  <table class="std">
+    <thead>
+      <tr><th style="width:22%;">시스템</th><th>구성 요소</th></tr>
+    </thead>
+    <tbody>
+      <tr><td><strong>① 영상획득장치</strong><br><em>(Image Acquisition)</em></td>
+          <td>Generator, PDU, Gantry, X선관(Tube), 필터, 콜리메이터, 검출기(Detector), DAS</td></tr>
+      <tr><td><strong>② 영상처리장치</strong><br><em>(Image Processing)</em></td>
+          <td>입출력장치(Console), CPU, Array processor, 인터페이스, 저장장치, 소프트웨어</td></tr>
+      <tr><td><strong>③ 영상표시장치</strong><br><em>(Image Display)</em></td>
+          <td>Soft display(CRT, LCD, PDP) / Hard copy(Video imager, Laser imager)</td></tr>
+      <tr><td><strong>④ 영상저장·전송장치</strong><br><em>(Storage & Transfer)</em></td>
+          <td>HDD, Magnetic tape, Optical disk, DAT, CD 드라이버 / DICOM 3.0</td></tr>
+    </tbody>
+  </table>
+
+  <div class="concept">
+    <div class="concept-label">공간 배치</div>
+    <div class="concept-term">촬영실 vs 조정실</div>
+    <div class="concept-body">
+      촬영실에는 <span class="kv">갠트리</span>, <span class="kv">환자테이블</span>, <span class="kv">Generator</span>가 배치되고, 조정실에는 <span class="kv">조작대(Console)</span>와 <span class="kv">영상처리·재구성장치</span>가 배치된다.
+    </div>
+  </div>
+
+  <div class="source">출처: 3장_MDCT의_하드웨어_복사본.pdf, p.2, p.4~6</div>
+</section>
+
+<!-- ============ 02 ============ -->
+<section class="chapter" id="c02">
+  <h2 class="chapter-title"><span class="num">02</span>고전압 발생장치<span class="en">Generator</span></h2>
+
+  <div class="concept">
+    <div class="concept-label">CONCEPT</div>
+    <div class="concept-term">Generator <span class="en">(X선 고전압 발생장치)</span></div>
+    <div class="concept-body">
+      X선을 조사하기 위해 고전압을 발생시키는 장치. Slip ring을 통해 전달되는 전압의 크기에 따라 <strong class="red">고압용(High voltage)</strong>과 <strong class="blue">저압용(Low voltage)</strong>으로 구분된다.
+    </div>
+  </div>
+
+  <div class="source">출처: 3장_MDCT의_하드웨어_복사본.pdf, p.7</div>
+</section>
+
+<!-- ============ 03 ============ -->
+<section class="chapter" id="c03">
+  <h2 class="chapter-title"><span class="num">03</span>Slip Ring &amp; Brush 기술<span class="en">Slip Ring Technology</span></h2>
+
+  <div class="concept">
+    <div class="concept-label">CONCEPT</div>
+    <div class="concept-term">Slip Ring 기술</div>
+    <div class="concept-body">
+      X선관이 <strong>회전하는 동안</strong> 고압케이블을 대신하여 <strong class="red">slip ring</strong>과 <strong class="red">brush</strong>를 이용하여 <strong>전압</strong>과 <strong>데이터 신호</strong>를 전달받는 기술. 연속회전 스캔(Spiral/Helical CT)의 핵심 기술이다.
+    </div>
+  </div>
+
+  <h3 class="section-title">Slip Ring과 Brush의 역할 구분<span class="en">Rotating Part vs Stationary Part</span></h3>
+
+  <div class="compare">
+    <div class="head">Slip Ring (회전부)</div>
+    <div class="head">Brush (고정부)</div>
+    <div class="cell-left">
+      <ul>
+        <li>갠트리의 <strong>회전부</strong>에 속함</li>
+        <li>내구성 우수, <strong>전도효과</strong>가 있어야 함</li>
+        <li>재질: <span class="kv">백금(Pt) 코팅</span></li>
+        <li>수명: <strong class="red">반영구적</strong> 사용</li>
+      </ul>
+    </div>
+    <div class="cell-right">
+      <ul>
+        <li>갠트리의 <strong>고정부</strong>에 위치</li>
+        <li>회전부에 전원 공급 + scan data 수신</li>
+        <li>재질: <span class="kv">은(Ag) 코팅 테프론(Teflon)</span></li>
+        <li>수명: <strong class="red">1~2년마다 교체</strong></li>
+      </ul>
+    </div>
+  </div>
+
+  <h3 class="section-title">Brush의 개수 구성<span class="en">Power & Signal Brushes</span></h3>
+
+  <table class="std">
+    <thead>
+      <tr><th>구분</th><th>총 개수</th><th>세부 구성</th></tr>
+    </thead>
+    <tbody>
+      <tr><td><strong>Power Brush</strong></td><td><span class="kv">6개</span></td><td>고전압용 <span class="kv">4개</span> + 저전압용 <span class="kv">2개</span></td></tr>
+      <tr><td><strong>Signal Brush</strong></td><td><span class="kv">8개</span></td><td>데이터 신호 전달용</td></tr>
+    </tbody>
+  </table>
+
+  <div class="note">
+    <span class="label">▶ 핵심:</span> Slip ring과 brush는 <strong>동일한 개수</strong>로 이루어진다.
+  </div>
+
+  <div class="exam-focus">
+    <div class="title">★ EXAM FOCUS</div>
+    <ol>
+      <li>Slip ring은 <span class="hl">회전부</span>, Brush는 <span class="hl">고정부</span>에 위치한다.</li>
+      <li>Slip ring 재질 = <span class="hl-gold">백금 코팅 (반영구적)</span></li>
+      <li>Brush 재질 = <span class="hl-gold">은 코팅 테프론 (1~2년 교체)</span></li>
+      <li>Slip ring 기술 덕분에 <strong>연속회전(Helical/Spiral) 스캔</strong>이 가능해졌다.</li>
+    </ol>
+  </div>
+
+  <div class="source">출처: 3장_MDCT의_하드웨어_복사본.pdf, p.8~13</div>
+</section>
+
+<!-- ============ 04 ============ -->
+<section class="chapter" id="c04">
+  <h2 class="chapter-title"><span class="num">04</span>고압용 Slip Ring 방식<span class="en">High Voltage Slip Ring</span></h2>
+
+  <div class="concept">
+    <div class="concept-label">CONCEPT</div>
+    <div class="concept-term">고압용 slip ring 방식 <span class="en">(High voltage slip ring type)</span></div>
+    <div class="concept-body">
+      <strong>갠트리 외부</strong>에 위치한 변압기에서 <strong class="red">승압한 고전압</strong>이 고압케이블을 통해 slip ring과 brush에 전달되고, 갠트리 내부에서 회전하는 X선관에 공급되는 방식.
+    </div>
+  </div>
+
+  <div class="diagram">
+AC → [Generator(외부)] → 고압케이블 → [High Voltage Slip Ring] → X선관(회전부)
+  </div>
+
+  <h3 class="section-title">고압용 방식의 특징<span class="en">Characteristics</span></h3>
+
+  <ul class="tight">
+    <li>고주파 전원의 영향을 <strong>적게</strong> 받음</li>
+    <li><strong>전력손실이 거의 없이</strong> 동력 전달 가능</li>
+    <li>상대적으로 <strong class="red">낮은 전류</strong> 사용 → 전력손실 감소</li>
+    <li>갠트리 외부에 고정된 변압기 사용 → 갠트리에 <strong>회전중량 적게</strong> 부여</li>
+    <li><strong>높은 출력의 연속적</strong> 제공 가능</li>
+    <li style="color:var(--accent);"><strong>단점:</strong> 고압에 의한 <strong>arching 및 간섭현상</strong> 발생</li>
+    <li style="color:var(--accent);"><strong>단점:</strong> Brush 사용으로 <strong>전기적 노이즈</strong> 발생</li>
+  </ul>
+
+  <div class="source">출처: 3장_MDCT의_하드웨어_복사본.pdf, p.15~17</div>
+</section>
+
+<!-- ============ 05 ============ -->
+<section class="chapter" id="c05">
+  <h2 class="chapter-title"><span class="num">05</span>저압용 Slip Ring 방식<span class="en">Low Voltage Slip Ring</span></h2>
+
+  <div class="concept">
+    <div class="concept-label">CONCEPT</div>
+    <div class="concept-term">저압용 slip ring 방식 <span class="en">(Low voltage slip ring type)</span></div>
+    <div class="concept-body">
+      <span class="kv">220~480V</span>의 상용 입력전압을 <strong>PDU</strong>를 통해 <span class="kv">550V</span>와 <span class="kv">120V</span>의 직류로 변환 후 slip ring에 전달 → 갠트리 내부의 <strong>Inverter</strong>를 경유 → 검출기와 함께 회전하는 <strong>양극·음극 2개의 소형 대용량 generator</strong>를 통해 X선관에 전달하는 방식.
+    </div>
+  </div>
+
+  <div class="diagram">
+AC(480V) → [PDU, 전압배분장치] → [Low Voltage Slip Ring] → [Inverter(갠트리 내부)] → [High Voltage Generator(회전)] → X선관
+  </div>
+
+  <h3 class="section-title">고압 vs 저압 Slip Ring 비교<span class="en">HV vs LV</span></h3>
+
+  <div class="compare">
+    <div class="head">고압용 (High Voltage)</div>
+    <div class="head">저압용 (Low Voltage)</div>
+    <div class="cell-left">
+      <ul>
+        <li>변압기: <strong>갠트리 외부</strong></li>
+        <li>Slip ring 전압: <strong>고전압</strong></li>
+        <li>갠트리 중량: <strong>적음</strong></li>
+        <li>Arching·간섭·노이즈 <strong>발생</strong></li>
+        <li>높은 출력 연속 공급 가능</li>
+      </ul>
+    </div>
+    <div class="cell-right">
+      <ul>
+        <li>Generator: <strong>갠트리 내부(회전)</strong></li>
+        <li>Slip ring 전압: <span class="kv">550V / 120V DC</span></li>
+        <li>갠트리 중량: <strong class="red">커짐</strong></li>
+        <li>전기적 누출 위험 <strong>없음</strong></li>
+        <li>Gas·Oil 절연 <strong>불필요</strong>, 수리 용이</li>
+      </ul>
+    </div>
+  </div>
+
+  <h3 class="section-title">저압용 방식의 특징<span class="en">Characteristics</span></h3>
+
+  <ol class="tight">
+    <li><strong>신뢰성</strong> 있는 작동</li>
+    <li><strong>전기적 누출</strong>에 의한 위험 없음</li>
+    <li>전기절연을 위한 <strong>Gas 및 Oil 불필요</strong></li>
+    <li>시스템의 <strong>안정성 우수</strong></li>
+    <li>장치의 <strong>전력 소모율 적음</strong></li>
+    <li><strong>고장수리 용이</strong></li>
+    <li style="color:var(--accent);"><strong>단점:</strong> 갠트리 내에 generator가 있어 <strong>갠트리 하중이 커짐</strong></li>
+  </ol>
+
+  <div class="exam-focus">
+    <div class="title">★ EXAM FOCUS — 고압 vs 저압 구분</div>
+    <ol>
+      <li>변압기(Generator)의 <span class="hl">위치</span>가 가장 큰 구분 포인트 → 외부(고압) / 내부(저압)</li>
+      <li>저압용 입력전압 = <span class="hl-gold">220~480V</span>, 변환 후 = <span class="hl-gold">550V / 120V DC</span></li>
+      <li>저압용은 <span class="hl">갠트리 하중 증가</span>가 유일한 단점</li>
+      <li>고압용은 <span class="hl">arching·노이즈</span>가 발생</li>
+    </ol>
+  </div>
+
+  <div class="source">출처: 3장_MDCT의_하드웨어_복사본.pdf, p.18~21</div>
+</section>
+
+<!-- ============ 06 ============ -->
+<section class="chapter" id="c06">
+  <h2 class="chapter-title"><span class="num">06</span>전압분배장치<span class="en">Power Distribution Unit, PDU</span></h2>
+
+  <div class="concept">
+    <div class="concept-label">CONCEPT</div>
+    <div class="concept-term">PDU <span class="en">(Power Distribution Unit)</span></div>
+    <div class="concept-body">
+      제공된 <strong>주전원</strong>을 <strong>테이블, 갠트리, 콘솔, 영상처리장치</strong> 등에 전원을 분배하는 장치.
+    </div>
+  </div>
+
+  <div class="source">출처: 3장_MDCT의_하드웨어_복사본.pdf, p.22</div>
+</section>
+
+<!-- ============ 07 ============ -->
+<section class="chapter" id="c07">
+  <h2 class="chapter-title"><span class="num">07</span>갠트리 및 환자테이블<span class="en">Gantry & Patient Table</span></h2>
+
+  <div class="concept">
+    <div class="concept-label">CONCEPT</div>
+    <div class="concept-term">Gantry <span class="en">(갠트리)</span></div>
+    <div class="concept-body">
+      환자의 스캔을 담당하는 부분으로, <strong>X선 tube</strong>, <strong>Detector</strong>, <strong>DAS</strong>를 수용하고 있는 장치.
+    </div>
+  </div>
+
+  <h3 class="section-title">갠트리의 핵심 수치<span class="en">Key Specifications</span></h3>
+
+  <ul class="tight">
+    <li>Gantry tilt 각도: <span class="kv">상하 ±30°</span></li>
+    <li>Tilt 속도: <span class="kv">초당 1°씩</span></li>
+    <li>초점-검출기 간 거리 (SID): <span class="kv">약 110 cm</span></li>
+    <li><strong>Beam alignment light</strong> 설치</li>
+  </ul>
+
+  <div class="exam-focus">
+    <div class="title">★ EXAM FOCUS</div>
+    <ol>
+      <li>Gantry tilt: <span class="hl-gold">±30°</span>, 초당 <span class="hl-gold">1°</span></li>
+      <li>초점–검출기 거리 ≈ <span class="hl-gold">110 cm</span></li>
+      <li>갠트리는 <span class="hl">X선관 + 검출기 + DAS</span>를 모두 수용</li>
+    </ol>
+  </div>
+
+  <div class="source">출처: 3장_MDCT의_하드웨어_복사본.pdf, p.23~24</div>
+</section>
+
+<!-- ============ 08 ============ -->
+<section class="chapter" id="c08">
+  <h2 class="chapter-title"><span class="num">08</span>CT X선관 (CT Tube)<span class="en">CT X-ray Tube</span></h2>
+
+  <div class="concept">
+    <div class="concept-label">CONCEPT</div>
+    <div class="concept-term">CT Tube의 특징</div>
+    <div class="concept-body">
+      CT tube는 <strong class="red">이중 초점(Dual focus)</strong> 구조이며, 실제 스캔 시 <strong>초점 크기는 관전류의 대소에 따라 장치에서 자동 설정</strong>된다.
+    </div>
+  </div>
+
+  <h3 class="section-title">고관전류 Tube 사용의 이점<span class="en">Benefits of High mA Tube</span></h3>
+
+  <ul class="tight">
+    <li>관전류가 높으면 <strong class="red">대조도 분해능(Contrast Resolution)</strong>이 높아진다</li>
+    <li>동일한 mAs에서 <strong>영상화 시간이 짧아짐</strong> → 움직임 적은 영상</li>
+    <li>검사 소요시간 감소 → <strong>생산성 향상</strong></li>
+  </ul>
+
+  <h3 class="section-title">CT Tube의 구비조건<span class="en">Requirements</span></h3>
+
+  <table class="std">
+    <thead>
+      <tr><th>조건</th><th>상세</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>양극 열축적 용량</td><td><strong>커야 함</strong> — 보통 <span class="kv">2~5 MHU</span></td></tr>
+      <tr><td>Cooling rate (냉각율)</td><td>높아야 함</td></tr>
+      <tr><td>Focal track loadability (초점궤적 부하능력)</td><td>높아야 함</td></tr>
+      <tr><td>수명</td><td>길어야 함</td></tr>
+    </tbody>
+  </table>
+
+  <div class="exam-focus">
+    <div class="title">★ EXAM FOCUS</div>
+    <ol>
+      <li>CT tube = <span class="hl">이중 초점</span>, 초점 크기는 <span class="hl">관전류에 따라 자동 설정</span></li>
+      <li>양극 열축적 용량 = <span class="hl-gold">2~5 MHU</span> (빈출 수치)</li>
+      <li>고관전류 → 대조도 분해능 ↑, 촬영시간 ↓, 움직임 아티팩트 ↓</li>
+    </ol>
+  </div>
+
+  <div class="source">출처: 3장_MDCT의_하드웨어_복사본.pdf, p.25~26</div>
+</section>
+
+<!-- ============ 09 ============ -->
+<section class="chapter" id="c09">
+  <h2 class="chapter-title"><span class="num">09</span>필터<span class="en">Filter</span></h2>
+
+  <div class="concept">
+    <div class="concept-label">CONCEPT — 사용 목적</div>
+    <div class="concept-term">Filter 사용의 두 가지 목적</div>
+    <div class="concept-body">
+      <strong>① 선질 조절(Filtration)</strong> — X선속을 여과시켜 <strong class="red">환자 피폭 최소화</strong>, 선속 경화로 <strong>투과력 증가</strong> (Filter 사용 시 <strong>SNR 증가</strong>) → <strong>고유필터 + 부가필터</strong><br>
+      <strong>② Beam Shaping</strong> — X선속의 형태를 조절 → <strong class="red">Bow-tie filter</strong>
+    </div>
+  </div>
+
+  <h3 class="section-title">필터의 종류<span class="en">Types of Filter</span></h3>
+
+  <ol class="tight">
+    <li><strong>Bowtie filter</strong> — 환자 중앙은 얇게, 가장자리는 두껍게 → 환자를 통과한 X선속을 <strong>균질</strong>하게 만듦</li>
+    <li><strong>Smart filter</strong></li>
+    <li><strong>Adaptive filter</strong></li>
+    <li><strong>Sharp point filter</strong></li>
+  </ol>
+
+  <div class="note">
+    <span class="label">▶ 개념:</span> 필터링 후 <strong>저에너지 X선 제거</strong> → 평균 에너지 상승(선속 경화) → 환자 피폭 감소 + 영상 대조도 유지.
+  </div>
+
+  <div class="exam-focus">
+    <div class="title">★ EXAM FOCUS</div>
+    <ol>
+      <li>Filter 목적 2가지: <span class="hl">선질조절(피폭↓, 투과력↑, SNR↑)</span> + <span class="hl">Beam shaping</span></li>
+      <li>Bow-tie filter = <span class="hl-gold">Beam shaping용</span>, 환자를 통과한 X선속을 <strong>균질화</strong></li>
+      <li>Filter 종류 4가지: <span class="hl-gold">Bowtie / Smart / Adaptive / Sharp point</span></li>
+    </ol>
+  </div>
+
+  <div class="source">출처: 3장_MDCT의_하드웨어_복사본.pdf, p.27~29</div>
+</section>
+
+<!-- ============ 10 ============ -->
+<section class="chapter" id="c10">
+  <h2 class="chapter-title"><span class="num">10</span>콜리메이터<span class="en">Collimator</span></h2>
+
+  <div class="concept">
+    <div class="concept-label">CONCEPT</div>
+    <div class="concept-term">Collimator (콜리메이터)</div>
+    <div class="concept-body">
+      <strong>Primary aperture</strong>로서 부채꼴 선속(Fan beam)의 각도를 형성하며, 슬라이스 두께 조절·CT number의 균일성 증가·산란선 감소·방사선 피폭 감소의 역할을 한다.
+    </div>
+  </div>
+
+  <h3 class="section-title">콜리메이터의 5대 역할<span class="en">5 Major Roles</span></h3>
+
+  <ol class="tight">
+    <li><strong>Primary aperture</strong> — 부채꼴 선속의 각도 형성</li>
+    <li><strong>슬라이스 두께 조절</strong> (Slice thickness)</li>
+    <li><strong>CT number의 균일성 및 안정성 증가</strong></li>
+    <li><strong>산란선 감소</strong> (Scatter reduction)</li>
+    <li><strong>방사선 피폭 감소</strong> (Dose reduction)</li>
+  </ol>
+
+  <h3 class="section-title">Tube측 vs 검출기측 콜리메이터<span class="en">Pre-patient vs Post-patient</span></h3>
+
+  <div class="compare">
+    <div class="head">Tube측 콜리메이터 (Pre-patient)</div>
+    <div class="head">검출기측 콜리메이터 (Post-patient)</div>
+    <div class="cell-left">
+      <ul>
+        <li>X선관 바로 아래 위치</li>
+        <li><strong class="red">슬라이스 두께 조절</strong></li>
+        <li>환자 피폭 감소에 기여</li>
+      </ul>
+    </div>
+    <div class="cell-right">
+      <ul>
+        <li>검출기 바로 위 위치</li>
+        <li><strong class="red">슬라이스 두께의 유지</strong> (복셀 길이 유지)</li>
+        <li><strong class="red">산란선 감소</strong></li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="exam-focus">
+    <div class="title">★ EXAM FOCUS — Tube측 vs 검출기측</div>
+    <ol>
+      <li>Tube측 → <span class="hl">슬라이스 두께 "조절"</span></li>
+      <li>검출기측 → <span class="hl">슬라이스 두께 "유지" + 산란선 감소</span></li>
+      <li>"Primary aperture" = <span class="hl-gold">부채꼴 선속 각도 형성</span> (콜리메이터의 별칭)</li>
+    </ol>
+  </div>
+
+  <div class="source">출처: 3장_MDCT의_하드웨어_복사본.pdf, p.30~33</div>
+</section>
+
+<!-- ============ 11 ============ -->
+<section class="chapter" id="c11">
+  <h2 class="chapter-title"><span class="num">11</span>검출기<span class="en">Detector</span></h2>
+
+  <div class="concept">
+    <div class="concept-label">CONCEPT</div>
+    <div class="concept-term">Detector (검출장치)</div>
+    <div class="concept-body">
+      환자를 투과한 X선을 검출하는 장치로, <strong>섬광체(희토류계)</strong> + <strong>광다이오드 어레이(반도체 다이오드)</strong> + <strong>DAS</strong>로 구성된다.
+    </div>
+  </div>
+
+  <h3 class="section-title">검출기의 신호 변환 경로<span class="en">Signal Conversion Flow</span></h3>
+
+  <div class="formula">
+    <div class="label">SIGNAL FLOW</div>
+    <div class="eq">X선 → [섬광체] → 빛 신호 → [광다이오드] → 전류(전기신호) → [DAS]</div>
+    <div class="legend">
+      • <strong>섬광체(Scintillator)</strong>: X선 에너지를 가시광선으로 변환 (희토류계)<br>
+      • <strong>광다이오드(Photodiode)</strong>: 빛 → 전류 변환<br>
+      • <strong>DAS</strong>: 아날로그 전류를 증폭 → ADC → 디지털 신호
+    </div>
+  </div>
+
+  <h3 class="section-title">검출기의 8대 구비조건<span class="en">Requirements</span></h3>
+
+  <table class="std">
+    <thead><tr><th>No.</th><th>요구조건</th><th>의미</th></tr></thead>
+    <tbody>
+      <tr><td>①</td><td>높은 <strong>흡수효율</strong> (Detection efficiency)</td><td>X선을 최대한 감지</td></tr>
+      <tr><td>②</td><td>넓은 <strong>동적범위</strong> (Dynamic range)</td><td>약한 신호~강한 신호 모두 처리</td></tr>
+      <tr><td>③</td><td>우수한 <strong>신호의 직선성</strong></td><td>입력과 출력이 비례</td></tr>
+      <tr><td>④</td><td><strong>일관성 및 재생성</strong></td><td>반복 측정 시 동일 결과</td></tr>
+      <tr><td>⑤</td><td><strong>검출소자의 수가 많을 것</strong></td><td>해상력 향상</td></tr>
+      <tr><td>⑥</td><td>최소한의 <strong>불감영역</strong> + 우수한 <strong>산란선 제거율</strong></td><td>효율·화질 향상</td></tr>
+      <tr><td>⑦</td><td>짧은 <strong>잔광(afterglow)</strong>과 <strong>회복시간</strong></td><td>빠른 스캔 대응</td></tr>
+      <tr><td>⑧</td><td><strong>온도·습도에 대한 안정성</strong></td><td>외부 환경 내성</td></tr>
+    </tbody>
+  </table>
+
+  <div class="source">출처: 3장_MDCT의_하드웨어_복사본.pdf, p.34~36</div>
+</section>
+
+<!-- ============ 12 ============ -->
+<section class="chapter" id="c12">
+  <h2 class="chapter-title"><span class="num">12</span>검출기의 종류<span class="en">Types of Detector</span></h2>
+
+  <h3 class="section-title">① 광전자증배관 검출기<span class="en">Scintillation Crystal Photomultiplier Detector</span></h3>
+
+  <ul class="tight">
+    <li>형광체 + 다이오드 구조를 갖는 <strong>광전자증배관(PMT)</strong>으로 구성</li>
+    <li><strong class="red">1·2세대</strong> 장치에 사용 — <strong>현재는 사용되지 않음</strong></li>
+    <li>형광체: <span class="kv">NaI, CsI, CaF₂, BGO</span></li>
+    <li>최근: <span class="kv">CdWO₄, gadolinium-based ceramic, rare earth oxide</span></li>
+  </ul>
+
+  <h3 class="section-title">② 제논 가스 검출기<span class="en">Xenon Gas Detector</span></h3>
+
+  <div class="concept">
+    <div class="concept-label">CONCEPT</div>
+    <div class="concept-term">Xenon Gas Detector</div>
+    <div class="concept-body">
+      <strong>제논(Xe) 가스(불활성 가스)</strong>를 사용. 비례계수관 내에 양극·음극을 설치하고 두 극판 사이에 <strong>고압의 제논가스</strong>를 봉입한 구조. <strong class="red">3세대 장치에만</strong> 사용됨.
+    </div>
+  </div>
+
+  <table class="std">
+    <thead><tr><th>특성</th><th>설명</th></tr></thead>
+    <tbody>
+      <tr><td>장점 ①</td><td><strong>X선속 강도</strong>에 영향을 받지 않음</td></tr>
+      <tr><td>장점 ②</td><td><strong>잔광(afterglow)</strong>이 없음</td></tr>
+      <tr><td>장점 ③</td><td>NaI보다 <strong>소형</strong>이고 간단</td></tr>
+      <tr><td>장점 ④</td><td>단위면적당 <strong>많은 수 설치 가능</strong></td></tr>
+      <tr><td>단점</td><td style="color:var(--accent);"><strong>안전성에 문제점</strong>이 있음</td></tr>
+    </tbody>
+  </table>
+
+  <h3 class="section-title">③ 반도체 검출기<span class="en">Scintillation Crystal Photodiode Detector</span></h3>
+
+  <ul class="tight">
+    <li><strong>섬광체 + 광다이오드</strong>로 구성</li>
+    <li><strong class="red">3·4세대</strong> 장치에 주로 이용 (현재 주류)</li>
+    <li>섬광체 두께 약 <span class="kv">2 mm</span></li>
+    <li>산란선 제거용 <strong>콜리메이터 판</strong>이 각 검출 소자 사이에 배치됨</li>
+  </ul>
+
+  <h3 class="section-title">검출기 세대별 정리<span class="en">Detector Generations</span></h3>
+
+  <table class="std">
+    <thead><tr><th>종류</th><th>세대</th><th>사용 재질</th><th>현재 사용</th></tr></thead>
+    <tbody>
+      <tr><td>광전자증배관(PMT)</td><td>1·2세대</td><td>NaI, CsI, CaF₂, BGO</td><td style="color:var(--accent);">미사용</td></tr>
+      <tr><td>Xenon Gas</td><td>3세대</td><td>제논 가스</td><td style="color:var(--accent);">미사용</td></tr>
+      <tr><td>반도체(Photodiode)</td><td>3·4세대</td><td>섬광체+광다이오드</td><td style="color:var(--green);">주류</td></tr>
+      <tr><td>Multi-slice</td><td>MDCT</td><td>섬광 크리스탈 광다이오드</td><td style="color:var(--green);">최신</td></tr>
+    </tbody>
+  </table>
+
+  <div class="exam-focus">
+    <div class="title">★ EXAM FOCUS — 검출기 종류 암기법</div>
+    <ol>
+      <li><span class="hl">PMT = 1·2세대 (구식)</span></li>
+      <li><span class="hl">Xenon = 3세대만</span>, 잔광 없음이 장점, 안전성이 단점</li>
+      <li><span class="hl">반도체 = 3·4세대, 현재 주류</span> — 섬광체 + 광다이오드</li>
+      <li>Xenon은 <span class="hl-gold">X선속 강도에 영향 안받음 + 잔광 없음</span></li>
+    </ol>
+  </div>
+
+  <div class="source">출처: 3장_MDCT의_하드웨어_복사본.pdf, p.37~42</div>
+</section>
+
+<!-- ============ 13 ============ -->
+<section class="chapter" id="c13">
+  <h2 class="chapter-title"><span class="num">13</span>Multi-slice Detector<span class="en">MDCT Detector Array</span></h2>
+
+  <div class="concept">
+    <div class="concept-label">CONCEPT</div>
+    <div class="concept-term">Multi-slice Detector</div>
+    <div class="concept-body">
+      <strong>섬광 크리스탈 광다이오드 검출기</strong>를 이용하며, 구조는 <strong>섬광체 + 광다이오드 어레이 + DAS</strong>로 구성된다. <strong>Z-축 방향</strong>으로의 배열방식에 따라 세 가지로 구분된다.
+    </div>
+  </div>
+
+  <h3 class="section-title">Z축 배열 방식에 따른 분류<span class="en">Classification by Z-axis Array</span></h3>
+
+  <table class="std">
+    <thead>
+      <tr><th>종류</th><th>영문명</th><th>특징</th><th>대표 회사</th></tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><strong>Matrix Detector</strong></td>
+        <td>Fixed-Array Detector (FAD)</td>
+        <td>동일한 크기의 소자를 Z축으로 균등 배열<br>(예: 16 × 1.25 mm, 총 <span class="kv">20 mm</span>)</td>
+        <td>GE, Philips</td>
+      </tr>
+      <tr>
+        <td><strong>Adaptive Array Detector (AAD)</strong></td>
+        <td>Adaptive / Non-uniform</td>
+        <td>중심은 얇고, 가장자리는 두꺼운 <strong>비균일 배열</strong><br>(예: 5–2.5–1.5–1–1–1.5–2.5–5 mm, 총 <span class="kv">20 mm</span>)</td>
+        <td>Siemens</td>
+      </tr>
+      <tr>
+        <td><strong>Hybrid Detector</strong></td>
+        <td>Combination Type</td>
+        <td>Matrix + Adaptive 혼합<br>(예: 중심 4×0.5 mm, 양쪽 15 mm, 총 <span class="kv">32 mm</span>)</td>
+        <td>Toshiba</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <h3 class="section-title">MDCT 검출기 조합 예시 (4-row MDCT)<span class="en">Example Configurations</span></h3>
+
+  <ul class="tight">
+    <li>4 × 1.25 mm = <span class="kv">5 mm</span> coverage</li>
+    <li>4 × 2.5 mm = <span class="kv">10 mm</span> coverage</li>
+    <li>4 × 3.75 mm = <span class="kv">15 mm</span> coverage</li>
+    <li>4 × 5 mm = <span class="kv">20 mm</span> coverage (all 16 rows active)</li>
+  </ul>
+
+  <h3 class="section-title">Multiple Thin Image Detection의 장점<span class="en">Benefits</span></h3>
+
+  <div class="compare">
+    <div class="head">Multi-slice 활용</div>
+    <div class="head">Addition (합산) 활용</div>
+    <div class="cell-left">
+      <ul>
+        <li>4 × 1.25 mm 획득 후 <strong>그대로 사용</strong></li>
+        <li>1×mAs로 4배 많은 영상 획득</li>
+        <li><strong class="red">Tube 부하가 적음</strong></li>
+      </ul>
+    </div>
+    <div class="cell-right">
+      <ul>
+        <li>4 × 1.25 mm를 <strong>합산 → 1×5 mm</strong></li>
+        <li>신호합으로 노이즈 감소</li>
+        <li><strong class="red">1×5 mm보다 더 좋은 화질</strong></li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="exam-focus">
+    <div class="title">★ EXAM FOCUS — MDCT 검출기 회사별 정리</div>
+    <ol>
+      <li><span class="hl">GE·Philips = Matrix (Mosaic)</span> — 16×1.25 mm 균일</li>
+      <li><span class="hl">Siemens = Adaptive (Non-uniform)</span> — 5·2.5·1.5·1·1·1.5·2.5·5</li>
+      <li><span class="hl">Toshiba = Hybrid (Combination)</span> — 중심 4×0.5 mm + 양쪽 15 mm</li>
+      <li>시험 그림 문제: <strong>비균일(5–2.5–…–2.5–5)</strong>이 보이면 → <span class="hl-gold">Adaptive array type</span> 정답</li>
+    </ol>
+  </div>
+
+  <div class="source">출처: 3장_MDCT의_하드웨어_복사본.pdf, p.43~48</div>
+</section>
+
+<!-- ============ 14 ============ -->
+<section class="chapter" id="c14">
+  <h2 class="chapter-title"><span class="num">14</span>Dual Energy CT<span class="en">Dual Energy CT Diagnosis</span></h2>
+
+  <div class="concept">
+    <div class="concept-label">CONCEPT</div>
+    <div class="concept-term">Dual Energy CT</div>
+    <div class="concept-body">
+      약간의 <strong>inter scan delay</strong>를 두고 <strong>두 에너지</strong>의 교차 스캔을 시행하는 방법. 동일한 물질이라도 에너지에 따라 감약값이 다르게 나타나는 원리를 이용한다.
+    </div>
+  </div>
+
+  <h3 class="section-title">Dual Energy 핵심 수치<span class="en">Key Values</span></h3>
+
+  <table class="std">
+    <tbody>
+      <tr><td>저에너지 kV</td><td><span class="kv">80 kV</span></td><td>High mA 필요</td></tr>
+      <tr><td>고에너지 kV</td><td><span class="kv">140 kV</span></td><td>통상 mA</td></tr>
+      <tr><td>Source 1 FOV</td><td><span class="kv">50 cm</span></td><td>넓은 FOV</td></tr>
+      <tr><td>Source 2 FOV</td><td><span class="kv">33 cm</span></td><td>좁은 FOV</td></tr>
+    </tbody>
+  </table>
+
+  <h3 class="section-title">Dual Energy의 원리와 임상 응용<span class="en">Principle & Application</span></h3>
+
+  <ul class="tight">
+    <li>에너지 차이 → <strong>photon 에너지 차이</strong> 발생</li>
+    <li>같은 물질에서도 <strong>다른 감약값(μ)</strong> → <strong>다른 스펙트럼</strong> 획득</li>
+    <li>한 번의 촬영으로 <strong class="red">조영된 혈관과 혈관주변의 석회화를 구분</strong></li>
+    <li><strong>심혈관 질환 진단</strong>에 유용</li>
+  </ul>
+
+  <div class="exam-focus">
+    <div class="title">★ EXAM FOCUS</div>
+    <ol>
+      <li>Dual Energy = <span class="hl-gold">80 kV + 140 kV 교차 스캔</span></li>
+      <li>저에너지에서는 <span class="hl">High mA 필요</span> (환자 감쇠 크므로)</li>
+      <li>주요 임상 응용: <span class="hl">혈관 석회화 vs 조영 혈관 구분</span></li>
+    </ol>
+  </div>
+
+  <div class="source">출처: 3장_MDCT의_하드웨어_복사본.pdf, p.49~50</div>
+</section>
+
+<!-- ============ 15 ============ -->
+<section class="chapter" id="c15">
+  <h2 class="chapter-title"><span class="num">15</span>DAS<span class="en">Data Acquisition System</span></h2>
+
+  <div class="concept">
+    <div class="concept-label">CONCEPT</div>
+    <div class="concept-term">DAS <span class="en">(Data Acquisition System)</span></div>
+    <div class="concept-body">
+      Detector <strong>뒤에 위치</strong>한 수십 개의 <strong>IC board</strong>로 구성된 전기적 하드웨어. 검출기에서 출력된 <strong>빛 신호</strong>를 받아 <strong>아날로그 전기신호로 변환</strong> → <strong>증폭</strong> → <strong>ADC로 디지털화</strong> → 컴퓨터로 전송하여 영상 재구성에 사용된다.
+    </div>
+  </div>
+
+  <div class="formula">
+    <div class="label">DAS SIGNAL FLOW</div>
+    <div class="eq">빛 신호 → [아날로그 전기신호 변환] → [증폭] → [ADC 디지털화] → [Computer]</div>
+    <div class="legend">
+      • <strong>ADC</strong> (Analog-to-Digital Converter): 아날로그 신호를 디지털 값으로 변환<br>
+      • DAS 이후 단계부터는 <strong>Raw data(scan data)</strong>로서 재구성 알고리즘의 입력이 된다.
+    </div>
+  </div>
+
+  <h3 class="section-title">DAS의 필요조건<span class="en">Requirements</span></h3>
+
+  <ol class="tight">
+    <li><strong>동적범위(Dynamic range)가 넓어야 함</strong></li>
+    <li><strong>포화상태가 되지 않아야 함</strong> → 받은 data가 DAS에 <strong>넘치지 않아야 함</strong><br>
+        <span style="color:var(--accent);">▶ 넘치면 Artifact 발생</span></li>
+    <li><strong>노이즈가 적어야 함</strong></li>
+    <li><strong>직선성·안정성이 높아야 함</strong></li>
+  </ol>
+
+  <div class="exam-focus">
+    <div class="title">★ EXAM FOCUS</div>
+    <ol>
+      <li>DAS 위치 = <span class="hl">Detector 바로 뒤</span>, 수십 개의 IC board로 구성</li>
+      <li>DAS의 역할 = <span class="hl-gold">빛 → 전류 → 증폭 → ADC(디지털 변환)</span></li>
+      <li>DAS 포화 발생 시 → <span class="hl">Artifact 발생</span></li>
+      <li>DAS의 4대 조건: <span class="hl-gold">동적범위 넓고 / 포화되지 않고 / 노이즈 적고 / 직선성·안정성 높을 것</span></li>
+    </ol>
+  </div>
+
+  <div class="source">출처: 3장_MDCT의_하드웨어_복사본.pdf, p.51~52</div>
+</section>
+
+<!-- ============ 16 ============ -->
+<section class="chapter" id="c16">
+  <h2 class="chapter-title"><span class="num">16</span>영상처리·표시·저장·전송 장치<span class="en">Processing · Display · Storage · Transfer</span></h2>
+
+  <h3 class="section-title">영상처리장치 6대 구성<span class="en">Image Processing System</span></h3>
+  <ol class="tight">
+    <li>입출력장치(<strong>사용자 조작대, Console</strong>)</li>
+    <li>중앙처리장치(<strong>CPU</strong>)</li>
+    <li><strong>Array processor</strong>(배열처리기) — 역투영·컨벌루션 등 대용량 병렬연산 담당</li>
+    <li>인터페이스 장치</li>
+    <li>저장장치 및 통신 하드웨어</li>
+    <li>소프트웨어</li>
+  </ol>
+
+  <h3 class="section-title">영상표시장치<span class="en">Image Display</span></h3>
+
+  <div class="compare">
+    <div class="head">Soft Display</div>
+    <div class="head">Hard Copy</div>
+    <div class="cell-left">
+      <ul>
+        <li>영상용: <strong>CRT, LCD</strong></li>
+        <li>텍스트용: <strong>PDP</strong></li>
+      </ul>
+    </div>
+    <div class="cell-right">
+      <ul>
+        <li><strong>Video imager</strong></li>
+        <li><strong>Laser imager</strong></li>
+      </ul>
+    </div>
+  </div>
+
+  <h3 class="section-title">영상저장장치 5종<span class="en">Image Storage</span></h3>
+  <ol class="tight">
+    <li>자기하드디스크 <em>(Magnetic hard disk, HDD)</em></li>
+    <li>자기테이프 드라이버 <em>(Magnetic tape driver)</em></li>
+    <li>광디스크 드라이버 <em>(Optical disk driver)</em></li>
+    <li>DAT 드라이버 <em>(Digital Audio Tape)</em></li>
+    <li>CD 드라이버</li>
+  </ol>
+
+  <h3 class="section-title">영상전송장치 — DICOM<span class="en">Digital Imaging and Communications in Medicine</span></h3>
+
+  <div class="concept">
+    <div class="concept-label">CONCEPT</div>
+    <div class="concept-term">DICOM 3.0 <span class="en">(Digital Imaging and Communications in Medicine)</span></div>
+    <div class="concept-body">
+      의료용 기기에서 <strong>디지털 영상 표현 및 통신</strong>에 사용되는 여러 표준의 총칭. 
+      <strong class="red">미국방사선의학회(ACR)</strong>와 <strong class="red">미국전기공업회(NEMA)</strong>가 구성한 <strong>연합위원회</strong>에서 발표.
+    </div>
+  </div>
+
+  <div class="exam-focus">
+    <div class="title">★ EXAM FOCUS</div>
+    <ol>
+      <li>DICOM 제정: <span class="hl-gold">ACR + NEMA</span></li>
+      <li>DICOM 현재 버전: <span class="hl-gold">3.0</span></li>
+      <li>Soft Display: 영상 <span class="hl">CRT·LCD</span> / 텍스트 <span class="hl">PDP</span></li>
+      <li>Array processor = <span class="hl">병렬 연산 담당 (재구성 속도의 핵심)</span></li>
+    </ol>
+  </div>
+
+  <div class="source">출처: 3장_MDCT의_하드웨어_복사본.pdf, p.53~57</div>
+</section>
+
+<!-- ============ 17 ============ -->
+<section class="chapter" id="c17">
+  <h2 class="chapter-title"><span class="num">17</span>기타 보조장치 및 기구<span class="en">Auxiliary Devices</span></h2>
+
+  <ul class="tight">
+    <li><strong>조영제주입기</strong> (Injector)</li>
+    <li><strong>Defibrillator</strong> (제세동기)</li>
+    <li><strong>산소주입기</strong> (Oxygen supply)</li>
+    <li><strong>Suction</strong> (흡인기)</li>
+    <li><strong>Emergency Kit</strong> (응급 키트)</li>
+  </ul>
+
+  <div class="source">출처: 3장_MDCT의_하드웨어_복사본.pdf, p.58</div>
+</section>
+
+<!-- ============ PRACTICE ============ -->
+<section class="practice" id="practice">
+  <h2>★ 예상문제 10선 <span class="en">Practice Problems</span></h2>
+
+  <!-- Q1 -->
+  <div class="q-block">
+    <div class="q-question"><span class="q-num">Q1</span>Slip ring과 brush에 대한 설명으로 옳지 않은 것은?</div>
+    <div class="q-choices">
+      <div>① Slip ring은 갠트리의 회전부에 속한다.</div>
+      <div>② Slip ring의 재질은 백금 코팅으로 반영구적으로 사용된다.</div>
+      <div>③ Brush의 재질은 은 코팅 테프론으로 1~2년마다 교체한다.</div>
+      <div>④ Slip ring과 brush의 개수는 서로 다르다.</div>
+    </div>
+    <div class="q-solution"><span class="label">풀이:</span> Slip ring과 brush는 <strong>반드시 동일한 개수</strong>로 이루어져야 전기적 접촉과 신호 전달이 가능하다. 개수가 다르면 회전 중 특정 위치에서 접촉이 끊긴다.</div>
+    <div class="q-answer">정답: ④</div>
+  </div>
+
+  <!-- Q2 -->
+  <div class="q-block">
+    <div class="q-question"><span class="q-num">Q2</span>저압용 slip ring 방식의 특징으로 옳지 않은 것은?</div>
+    <div class="q-choices">
+      <div>① 전기적 누출에 의한 위험이 없다.</div>
+      <div>② 전기절연을 위한 Gas 및 Oil이 필요 없다.</div>
+      <div>③ 갠트리 내에 generator가 있어 갠트리 하중이 작아진다.</div>
+      <div>④ 장치의 전력 소모율이 적고 고장수리가 용이하다.</div>
+    </div>
+    <div class="q-solution"><span class="label">풀이:</span> 저압용은 generator가 <strong>갠트리 내부(회전부)</strong>에 위치하므로 오히려 <strong>갠트리 하중이 커진다</strong>. 이것이 저압용의 유일한 단점이다.</div>
+    <div class="q-answer">정답: ③</div>
+  </div>
+
+  <!-- Q3 -->
+  <div class="q-block">
+    <div class="q-question"><span class="q-num">Q3</span>CT tube의 구비조건으로 옳지 <strong>않은</strong> 것은?</div>
+    <div class="q-choices">
+      <div>① 양극의 열축적 용량이 2~5 MHU 정도로 커야 한다.</div>
+      <div>② 냉각율(cooling rate)이 낮아야 한다.</div>
+      <div>③ Focal track loadability가 높아야 한다.</div>
+      <div>④ 수명이 길어야 한다.</div>
+    </div>
+    <div class="q-solution"><span class="label">풀이:</span> Cooling rate는 <strong>높아야</strong> 한다. 연속적인 스캔에서 발생하는 열을 빠르게 방출해야 tube 부하를 줄이고 연속 촬영이 가능하다.</div>
+    <div class="q-answer">정답: ②</div>
+  </div>
+
+  <!-- Q4 -->
+  <div class="q-block">
+    <div class="q-question"><span class="q-num">Q4</span>CT 콜리메이터의 역할로 옳지 않은 것은?</div>
+    <div class="q-choices">
+      <div>① 부채꼴 선속의 각도를 형성하는 primary aperture 역할을 한다.</div>
+      <div>② Tube측 콜리메이터는 슬라이스 두께를 조절한다.</div>
+      <div>③ 검출기측 콜리메이터는 슬라이스 두께 유지와 산란선 감소 역할을 한다.</div>
+      <div>④ 콜리메이터는 CT number의 균일성을 감소시킨다.</div>
+    </div>
+    <div class="q-solution"><span class="label">풀이:</span> 콜리메이터는 산란선을 제거해 <strong>CT number의 균일성과 안정성을 증가</strong>시킨다. 산란선이 많을수록 CT number의 정확성이 떨어진다.</div>
+    <div class="q-answer">정답: ④</div>
+  </div>
+
+  <!-- Q5 -->
+  <div class="q-block">
+    <div class="q-question"><span class="q-num">Q5</span>다음 중 CT 검출기의 구비조건이 <strong>아닌</strong> 것은?</div>
+    <div class="q-choices">
+      <div>① 높은 흡수효율</div>
+      <div>② 좁은 동적범위</div>
+      <div>③ 짧은 잔광(afterglow)과 회복시간</div>
+      <div>④ 온도·습도에 대한 안정성</div>
+    </div>
+    <div class="q-solution"><span class="label">풀이:</span> 검출기의 동적범위(Dynamic range)는 <strong>넓어야</strong> 한다. 약한 신호부터 강한 신호까지 모두 선형적으로 검출해야 밀도 대비가 큰 부위(폐와 뼈 등)를 한 번에 영상화할 수 있다.</div>
+    <div class="q-answer">정답: ②</div>
+  </div>
+
+  <!-- Q6 -->
+  <div class="q-block">
+    <div class="q-question"><span class="q-num">Q6</span>Xenon 가스 검출기의 특성으로 옳지 않은 것은?</div>
+    <div class="q-choices">
+      <div>① X선속 강도에 영향을 받지 않는다.</div>
+      <div>② 잔광(afterglow)이 없다.</div>
+      <div>③ 4세대 장치에 주로 사용된다.</div>
+      <div>④ 단위면적당 많은 수의 설치가 가능하다.</div>
+    </div>
+    <div class="q-solution"><span class="label">풀이:</span> Xenon 가스 검출기는 <strong>3세대 장치에만</strong> 사용되었다. 4세대 장치에는 반도체 검출기가 주로 사용된다. 또한 현재는 안전성 문제로 반도체 검출기가 대세이다.</div>
+    <div class="q-answer">정답: ③</div>
+  </div>
+
+  <!-- Q7 -->
+  <div class="q-block">
+    <div class="q-question"><span class="q-num">Q7</span>MDCT 검출기 중 제조사–구조 연결이 <strong>잘못된</strong> 것은?</div>
+    <div class="q-choices">
+      <div>① GE·Philips — Matrix (Mosaic) 구조</div>
+      <div>② Siemens — Adaptive array (Non-uniform) 구조</div>
+      <div>③ Toshiba — Hybrid (Combination) 구조</div>
+      <div>④ Siemens — 16 × 1.25 mm 균일 배열</div>
+    </div>
+    <div class="q-solution"><span class="label">풀이:</span> 16 × 1.25 mm 균일 배열은 <strong>GE·Philips의 Matrix(Mosaic) 구조</strong>이다. Siemens는 5-2.5-1.5-1-1-1.5-2.5-5 mm의 <strong>비균일(Non-uniform, Adaptive) 배열</strong>을 사용한다.</div>
+    <div class="q-answer">정답: ④</div>
+  </div>
+
+  <!-- Q8 -->
+  <div class="q-block">
+    <div class="q-question"><span class="q-num">Q8</span>그림과 같이 중앙에 1 mm, 양쪽에 순차적으로 1.5 mm, 2.5 mm, 5 mm의 비균일 배열을 가진 MDCT 검출기의 종류는?</div>
+    <div class="q-choices">
+      <div>① Adaptive array type detector</div>
+      <div>② Matrix detector</div>
+      <div>③ Fixed array type</div>
+      <div>④ Combination type detector</div>
+    </div>
+    <div class="q-solution"><span class="label">풀이:</span> 중심은 얇고 가장자리는 두껍게 배열된 <strong>비균일(Non-uniform) 구조</strong>는 <strong>Adaptive Array Detector (AAD)</strong>로, Siemens사가 대표적으로 사용하는 구조이다. 균일 배열인 Matrix(=Fixed array)와 반드시 구분해야 한다.</div>
+    <div class="q-answer">정답: ①</div>
+  </div>
+
+  <!-- Q9 -->
+  <div class="q-block">
+    <div class="q-question"><span class="q-num">Q9</span>Dual Energy CT에 대한 설명으로 옳은 것은?</div>
+    <div class="q-choices">
+      <div>① 80 kV와 140 kV의 두 에너지를 교차 스캔한다.</div>
+      <div>② 고에너지 스캔에서 high mA가 필요하다.</div>
+      <div>③ 두 영상의 에너지 차이는 동일 물질에서 동일한 감약값을 만든다.</div>
+      <div>④ 주로 폐결절 감별 진단에만 사용된다.</div>
+    </div>
+    <div class="q-solution"><span class="label">풀이:</span> Dual Energy CT는 <strong>80 kV + 140 kV 교차 스캔</strong>이 원칙이다. <strong>저에너지(80 kV) 스캔에서 high mA가 필요</strong>하며(광자 감쇠가 크므로), 에너지 차이로 인해 같은 물질에서도 <strong>다른 감약값</strong>이 얻어진다. 주요 응용은 <strong>혈관 내 조영제와 석회화 구분</strong>으로 심혈관 진단에 유용하다.</div>
+    <div class="q-answer">정답: ①</div>
+  </div>
+
+  <!-- Q10 -->
+  <div class="q-block">
+    <div class="q-question"><span class="q-num">Q10</span>DAS(Data Acquisition System)에 대한 설명으로 옳지 않은 것은?</div>
+    <div class="q-choices">
+      <div>① Detector 바로 뒤에 위치한 수십 개의 IC board로 구성된다.</div>
+      <div>② 빛 신호를 아날로그 전기신호로 변환 후 증폭하여 ADC로 디지털화한다.</div>
+      <div>③ 동적범위가 좁을수록 좋다.</div>
+      <div>④ 포화상태가 되면 artifact가 발생한다.</div>
+    </div>
+    <div class="q-solution"><span class="label">풀이:</span> DAS의 <strong>동적범위는 넓을수록</strong> 좋다. 넓은 동적범위는 약한 신호부터 강한 신호까지 정확히 디지털화할 수 있게 해준다. 좁은 동적범위는 신호 포화(saturation)를 유발해 artifact의 원인이 된다.
+    <div class="step"><span class="sl">STEP 1</span>DAS 필요조건 4가지 암기 — 동적범위 ↑ / 포화 X / 노이즈 ↓ / 직선성·안정성 ↑</div>
+    <div class="step"><span class="sl">STEP 2</span>"좁다(narrow)"라는 표현이 보이면 ③처럼 오답일 확률이 매우 높음</div>
+    </div>
+    <div class="q-answer">정답: ③</div>
+  </div>
+
+</section>
+
+<!-- FOOTER -->
+<div style="margin-top:60px; padding-top:20px; border-top:2px double var(--ink); text-align:center; font-size:12px; color:var(--gray); font-style:italic;">
+  본 노트는 <strong>3장_MDCT의_하드웨어_복사본.pdf</strong> (총 58p) 강의자료를 시험 대비용으로 재구성한 자료임.<br>
+  © Radiologic Technology Study Note · Chapter 3 of MDCT Hardware
+</div>
+
+</div>
+</body>
+</html>

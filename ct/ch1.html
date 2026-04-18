@@ -1,0 +1,1448 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CT 기초이론 ― 시험 대비 노트</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;0,9..144,800;1,9..144,400&family=Noto+Serif+KR:wght@400;500;700;900&family=JetBrains+Mono:wght@400;600&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --ink:#1a1f2e;
+  --ink-soft:#2c3444;
+  --paper:#f5f1e8;
+  --paper-warm:#ede6d3;
+  --rule:#3a4152;
+  --accent:#b8312f;       /* 의학 적색 - 핵심 강조 */
+  --accent-deep:#8a1a18;
+  --marine:#1e4d6b;       /* 해군청 - 보조 강조 */
+  --marine-soft:#2d6a8a;
+  --ochre:#c8860d;        /* 오커 - 공식/수치 */
+  --sage:#4a6b4f;         /* 세이지 - 보조 */
+  --line:#2a2f3d;
+  --mute:#6b6758;
+}
+
+*{box-sizing:border-box;margin:0;padding:0}
+
+html{scroll-behavior:smooth}
+
+body{
+  font-family:'Noto Serif KR',serif;
+  background:var(--paper);
+  color:var(--ink);
+  line-height:1.75;
+  font-size:16px;
+  background-image:
+    radial-gradient(circle at 20% 10%, rgba(184,49,47,0.03) 0%, transparent 40%),
+    radial-gradient(circle at 80% 90%, rgba(30,77,107,0.04) 0%, transparent 45%);
+  background-attachment:fixed;
+}
+
+/* ===== HEADER ===== */
+.hero{
+  max-width:1100px;
+  margin:0 auto;
+  padding:80px 60px 40px;
+  border-bottom:2px solid var(--line);
+  position:relative;
+}
+.hero::before{
+  content:"";
+  position:absolute;
+  top:60px;left:60px;right:60px;
+  height:1px;
+  background:var(--line);
+}
+.kicker{
+  font-family:'Fraunces',serif;
+  font-style:italic;
+  font-size:14px;
+  letter-spacing:0.3em;
+  text-transform:uppercase;
+  color:var(--accent);
+  margin-bottom:20px;
+  font-weight:500;
+}
+.hero h1{
+  font-family:'Fraunces',serif;
+  font-weight:800;
+  font-size:clamp(42px,6vw,78px);
+  line-height:0.95;
+  letter-spacing:-0.02em;
+  color:var(--ink);
+  margin-bottom:24px;
+}
+.hero h1 em{
+  font-style:italic;
+  color:var(--accent);
+  font-weight:400;
+}
+.hero .sub{
+  font-family:'Noto Serif KR',serif;
+  font-size:18px;
+  color:var(--ink-soft);
+  max-width:640px;
+  line-height:1.7;
+}
+.meta-row{
+  display:flex;
+  gap:30px;
+  margin-top:40px;
+  padding-top:24px;
+  border-top:1px dashed var(--line);
+  flex-wrap:wrap;
+  font-family:'JetBrains Mono',monospace;
+  font-size:12px;
+  color:var(--mute);
+  letter-spacing:0.05em;
+  text-transform:uppercase;
+}
+.meta-row span strong{color:var(--ink);font-weight:600;margin-right:8px}
+
+/* ===== NAV / TOC ===== */
+.toc{
+  max-width:1100px;
+  margin:0 auto;
+  padding:50px 60px;
+  background:var(--paper-warm);
+  border-bottom:2px solid var(--line);
+}
+.toc-title{
+  font-family:'Fraunces',serif;
+  font-style:italic;
+  font-size:13px;
+  letter-spacing:0.25em;
+  text-transform:uppercase;
+  color:var(--mute);
+  margin-bottom:20px;
+}
+.toc-grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
+  gap:4px 40px;
+}
+.toc-grid a{
+  display:flex;
+  align-items:baseline;
+  gap:14px;
+  padding:10px 0;
+  color:var(--ink);
+  text-decoration:none;
+  border-bottom:1px dotted rgba(42,47,61,0.3);
+  font-size:15px;
+  transition:all 0.2s;
+}
+.toc-grid a:hover{
+  color:var(--accent);
+  padding-left:8px;
+  border-bottom-color:var(--accent);
+}
+.toc-grid a .num{
+  font-family:'JetBrains Mono',monospace;
+  font-size:11px;
+  color:var(--accent);
+  font-weight:600;
+  min-width:32px;
+}
+
+/* ===== MAIN ===== */
+main{
+  max-width:1100px;
+  margin:0 auto;
+  padding:0 60px;
+}
+
+section.chapter{
+  padding:80px 0 40px;
+  border-bottom:1px solid rgba(42,47,61,0.15);
+}
+section.chapter:last-of-type{border-bottom:none}
+
+.chap-head{
+  display:flex;
+  align-items:flex-start;
+  gap:40px;
+  margin-bottom:50px;
+}
+.chap-num{
+  font-family:'Fraunces',serif;
+  font-style:italic;
+  font-weight:400;
+  font-size:92px;
+  line-height:0.8;
+  color:var(--accent);
+  letter-spacing:-0.04em;
+  flex-shrink:0;
+}
+.chap-title-wrap{padding-top:14px}
+.chap-label{
+  font-family:'JetBrains Mono',monospace;
+  font-size:11px;
+  letter-spacing:0.3em;
+  text-transform:uppercase;
+  color:var(--mute);
+  margin-bottom:8px;
+}
+.chap-title{
+  font-family:'Fraunces',serif;
+  font-weight:700;
+  font-size:40px;
+  line-height:1.05;
+  letter-spacing:-0.015em;
+  color:var(--ink);
+}
+
+/* ===== CARDS ===== */
+.concept{
+  background:#fbf8ee;
+  border:1px solid rgba(42,47,61,0.15);
+  padding:32px 36px;
+  margin:20px 0;
+  position:relative;
+}
+.concept::before{
+  content:"";
+  position:absolute;
+  top:0;left:0;
+  width:4px;height:100%;
+  background:var(--accent);
+}
+.concept.marine::before{background:var(--marine)}
+.concept.ochre::before{background:var(--ochre)}
+.concept.sage::before{background:var(--sage)}
+
+.concept h3{
+  font-family:'Fraunces',serif;
+  font-weight:600;
+  font-size:22px;
+  color:var(--ink);
+  margin-bottom:14px;
+  letter-spacing:-0.01em;
+}
+.concept h3 .en{
+  font-style:italic;
+  color:var(--marine);
+  font-weight:400;
+  font-size:18px;
+  margin-left:8px;
+}
+
+.concept p{margin-bottom:10px;color:var(--ink-soft)}
+.concept ul{
+  list-style:none;
+  padding-left:0;
+  margin:12px 0;
+}
+.concept ul li{
+  padding:6px 0 6px 24px;
+  position:relative;
+  color:var(--ink-soft);
+  line-height:1.65;
+}
+.concept ul li::before{
+  content:"—";
+  position:absolute;
+  left:0;
+  color:var(--accent);
+  font-weight:700;
+}
+
+/* ===== HIGHLIGHT ===== */
+.hl{
+  background:linear-gradient(transparent 60%,rgba(200,134,13,0.3) 60%);
+  font-weight:500;
+  padding:0 2px;
+}
+.key{
+  color:var(--accent);
+  font-weight:700;
+}
+.num-val{
+  font-family:'JetBrains Mono',monospace;
+  font-weight:600;
+  color:var(--marine);
+  background:rgba(30,77,107,0.08);
+  padding:2px 8px;
+  border-radius:3px;
+  font-size:0.92em;
+}
+
+/* ===== FORMULA BOX ===== */
+.formula{
+  background:var(--ink);
+  color:var(--paper);
+  padding:28px 36px;
+  margin:20px 0;
+  font-family:'JetBrains Mono',monospace;
+  position:relative;
+  border:1px solid var(--ink);
+}
+.formula::before{
+  content:"FORMULA";
+  position:absolute;
+  top:-1px;left:24px;
+  background:var(--ochre);
+  color:var(--ink);
+  font-size:10px;
+  letter-spacing:0.2em;
+  padding:4px 12px;
+  font-weight:700;
+}
+.formula .eq{
+  font-size:22px;
+  text-align:center;
+  padding:20px 0;
+  font-family:'Fraunces',serif;
+  font-style:italic;
+}
+.formula .leg{
+  font-size:12px;
+  color:rgba(245,241,232,0.7);
+  margin-top:12px;
+  line-height:1.8;
+}
+.formula .leg span{display:block}
+
+/* ===== TABLE ===== */
+.tbl-wrap{
+  margin:24px 0;
+  border:1px solid var(--line);
+  overflow-x:auto;
+}
+table{
+  width:100%;
+  border-collapse:collapse;
+  font-size:14.5px;
+}
+table thead{
+  background:var(--ink);
+  color:var(--paper);
+}
+table th{
+  padding:14px 16px;
+  text-align:left;
+  font-family:'Fraunces',serif;
+  font-weight:600;
+  font-size:14px;
+  letter-spacing:0.02em;
+  border-right:1px solid rgba(245,241,232,0.15);
+}
+table th:last-child{border-right:none}
+table td{
+  padding:12px 16px;
+  border-bottom:1px solid rgba(42,47,61,0.1);
+  border-right:1px solid rgba(42,47,61,0.08);
+  color:var(--ink-soft);
+  vertical-align:top;
+}
+table td:last-child{border-right:none}
+table tbody tr:nth-child(even){background:rgba(237,230,211,0.4)}
+table tbody tr:hover{background:rgba(200,134,13,0.08)}
+
+/* ===== COMPARE GRID ===== */
+.cmp{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:0;
+  margin:24px 0;
+  border:1px solid var(--line);
+}
+.cmp > div{
+  padding:28px 32px;
+}
+.cmp > div:first-child{
+  border-right:1px solid var(--line);
+  background:rgba(184,49,47,0.04);
+}
+.cmp > div:last-child{background:rgba(30,77,107,0.04)}
+.cmp h4{
+  font-family:'Fraunces',serif;
+  font-size:20px;
+  margin-bottom:14px;
+  color:var(--ink);
+  font-weight:600;
+}
+.cmp h4 .tag{
+  font-family:'JetBrains Mono',monospace;
+  font-size:10px;
+  letter-spacing:0.2em;
+  background:var(--accent);
+  color:var(--paper);
+  padding:3px 8px;
+  margin-right:10px;
+  vertical-align:middle;
+  font-weight:600;
+}
+.cmp > div:last-child h4 .tag{background:var(--marine)}
+.cmp ul{list-style:none;padding:0}
+.cmp ul li{
+  padding:5px 0 5px 18px;
+  position:relative;
+  font-size:14.5px;
+  line-height:1.6;
+}
+.cmp ul li::before{
+  content:"▸";
+  position:absolute;
+  left:0;
+  color:var(--ochre);
+}
+
+/* ===== EXAM ALERT ===== */
+.exam{
+  background:var(--ink);
+  color:var(--paper);
+  padding:36px 40px;
+  margin:32px 0;
+  border-left:6px solid var(--accent);
+  position:relative;
+}
+.exam::before{
+  content:"★ 기출 포인트";
+  display:inline-block;
+  font-family:'JetBrains Mono',monospace;
+  font-size:11px;
+  letter-spacing:0.25em;
+  color:var(--accent);
+  font-weight:700;
+  margin-bottom:16px;
+}
+.exam h4{
+  font-family:'Fraunces',serif;
+  font-weight:600;
+  font-size:22px;
+  margin-bottom:16px;
+  color:var(--paper);
+}
+.exam ol{padding-left:24px;margin-top:14px}
+.exam ol li{
+  padding:6px 0;
+  color:rgba(245,241,232,0.92);
+  line-height:1.7;
+}
+.exam ol li strong{color:var(--ochre)}
+
+/* ===== PROBLEM BOX ===== */
+.problem{
+  background:#fbf8ee;
+  border:2px solid var(--ink);
+  padding:32px 36px;
+  margin:24px 0;
+  position:relative;
+}
+.problem::before{
+  content:"예상문제";
+  position:absolute;
+  top:-13px;left:24px;
+  background:var(--ochre);
+  color:var(--ink);
+  font-family:'JetBrains Mono',monospace;
+  font-size:11px;
+  font-weight:700;
+  letter-spacing:0.2em;
+  padding:4px 14px;
+}
+.problem .q{
+  font-family:'Fraunces',serif;
+  font-size:18px;
+  font-weight:500;
+  color:var(--ink);
+  margin-bottom:18px;
+  line-height:1.5;
+}
+.problem .a{
+  background:var(--ink);
+  color:var(--paper);
+  padding:16px 20px;
+  font-family:'JetBrains Mono',monospace;
+  font-size:14px;
+  line-height:1.9;
+  margin-top:14px;
+}
+.problem .a .label{
+  display:inline-block;
+  color:var(--ochre);
+  font-weight:700;
+  margin-right:10px;
+}
+
+/* ===== SOURCE ===== */
+.source{
+  margin-top:18px;
+  padding-top:14px;
+  border-top:1px dashed rgba(42,47,61,0.3);
+  font-family:'JetBrains Mono',monospace;
+  font-size:11px;
+  color:var(--mute);
+  letter-spacing:0.05em;
+}
+.source .pin{color:var(--accent);margin-right:6px}
+
+/* ===== FOOTER ===== */
+footer{
+  max-width:1100px;
+  margin:80px auto 0;
+  padding:50px 60px;
+  background:var(--ink);
+  color:var(--paper);
+  text-align:center;
+}
+footer .stamp{
+  font-family:'Fraunces',serif;
+  font-style:italic;
+  font-size:28px;
+  margin-bottom:10px;
+}
+footer .tag{
+  font-family:'JetBrains Mono',monospace;
+  font-size:11px;
+  letter-spacing:0.25em;
+  color:rgba(245,241,232,0.5);
+  text-transform:uppercase;
+}
+
+/* ===== ANIMATIONS ===== */
+@keyframes rise{
+  from{opacity:0;transform:translateY(20px)}
+  to{opacity:1;transform:translateY(0)}
+}
+.hero > *{animation:rise 0.8s cubic-bezier(0.2,0.6,0.2,1) backwards}
+.hero .kicker{animation-delay:0.1s}
+.hero h1{animation-delay:0.2s}
+.hero .sub{animation-delay:0.35s}
+.hero .meta-row{animation-delay:0.5s}
+
+/* ===== RESPONSIVE ===== */
+@media (max-width:768px){
+  .hero,.toc,main{padding-left:24px;padding-right:24px}
+  footer{padding-left:24px;padding-right:24px}
+  .hero{padding-top:50px}
+  .chap-head{flex-direction:column;gap:8px;margin-bottom:30px}
+  .chap-num{font-size:64px}
+  .chap-title{font-size:28px}
+  .cmp{grid-template-columns:1fr}
+  .cmp > div:first-child{border-right:none;border-bottom:1px solid var(--line)}
+  .concept{padding:24px}
+  .formula{padding:20px 24px}
+  .formula .eq{font-size:16px}
+}
+
+/* ===== TAG CHIPS ===== */
+.chips{
+  display:flex;
+  flex-wrap:wrap;
+  gap:8px;
+  margin:16px 0;
+}
+.chip{
+  font-family:'JetBrains Mono',monospace;
+  font-size:11px;
+  padding:5px 10px;
+  background:var(--paper-warm);
+  border:1px solid rgba(42,47,61,0.2);
+  letter-spacing:0.03em;
+  color:var(--ink-soft);
+}
+.chip.hot{background:var(--accent);color:var(--paper);border-color:var(--accent)}
+
+/* Gen-list */
+.gen-list{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(200px,1fr));
+  gap:0;
+  border:1px solid var(--line);
+  margin:24px 0;
+}
+.gen-list .gen{
+  padding:22px 24px;
+  border-right:1px solid rgba(42,47,61,0.2);
+  border-bottom:1px solid rgba(42,47,61,0.2);
+  background:#fbf8ee;
+}
+.gen-list .gen:nth-child(even){background:rgba(237,230,211,0.5)}
+.gen h5{
+  font-family:'Fraunces',serif;
+  font-weight:700;
+  font-size:20px;
+  color:var(--accent);
+  margin-bottom:10px;
+}
+.gen h5 small{
+  font-family:'JetBrains Mono',monospace;
+  font-size:10px;
+  color:var(--mute);
+  display:block;
+  letter-spacing:0.15em;
+  margin-top:3px;
+  font-weight:400;
+}
+.gen p{font-size:13.5px;line-height:1.65;color:var(--ink-soft);margin-bottom:6px}
+.gen p strong{color:var(--ink)}
+</style>
+</head>
+<body>
+
+<!-- ===================== HERO ===================== -->
+<header class="hero">
+  <div class="kicker">Radiologic Tech · 3rd Year · Exam Cram</div>
+  <h1>CT의 <em>기초이론</em><br>완전 정복 노트</h1>
+  <p class="sub">1장 전체를 시험장에서 꺼내 쓸 수 있는 형태로 재구성했습니다. 개념 정의 · 핵심 수치 · 비교표 · 공식 · 기출 포인트 · 예상문제 순으로 배치하여, 한 번의 훑음으로 시험 대비가 끝나도록 설계했습니다.</p>
+  <div class="meta-row">
+    <span><strong>SOURCE</strong>1장_CT의_기초이론</span>
+    <span><strong>TOPICS</strong>10개 섹션</span>
+    <span><strong>FORMAT</strong>개념→수치→문제</span>
+  </div>
+</header>
+
+<!-- ===================== TOC ===================== -->
+<nav class="toc">
+  <div class="toc-title">— Table of Contents —</div>
+  <div class="toc-grid">
+    <a href="#c1"><span class="num">01</span><span>CT의 개념과 정의</span></a>
+    <a href="#c2"><span class="num">02</span><span>CT의 특성 · 장단점</span></a>
+    <a href="#c3"><span class="num">03</span><span>Scanning Geometry (세대별)</span></a>
+    <a href="#c4"><span class="num">04</span><span>영상화 4단계</span></a>
+    <a href="#c5"><span class="num">05</span><span>감약 · 선감약계수 · 반가층</span></a>
+    <a href="#c6"><span class="num">06</span><span>CT number (Hounsfield Unit)</span></a>
+    <a href="#c7"><span class="num">07</span><span>영상 데이터 획득 방식</span></a>
+    <a href="#c8"><span class="num">08</span><span>픽셀 · 매트릭스 · 복셀 · ROI</span></a>
+    <a href="#c9"><span class="num">09</span><span>Scan data vs Image data</span></a>
+    <a href="#c10"><span class="num">10</span><span>Windowing (WW · WL)</span></a>
+    <a href="#c11"><span class="num">11</span><span>예상문제 모음</span></a>
+  </div>
+</nav>
+
+<main>
+
+<!-- ===================== 01 ===================== -->
+<section class="chapter" id="c1">
+  <div class="chap-head">
+    <div class="chap-num">01</div>
+    <div class="chap-title-wrap">
+      <div class="chap-label">Definition · Principle</div>
+      <h2 class="chap-title">CT의 개념과 정의</h2>
+    </div>
+  </div>
+
+  <div class="concept">
+    <h3>CT란? <span class="en">Computed Tomography</span></h3>
+    <ul>
+      <li>기존의 <span class="key">X선 영상법 + 컴퓨터</span>의 결합에 의한 영상화 방법</li>
+      <li>인체 각 조직의 <span class="hl">감약계수(μ) 차이</span>를 이용</li>
+      <li><span class="key">횡단면(axial)</span> 영상을 기본으로 다방면 재구성 가능</li>
+    </ul>
+    <div class="source"><span class="pin">📚 출처:</span>1장_CT의_기초이론_복사본.pdf, p.4</div>
+  </div>
+
+  <div class="cmp">
+    <div>
+      <h4><span class="tag">한계 1</span>일반 X선 영상</h4>
+      <ul>
+        <li>3차원 구조물을 평면에 투영 → <strong>구조 중첩현상</strong></li>
+        <li>원자번호/두께가 다른 물질의 감약 표현에 한계</li>
+      </ul>
+    </div>
+    <div>
+      <h4><span class="tag">한계 2</span>단층촬영(Tomography)</h4>
+      <ul>
+        <li>X선관-필름 등속 이동으로 목적 단층만 명료화</li>
+        <li>목적부위에도 <strong>흐림현상(blurring)</strong> 발생</li>
+        <li><strong>산란선</strong>으로 인한 대조도 저하</li>
+      </ul>
+    </div>
+  </div>
+  <div class="source"><span class="pin">📚 출처:</span>1장_CT의_기초이론_복사본.pdf, p.5–6</div>
+</section>
+
+<!-- ===================== 02 ===================== -->
+<section class="chapter" id="c2">
+  <div class="chap-head">
+    <div class="chap-num">02</div>
+    <div class="chap-title-wrap">
+      <div class="chap-label">Characteristics · Pros & Cons</div>
+      <h2 class="chap-title">CT의 특성 · 장점 · 제한점</h2>
+    </div>
+  </div>
+
+  <div class="concept ochre">
+    <h3>CT의 7가지 특성</h3>
+    <ul>
+      <li><span class="key">고관전압</span> 이용</li>
+      <li>우수한 해상능</li>
+      <li>우수한 조직 감약계수 분해능 = <span class="hl">대조도 분해능</span></li>
+      <li>얇은 슬라이스 단면 영상 획득</li>
+      <li>해부학적 구조 + 기능적 정보 제공</li>
+      <li>원하는 방향으로 재구성 가능</li>
+      <li>3차원 영상화</li>
+    </ul>
+    <div class="source"><span class="pin">📚 출처:</span>1장_CT의_기초이론_복사본.pdf, p.7</div>
+  </div>
+
+  <div class="exam">
+    <h4>고관전압 기법을 적용하는 이유 <span style="font-size:13px;opacity:0.6">(★빈출)</span></h4>
+    <ol>
+      <li><strong>피사체 투과력 증가</strong> → 검출기 도달 X선량 증가 → 검출효율 극대화</li>
+      <li><strong>관용도(latitude) 넓은</strong> 영상 획득</li>
+      <li>조직의 <strong>감약계수 차 감소</strong></li>
+      <li><strong>선속경화(beam hardening)</strong>로 인한 아티팩트 감소</li>
+      <li>감약계수차가 큰 조직에서 발생하는 아티팩트 감소</li>
+    </ol>
+  </div>
+  <div class="source"><span class="pin">📚 출처:</span>1장_CT의_기초이론_복사본.pdf, p.8</div>
+
+  <div class="cmp">
+    <div>
+      <h4><span class="tag">PROS</span>CT의 장점</h4>
+      <ul>
+        <li>스캔시간 단축 → 1회 조영제 주입으로 <strong>multi-phase</strong> 검사 가능</li>
+        <li>ROI/픽셀 분석 → <strong>정량적 진단</strong></li>
+        <li>비침습적 혈관조영술</li>
+        <li>3D 영상화, perfusion, 가상내시경</li>
+        <li>미세 병변 감별 용이</li>
+      </ul>
+    </div>
+    <div>
+      <h4><span class="tag">CONS</span>CT의 제한점</h4>
+      <ul>
+        <li><strong>방사선 피폭</strong></li>
+        <li>고가의 검사비용</li>
+        <li>조영제 부작용</li>
+        <li>감약계수가 큰 물질에서 <strong>아티팩트</strong> 발생</li>
+      </ul>
+    </div>
+  </div>
+  <div class="source"><span class="pin">📚 출처:</span>1장_CT의_기초이론_복사본.pdf, p.9–10</div>
+</section>
+
+<!-- ===================== 03 ===================== -->
+<section class="chapter" id="c3">
+  <div class="chap-head">
+    <div class="chap-num">03</div>
+    <div class="chap-title-wrap">
+      <div class="chap-label">Scanning Geometry</div>
+      <h2 class="chap-title">세대별 CT 장치</h2>
+    </div>
+  </div>
+
+  <p style="font-size:15px;color:var(--ink-soft);margin-bottom:12px">감약된 X선을 검출기에서 획득하는 방식에 따라 세대별로 구분. <span class="key">빔 형태, 검출기 수, 운동 방식</span>이 핵심 비교 포인트.</p>
+
+  <div class="gen-list">
+    <div class="gen">
+      <h5>1세대<small>1ST GENERATION</small></h5>
+      <p><strong>빔:</strong> Parallel beam (연필형)</p>
+      <p><strong>검출기:</strong> 1–2개</p>
+      <p><strong>운동:</strong> 회전 + 직선</p>
+      <p><strong>용도:</strong> 두부 전용</p>
+    </div>
+    <div class="gen">
+      <h5>2세대<small>2ND GENERATION</small></h5>
+      <p><strong>빔:</strong> Fan beam (좁은 부채형)</p>
+      <p><strong>검출기:</strong> 수십 개</p>
+      <p><strong>운동:</strong> 회전 + 직선</p>
+      <p><strong>특징:</strong> Bowtie filter 도입</p>
+    </div>
+    <div class="gen">
+      <h5>3세대<small>3RD GENERATION</small></h5>
+      <p><strong>빔:</strong> Rotating Fan beam (넓은 부채형)</p>
+      <p><strong>검출기:</strong> 수백 개</p>
+      <p><strong>운동:</strong> 회전 + 회전</p>
+      <p><strong>특징:</strong> <span style="color:var(--accent);font-weight:600">Ring artifact 발생</span></p>
+    </div>
+    <div class="gen">
+      <h5>4세대<small>4TH GENERATION</small></h5>
+      <p><strong>빔:</strong> Rotating/Nutating Fan beam</p>
+      <p><strong>검출기:</strong> 수천 개</p>
+      <p><strong>운동:</strong> 회전 + 고정</p>
+    </div>
+    <div class="gen">
+      <h5>5세대<small>5TH GENERATION</small></h5>
+      <p><strong>빔:</strong> Electron beam (EBCT)</p>
+      <p><strong>검출기:</strong> <span class="num-val">1,296개</span></p>
+      <p><strong>운동:</strong> 고정 + 고정</p>
+      <p><strong>특징:</strong> 전자총 사용</p>
+    </div>
+    <div class="gen" style="background:rgba(184,49,47,0.08)">
+      <h5>Helical<small>HELICAL / SPIRAL</small></h5>
+      <p><strong>원리:</strong> 나선형 스캔</p>
+      <p><strong>핵심:</strong> <span class="key">Slip ring + brush</span></p>
+      <p><strong>장점:</strong> 외부 고압케이블 제거 → 연속회전</p>
+      <p>X선관 회전 중 <strong>테이블 동시 이동</strong></p>
+    </div>
+  </div>
+
+  <div class="exam">
+    <h4>세대별 핵심 암기표</h4>
+    <ol>
+      <li>검출기 수 증가 순서: <strong>1–2개 → 수십 → 수백 → 수천 → 1,296개(EBCT)</strong></li>
+      <li><strong>Ring artifact</strong> = 3세대의 대표 결점 (회전/회전 운동)</li>
+      <li><strong>Bowtie filter</strong> 최초 도입 = 2세대</li>
+      <li><strong>Slip ring 기술</strong> = Helical CT의 핵심 (연속회전 가능케 함)</li>
+      <li><strong>5세대 EBCT</strong> = X선관과 검출기 모두 <strong>고정</strong> (전자선 편향으로 영상 획득)</li>
+    </ol>
+  </div>
+  <div class="source"><span class="pin">📚 출처:</span>1장_CT의_기초이론_복사본.pdf, p.11–18</div>
+</section>
+
+<!-- ===================== 04 ===================== -->
+<section class="chapter" id="c4">
+  <div class="chap-head">
+    <div class="chap-num">04</div>
+    <div class="chap-title-wrap">
+      <div class="chap-label">Imaging Chain</div>
+      <h2 class="chap-title">CT 영상화의 4단계</h2>
+    </div>
+  </div>
+
+  <div class="tbl-wrap">
+    <table>
+      <thead>
+        <tr><th style="width:60px">단계</th><th>과정</th><th>주요 내용</th></tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>①</strong></td>
+          <td><strong>X선 발생</strong></td>
+          <td>필라멘트 가열 → 열전자 방출 → 회전양극 타깃 충돌 → X선 발생 (일반 X선과 동일)</td>
+        </tr>
+        <tr>
+          <td><strong>②</strong></td>
+          <td><strong>감약 데이터 획득</strong></td>
+          <td>Detector array + <span class="key">DAS</span>(Data Acquisition System) → 아날로그 신호 → 증폭 → <span class="key">ADC</span>로 디지털 변환</td>
+        </tr>
+        <tr>
+          <td><strong>③</strong></td>
+          <td><strong>데이터 처리</strong></td>
+          <td>전처리 → 재구성 → Convolution(필터링) → 후처리</td>
+        </tr>
+        <tr>
+          <td><strong>④</strong></td>
+          <td><strong>영상 표시/저장</strong></td>
+          <td>모니터 표시 또는 하드카피</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="concept marine">
+    <h3>③ 데이터 처리의 세부 단계</h3>
+    <ul>
+      <li><strong>전처리(Pre-processing):</strong> 측정값(measurement data)을 raw data로 변환 · 데이터 교정</li>
+      <li><strong>영상 재구성:</strong> Scan data → CT number로 변환 (수치화된 디지털 영상)</li>
+      <li><strong>Convolution:</strong> 검사 목적/해부학적 특성에 맞게 필터링 — <em>Standard · Bone · Soft tissue</em> 알고리즘</li>
+      <li><strong>후처리:</strong> 부가적 영상처리</li>
+    </ul>
+  </div>
+  <div class="source"><span class="pin">📚 출처:</span>1장_CT의_기초이론_복사본.pdf, p.19–28</div>
+
+  <div class="concept">
+    <h3>영상 표시의 한계와 Gray Scale</h3>
+    <ul>
+      <li>CT 시스템: 약 <span class="num-val">4,000개의 HU</span> 존재</li>
+      <li>모니터: <span class="num-val">256개 음영</span>만 표시 가능</li>
+      <li>→ 이를 극복하기 위해 <span class="key">Gray scale + Windowing</span> 기법 사용</li>
+    </ul>
+    <div class="source"><span class="pin">📚 출처:</span>1장_CT의_기초이론_복사본.pdf, p.29</div>
+  </div>
+</section>
+
+<!-- ===================== 05 ===================== -->
+<section class="chapter" id="c5">
+  <div class="chap-head">
+    <div class="chap-num">05</div>
+    <div class="chap-title-wrap">
+      <div class="chap-label">Attenuation Physics</div>
+      <h2 class="chap-title">감약 · 선감약계수 · 반가층</h2>
+    </div>
+  </div>
+
+  <div class="concept">
+    <h3>감약(Attenuation) <span class="en">Attenuation</span></h3>
+    <p>X선이 물질을 투과할 때 흡수되거나 산란되어 <span class="key">X선 강도가 낮아지는 현상</span>.</p>
+    <div class="formula" style="margin-top:16px">
+      <div class="eq">X선 강도 = 광자수(Quantity, 양) × 광자 에너지(Quality, 질)</div>
+    </div>
+    <p style="margin-top:12px"><strong>감약에 영향을 미치는 4인자:</strong></p>
+    <ul>
+      <li>X선 광자 <strong>에너지</strong></li>
+      <li>조직의 <strong>밀도</strong></li>
+      <li>조직의 <strong>원자번호</strong></li>
+      <li>물질의 <strong>단위중량당 전자 수</strong></li>
+    </ul>
+    <div class="source"><span class="pin">📚 출처:</span>1장_CT의_기초이론_복사본.pdf, p.32–33</div>
+  </div>
+
+  <div class="cmp">
+    <div>
+      <h4><span class="tag">MONO</span>단색방사선</h4>
+      <ul>
+        <li>균등방사선 (homogeneous)</li>
+        <li>광자수가 <strong>균일하게</strong> 감소</li>
+        <li>최초 에너지 = 투과 후 에너지</li>
+        <li><strong>감약공식 성립</strong></li>
+      </ul>
+      <div class="formula" style="margin-top:12px"><div class="eq" style="font-size:18px">I = I₀ e<sup>−μx</sup></div></div>
+    </div>
+    <div>
+      <h4><span class="tag">POLY</span>다색방사선</h4>
+      <ul>
+        <li>불균등방사선 (heterogeneous)</li>
+        <li>광자수가 <strong>불균일하게</strong> 감소</li>
+        <li>투과 후 에너지 <strong>&gt;</strong> 최초 에너지 (평균)</li>
+        <li><strong>감약공식 성립 안됨</strong> → <span class="key">선속경화</span></li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="concept accent">
+    <h3>선속경화 현상 <span class="en">Beam Hardening</span></h3>
+    <ul>
+      <li>X선 진행 시 <strong>낮은 에너지 대역</strong>의 X선이 높은 에너지 대역보다 <span class="key">상대적으로 더 많이 감쇠</span></li>
+      <li>결과: X선의 <strong>평균 에너지가 증가</strong>하는 현상</li>
+    </ul>
+    <div class="source"><span class="pin">📚 출처:</span>1장_CT의_기초이론_복사본.pdf, p.34–36</div>
+  </div>
+
+  <div class="concept marine">
+    <h3>선감약계수(μ) <span class="en">Linear Attenuation Coefficient</span></h3>
+    <ul>
+      <li>일정한 두께의 물질을 투과할 때 <strong>감소된 광자의 비율</strong></li>
+      <li><span class="key">단색방사선에만 적용</span></li>
+      <li>단위: <span class="num-val">cm⁻¹</span></li>
+    </ul>
+    <div class="formula"><div class="eq">N = N₀ · e<sup>−(μ₁+μ₂+⋯+μₙ)x</sup></div></div>
+  </div>
+
+  <div class="tbl-wrap">
+    <table>
+      <thead>
+        <tr><th>인체조직</th><th>60 keV (cm⁻¹)</th><th>73 keV (cm⁻¹)</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>뼈</td><td>0.612</td><td>0.380</td></tr>
+        <tr><td>물</td><td>0.223</td><td>0.190</td></tr>
+        <tr><td>조직</td><td>0.218</td><td>0.200</td></tr>
+        <tr><td>근육</td><td>0.216</td><td>0.198</td></tr>
+        <tr><td>지방</td><td>0.189</td><td>0.171</td></tr>
+        <tr><td>공기</td><td>0.0003</td><td>0.0002</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="source"><span class="pin">📚 출처:</span>1장_CT의_기초이론_복사본.pdf, p.37–38</div>
+
+  <div class="cmp">
+    <div>
+      <h4><span class="tag">HVL</span>반가층</h4>
+      <ul>
+        <li>조사된 X선속 강도가 <strong>반</strong>으로 되는 데 필요한 물질의 두께</li>
+        <li><span class="key">X선의 질(quality)</span>을 나타내는 지표</li>
+      </ul>
+    </div>
+    <div>
+      <h4><span class="tag">MASS</span>질량감약계수</h4>
+      <ul>
+        <li>선감약계수는 <strong>같은 물질이라도 밀도에 따라 변화</strong></li>
+        <li>계산: μ ÷ 밀도 <span class="num-val">[cm²/g]</span></li>
+        <li><strong>물리적 상태와 무관</strong>하게 항상 일정</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="tbl-wrap">
+    <table>
+      <thead>
+        <tr><th>물질</th><th>선감약계수 (cm⁻¹)</th><th>질량감약계수 (cm²/g)</th><th>밀도 (g/cm³)</th><th>1g/cm² 두께</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>물</td><td>0.214</td><td><strong style="color:var(--accent)">0.214</strong></td><td>1</td><td>1 cm</td></tr>
+        <tr><td>얼음</td><td>0.196</td><td><strong style="color:var(--accent)">0.214</strong></td><td>0.917</td><td>1.09 cm</td></tr>
+        <tr><td>수증기</td><td>0.000128</td><td><strong style="color:var(--accent)">0.214</strong></td><td>0.00598</td><td>1,670 cm</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p style="font-size:14px;color:var(--mute);margin-top:8px"><em>※ 물·얼음·수증기는 <strong>H₂O로 동일</strong> → 선감약계수는 모두 다르지만 <span style="color:var(--accent);font-weight:600">질량감약계수는 0.214로 동일</span>.</em></p>
+  <div class="source"><span class="pin">📚 출처:</span>1장_CT의_기초이론_복사본.pdf, p.39–41</div>
+</section>
+
+<!-- ===================== 06 ===================== -->
+<section class="chapter" id="c6">
+  <div class="chap-head">
+    <div class="chap-num">06</div>
+    <div class="chap-title-wrap">
+      <div class="chap-label">Hounsfield Unit</div>
+      <h2 class="chap-title">CT number (HU)</h2>
+    </div>
+  </div>
+
+  <div class="concept">
+    <h3>CT number의 정의 <span class="en">Hounsfield Unit</span></h3>
+    <ul>
+      <li>CT 영상을 구성하는 <span class="key">단위</span></li>
+      <li>컴퓨터가 인체조직의 Matrix 수만큼 선감약계수를 측정·계산</li>
+      <li><span class="hl">물을 기준(0)으로 하여</span> 상대치로 나타낸 값</li>
+    </ul>
+
+    <div class="formula">
+      <div class="eq">CT Number = k × (μₜ − μw) / μw</div>
+      <div class="leg">
+        <span>μₜ = 조직의 선감약계수</span>
+        <span>μw = 물의 선감약계수</span>
+        <span>k = 확대정수 (contrast factor / scaling factor) — 일반적으로 1,000</span>
+      </div>
+    </div>
+    <div class="source"><span class="pin">📚 출처:</span>1장_CT의_기초이론_복사본.pdf, p.42, 44</div>
+  </div>
+
+  <div class="concept ochre">
+    <h3>기준 HU 값 (암기 필수)</h3>
+    <div class="chips">
+      <span class="chip hot">공기 = −1,000</span>
+      <span class="chip hot">물 = 0 (기준)</span>
+      <span class="chip hot">뼈 · 조영제 = +1,000</span>
+      <span class="chip hot">금속 = +2,000 ~ +4,000</span>
+    </div>
+    <p style="margin-top:10px;font-size:14px">Gray scale: <strong>HU값이 클수록 밝은 음영</strong>, 작을수록 어둡게 표시.</p>
+  </div>
+
+  <div class="tbl-wrap">
+    <table>
+      <thead>
+        <tr><th>조직</th><th>CT number</th><th>조직</th><th>CT number</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>뼈(피질)</td><td><strong>250 이상</strong></td><td>림프절</td><td>45 ± 10</td></tr>
+        <tr><td>뼈(수질, pulp)</td><td>130 ± 100</td><td>췌장</td><td>40 ± 10</td></tr>
+        <tr><td>갑상선</td><td>70 ± 10</td><td>신장</td><td>30 ± 10</td></tr>
+        <tr><td>간</td><td>50 ± 10</td><td>지방</td><td><strong>−100 ± 10</strong></td></tr>
+        <tr><td>근육</td><td>45 ± 5</td><td>혈액</td><td>40 ± 10</td></tr>
+        <tr><td>비장</td><td>45 ± 5</td><td>응고된 혈액</td><td><strong>80 ± 10</strong></td></tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="source"><span class="pin">📚 출처:</span>1장_CT의_기초이론_복사본.pdf, p.43</div>
+
+  <div class="exam">
+    <h4>CT number 영향 인자 (중요도 순)</h4>
+    <ol>
+      <li><strong>선속 에너지</strong> — <span style="color:var(--ochre)">가장 큰 영향</span></li>
+      <li>피사체 <strong>원자번호</strong></li>
+      <li>피사체 <strong>조직 밀도</strong></li>
+      <li><strong>조영 증강도</strong></li>
+    </ol>
+  </div>
+  <div class="source"><span class="pin">📚 출처:</span>1장_CT의_기초이론_복사본.pdf, p.46</div>
+
+  <div class="problem">
+    <div class="q">[기출 예제] 어떤 조직의 선감약계수가 <strong>0.247</strong>일 때 CT number 값은? <br><span style="font-size:14px;color:var(--mute)">(단, 물 선감약계수 0.190, 뼈 감약계수 0.380)</span></div>
+    <div class="a">
+      <div><span class="label">STEP 1</span>CT No = 1000 × (0.247 − 0.190) / 0.190</div>
+      <div><span class="label">STEP 2</span>= 1000 × (0.057 / 0.190)</div>
+      <div><span class="label">STEP 3</span>= 5,700 / 19</div>
+      <div><span class="label">정답</span><span style="color:var(--ochre);font-size:18px;font-weight:700">= 300 HU</span></div>
+    </div>
+  </div>
+  <div class="source"><span class="pin">📚 출처:</span>1장_CT의_기초이론_복사본.pdf, p.45</div>
+</section>
+
+<!-- ===================== 07 ===================== -->
+<section class="chapter" id="c7">
+  <div class="chap-head">
+    <div class="chap-num">07</div>
+    <div class="chap-title-wrap">
+      <div class="chap-label">Data Acquisition Modes</div>
+      <h2 class="chap-title">영상 데이터 획득 방식</h2>
+    </div>
+  </div>
+
+  <div class="tbl-wrap">
+    <table>
+      <thead>
+        <tr><th>방식</th><th>원리</th><th>특징 / 용어</th></tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>Axial scan</strong><br>(Conventional)</td>
+          <td>테이블 <span class="key">고정</span> 상태로 X선관 회전 → 한 단면 데이터 획득</td>
+          <td><span class="hl">Step and shoot</span>, ISD (Inter Scan Delay, slice by slice)</td>
+        </tr>
+        <tr>
+          <td><strong>Cluster scan</strong></td>
+          <td>스캔 부위를 몇 단계로 나누어 그룹 사이에 환자 호흡 허용</td>
+          <td>FOV 설정 → 숨참고 촬영, <span class="hl">IGD (Inter Group Delay)</span></td>
+        </tr>
+        <tr>
+          <td><strong>Volume scan</strong></td>
+          <td><span class="key">나선형 스캔</span>을 통한 체적 데이터 획득</td>
+          <td>한 번의 호흡정지로 넓은 범위 스캔</td>
+        </tr>
+        <tr>
+          <td><strong>Cine scan</strong></td>
+          <td>동일 위치에서 임의의 시간 간격으로 <span class="key">연속 스캔</span></td>
+          <td>Stationary dynamic scan<br>혈관조영검사, CT guided biopsy</td>
+        </tr>
+        <tr>
+          <td><strong>Dynamic scan</strong></td>
+          <td>Cine와 동일 개념, <strong>테이블이 움직이는 동안</strong> 연속 스캔</td>
+          <td>조영증강의 시간적 변화 관찰</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="cmp">
+    <div>
+      <h4><span class="tag">AXIAL</span>Axial Scan</h4>
+      <ul>
+        <li>호흡정지 — 촬영 — <strong>호흡</strong> — 호흡정지 — 촬영…</li>
+        <li>슬라이스 사이 <strong>간격 존재</strong></li>
+        <li>Step and shoot 방식</li>
+      </ul>
+    </div>
+    <div>
+      <h4><span class="tag">VOLUME</span>Volume(Helical) Scan</h4>
+      <ul>
+        <li>1회 호흡정지로 <strong>연속 스캔</strong></li>
+        <li>슬라이스 사이 간격 없음 → 체적 데이터</li>
+        <li>Table 이동 + Gantry 연속회전</li>
+      </ul>
+    </div>
+  </div>
+  <div class="source"><span class="pin">📚 출처:</span>1장_CT의_기초이론_복사본.pdf, p.47–54</div>
+</section>
+
+<!-- ===================== 08 ===================== -->
+<section class="chapter" id="c8">
+  <div class="chap-head">
+    <div class="chap-num">08</div>
+    <div class="chap-title-wrap">
+      <div class="chap-label">Image Composition</div>
+      <h2 class="chap-title">픽셀 · 매트릭스 · 복셀 · ROI</h2>
+    </div>
+  </div>
+
+  <div class="concept">
+    <h3>슬라이스 두께와 간격 <span class="en">Slice Thickness & Interval</span></h3>
+    <ul>
+      <li><strong>두께:</strong> 인체 횡단면의 두께 (<span class="num-val">1 ~ 10 mm</span>)</li>
+      <li><strong>간격:</strong> 한 슬라이스 중앙 → 다음 슬라이스 중앙까지의 거리 (<span class="num-val">1 ~ 수십 mm</span>)</li>
+    </ul>
+    <div class="source"><span class="pin">📚 출처:</span>1장_CT의_기초이론_복사본.pdf, p.57</div>
+  </div>
+
+  <div class="concept marine">
+    <h3>픽셀 <span class="en">Pixel (Picture Element)</span></h3>
+    <ul>
+      <li>영상을 구성하는 <span class="key">최소 단위</span></li>
+      <li>해부학적인 한 조각을 표현</li>
+      <li><strong>픽셀 크기가 작을수록</strong> 작은 조직 해부학 우수</li>
+      <li>영상 모니터에서 gray scale의 한 점으로 표시</li>
+    </ul>
+    <div class="formula">
+      <div class="eq">픽셀 크기 = scan FOV / (매트릭스 크기 × zoom factor) = display FOV / 매트릭스 크기</div>
+    </div>
+    <div class="source"><span class="pin">📚 출처:</span>1장_CT의_기초이론_복사본.pdf, p.58</div>
+  </div>
+
+  <div class="concept">
+    <h3>매트릭스 <span class="en">Matrix</span></h3>
+    <ul>
+      <li>가로열 × 세로열의 <strong>2차원 픽셀 배열</strong></li>
+      <li>종류: <span class="num-val">256×256</span>, <span class="num-val">320×320</span>, <span class="num-val">512×512</span></li>
+      <li>256×256 매트릭스 = 총 <strong>65,536개 픽셀</strong></li>
+    </ul>
+    <div class="source"><span class="pin">📚 출처:</span>1장_CT의_기초이론_복사본.pdf, p.59</div>
+  </div>
+
+  <div class="concept sage">
+    <h3>ROI <span class="en">Region of Interest</span></h3>
+    <ul>
+      <li>계측 목적으로 영상에 설정되는 <strong>2차원 영역</strong></li>
+      <li>구성: 원형, 타원형, 사각형, trace</li>
+      <li>ROI 설정 → <span class="key">CT HU, 노이즈 측정</span> 가능</li>
+    </ul>
+    <div class="source"><span class="pin">📚 출처:</span>1장_CT의_기초이론_복사본.pdf, p.66</div>
+  </div>
+</section>
+
+<!-- ===================== 09 ===================== -->
+<section class="chapter" id="c9">
+  <div class="chap-head">
+    <div class="chap-num">09</div>
+    <div class="chap-title-wrap">
+      <div class="chap-label">Data Types</div>
+      <h2 class="chap-title">Scan data vs Image data</h2>
+    </div>
+  </div>
+
+  <div class="cmp">
+    <div>
+      <h4><span class="tag">RAW</span>Scan data (= Raw data)</h4>
+      <ul>
+        <li>환자 투과 후 검출기에 포획된 <strong>감약 데이터</strong></li>
+        <li>또는 전처리 후 <strong>재구성 전</strong> 상태</li>
+        <li>형태: <span class="key">Sinogram</span></li>
+        <li>주파수 영역 데이터</li>
+      </ul>
+    </div>
+    <div>
+      <h4><span class="tag">IMG</span>Image data</h4>
+      <ul>
+        <li><strong>공간 영역</strong>의 데이터 (눈으로 볼 수 있음)</li>
+        <li>재구성 처리 후 digital로 변환</li>
+        <li><strong>CT number로 표현</strong>된 데이터</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="concept accent">
+    <h3>데이터 크기 비교</h3>
+    <ul>
+      <li><span class="hl" style="font-size:18px;font-weight:600">Raw data 양 &gt; Image data 양</span></li>
+      <li>→ Raw data에서 FBP(Filtered Back Projection)를 통해 image data 재구성</li>
+    </ul>
+    <div class="source"><span class="pin">📚 출처:</span>1장_CT의_기초이론_복사본.pdf, p.60–62</div>
+  </div>
+
+  <div class="tbl-wrap">
+    <table>
+      <thead>
+        <tr><th>용어</th><th>정의</th></tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>Construction</strong></td>
+          <td>X선관 고정, slit 형태 X선 노출, 테이블 이동하며 영상 획득 → <span class="key">Scout 영상</span>처럼 스캔 즉시 영상 구성</td>
+        </tr>
+        <tr>
+          <td><strong>Reconstruction</strong></td>
+          <td><span class="key">역투영법(Back projection)</span> 등 재구성 기법으로 각 방향의 프로필 데이터 중첩 → <strong>Axial 영상</strong> 획득</td>
+        </tr>
+        <tr>
+          <td><strong>Reformation</strong></td>
+          <td>재구성된 Axial 영상을 이용하여 <strong>Coronal · Sagittal · Oblique</strong> 영상으로 변환</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="source"><span class="pin">📚 출처:</span>1장_CT의_기초이론_복사본.pdf, p.63–65</div>
+</section>
+
+<!-- ===================== 10 ===================== -->
+<section class="chapter" id="c10">
+  <div class="chap-head">
+    <div class="chap-num">10</div>
+    <div class="chap-title-wrap">
+      <div class="chap-label">Windowing</div>
+      <h2 class="chap-title">Window Width & Level</h2>
+    </div>
+  </div>
+
+  <div class="cmp">
+    <div>
+      <h4><span class="tag">CT</span>CT 장치 Gray Scale</h4>
+      <ul>
+        <li><strong>12 bit</strong></li>
+        <li>총 <span class="num-val">4,096 단계</span></li>
+        <li>범위: <strong>−1,024 ~ +3,071</strong></li>
+      </ul>
+    </div>
+    <div>
+      <h4><span class="tag">MON</span>모니터 Gray Scale</h4>
+      <ul>
+        <li><strong>8 bit</strong></li>
+        <li>총 <span class="num-val">256 단계</span></li>
+        <li>범위: <strong>0 ~ 255</strong></li>
+      </ul>
+    </div>
+  </div>
+  <div class="source"><span class="pin">📚 출처:</span>1장_CT의_기초이론_복사본.pdf, p.70</div>
+
+  <div class="concept">
+    <h3>Window Width (WW, 색소 폭)</h3>
+    <ul>
+      <li>CRT에 흑백으로 표시되는 <span class="key">CT No의 범위</span></li>
+      <li>영상의 농도 범위 = <span class="hl">Gray scale</span></li>
+      <li>WW가 높은 곳은 <strong>흰색</strong>, 낮은 곳은 <strong>검은색</strong></li>
+      <li>CT 영상의 <span class="key">Contrast(대조도)</span>를 결정</li>
+      <li>WW 작을수록 표시되는 CT No 폭이 좁고, 클수록 넓다</li>
+    </ul>
+  </div>
+
+  <div class="concept marine">
+    <h3>Window Level (WL, 색소 치)</h3>
+    <ul>
+      <li>Window 폭 범위의 <span class="key">중앙치</span></li>
+      <li>명암(density) 준위 → 농도 변화</li>
+      <li>직접 관련 인자: <span class="hl">X선 흡수치(선감약계수)</span></li>
+      <li>WL 작을수록 WW 내 CT No 수가 낮고, 클수록 높아짐</li>
+    </ul>
+  </div>
+  <div class="source"><span class="pin">📚 출처:</span>1장_CT의_기초이론_복사본.pdf, p.71–73</div>
+
+  <div class="cmp">
+    <div>
+      <h4><span class="tag">WW↑</span>Window Width ↑ (넓게)</h4>
+      <ul>
+        <li>Gray scale <strong style="color:var(--accent)">증가</strong></li>
+        <li>Contrast(대조도) <strong style="color:var(--marine)">저하</strong></li>
+        <li>흑색·백색이 약해짐</li>
+        <li>Resolution(해상력) <strong style="color:var(--marine)">저하</strong></li>
+        <li>비슷한 조직 식별능 <strong style="color:var(--marine)">저하</strong></li>
+      </ul>
+    </div>
+    <div>
+      <h4><span class="tag">WW↓</span>Window Width ↓ (좁게)</h4>
+      <ul>
+        <li>Gray scale <strong style="color:var(--marine)">감소</strong></li>
+        <li>Contrast(대조도) <strong style="color:var(--accent)">증가</strong></li>
+        <li>흑색·백색이 강해짐</li>
+        <li>Resolution(해상력) <strong style="color:var(--accent)">증가</strong></li>
+        <li>비슷한 조직 식별능 <strong style="color:var(--accent)">증가</strong></li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="cmp">
+    <div>
+      <h4><span class="tag">WL↑</span>Window Level ↑ (높이면)</h4>
+      <ul>
+        <li>영상이 <strong>어두워짐</strong></li>
+        <li><span class="key">Bone</span>처럼 X선 흡수도가 높은(μ 큰) 조직이 잘 관찰</li>
+      </ul>
+    </div>
+    <div>
+      <h4><span class="tag">WL↓</span>Window Level ↓ (낮추면)</h4>
+      <ul>
+        <li>영상이 <strong>밝아짐</strong></li>
+        <li><span class="key">공기 · 지방</span>처럼 X선 흡수도가 낮은(μ 작은) 조직이 잘 관찰</li>
+      </ul>
+    </div>
+  </div>
+  <div class="source"><span class="pin">📚 출처:</span>1장_CT의_기초이론_복사본.pdf, p.74–78</div>
+
+  <div class="concept ochre">
+    <h3>부위별 Window Setting ★ 암기 필수 ★</h3>
+    <div class="tbl-wrap" style="margin-top:12px">
+      <table>
+        <thead>
+          <tr><th>부위</th><th>Window Width</th><th>Window Level</th></tr>
+        </thead>
+        <tbody>
+          <tr><td><strong>뇌 실질조직</strong> (Brain)</td><td>80 ~ 100</td><td>0 ~ 30</td></tr>
+          <tr><td>복부 연부조직</td><td>300 ~ 350</td><td>0 ~ 30</td></tr>
+          <tr><td>간 (Narrow)</td><td>70 ~ 100</td><td>50 ~ 80</td></tr>
+          <tr><td>흉부 Mediastinal</td><td>400 ~ 500</td><td>0 ~ 100</td></tr>
+          <tr style="background:rgba(184,49,47,0.08)"><td><strong>Lung</strong></td><td><strong>1,000 ~ 1,500</strong></td><td><strong>−700 ~ −1,000</strong></td></tr>
+          <tr><td><strong>Bone</strong></td><td>1,000 ~ 2,000</td><td>200 ~ 300</td></tr>
+          <tr><td>Temporal bone</td><td><strong>3,000 ~ 4,000</strong></td><td>200 ~ 300</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+  <div class="source"><span class="pin">📚 출처:</span>1장_CT의_기초이론_복사본.pdf, p.80</div>
+</section>
+
+<!-- ===================== 11 예상문제 ===================== -->
+<section class="chapter" id="c11">
+  <div class="chap-head">
+    <div class="chap-num">11</div>
+    <div class="chap-title-wrap">
+      <div class="chap-label">Practice Problems</div>
+      <h2 class="chap-title">예상문제 모음</h2>
+    </div>
+  </div>
+
+  <div class="problem">
+    <div class="q">Q1. CT 시스템의 gray scale은 약 <strong>4,000개의 HU</strong>를 갖는데, 모니터에서는 몇 단계의 음영만 표시 가능한가?</div>
+    <div class="a">
+      <div><span class="label">A</span>256 단계 (8 bit)</div>
+      <div><span class="label">∴</span>Gray scale + Windowing 기법으로 극복</div>
+    </div>
+  </div>
+
+  <div class="problem">
+    <div class="q">Q2. 어떤 조직의 선감약계수 μₜ = <strong>0.285</strong>, 물의 선감약계수 μw = <strong>0.190</strong>일 때 CT number는? (k=1,000)</div>
+    <div class="a">
+      <div><span class="label">풀이</span>CT No = 1000 × (0.285 − 0.190) / 0.190</div>
+      <div><span class="label"></span>= 1000 × 0.095 / 0.190</div>
+      <div><span class="label">정답</span><span style="color:var(--ochre);font-weight:700">= 500 HU</span></div>
+    </div>
+  </div>
+
+  <div class="problem">
+    <div class="q">Q3. 3세대 CT 장치에서 발생하는 대표적인 아티팩트는?</div>
+    <div class="a">
+      <div><span class="label">A</span>Ring artifact (원형 아티팩트)</div>
+      <div><span class="label">이유</span>회전/회전 운동 + 검출기 고장으로 원형 무늬 발생</div>
+    </div>
+  </div>
+
+  <div class="problem">
+    <div class="q">Q4. Helical CT에서 외부 고압케이블을 제거하고 연속회전을 가능하게 한 핵심 기술은?</div>
+    <div class="a">
+      <div><span class="label">A</span>Slip ring + Brush 구조</div>
+    </div>
+  </div>
+
+  <div class="problem">
+    <div class="q">Q5. 물(μ=0.214), 얼음(μ=0.196), 수증기(μ=0.000128)의 질량감약계수는 어떤 관계인가?</div>
+    <div class="a">
+      <div><span class="label">A</span>모두 동일 = <strong>0.214 cm²/g</strong></div>
+      <div><span class="label">∴</span>H₂O라는 <strong>동일 물질</strong>이므로 물리적 상태(밀도)와 무관하게 질량감약계수는 일정</div>
+    </div>
+  </div>
+
+  <div class="problem">
+    <div class="q">Q6. Lung window의 표준 setting 값은?</div>
+    <div class="a">
+      <div><span class="label">WW</span>1,000 ~ 1,500</div>
+      <div><span class="label">WL</span>−700 ~ −1,000</div>
+    </div>
+  </div>
+
+  <div class="problem">
+    <div class="q">Q7. Window Width를 <strong>좁게</strong> 설정했을 때 영상 변화 5가지?</div>
+    <div class="a">
+      <div><span class="label">①</span>Gray scale 감소</div>
+      <div><span class="label">②</span>Contrast(대조도) 증가</div>
+      <div><span class="label">③</span>흑색·백색 강해짐</div>
+      <div><span class="label">④</span>Resolution 증가</div>
+      <div><span class="label">⑤</span>비슷한 조직 식별능 증가</div>
+    </div>
+  </div>
+
+  <div class="problem">
+    <div class="q">Q8. CT number에 가장 큰 영향을 주는 인자는?</div>
+    <div class="a">
+      <div><span class="label">A</span>선속 에너지 (X-ray energy)</div>
+      <div><span class="label">기타</span>원자번호, 조직 밀도, 조영 증강도</div>
+    </div>
+  </div>
+
+  <div class="problem">
+    <div class="q">Q9. 단색방사선에서만 성립하는 감약공식은?</div>
+    <div class="a">
+      <div><span class="label">A</span>I = I₀ · e<sup>−μx</sup></div>
+      <div><span class="label">∵</span>다색방사선은 선속경화로 평균에너지 증가 → 공식 성립 X</div>
+    </div>
+  </div>
+
+  <div class="problem">
+    <div class="q">Q10. Axial scan과 Volume scan의 핵심 차이는?</div>
+    <div class="a">
+      <div><span class="label">Axial</span>테이블 고정 + 회전 → Step and shoot (ISD 존재)</div>
+      <div><span class="label">Volume</span>테이블 이동 + 연속회전 (나선형) → 1회 호흡정지로 체적 데이터</div>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<footer>
+  <div class="stamp">— End of Chapter 1 —</div>
+  <div class="tag">Computed Tomography · Foundations · Exam Ready</div>
+</footer>
+
+</body>
+</html>
