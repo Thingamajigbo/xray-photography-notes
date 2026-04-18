@@ -1,0 +1,914 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CT 1장 국가고시 모의고사 ― 15문제</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;0,9..144,800;1,9..144,400&family=Noto+Serif+KR:wght@400;500;700;900&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --ink:#1a1f2e;
+  --ink-soft:#2c3444;
+  --paper:#f5f1e8;
+  --paper-warm:#ede6d3;
+  --rule:#3a4152;
+  --accent:#b8312f;
+  --accent-deep:#8a1a18;
+  --marine:#1e4d6b;
+  --marine-soft:#2d6a8a;
+  --ochre:#c8860d;
+  --sage:#4a6b4f;
+  --line:#2a2f3d;
+  --mute:#6b6758;
+  --correct:#4a6b4f;
+}
+
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+
+body{
+  font-family:'Noto Serif KR',serif;
+  background:var(--paper);
+  color:var(--ink);
+  line-height:1.75;
+  font-size:16px;
+  background-image:
+    radial-gradient(circle at 20% 10%, rgba(184,49,47,0.03) 0%, transparent 40%),
+    radial-gradient(circle at 80% 90%, rgba(30,77,107,0.04) 0%, transparent 45%);
+  background-attachment:fixed;
+}
+
+/* ===== HEADER ===== */
+.hero{
+  max-width:1100px;
+  margin:0 auto;
+  padding:80px 60px 40px;
+  border-bottom:2px solid var(--line);
+  position:relative;
+}
+.hero::before{
+  content:"";
+  position:absolute;
+  top:60px;left:60px;right:60px;
+  height:1px;
+  background:var(--line);
+}
+.kicker{
+  font-family:'Fraunces',serif;
+  font-style:italic;
+  font-size:14px;
+  letter-spacing:0.3em;
+  text-transform:uppercase;
+  color:var(--accent);
+  margin-bottom:20px;
+  font-weight:500;
+}
+.hero h1{
+  font-family:'Fraunces',serif;
+  font-weight:800;
+  font-size:clamp(42px,6vw,78px);
+  line-height:0.95;
+  letter-spacing:-0.02em;
+  color:var(--ink);
+  margin-bottom:24px;
+}
+.hero h1 em{
+  font-style:italic;
+  color:var(--accent);
+  font-weight:400;
+}
+.hero .sub{
+  font-family:'Noto Serif KR',serif;
+  font-size:18px;
+  color:var(--ink-soft);
+  max-width:640px;
+  line-height:1.7;
+}
+.meta-row{
+  display:flex;
+  gap:30px;
+  margin-top:40px;
+  padding-top:24px;
+  border-top:1px dashed var(--line);
+  flex-wrap:wrap;
+  font-family:'JetBrains Mono',monospace;
+  font-size:12px;
+  color:var(--mute);
+  letter-spacing:0.05em;
+  text-transform:uppercase;
+}
+.meta-row span strong{color:var(--ink);font-weight:600;margin-right:8px}
+
+/* ===== CONTROL BAR ===== */
+.control{
+  max-width:1100px;
+  margin:0 auto;
+  padding:30px 60px;
+  background:var(--paper-warm);
+  border-bottom:2px solid var(--line);
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  flex-wrap:wrap;
+  gap:20px;
+}
+.score-display{
+  font-family:'Fraunces',serif;
+  font-size:20px;
+  color:var(--ink);
+}
+.score-display strong{
+  font-size:32px;
+  color:var(--accent);
+  font-weight:700;
+  font-family:'Fraunces',serif;
+}
+.btn-group{display:flex;gap:10px;flex-wrap:wrap}
+.btn{
+  font-family:'JetBrains Mono',monospace;
+  font-size:12px;
+  letter-spacing:0.15em;
+  text-transform:uppercase;
+  padding:10px 20px;
+  border:1.5px solid var(--ink);
+  background:var(--paper);
+  color:var(--ink);
+  cursor:pointer;
+  transition:all 0.2s;
+  font-weight:600;
+}
+.btn:hover{background:var(--ink);color:var(--paper)}
+.btn.primary{background:var(--accent);color:var(--paper);border-color:var(--accent)}
+.btn.primary:hover{background:var(--accent-deep);border-color:var(--accent-deep)}
+
+/* ===== MAIN ===== */
+main{
+  max-width:1100px;
+  margin:0 auto;
+  padding:40px 60px;
+}
+
+/* ===== QUESTION CARD ===== */
+.question{
+  background:#fbf8ee;
+  border:1px solid rgba(42,47,61,0.2);
+  margin-bottom:32px;
+  position:relative;
+  transition:all 0.3s;
+}
+.question.answered{border-color:var(--ink)}
+.question.correct{border-color:var(--correct);border-width:2px}
+.question.incorrect{border-color:var(--accent);border-width:2px}
+
+.q-header{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  padding:18px 32px;
+  background:var(--ink);
+  color:var(--paper);
+}
+.q-num{
+  font-family:'Fraunces',serif;
+  font-style:italic;
+  font-size:22px;
+  font-weight:400;
+}
+.q-num strong{
+  font-weight:700;
+  color:var(--ochre);
+  font-style:normal;
+  margin-right:6px;
+}
+.q-tag{
+  font-family:'JetBrains Mono',monospace;
+  font-size:10px;
+  letter-spacing:0.2em;
+  padding:4px 10px;
+  background:rgba(245,241,232,0.15);
+  color:var(--paper);
+}
+
+.q-body{padding:28px 32px 24px}
+.q-text{
+  font-family:'Noto Serif KR',serif;
+  font-size:17px;
+  font-weight:500;
+  color:var(--ink);
+  line-height:1.65;
+  margin-bottom:22px;
+}
+.q-text .hl{
+  background:linear-gradient(transparent 60%,rgba(200,134,13,0.3) 60%);
+  font-weight:600;
+  padding:0 2px;
+}
+
+.choices{list-style:none;padding:0}
+.choices li{
+  display:flex;
+  align-items:flex-start;
+  gap:14px;
+  padding:12px 16px;
+  margin-bottom:6px;
+  border:1px solid rgba(42,47,61,0.15);
+  background:var(--paper);
+  cursor:pointer;
+  transition:all 0.2s;
+  font-size:15.5px;
+  color:var(--ink-soft);
+  user-select:none;
+}
+.choices li:hover{
+  border-color:var(--ink);
+  background:var(--paper-warm);
+}
+.choices li.selected{
+  border-color:var(--ink);
+  background:var(--paper-warm);
+  color:var(--ink);
+  font-weight:500;
+}
+.choices li.correct-answer{
+  border-color:var(--correct);
+  background:rgba(74,107,79,0.1);
+  color:var(--ink);
+  font-weight:600;
+}
+.choices li.wrong-answer{
+  border-color:var(--accent);
+  background:rgba(184,49,47,0.08);
+  color:var(--ink);
+  text-decoration:line-through;
+  opacity:0.7;
+}
+.choices li .num{
+  font-family:'JetBrains Mono',monospace;
+  font-size:14px;
+  color:var(--accent);
+  font-weight:700;
+  min-width:28px;
+  flex-shrink:0;
+}
+.choices li.correct-answer .num{color:var(--correct)}
+.choices li.disabled{cursor:default;pointer-events:none}
+
+/* ===== EXPLANATION ===== */
+.explain{
+  display:none;
+  margin-top:20px;
+  padding:22px 26px;
+  background:var(--ink);
+  color:var(--paper);
+  border-left:5px solid var(--ochre);
+  font-size:14.5px;
+  line-height:1.75;
+}
+.explain.show{display:block;animation:rise 0.4s ease-out}
+.explain-label{
+  font-family:'JetBrains Mono',monospace;
+  font-size:10px;
+  letter-spacing:0.25em;
+  color:var(--ochre);
+  font-weight:700;
+  margin-bottom:10px;
+}
+.explain .ans-line{
+  font-family:'Fraunces',serif;
+  font-size:18px;
+  font-weight:600;
+  margin-bottom:10px;
+  color:var(--ochre);
+}
+.explain .ans-line .label{
+  color:rgba(245,241,232,0.6);
+  font-size:13px;
+  margin-right:10px;
+  font-family:'JetBrains Mono',monospace;
+  letter-spacing:0.1em;
+  font-weight:400;
+}
+.explain p{color:rgba(245,241,232,0.92);margin-bottom:6px}
+.explain .source{
+  margin-top:12px;
+  padding-top:10px;
+  border-top:1px dashed rgba(245,241,232,0.2);
+  font-family:'JetBrains Mono',monospace;
+  font-size:10.5px;
+  color:rgba(245,241,232,0.55);
+  letter-spacing:0.05em;
+}
+
+/* ===== RESULT MODAL ===== */
+.result-banner{
+  display:none;
+  max-width:1100px;
+  margin:0 auto 20px;
+  padding:40px 60px;
+  background:var(--ink);
+  color:var(--paper);
+  text-align:center;
+}
+.result-banner.show{display:block;animation:rise 0.5s ease-out}
+.result-banner .big{
+  font-family:'Fraunces',serif;
+  font-weight:800;
+  font-size:64px;
+  color:var(--ochre);
+  line-height:1;
+  margin-bottom:10px;
+}
+.result-banner .big em{font-style:italic;font-weight:400;font-size:36px;color:rgba(245,241,232,0.6)}
+.result-banner .msg{
+  font-family:'Fraunces',serif;
+  font-size:20px;
+  font-style:italic;
+  color:rgba(245,241,232,0.9);
+}
+
+/* ===== FOOTER ===== */
+footer{
+  max-width:1100px;
+  margin:60px auto 0;
+  padding:50px 60px;
+  background:var(--ink);
+  color:var(--paper);
+  text-align:center;
+}
+footer .stamp{
+  font-family:'Fraunces',serif;
+  font-style:italic;
+  font-size:28px;
+  margin-bottom:10px;
+}
+footer .tag{
+  font-family:'JetBrains Mono',monospace;
+  font-size:11px;
+  letter-spacing:0.25em;
+  color:rgba(245,241,232,0.5);
+  text-transform:uppercase;
+}
+
+/* ===== ANIMATIONS ===== */
+@keyframes rise{
+  from{opacity:0;transform:translateY(15px)}
+  to{opacity:1;transform:translateY(0)}
+}
+.hero > *{animation:rise 0.8s cubic-bezier(0.2,0.6,0.2,1) backwards}
+.hero .kicker{animation-delay:0.1s}
+.hero h1{animation-delay:0.2s}
+.hero .sub{animation-delay:0.35s}
+.hero .meta-row{animation-delay:0.5s}
+
+/* ===== RESPONSIVE ===== */
+@media (max-width:768px){
+  .hero,.control,main{padding-left:24px;padding-right:24px}
+  footer,.result-banner{padding-left:24px;padding-right:24px}
+  .hero{padding-top:50px}
+  .q-header,.q-body{padding-left:20px;padding-right:20px}
+  .q-text{font-size:16px}
+  .choices li{font-size:14.5px}
+  .result-banner .big{font-size:48px}
+}
+
+.q-calc{
+  background:var(--paper-warm);
+  border:1px dashed var(--ink);
+  padding:12px 16px;
+  margin:10px 0;
+  font-family:'JetBrains Mono',monospace;
+  font-size:14px;
+}
+</style>
+</head>
+<body>
+
+<!-- ===================== HERO ===================== -->
+<header class="hero">
+  <div class="kicker">CT Ch.1 · National Exam Simulation</div>
+  <h1>방사선사 <em>국가고시</em><br>모의고사 15제</h1>
+  <p class="sub">CT 1장 기초이론 전 범위를 국시 출제 경향에 맞춰 오지선다 15문항으로 구성했습니다. 세대별 CT, 감약 물리, CT number 계산, Windowing, 데이터 획득 방식 등 핵심 영역을 고루 포함했습니다.</p>
+  <div class="meta-row">
+    <span><strong>SUBJECT</strong>전산화단층촬영</span>
+    <span><strong>SCOPE</strong>CT 1장 기초이론</span>
+    <span><strong>ITEMS</strong>15문항 × 오지선다</span>
+    <span><strong>PASS</strong>60점 이상 (9문항)</span>
+  </div>
+</header>
+
+<!-- ===================== CONTROL ===================== -->
+<div class="control">
+  <div class="score-display">
+    진행: <strong id="progress">0</strong> / 15 &nbsp;&nbsp; 정답: <strong id="correct-count">0</strong>
+  </div>
+  <div class="btn-group">
+    <button class="btn" onclick="showAllAnswers()">전체 정답 보기</button>
+    <button class="btn" onclick="resetQuiz()">다시 풀기</button>
+    <button class="btn primary" onclick="submitAll()">채점하기</button>
+  </div>
+</div>
+
+<!-- ===================== RESULT BANNER ===================== -->
+<div class="result-banner" id="resultBanner">
+  <div class="big"><span id="finalScore">0</span><em>/15</em></div>
+  <div class="msg" id="finalMsg">—</div>
+</div>
+
+<!-- ===================== QUESTIONS ===================== -->
+<main>
+
+<!-- Q1 -->
+<div class="question" data-q="1" data-answer="3">
+  <div class="q-header">
+    <div class="q-num"><strong>Q1.</strong> <em>CT의 개념</em></div>
+    <div class="q-tag">기초 개념</div>
+  </div>
+  <div class="q-body">
+    <div class="q-text">CT 영상화의 기본 원리에 대한 설명으로 <span class="hl">옳은 것</span>은?</div>
+    <ul class="choices">
+      <li data-c="1"><span class="num">①</span>인체 조직의 자기공명 신호 차이를 이용한다</li>
+      <li data-c="2"><span class="num">②</span>음파의 반사를 통해 단층 영상을 획득한다</li>
+      <li data-c="3"><span class="num">③</span>인체 각 조직의 감약계수 차이를 이용하여 횡단면 영상을 얻는다</li>
+      <li data-c="4"><span class="num">④</span>방사성동위원소의 붕괴를 검출하여 영상화한다</li>
+      <li data-c="5"><span class="num">⑤</span>적외선의 투과도를 측정하여 재구성한다</li>
+    </ul>
+    <div class="explain">
+      <div class="explain-label">해설</div>
+      <div class="ans-line"><span class="label">정답</span>③</div>
+      <p>CT는 기존 X선 영상법과 컴퓨터의 결합에 의한 영상화 방법으로, 인체 각 조직의 <strong>감약계수(μ) 차이</strong>를 이용하여 횡단면(axial) 영상을 획득한다.</p>
+      <p>① MRI, ② 초음파, ④ 핵의학, ⑤ 적외선 영상의 원리이다.</p>
+      <div class="source">📚 출처: 1장_CT의_기초이론_복사본.pdf, p.4</div>
+    </div>
+  </div>
+</div>
+
+<!-- Q2 -->
+<div class="question" data-q="2" data-answer="2">
+  <div class="q-header">
+    <div class="q-num"><strong>Q2.</strong> <em>CT의 특성</em></div>
+    <div class="q-tag">빈출 ★</div>
+  </div>
+  <div class="q-body">
+    <div class="q-text">CT에서 <span class="hl">고관전압 기법</span>을 적용하는 이유로 옳지 <strong>않은</strong> 것은?</div>
+    <ul class="choices">
+      <li data-c="1"><span class="num">①</span>피사체 투과력을 증가시켜 검출효율을 극대화한다</li>
+      <li data-c="2"><span class="num">②</span>조직의 감약계수 차이를 증가시킨다</li>
+      <li data-c="3"><span class="num">③</span>선속경화로 인한 아티팩트를 감소시킨다</li>
+      <li data-c="4"><span class="num">④</span>관용도가 넓은 영상을 획득한다</li>
+      <li data-c="5"><span class="num">⑤</span>감약계수차가 큰 조직에서 발생하는 아티팩트를 감소시킨다</li>
+    </ul>
+    <div class="explain">
+      <div class="explain-label">해설</div>
+      <div class="ans-line"><span class="label">정답</span>②</div>
+      <p>고관전압은 오히려 조직의 <strong>감약계수 차를 감소</strong>시킨다. 이는 선속경화 아티팩트를 줄이는 효과와 연결된다.</p>
+      <p>고관전압 적용 이유: 투과력 증가, 관용도 증가, 감약계수 차 <strong>감소</strong>, 선속경화 아티팩트 감소, 감약계수차 큰 조직의 아티팩트 감소.</p>
+      <div class="source">📚 출처: 1장_CT의_기초이론_복사본.pdf, p.8</div>
+    </div>
+  </div>
+</div>
+
+<!-- Q3 -->
+<div class="question" data-q="3" data-answer="3">
+  <div class="q-header">
+    <div class="q-num"><strong>Q3.</strong> <em>세대별 CT</em></div>
+    <div class="q-tag">빈출 ★</div>
+  </div>
+  <div class="q-body">
+    <div class="q-text"><span class="hl">3세대 CT 장치</span>의 특징으로 옳은 것은?</div>
+    <ul class="choices">
+      <li data-c="1"><span class="num">①</span>연필형 선속(parallel beam)을 사용한다</li>
+      <li data-c="2"><span class="num">②</span>X선관과 검출기가 회전/직선 운동을 한다</li>
+      <li data-c="3"><span class="num">③</span>X선관과 검출기가 회전/회전 운동을 하며 ring artifact가 발생한다</li>
+      <li data-c="4"><span class="num">④</span>검출기가 고정되어 있고 X선관만 회전한다</li>
+      <li data-c="5"><span class="num">⑤</span>전자총을 사용하여 X선관과 검출기가 모두 고정되어 있다</li>
+    </ul>
+    <div class="explain">
+      <div class="explain-label">해설</div>
+      <div class="ans-line"><span class="label">정답</span>③</div>
+      <p>3세대 CT는 <strong>Rotating Fan beam geometry</strong>(넓은 부채형 선속)를 사용하며, X선관과 검출기가 모두 회전(회전/회전 운동)한다. 검출기 수는 수백 개이며, 검출기 고장 시 <strong>ring artifact(원형 아티팩트)</strong>가 발생하는 것이 대표적 특징이다.</p>
+      <p>① 1세대, ② 1·2세대, ④ 4세대, ⑤ 5세대(EBCT)</p>
+      <div class="source">📚 출처: 1장_CT의_기초이론_복사본.pdf, p.14</div>
+    </div>
+  </div>
+</div>
+
+<!-- Q4 -->
+<div class="question" data-q="4" data-answer="4">
+  <div class="q-header">
+    <div class="q-num"><strong>Q4.</strong> <em>Helical CT</em></div>
+    <div class="q-tag">빈출 ★</div>
+  </div>
+  <div class="q-body">
+    <div class="q-text"><span class="hl">나선형(Helical) 스캔</span>을 가능하게 한 핵심 기술 요소는?</div>
+    <ul class="choices">
+      <li data-c="1"><span class="num">①</span>Bowtie filter</li>
+      <li data-c="2"><span class="num">②</span>Electron gun</li>
+      <li data-c="3"><span class="num">③</span>Flat panel detector</li>
+      <li data-c="4"><span class="num">④</span>Slip ring과 brush</li>
+      <li data-c="5"><span class="num">⑤</span>Collimator array</li>
+    </ul>
+    <div class="explain">
+      <div class="explain-label">해설</div>
+      <div class="ans-line"><span class="label">정답</span>④</div>
+      <p>Helical CT는 <strong>Slip ring과 brush</strong> 구조를 이용하여 외부 고압케이블을 제거함으로써 X선관의 <strong>연속적인 회전</strong>이 가능해졌다. X선관이 회전하는 동안 환자 테이블도 동시에 이동하여 나선형 스캔이 이루어진다.</p>
+      <p>① Bowtie filter는 2세대부터 도입, ② Electron gun은 5세대 EBCT의 핵심이다.</p>
+      <div class="source">📚 출처: 1장_CT의_기초이론_복사본.pdf, p.16–17</div>
+    </div>
+  </div>
+</div>
+
+<!-- Q5 -->
+<div class="question" data-q="5" data-answer="2">
+  <div class="q-header">
+    <div class="q-num"><strong>Q5.</strong> <em>선속경화</em></div>
+    <div class="q-tag">물리</div>
+  </div>
+  <div class="q-body">
+    <div class="q-text"><span class="hl">선속경화(Beam Hardening)</span> 현상에 대한 설명으로 옳은 것은?</div>
+    <ul class="choices">
+      <li data-c="1"><span class="num">①</span>단색방사선에서만 발생하는 현상이다</li>
+      <li data-c="2"><span class="num">②</span>낮은 에너지 대역의 X선이 더 많이 감쇠되어 평균에너지가 증가하는 현상이다</li>
+      <li data-c="3"><span class="num">③</span>X선 광자수가 균일하게 감소하는 현상이다</li>
+      <li data-c="4"><span class="num">④</span>투과 후 X선 에너지가 감소하는 현상이다</li>
+      <li data-c="5"><span class="num">⑤</span>감약공식 I = I₀e⁻ᵘˣ가 정확히 성립한다</li>
+    </ul>
+    <div class="explain">
+      <div class="explain-label">해설</div>
+      <div class="ans-line"><span class="label">정답</span>②</div>
+      <p>선속경화는 <strong>다색방사선(polychromatic)</strong>에서 발생하는 현상으로, X선이 진행하면서 낮은 에너지 대역의 X선이 높은 에너지 대역보다 상대적으로 더 많이 감쇠되어 X선의 <strong>평균 에너지가 증가</strong>하는 현상이다.</p>
+      <p>다색방사선에서는 감약공식 I = I₀e⁻ᵘˣ가 <strong>성립하지 않는다</strong>.</p>
+      <div class="source">📚 출처: 1장_CT의_기초이론_복사본.pdf, p.34–36</div>
+    </div>
+  </div>
+</div>
+
+<!-- Q6 -->
+<div class="question" data-q="6" data-answer="3">
+  <div class="q-header">
+    <div class="q-num"><strong>Q6.</strong> <em>CT number 계산</em></div>
+    <div class="q-tag">계산 ★★</div>
+  </div>
+  <div class="q-body">
+    <div class="q-text">어떤 조직의 선감약계수가 <span class="hl">0.228</span>이고, 물의 선감약계수가 <span class="hl">0.190</span>일 때 이 조직의 CT number는? (단, k=1,000)</div>
+    <div class="q-calc">CT No = k × (μₜ − μw) / μw</div>
+    <ul class="choices">
+      <li data-c="1"><span class="num">①</span>100 HU</li>
+      <li data-c="2"><span class="num">②</span>150 HU</li>
+      <li data-c="3"><span class="num">③</span>200 HU</li>
+      <li data-c="4"><span class="num">④</span>250 HU</li>
+      <li data-c="5"><span class="num">⑤</span>300 HU</li>
+    </ul>
+    <div class="explain">
+      <div class="explain-label">해설</div>
+      <div class="ans-line"><span class="label">정답</span>③</div>
+      <p><strong>STEP 1.</strong> CT No = 1000 × (0.228 − 0.190) / 0.190</p>
+      <p><strong>STEP 2.</strong> = 1000 × (0.038 / 0.190)</p>
+      <p><strong>STEP 3.</strong> = 1000 × 0.2 = <strong style="color:var(--ochre)">200 HU</strong></p>
+      <div class="source">📚 출처: 1장_CT의_기초이론_복사본.pdf, p.42, 44–45</div>
+    </div>
+  </div>
+</div>
+
+<!-- Q7 -->
+<div class="question" data-q="7" data-answer="1">
+  <div class="q-header">
+    <div class="q-num"><strong>Q7.</strong> <em>CT number 기준값</em></div>
+    <div class="q-tag">암기</div>
+  </div>
+  <div class="q-body">
+    <div class="q-text">다음 중 CT number(HU) 기준값이 <span class="hl">잘못 짝지어진 것</span>은?</div>
+    <ul class="choices">
+      <li data-c="1"><span class="num">①</span>물: −1,000 HU</li>
+      <li data-c="2"><span class="num">②</span>공기: −1,000 HU</li>
+      <li data-c="3"><span class="num">③</span>뼈(피질): 250 HU 이상</li>
+      <li data-c="4"><span class="num">④</span>지방: −100 ± 10 HU</li>
+      <li data-c="5"><span class="num">⑤</span>금속: +2,000 ~ +4,000 HU</li>
+    </ul>
+    <div class="explain">
+      <div class="explain-label">해설</div>
+      <div class="ans-line"><span class="label">정답</span>①</div>
+      <p><strong>물은 CT number의 기준값인 0 HU</strong>이다. CT number는 물의 선감약계수를 기준으로 상대적으로 계산되기 때문이다.</p>
+      <p>공기 −1,000 / 물 0(기준) / 뼈·조영제 +1,000 / 금속 +2,000~+4,000</p>
+      <div class="source">📚 출처: 1장_CT의_기초이론_복사본.pdf, p.30, 43</div>
+    </div>
+  </div>
+</div>
+
+<!-- Q8 -->
+<div class="question" data-q="8" data-answer="1">
+  <div class="q-header">
+    <div class="q-num"><strong>Q8.</strong> <em>CT number 영향인자</em></div>
+    <div class="q-tag">빈출 ★</div>
+  </div>
+  <div class="q-body">
+    <div class="q-text">CT number에 <span class="hl">가장 큰 영향</span>을 미치는 인자는?</div>
+    <ul class="choices">
+      <li data-c="1"><span class="num">①</span>선속 에너지</li>
+      <li data-c="2"><span class="num">②</span>피사체 원자번호</li>
+      <li data-c="3"><span class="num">③</span>피사체 조직 밀도</li>
+      <li data-c="4"><span class="num">④</span>조영 증강도</li>
+      <li data-c="5"><span class="num">⑤</span>매트릭스 크기</li>
+    </ul>
+    <div class="explain">
+      <div class="explain-label">해설</div>
+      <div class="ans-line"><span class="label">정답</span>①</div>
+      <p>CT number 영향인자 중 <strong>선속 에너지(X-ray energy)가 가장 큰 영향</strong>을 미친다.</p>
+      <p>영향 순서: 선속에너지 > 원자번호 > 조직밀도 > 조영증강도</p>
+      <div class="source">📚 출처: 1장_CT의_기초이론_복사본.pdf, p.46</div>
+    </div>
+  </div>
+</div>
+
+<!-- Q9 -->
+<div class="question" data-q="9" data-answer="4">
+  <div class="q-header">
+    <div class="q-num"><strong>Q9.</strong> <em>질량감약계수</em></div>
+    <div class="q-tag">물리</div>
+  </div>
+  <div class="q-body">
+    <div class="q-text">물, 얼음, 수증기의 <span class="hl">질량감약계수</span>에 대한 설명으로 옳은 것은?</div>
+    <ul class="choices">
+      <li data-c="1"><span class="num">①</span>물 > 얼음 > 수증기 순으로 크다</li>
+      <li data-c="2"><span class="num">②</span>밀도가 큰 얼음이 가장 크다</li>
+      <li data-c="3"><span class="num">③</span>선감약계수와 같은 값을 갖는다</li>
+      <li data-c="4"><span class="num">④</span>세 물질 모두 동일한 값(0.214)을 갖는다</li>
+      <li data-c="5"><span class="num">⑤</span>수증기가 가장 큰 값을 갖는다</li>
+    </ul>
+    <div class="explain">
+      <div class="explain-label">해설</div>
+      <div class="ans-line"><span class="label">정답</span>④</div>
+      <p>질량감약계수(μ/ρ)는 <strong>물리적 상태와 무관하게 동일 물질이면 항상 일정</strong>하다. 물·얼음·수증기는 모두 H₂O이므로 질량감약계수는 0.214 cm²/g로 동일하다.</p>
+      <p>단, 선감약계수는 밀도에 따라 달라 물(0.214) > 얼음(0.196) > 수증기(0.000128)로 모두 다르다.</p>
+      <div class="source">📚 출처: 1장_CT의_기초이론_복사본.pdf, p.40–41</div>
+    </div>
+  </div>
+</div>
+
+<!-- Q10 -->
+<div class="question" data-q="10" data-answer="2">
+  <div class="q-header">
+    <div class="q-num"><strong>Q10.</strong> <em>Gray scale</em></div>
+    <div class="q-tag">수치 암기</div>
+  </div>
+  <div class="q-body">
+    <div class="q-text">CT 장치와 모니터의 <span class="hl">gray scale</span>에 대한 설명으로 옳은 것은?</div>
+    <ul class="choices">
+      <li data-c="1"><span class="num">①</span>CT 장치는 8 bit, 256 단계이다</li>
+      <li data-c="2"><span class="num">②</span>CT 장치는 12 bit, 4,096 단계(−1,024 ~ +3,071)이다</li>
+      <li data-c="3"><span class="num">③</span>모니터는 16 bit, 65,536 단계이다</li>
+      <li data-c="4"><span class="num">④</span>CT 장치와 모니터의 단계 수는 동일하다</li>
+      <li data-c="5"><span class="num">⑤</span>CT 장치는 1,000 단계, 모니터는 500 단계이다</li>
+    </ul>
+    <div class="explain">
+      <div class="explain-label">해설</div>
+      <div class="ans-line"><span class="label">정답</span>②</div>
+      <p><strong>CT 장치</strong>: 12 bit, 총 <strong>4,096 단계</strong> (−1,024 ~ +3,071)</p>
+      <p><strong>모니터(전시장치)</strong>: 8 bit, 총 <strong>256 단계</strong> (0 ~ 255)</p>
+      <p>이 차이 때문에 <strong>Windowing</strong> 기법으로 관심 영역만 집중적으로 표시한다.</p>
+      <div class="source">📚 출처: 1장_CT의_기초이론_복사본.pdf, p.29, 70</div>
+    </div>
+  </div>
+</div>
+
+<!-- Q11 -->
+<div class="question" data-q="11" data-answer="3">
+  <div class="q-header">
+    <div class="q-num"><strong>Q11.</strong> <em>Window Width</em></div>
+    <div class="q-tag">빈출 ★★</div>
+  </div>
+  <div class="q-body">
+    <div class="q-text"><span class="hl">Window Width를 좁게(낮게) 설정</span>하였을 때 나타나는 변화로 옳은 것은?</div>
+    <ul class="choices">
+      <li data-c="1"><span class="num">①</span>Gray scale 증가, contrast 저하</li>
+      <li data-c="2"><span class="num">②</span>Contrast 저하, resolution 저하</li>
+      <li data-c="3"><span class="num">③</span>Contrast 증가, resolution 증가, 비슷한 조직 식별능 증가</li>
+      <li data-c="4"><span class="num">④</span>흑색과 백색이 약해지고 gray scale 증가</li>
+      <li data-c="5"><span class="num">⑤</span>비슷한 조직 식별능이 저하된다</li>
+    </ul>
+    <div class="explain">
+      <div class="explain-label">해설</div>
+      <div class="ans-line"><span class="label">정답</span>③</div>
+      <p>Window Width를 <strong>좁게</strong> 설정하면: Gray scale 감소 / Contrast 증가 / 흑색·백색 강해짐 / Resolution 증가 / 비슷한 조직 식별능 증가.</p>
+      <p>반대로 WW를 넓게 설정하면 gray scale은 증가하지만 contrast와 resolution은 저하된다.</p>
+      <div class="source">📚 출처: 1장_CT의_기초이론_복사본.pdf, p.74–75</div>
+    </div>
+  </div>
+</div>
+
+<!-- Q12 -->
+<div class="question" data-q="12" data-answer="4">
+  <div class="q-header">
+    <div class="q-num"><strong>Q12.</strong> <em>Window Level</em></div>
+    <div class="q-tag">빈출 ★</div>
+  </div>
+  <div class="q-body">
+    <div class="q-text"><span class="hl">Window Level을 높게</span> 설정하면 상대적으로 잘 관찰되는 조직은?</div>
+    <ul class="choices">
+      <li data-c="1"><span class="num">①</span>공기</li>
+      <li data-c="2"><span class="num">②</span>지방</li>
+      <li data-c="3"><span class="num">③</span>폐 실질</li>
+      <li data-c="4"><span class="num">④</span>뼈</li>
+      <li data-c="5"><span class="num">⑤</span>물</li>
+    </ul>
+    <div class="explain">
+      <div class="explain-label">해설</div>
+      <div class="ans-line"><span class="label">정답</span>④</div>
+      <p>Window Level을 <strong>높이면</strong> 영상이 어두워지면서, <strong>X선 흡수도가 높은(선감약계수가 큰) 조직</strong> — 즉 뼈(bone)와 같은 조직이 잘 관찰된다.</p>
+      <p>반대로 WL을 낮추면 영상이 밝아지며 공기·지방처럼 흡수도가 낮은 조직이 잘 관찰된다.</p>
+      <div class="source">📚 출처: 1장_CT의_기초이론_복사본.pdf, p.76–78</div>
+    </div>
+  </div>
+</div>
+
+<!-- Q13 -->
+<div class="question" data-q="13" data-answer="2">
+  <div class="q-header">
+    <div class="q-num"><strong>Q13.</strong> <em>Window Setting</em></div>
+    <div class="q-tag">임상 ★</div>
+  </div>
+  <div class="q-body">
+    <div class="q-text">일반적으로 사용되는 <span class="hl">Lung window setting</span> 값은?</div>
+    <ul class="choices">
+      <li data-c="1"><span class="num">①</span>WW 80~100 / WL 0~30</li>
+      <li data-c="2"><span class="num">②</span>WW 1,000~1,500 / WL −700 ~ −1,000</li>
+      <li data-c="3"><span class="num">③</span>WW 400~500 / WL 0~100</li>
+      <li data-c="4"><span class="num">④</span>WW 1,000~2,000 / WL 200~300</li>
+      <li data-c="5"><span class="num">⑤</span>WW 300~350 / WL 0~30</li>
+    </ul>
+    <div class="explain">
+      <div class="explain-label">해설</div>
+      <div class="ans-line"><span class="label">정답</span>②</div>
+      <p><strong>Lung window</strong>: WW 1,000~1,500 / WL −700 ~ −1,000. 폐 실질은 공기를 많이 포함하므로 WL이 매우 낮은 음수값이어야 한다.</p>
+      <p>① 뇌 실질 / ③ 흉부 mediastinal / ④ Bone / ⑤ 복부 연부조직</p>
+      <div class="source">📚 출처: 1장_CT의_기초이론_복사본.pdf, p.80</div>
+    </div>
+  </div>
+</div>
+
+<!-- Q14 -->
+<div class="question" data-q="14" data-answer="5">
+  <div class="q-header">
+    <div class="q-num"><strong>Q14.</strong> <em>데이터 획득 방식</em></div>
+    <div class="q-tag">개념</div>
+  </div>
+  <div class="q-body">
+    <div class="q-text"><span class="hl">Axial scan(conventional scan)</span>에 대한 설명으로 옳은 것은?</div>
+    <ul class="choices">
+      <li data-c="1"><span class="num">①</span>나선형 스캔을 통한 체적 데이터 획득 방식이다</li>
+      <li data-c="2"><span class="num">②</span>동일 위치에서 임의의 시간 간격으로 연속 스캔하는 방식이다</li>
+      <li data-c="3"><span class="num">③</span>테이블이 움직이는 동안 연속적으로 스캔한다</li>
+      <li data-c="4"><span class="num">④</span>IGD(Inter Group Delay)가 적용된다</li>
+      <li data-c="5"><span class="num">⑤</span>테이블 고정 상태에서 X선관이 회전하며 한 단면을 획득하는 step and shoot 방식이다</li>
+    </ul>
+    <div class="explain">
+      <div class="explain-label">해설</div>
+      <div class="ans-line"><span class="label">정답</span>⑤</div>
+      <p>Axial scan(conventional scan)은 테이블이 <strong>고정된 상태</strong>에서 X선관이 회전하며 한 단면의 데이터를 획득하는 방식으로, <strong>step and shoot</strong> CT technology로 불리며 슬라이스마다 <strong>ISD(Inter Scan Delay)</strong>가 존재한다.</p>
+      <p>① Volume scan / ② Cine scan / ③ Dynamic scan / ④ Cluster scan</p>
+      <div class="source">📚 출처: 1장_CT의_기초이론_복사본.pdf, p.47–50</div>
+    </div>
+  </div>
+</div>
+
+<!-- Q15 -->
+<div class="question" data-q="15" data-answer="2">
+  <div class="q-header">
+    <div class="q-num"><strong>Q15.</strong> <em>Scan data vs Image data</em></div>
+    <div class="q-tag">개념</div>
+  </div>
+  <div class="q-body">
+    <div class="q-text">CT의 <span class="hl">Scan data(raw data)와 Image data</span>에 관한 설명으로 옳지 <strong>않은</strong> 것은?</div>
+    <ul class="choices">
+      <li data-c="1"><span class="num">①</span>Scan data는 sinogram 형태를 가진다</li>
+      <li data-c="2"><span class="num">②</span>Image data의 양이 Scan data의 양보다 크다</li>
+      <li data-c="3"><span class="num">③</span>Image data는 CT number로 표현된 공간 영역 데이터이다</li>
+      <li data-c="4"><span class="num">④</span>Scan data는 재구성(back projection/convolution) 처리가 되지 않은 상태의 데이터이다</li>
+      <li data-c="5"><span class="num">⑤</span>FBP(Filtered Back Projection)를 통해 scan data가 image data로 변환된다</li>
+    </ul>
+    <div class="explain">
+      <div class="explain-label">해설</div>
+      <div class="ans-line"><span class="label">정답</span>②</div>
+      <p><strong>Raw data(scan data)의 양 > Image data의 양</strong>이다. 재구성 과정에서 필요 없는 데이터가 삭제되기 때문이다.</p>
+      <p>Scan data = measurement data = sinogram(주파수 영역) / Image data = CT number로 표현된 공간 영역 데이터.</p>
+      <div class="source">📚 출처: 1장_CT의_기초이론_복사본.pdf, p.60–62</div>
+    </div>
+  </div>
+</div>
+
+</main>
+
+<footer>
+  <div class="stamp">— End of Mock Exam —</div>
+  <div class="tag">CT Ch.1 · 15 Items · National Exam Style</div>
+</footer>
+
+<script>
+const questions = document.querySelectorAll('.question');
+const userAnswers = {};
+
+questions.forEach(q => {
+  const qNum = q.dataset.q;
+  const correctAns = q.dataset.answer;
+  const choices = q.querySelectorAll('.choices li');
+  
+  choices.forEach(choice => {
+    choice.addEventListener('click', () => {
+      if (q.classList.contains('answered')) return;
+      
+      // 선택 표시
+      choices.forEach(c => c.classList.remove('selected'));
+      choice.classList.add('selected');
+      userAnswers[qNum] = choice.dataset.c;
+      
+      updateProgress();
+    });
+  });
+});
+
+function updateProgress() {
+  const count = Object.keys(userAnswers).length;
+  document.getElementById('progress').textContent = count;
+}
+
+function submitAll() {
+  let correct = 0;
+  
+  questions.forEach(q => {
+    const qNum = q.dataset.q;
+    const correctAns = q.dataset.answer;
+    const userAns = userAnswers[qNum];
+    const choices = q.querySelectorAll('.choices li');
+    const explain = q.querySelector('.explain');
+    
+    q.classList.add('answered');
+    choices.forEach(c => c.classList.add('disabled'));
+    
+    // 정답 표시
+    choices.forEach(c => {
+      if (c.dataset.c === correctAns) {
+        c.classList.add('correct-answer');
+      } else if (c.dataset.c === userAns && userAns !== correctAns) {
+        c.classList.add('wrong-answer');
+      }
+    });
+    
+    // 결과 반영
+    if (userAns === correctAns) {
+      correct++;
+      q.classList.add('correct');
+    } else {
+      q.classList.add('incorrect');
+    }
+    
+    explain.classList.add('show');
+  });
+  
+  document.getElementById('correct-count').textContent = correct;
+  document.getElementById('finalScore').textContent = correct;
+  
+  const banner = document.getElementById('resultBanner');
+  const msg = document.getElementById('finalMsg');
+  const percent = (correct / 15) * 100;
+  
+  if (percent >= 90) {
+    msg.textContent = '완벽합니다 — 국시 실전도 문제없겠어요';
+  } else if (percent >= 80) {
+    msg.textContent = '훌륭합니다 — 안정적인 실력이에요';
+  } else if (percent >= 60) {
+    msg.textContent = '합격권 — 틀린 개념만 보강하세요';
+  } else if (percent >= 40) {
+    msg.textContent = '분발 필요 — 해설을 꼼꼼히 복습하세요';
+  } else {
+    msg.textContent = '기초부터 다시 — 1장 노트를 먼저 보세요';
+  }
+  
+  banner.classList.add('show');
+  banner.scrollIntoView({behavior:'smooth', block:'start'});
+}
+
+function showAllAnswers() {
+  questions.forEach(q => {
+    const correctAns = q.dataset.answer;
+    const choices = q.querySelectorAll('.choices li');
+    const explain = q.querySelector('.explain');
+    
+    q.classList.add('answered');
+    choices.forEach(c => {
+      c.classList.add('disabled');
+      if (c.dataset.c === correctAns) {
+        c.classList.add('correct-answer');
+      }
+    });
+    explain.classList.add('show');
+  });
+}
+
+function resetQuiz() {
+  location.reload();
+}
+</script>
+
+</body>
+</html>
